@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBasketTable extends Migration
+class CreateWishlistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateBasketTable extends Migration
      */
     public function up()
     {
-        Schema::create('basket', function (Blueprint $table) {
+        Schema::create('wishlists', function (Blueprint $table) {
             $table->id();
-            $table->integer('quantity');
-            $table->float('price');
-            $table->timestamp('insert_data');
-            
+            $table->foreignId('comic_id')->constrained();
+            $table->foreignId('user_id')->constrained();
         });
     }
 
@@ -29,6 +27,6 @@ class CreateBasketTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('basket');
+        Schema::dropIfExists('wishlists');
     }
 }

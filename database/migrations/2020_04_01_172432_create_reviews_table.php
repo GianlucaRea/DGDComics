@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBlogArticleTable extends Migration
+class CreateReviewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateBlogArticleTable extends Migration
      */
     public function up()
     {
-        Schema::create('blog_article', function (Blueprint $table) {
+        Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('article_text');
-            $table->timestamp('date');
+            $table->foreignId('comic_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->text('text');
+            $table->integer('stars');
+            $table->timestamp('review_date');
         });
     }
 
@@ -28,6 +30,6 @@ class CreateBlogArticleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blog_article');
+        Schema::dropIfExists('reviews');
     }
 }
