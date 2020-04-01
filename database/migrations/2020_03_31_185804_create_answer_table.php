@@ -15,7 +15,10 @@ class CreateAnswerTable extends Migration
     {
         Schema::create('answer', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->integer('like');
+            $table->integer('dislike');
+            $table->text('answer_text');
+            $table->timestamp('date_answer');
         });
     }
 

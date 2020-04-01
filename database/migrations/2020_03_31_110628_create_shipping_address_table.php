@@ -15,7 +15,9 @@ class CreateShippingAddressTable extends Migration
     {
         Schema::create('shipping_address', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->text('Via');
+            $table->string('civico');
+            $table->text('other_info');
         });
     }
 
