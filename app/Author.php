@@ -6,5 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Author extends Model
 {
-    //
+    protected $table = "authors";
+    public $timestamps = false;
+    /**
+     * The attributes that are mass assignable
+     * 
+     * @var array
+     */
+    protected $fillable = [
+        'name_author','surname_authore','nationality',
+      ];
+
+    public function comic(){
+        return $this->hasMany('App\Comic');
+    }
 }

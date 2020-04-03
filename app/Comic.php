@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notifiable;
 
 class Comic extends Model
 {
-    use Notifiable;
+    
     
     protected $table = "comics";
     /**
@@ -24,11 +24,11 @@ class Comic extends Model
     }
 
     public function genre(){
-        return $this->hasMany('App\Genre','comic_id');
+        return $this->belongsToMany('App\Genre');
     }
 
     public function author(){
-        return $this->hasMany('App\Author','comic_id');
+        return $this->belongsTo('App\Author');
     }
 
     public function review(){
@@ -39,5 +39,5 @@ class Comic extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function 
+    //public function 
 }

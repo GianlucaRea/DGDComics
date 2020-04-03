@@ -84,9 +84,9 @@ public function payment_method(){
     return $this->hasMany('App\PaymentMethod','user_id');
 }
 
-/* public function group(){
-    return $this->hasMany('App\Group','user_id');
-} */ 
+ public function group(){
+    return $this->belongsToMany('App\Group');
+} 
 
 public function ranking(){
     return $this->hasOne('App\Ranking','user_id');

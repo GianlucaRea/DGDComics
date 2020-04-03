@@ -15,7 +15,6 @@ class CreateGenresTable extends Migration
     {
         Schema::create('genres', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('comic_id')->constrained();
             $table->string('name_genre');
         });
     }
