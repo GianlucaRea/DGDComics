@@ -20,7 +20,7 @@ class Comic extends Model
     ];
 
     public function image(){
-        return  $this->hasMany('App\Image','comic_id');
+        return  $this->hasMany('App\Image');
     }
 
     public function genre(){
@@ -32,7 +32,7 @@ class Comic extends Model
     }
 
     public function review(){
-        return $this->hasMany('App\Review','comic_id');
+        return $this->hasMany('App\Review');
     }
 
     public function user(){

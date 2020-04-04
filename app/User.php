@@ -41,47 +41,50 @@ class User extends Authenticatable
 
 
 public function comic(){
-    return $this->hasMany('App\Comic','user_id');
+    return $this->hasMany('App\Comic');
 }
 
 public function order(){
-    return $this->hasMany('App\Order','user_id');
+    return $this->hasMany('App\Order');
 }
 
 public function wishlist(){
-    return $this->hasOne('App\Whishlist','user_id');
+    return $this->hasOne('App\Whishlist');
+}
+public function basket(){
+    return $this->hasOne('App\Basket');
 }
 
 public function phone(){
-    return $this->hasMany('App\Phone','user_id');
+    return $this->hasMany('App\Phone');
 }
 
 public function article(){
-    return $this->hasMany('App\Article','user_id');
+    return $this->hasMany('App\Article');
 }
 
 public function comment(){
-    return $this->hasMany('App\Comment','user_id');
+    return $this->hasMany('App\Comment');
 }
 
 public function reply(){
-    return $this->hasMany('App\Reply','user_id');
+    return $this->hasMany('App\Reply');
 }
 
 public function access_log(){
-    return $this->hasMany('App\AccessLog','user_id');
+    return $this->hasMany('App\AccessLog');
 }
 
 public function message(){
-    return $this->hasMany('App\Message','user_id');
+    return $this->hasMany('App\Message');
 }
 
 public function shipping_address(){
-    return $this->hasMany('App\ShippingAddress','user_id');
+    return $this->hasMany('App\ShippingAddress');
 }
 
 public function payment_method(){
-    return $this->hasMany('App\PaymentMethod','user_id');
+    return $this->hasMany('App\PaymentMethod');
 }
 
  public function group(){
@@ -89,15 +92,15 @@ public function payment_method(){
 } 
 
 public function ranking(){
-    return $this->hasOne('App\Ranking','user_id');
+    return $this->hasOne('App\Ranking');
 }
 
 public function review(){
-    return $this->hasMany('App\Review','user_id');
+    return $this->hasMany('App\Review');
 }
 
 public function notification(){
-    return $this->hasMany('App/Notification','user_id');
+    return $this->hasMany('App/Notification');
 }
 
 

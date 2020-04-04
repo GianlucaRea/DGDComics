@@ -17,7 +17,7 @@ class CreateReviewsTable extends Migration
             $table->id();
             $table->foreignId('comic_id')->constrained();
             $table->foreignId('user_id')->constrained();
-            $table->text('text');
+            $table->text('review_text');
             $table->integer('stars');
             $table->timestamp('review_date');
         });

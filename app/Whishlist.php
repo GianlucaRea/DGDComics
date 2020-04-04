@@ -6,5 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Whishlist extends Model
 {
-    //
+    protected $table = "whishlists";
+
+    protected $fillable = [
+        'comic_id','user_id'
+    ];
+
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 }
