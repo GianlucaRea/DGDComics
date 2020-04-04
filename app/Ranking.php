@@ -6,5 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ranking extends Model
 {
-    //
+    protected $table = "rankings";
+
+    protected $fillable = [
+        'user_id','feedback_number','stars_number','avg_stars','number_selling_products'
+    ];
+
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 }

@@ -100,4 +100,5 @@ public function notification(){
     return $this->hasMany('App/Notification','user_id');
 }
 
+
 }

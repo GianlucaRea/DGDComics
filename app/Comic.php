@@ -16,7 +16,7 @@ class Comic extends Model
      * @var array
      */
     protected $fillable = [
-        'comic_name','description','type','quantity','ISBN','price','publisher'
+        'user_id','author_id','comic_name','description','type','quantity','ISBN','price','publisher'
     ];
 
     public function image(){
@@ -39,5 +39,7 @@ class Comic extends Model
         return $this->belongsTo('App\User');
     }
 
-    //public function 
+    public function order(){
+        return $this->belongsToMany('App\Order');
+    }
 }

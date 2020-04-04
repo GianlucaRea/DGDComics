@@ -17,6 +17,8 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->foreignId('comic_id')->constrained();
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('payment_method_id')->constrained();
+            $table->foreignId('shipping_address_id')->constrained();
             $table->timestamps();
         });
     }
