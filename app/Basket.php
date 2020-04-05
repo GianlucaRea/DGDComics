@@ -16,5 +16,7 @@ class Basket extends Model
         return $this->belongsTo('App\User');
     }
 
-    
+    public function comic(){
+        return $this->belongsToMany('App\Comic');
+    }
 }

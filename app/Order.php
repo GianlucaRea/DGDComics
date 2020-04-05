@@ -24,7 +24,7 @@ class Order extends Model
     }
 
     public function comic(){
-        return $this->hasMany('App\Comic');
+        return $this->belongsTo('App\Comic');
     }
 
 
