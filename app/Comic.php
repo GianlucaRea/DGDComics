@@ -42,4 +42,12 @@ class Comic extends Model
     public function order(){
         return $this->belongsToMany('App\Order');
     }
+
+    public function wishlist(){
+        return $this->belongsToMany('App\Wishlist');
+    }
+
+    public function basket(){
+        return $this->belongsToMany('App\Basket');
+    }
 }
