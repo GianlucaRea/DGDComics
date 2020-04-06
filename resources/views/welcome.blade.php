@@ -2,18 +2,25 @@
 <html class="no-js" lang="en">
     <head>
         @include('layouts.head')
+        <title>DGDcomics</title>
     </head>
     <body class="home-2">
-             <header>
-                 @include('layouts.header')
-             </header>
-            <div class="container-fluid">
-                provaprovaprova
-                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-            </div>
-
+            <header>
+                @include('layouts.header')
+            </header>
+            @include('layouts.slider')
+            @include('layouts.featuredArea')
+            @include('layouts.banner')
+            @include('layouts.bestsellerArea')
+            @include('layouts.productArea')
+            @include('layouts.mostProductArea')
+            @include('layouts.recentPostArea')
+            @include('layouts.banner2')
+            @include('layouts.social')
             <footer>
                 @include('layouts.footer')
             </footer>
+            @include('layouts.modal')
+            @include('layouts.jsImport')
     </body>
 </html>
