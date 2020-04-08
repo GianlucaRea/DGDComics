@@ -65,7 +65,7 @@
                             </div>
                             <div class="add-to-link">
                                 <ul>
-                                    <li><a href="product-detailPageToCreate" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                    <li><a href="{{ url('/productDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -111,7 +111,7 @@
                             </div>
                             <div class="add-to-link">
                                 <ul>
-                                    <li><a href="product-detailPageToCreate" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                    <li><a href="{{ url('/productDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -157,7 +157,7 @@
                             </div>
                             <div class="add-to-link">
                                 <ul>
-                                    <li><a href="product-detailPageToCreate" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                    <li><a href="{{ url('/productDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -205,7 +205,7 @@
                             </div>
                             <div class="add-to-link">
                                 <ul>
-                                    <li><a href="product-detailPageToCreate" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                    <li><a href="{{ url('/productDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -252,7 +252,7 @@
                             </div>
                             <div class="add-to-link">
                                 <ul>
-                                    <li><a href="product-detailPageToCreate" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                    <li><a href="{{ url('/productDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -300,7 +300,7 @@
                             </div>
                             <div class="add-to-link">
                                 <ul>
-                                    <li><a href="product-detailPageToCreate" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                    <li><a href="{{ url('/productDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -350,7 +350,7 @@
                             </div>
                             <div class="add-to-link">
                                 <ul>
-                                    <li><a href="product-detailPageToCreate" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                    <li><a href="{{ url('/productDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -397,7 +397,7 @@
                             </div>
                             <div class="add-to-link">
                                 <ul>
-                                    <li><a href="product-detailPageToCreate" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                    <li><a href="{{ url('/productDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -443,7 +443,7 @@
                             </div>
                             <div class="add-to-link">
                                 <ul>
-                                    <li><a href="product-detailPageToCreate" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                    <li><a href="{{ url('/productDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -490,7 +490,7 @@
                             </div>
                             <div class="add-to-link">
                                 <ul>
-                                    <li><a href="product-detailPageToCreate" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                    <li><a href="{{ url('/productDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -538,7 +538,7 @@
                             </div>
                             <div class="add-to-link">
                                 <ul>
-                                    <li><a href="product-detailPageToCreate" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                    <li><a href="{{ url('/productDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -585,7 +585,7 @@
                             </div>
                             <div class="add-to-link">
                                 <ul>
-                                    <li><a href="product-detailPageToCreate" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                    <li><a href="{{ url('/productDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -637,7 +637,7 @@
                             </div>
                             <div class="add-to-link">
                                 <ul>
-                                    <li><a href="product-detailPageToCreate" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                    <li><a href="{{ url('/productDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -684,7 +684,7 @@
                             </div>
                             <div class="add-to-link">
                                 <ul>
-                                    <li><a href="product-detailPageToCreate" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                    <li><a href="{{ url('/productDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -731,7 +731,7 @@
                             </div>
                             <div class="add-to-link">
                                 <ul>
-                                    <li><a href="product-detailPageToCreate" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                    <li><a href="{{ url('/productDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -777,7 +777,7 @@
                             </div>
                             <div class="add-to-link">
                                 <ul>
-                                    <li><a href="product-detailPageToCreate" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                    <li><a href="{{ url('/productDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -823,7 +823,7 @@
                             </div>
                             <div class="add-to-link">
                                 <ul>
-                                    <li><a href="product-detailPageToCreate" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                    <li><a href="{{ url('/productDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -870,7 +870,7 @@
                             </div>
                             <div class="add-to-link">
                                 <ul>
-                                    <li><a href="product-detailPageToCreate" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                    <li><a href="{{ url('/productDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
                                 </ul>
                             </div>
                         </div>
