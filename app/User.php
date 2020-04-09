@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name','surname','age','iva', 'email', 'password',
+        'name','surname','age','iva','phone_number', 'email', 'password',
     ];
 
     /**
@@ -51,13 +51,6 @@ public function order(){
 public function wishlist(){
     return $this->hasOne('App\Whishlist');
 }
-public function basket(){
-    return $this->hasOne('App\Basket');
-}
-
-public function phone(){
-    return $this->hasMany('App\Phone');
-}
 
 public function article(){
     return $this->hasMany('App\Article');
@@ -65,10 +58,6 @@ public function article(){
 
 public function comment(){
     return $this->hasMany('App\Comment');
-}
-
-public function reply(){
-    return $this->hasMany('App\Reply');
 }
 
 public function access_log(){

@@ -20,8 +20,9 @@ class Comment extends Model
         return $this->belongsTo('App\Article');
     }
 
-    public function reply(){
-        return $this->hasMany('App\Reply');
+    public function replies()
+    {
+        return $this->hasMany('App\Comment', 'comment_parent');
     }
 
 }

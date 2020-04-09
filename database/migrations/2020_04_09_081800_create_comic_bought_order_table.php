@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePhonesTable extends Migration
+class CreateComicBoughtOrderTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreatePhonesTable extends Migration
      */
     public function up()
     {
-        Schema::create('phones', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->string('phone_number');
+        Schema::create('comic_bought_order', function (Blueprint $table) {
+            $table->foreignId('comic_bought_id')->constrained();
+            $table->foreignId('order_id')->constrained();
+            $table->integer('quantity');
         });
     }
 
@@ -27,6 +27,6 @@ class CreatePhonesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('phones');
+        Schema::dropIfExists('comic_bought_order');
     }
 }

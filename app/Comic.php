@@ -39,15 +39,12 @@ class Comic extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function order(){
-        return $this->belongsToMany('App\Order');
+    public function comic_bought(){
+        return $this->hasOne('App\ComicBought');
     }
 
     public function wishlist(){
         return $this->belongsToMany('App\Wishlist');
     }
 
-    public function basket(){
-        return $this->belongsToMany('App\Basket');
-    }
 }

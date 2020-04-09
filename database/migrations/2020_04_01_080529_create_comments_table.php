@@ -20,6 +20,7 @@ class CreateCommentsTable extends Migration
             $table->integer('like');
             $table->integer('dislike');
             $table->text('answer_text');
+            $table->unsignedBigInteger('parent_comment')->default(0);
             $table->timestamp('date');
         });
     }

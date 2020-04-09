@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBasketComicTable extends Migration
+class CreateComicBoughtsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateBasketComicTable extends Migration
      */
     public function up()
     {
-        Schema::create('basket_comic', function (Blueprint $table) {
-            $table->foreignId('basket_id')->constrained();
-            $table->foreignId('comic_id')->constrained();
+        Schema::create('comic_boughts', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('comic_id');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +27,6 @@ class CreateBasketComicTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('basket_comic');
+        Schema::dropIfExists('comic_boughts');
     }
 }
