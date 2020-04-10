@@ -18,7 +18,11 @@ class CreateImagesTable extends Migration
             $table->foreignId('comic_id')->constrained();
             $table->text('size');
             $table->text('format');
+            $table->binary('image');
         });
+        DB::table('images')->insert([
+            ['comic_id' => '1' , 'size' => '175.75 Kb' ,'format' => 'jpg' , 'image' => '/public/img/comicsImages/FMA1.jpg'],
+            ]);
     }
 
     /**

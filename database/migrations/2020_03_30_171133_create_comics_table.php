@@ -26,6 +26,9 @@ class CreateComicsTable extends Migration
             $table->float('price');
             $table->string('publisher');
         });
+        DB::table('comics')->insert([
+            ['user_id' => '1' , 'author_id' => '1' , 'comic_name' => 'Fullmetal Alchemist: Brotherhood 1' , 'description' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'type' => "shonen" , 'quantity' => '1'  , 'ISBN' => 'FAKEISBN' , 'price' => '4.5', 'publisher' => 'Planet manga'],
+        ]);
     }
 
     /**
