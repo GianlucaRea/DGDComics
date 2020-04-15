@@ -17,6 +17,12 @@ class CreateGenresTable extends Migration
             $table->id();
             $table->string('name_genre');
         });
+
+        DB::table('genres')->insert([
+            ['name_genre' => 'Adventure'],
+            ['name_genre' => 'Science Fiction'],
+            ['name_genre' => 'Dark Fantasy'],
+        ]);
     }
 
     /**

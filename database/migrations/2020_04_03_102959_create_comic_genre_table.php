@@ -14,6 +14,7 @@ class CreateComicGenreTable extends Migration
     public function up()
     {
         Schema::create('comic_genre', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('comic_id')->constrained();
             $table->foreignId('genre_id')->constrained();
         });

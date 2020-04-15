@@ -14,6 +14,7 @@ class CreateGroupUserTable extends Migration
     public function up()
     {
         Schema::create('group_user', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('group_id')->constrained();
             $table->foreignId('user_id')->constrained();
         });

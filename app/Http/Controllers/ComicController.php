@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Genre;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Image;
+use App\Comic;
 use Illuminate\Support\Facades\DB;
 use Validator;
 
-class ImageContoller extends Controller
+class ComicController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +18,7 @@ class ImageContoller extends Controller
      */
     public function index()
     {
-        return response()->json(Image::get(),200);
-
+        return response()->json(Comic::get(),200);
     }
 
     /**
@@ -34,22 +34,33 @@ class ImageContoller extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     * @param array $genre_id
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,array $genre_id)
     {
-        $rules=[
-            'comic_id' => 'required',
-            'image' => 'required'
+        $rules = [
+            'user_id'=>'required',
+            'id_author'=>'required',
+            'comic_name'=>'required',
+            'type'=>'required',
+            'quantity'=>'required',
+            'ISBN'=>'required',
+            'price'=>'required',
         ];
         $validator = Validator::make($request->all(),$rules);
         if($validator->fails()){
             return response()->json($validator->errors(),400);
         }
 
-        $image = Image::create($request->all());
-        return response()->json($image,201);
+
+        $Comic = Comic::create($request->all());
+        $Genre = Genre::find($genre_id);
+        $Comic->genre()->attach($Genre);
+        return response()->json($Comic,201);
+
+
     }
 
     /**
@@ -60,11 +71,11 @@ class ImageContoller extends Controller
      */
     public function show($id)
     {
-        $image = Image::find($id);
-        if(is_null($image)){
+        $Comic = Comic::find($id);
+        if(is_null($Comic)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        return response()->json(Image::find($id),200);
+        return response()->json(Comic::find($id),200);
     }
 
     /**
@@ -87,12 +98,12 @@ class ImageContoller extends Controller
      */
     public function update(Request $request, $id)
     {
-        $image = Image::find($id);
-        if(is_null($image)){
+        $Comic = Comic::find($id);
+        if(is_null($Comic)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        $image -> update($request -> all());
-        return response()->json($image,200);
+        $Comic -> update($request -> all());
+        return response()->json($Comic,200);
     }
 
     /**
@@ -101,20 +112,37 @@ class ImageContoller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
     public function destroy($id)
     {
-        $image = Image::find($id);
-        if(is_null($image)){
+        $Comic = Comic::find($id);
+        if(is_null($Comic)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        $image-> delete();
+        $Comic-> delete();
         return response()->json(null,204);
     }
 
-    public function getComic($id)
-    {
-        $image = Image::find($id)->comic()->get();
 
-        return response()->json($image, 200);
+    public function getUser($id){
+        $comic = Comic::find($id)->User()->get();
+
+        return response()->json($comic, 200);
+    }
+
+    public function getAuthor($id)
+    {
+        $comic = Comic::find($id)->Author()->get();
+
+        return response()->json($comic, 200);
+    }
+
+    public function getGenre($id)
+    {
+        $comic = Comic::find($id)->genre()->get();
+
+        return response()->json($comic, 200);
+
     }
 }
