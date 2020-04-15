@@ -9,7 +9,7 @@ class Image extends Model
     protected $table = "images";
 
     protected $fillable = [
-        'comic_id','size','format','image'
+        'comic_id','image_name','size','format',
     ];
 
     public function comic(){

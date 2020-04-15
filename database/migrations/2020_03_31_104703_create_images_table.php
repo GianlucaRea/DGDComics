@@ -16,12 +16,12 @@ class CreateImagesTable extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->bigIncrements('id')->unique();
             $table->foreignId('comic_id')->constrained();
+            $table->text('image_name');
             $table->text('size');
             $table->text('format');
-            $table->binary('image');
         });
         DB::table('images')->insert([
-            ['comic_id' => '1' , 'size' => '175.75 Kb' ,'format' => 'jpg' , 'image' => '/public/img/comicsImages/FMA1.jpg'],
+            ['comic_id' => '1' , 'image_name' => 'FMA1.jpg', 'size' => '175.75 Kb' ,'format' => 'jpg' ],
             ]);
     }
 

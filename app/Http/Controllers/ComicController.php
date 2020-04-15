@@ -8,7 +8,7 @@ use App\Comic;
 use Illuminate\Support\Facades\DB;
 use Validator;
 
-class ComicContoller extends Controller
+class ComicController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -120,6 +120,12 @@ class ComicContoller extends Controller
         return response()->json(null,204);
     }
 
+
+    public static function getByID($id){  //SOLO PER FARE UNA PROVA, NON SAPEVO COME FARE UNA GETBYID ALTRIMENTI IN FEATURED AREA
+        $comic = Comic::find($id);
+
+        return $comic;
+    }
 
     public function getUser($id){
         $comic = Comic::find($id)->User()->get();

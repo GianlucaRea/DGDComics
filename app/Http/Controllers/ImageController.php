@@ -8,7 +8,7 @@ use App\Image;
 use Illuminate\Support\Facades\DB;
 use Validator;
 
-class ImageContoller extends Controller
+class ImageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,7 +41,7 @@ class ImageContoller extends Controller
     {
         $rules=[
             'comic_id' => 'required',
-            'image' => 'required'
+            'image_name' => 'required'
         ];
         $validator = Validator::make($request->all(),$rules);
         if($validator->fails()){
@@ -109,6 +109,12 @@ class ImageContoller extends Controller
         }
         $image-> delete();
         return response()->json(null,204);
+    }
+
+    public static function getByID($id){ //SOLO PER FARE UNA PROVA, NON SAPEVO COME FARE UNA GETBYID ALTRIMENTI IN FEATURED AREA
+        $comic = Image::find($id);
+
+        return $comic;
     }
 
     public function getComic($id)
