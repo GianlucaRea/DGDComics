@@ -1464,6 +1464,8 @@ body {
 .most-product-img {
     position: relative;
     overflow: hidden;
+    max-width:350px;
+    max-height:449px;
 }
 
 .product-img::after,
