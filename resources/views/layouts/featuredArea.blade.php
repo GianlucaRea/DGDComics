@@ -1,3 +1,7 @@
+@php
+    $comic = \App\Http\Controllers\ComicController::getByID('1'); //SOLO PER FARE UNA PROVA
+    $image = \App\Http\Controllers\ImageController::getByID('1'); //SOLO PER FARE UNA PROVA
+@endphp
 <!-- featured-area-start -->
 <div class="new-book-area pt-100">
     <div class="container">
@@ -14,7 +18,7 @@
                 <div class="product-wrapper">
                     <div class="product-img">
                         <a href="#">
-                            <img src="img/product/1.jpg" alt="book" class="primary" />
+                            <img src="{{asset('img/comicsImages/' . $image->image_name) }}" alt="book" class="primary" />
                         </a>
                         <div class="quick-view">
                             <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
@@ -38,7 +42,7 @@
                                 <li><a href="#"><i class="fa fa-star"></i></a></li>
                             </ul>
                         </div>
-                        <h4><a href="#">Joust Duffle Bag</a></h4>
+                        <h4><a href="#">{{ $comic->comic_name }}</a></h4>
                         <div class="product-price">
                             <ul>
                                 <li>$60.00</li>
@@ -51,7 +55,7 @@
                         </div>
                         <div class="add-to-link">
                             <ul>
-                                <li><a href="{{ url('/productDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                <li><a href="{{ url('/comicDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -99,7 +103,7 @@
                         </div>
                         <div class="add-to-link">
                             <ul>
-                                <li><a href="{{ url('/productDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                <li><a href="{{ url('/comicDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -147,7 +151,7 @@
                         </div>
                         <div class="add-to-link">
                             <ul>
-                                <li><a href="{{ url('/productDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                <li><a href="{{ url('/comicDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -197,7 +201,7 @@
                         </div>
                         <div class="add-to-link">
                             <ul>
-                                <li><a href="{{ url('/productDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                <li><a href="{{ url('/comicDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -246,7 +250,7 @@
                         </div>
                         <div class="add-to-link">
                             <ul>
-                                <li><a href="{{ url('/productDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                <li><a href="{{ url('/comicDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -296,7 +300,7 @@
                         </div>
                         <div class="add-to-link">
                             <ul>
-                                <li><a href="{{ url('/productDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
+                                <li><a href="{{ url('/comicDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
                             </ul>
                         </div>
                     </div>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Comic;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,4 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::view('/productDetail', 'productDetail'); //da completare con il passaggio di dati. Prima devi creare bene la pagina e fare le blade generiche però DF
+Route::view('/comicDetail', 'comicDetail'); //da completare con il passaggio di dati. Prima devi creare bene la pagina e fare le blade generiche però DF

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Genre;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -59,8 +60,6 @@ class ComicController extends Controller
         $Genre = Genre::find($genre_id);
         $Comic->genre()->attach($Genre);
         return response()->json($Comic,201);
-
-
     }
 
     /**
@@ -125,6 +124,13 @@ class ComicController extends Controller
     }
 
 
+
+    public static function getByID($id){  //SOLO PER FARE UNA PROVA, NON SAPEVO COME FARE UNA GETBYID ALTRIMENTI IN FEATURED AREA
+        $comic = Comic::find($id);
+
+        return $comic;
+    }
+
     public function getUser($id){
         $comic = Comic::find($id)->User()->get();
 
@@ -137,6 +143,7 @@ class ComicController extends Controller
 
         return response()->json($comic, 200);
     }
+ 
 
     public function getGenre($id)
     {
@@ -145,4 +152,5 @@ class ComicController extends Controller
         return response()->json($comic, 200);
 
     }
+ 
 }
