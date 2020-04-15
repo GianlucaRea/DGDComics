@@ -14,6 +14,7 @@ class CreateComicBoughtOrderTable extends Migration
     public function up()
     {
         Schema::create('comic_bought_order', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('comic_bought_id')->constrained();
             $table->foreignId('order_id')->constrained();
             $table->integer('quantity');

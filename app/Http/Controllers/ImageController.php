@@ -42,6 +42,7 @@ class ImageController extends Controller
         $rules=[
             'comic_id' => 'required',
             'image_name' => 'required'
+            'image' => 'required'
         ];
         $validator = Validator::make($request->all(),$rules);
         if($validator->fails()){
@@ -111,11 +112,13 @@ class ImageController extends Controller
         return response()->json(null,204);
     }
 
+
     public static function getByID($id){ //SOLO PER FARE UNA PROVA, NON SAPEVO COME FARE UNA GETBYID ALTRIMENTI IN FEATURED AREA
         $comic = Image::find($id);
 
         return $comic;
     }
+
 
     public function getComic($id)
     {
