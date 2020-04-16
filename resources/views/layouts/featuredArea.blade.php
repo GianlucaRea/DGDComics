@@ -1,6 +1,6 @@
 @php
     $comic = \App\Http\Controllers\ComicController::getByID('1'); //SOLO PER FARE UNA PROVA
-    $image = \App\Http\Controllers\ImageController::getByID('1'); //SOLO PER FARE UNA PROVA
+    $image = \App\Http\Controllers\ImageController::getCover($comic->id); //SOLO PER FARE UNA PROVA
 @endphp
 <!-- featured-area-start -->
 <div class="new-book-area pt-100">
