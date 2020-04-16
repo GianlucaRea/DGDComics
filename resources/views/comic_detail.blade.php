@@ -8,11 +8,10 @@
 <header>
     @include('layouts.header')
 </header>
-<br/><br/><br/><br/><br/><br/>
-    @include('layouts.breadcrumbsArea')
-    @include('layouts.productMainArea')
-    @include('layouts.productInfo')
-    <br/><br/><br/><br/><br/><br/>
+@include('layouts.breadcrumbsArea')
+@include('layouts.productMainArea')
+@include('layouts.productInfo')
+@include('layouts.review')
 @include('layouts.banner2')
 @include('layouts.social')
 <footer>
