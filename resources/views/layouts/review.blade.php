@@ -54,6 +54,8 @@
                         </div>
                     </li>
                 </ul>
+            </div>
+            <div>
                 <div class="review-add">
                     <h3>You're reviewing:</h3>
                     <h4>Joust Duffle Bag</h4>
@@ -120,5 +122,4 @@
         </div>
     </div>
 </div>
-<br>
 <!--review area end-->

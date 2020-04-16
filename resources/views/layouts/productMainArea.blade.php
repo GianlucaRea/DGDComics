@@ -77,8 +77,9 @@
                         </div>
                     </div>
                 </div>
-</div>         @include('layouts.relatedProduct')
-                <!-- product-main-area-end -->         </div>
+            </div>
+        @include('layouts.relatedProduct')
+        <!-- product-main-area-end -->
         </div>
-
     </div>
+</div>

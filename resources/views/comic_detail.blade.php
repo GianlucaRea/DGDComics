@@ -12,6 +12,7 @@
 @include('layouts.productMainArea')
 @include('layouts.productInfo')
 @include('layouts.review')
+<br><br>
 @include('layouts.banner2')
 @include('layouts.social')
 <footer>
