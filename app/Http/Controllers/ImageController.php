@@ -41,7 +41,7 @@ class ImageController extends Controller
     {
         $rules=[
             'comic_id' => 'required',
-            'image_name' => 'required'
+            'image_name' => 'required',
             'image' => 'required'
         ];
         $validator = Validator::make($request->all(),$rules);
