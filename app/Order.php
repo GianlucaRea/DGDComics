@@ -23,8 +23,8 @@ class Order extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function comic(){
-        return $this->belongsTo('App\Comic');
+    public function comic_bought(){
+        return $this->belongsToMany('App\ComicBought');
     }
 
 

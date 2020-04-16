@@ -20,12 +20,16 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->integer('age');
             $table->string('iva');
+            $table->string('phone_number');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
+        DB::table('users')->insert([
+            ['name' => 'Daniele' , 'surname' => 'Fossemò' , 'username' => 'DanieleF198' , 'age' => '22' , 'iva' => 'PARTITAIVA0000X' , 'phone_number' => '123456789' , 'email' => 'daniele.fossemo@lalala.comma', 'password' => 'password'],
+        ]);
     }
 
     /**

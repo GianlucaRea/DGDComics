@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ServiceContoller extends Controller
+class AccessLogController extends Controller
 {
     //
 }

@@ -14,6 +14,7 @@ class CreateComicWishlistTable extends Migration
     public function up()
     {
         Schema::create('comic_wishlist', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('comic_id')->constrained();
             $table->foreignId('wishlists_id')->constrained();
         });
