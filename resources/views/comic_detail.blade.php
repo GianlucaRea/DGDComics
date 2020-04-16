@@ -9,10 +9,10 @@
     @include('layouts.header')
 </header>
 <br/><br/><br/><br/><br/><br/>
-<div class="container-fluid">
-    <h1 align="center"> PAGINA DA CREARE </h1>
-</div>
-<br/><br/><br/><br/><br/><br/>
+    @include('layouts.breadcrumbsArea')
+    @include('layouts.productMainArea')
+    @include('layouts.productInfo')
+    <br/><br/><br/><br/><br/><br/>
 @include('layouts.banner2')
 @include('layouts.social')
 <footer>

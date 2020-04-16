@@ -20,4 +20,4 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::view('/comicDetail', 'comicDetail'); //da completare con il passaggio di dati. Prima devi creare bene la pagina e fare le blade generiche però DF
+Route::view('/comicDetail', 'comic_detail'); //da completare con il passaggio di dati. Prima devi creare bene la pagina e fare le blade generiche però DF

@@ -39,8 +39,8 @@ class ComicController extends Controller
      * @param array $genre_id
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,array $genre_id)
-    {
+    public function store(Request $request,array $genre_id) //array $genre_id passa un array di id che corrispondono
+    {                                                       //ai generi che prenderà il fumetto
         $rules = [
             'user_id'=>'required',
             'id_author'=>'required',
@@ -57,8 +57,9 @@ class ComicController extends Controller
 
 
         $Comic = Comic::create($request->all());
-        $Genre = Genre::find($genre_id);
-        $Comic->genre()->attach($Genre);
+        $Genre = Genre::find($genre_id); // Prendi genere in base all'id passato
+        $Comic->genre()->attach($Genre); // Attacca al Comic i generi passati come argomento
+        //Questo codice non è sicuro sia funzionante Codice di Gianluca Rea
         return response()->json($Comic,201);
     }
 
