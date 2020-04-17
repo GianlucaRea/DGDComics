@@ -2,7 +2,6 @@
 <html class="no-js" lang="en">
     <head>
         @include('layouts.head')
-        <title>DGDcomics</title>
     </head>
     <body class="home-2">
             <header>
