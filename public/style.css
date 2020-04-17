@@ -4983,6 +4983,18 @@ nav.menu .cr-dropdown ul {
     display: inline-block;
 }
 
+.product-info-genre>span {
+    color: #333;
+    font-size: 14px;
+    font-weight: 400;
+    margin-right: 15px;
+    text-transform: capitalize;
+    font-family: 'Rufina', serif;
+    font-weight: 400;
+    float: left;
+    display: inline-block;
+}
+
 .product-attribute span {
     color: #333;
     font-size: 14px;
