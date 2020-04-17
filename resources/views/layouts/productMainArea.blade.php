@@ -10,10 +10,11 @@
                             <div class="flexslider">
                                 <ul class="slides">
                                     <li data-thumb="img/thum-2/1.jpg">
-                                        <img src="img/flex/1.jpg" alt="woman" />
+                                        @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
+                                        <img src="{{asset('img/comicsImages/' . $image->image_name) }}" alt="woman" />
                                     </li>
                                     <li data-thumb="img/thum-2/4.jpg">
-                                        <img src="img/flex/5.jpg" alt="woman" />
+                                        <img src="img/flex/5.jpg" alt="woman" /> <!-- IMMAGINI DA FARE, CI PENSO IO DF-->
                                     </li>
                                     <li data-thumb="img/thum-2/2.jpg">
                                         <img src="img/flex/2.jpg" alt="woman" />
@@ -27,13 +28,13 @@
                         <div class="col-lg-7 col-md-6 col-12">
                             <div class="product-info-main">
                                 <div class="page-title">
-                                    <h1>Savvy Shoulder Tote</h1>
+                                    <h1>{{ $comic->comic_name }}</h1>
                                 </div>
                                 <div class="product-info-stock-sku">
                                     <span>In stock</span>
                                     <div class="product-attribute">
-                                        <span>SKU</span>
-                                        <span class="value">24-WB05</span>
+                                        <span>KSU</span> <!--VENDITORE DA FARE-->
+                                        <span class="value">24-WB05</span> <!--NON SO COSA SIA-->
                                     </div>
                                 </div>
                                 <div class="product-reviews-summary">
@@ -52,7 +53,7 @@
                                 <div class="product-info-price">
                                     <div class="price-final">
                                         <span>$34.00</span>
-                                        <span class="old-price">$40.00</span>
+                                        <span class="old-price">$40.00</span> <!--PREZZO DA FARE-->
                                     </div>
                                 </div>
                                 <div class="product-add-form">
@@ -70,7 +71,7 @@
                                         <a href="#"><i class="fa fa-envelope-o"></i></a>
                                     </div>
                                     <div class="product-addto-links-text">
-                                        <p>Powerwalking to the gym or strolling to the local coffeehouse, the Savvy Shoulder Tote lets you stash your essentials in sporty style! A top-loading compartment provides quick and easy access to larger items, while zippered pockets on the front and side hold cash, credit cards and phone.</p>
+                                        <p>{{ $comic->description }}</p>
                                     </div>
                                 </div>
                             </div>
