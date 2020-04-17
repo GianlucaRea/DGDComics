@@ -15,9 +15,15 @@ use App\Comic;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $comics = Comic::all();
+    return view('welcome', compact('comics'));
 });
 
 Auth::routes();
 
-Route::view('/comicDetail', 'comic_detail'); //da completare con il passaggio di dati. Prima devi creare bene la pagina e fare le blade generiche però DF
+Route::get('/comic_detail/{id}', function ($id){
+
+    $comic = Comic::find($id);
+
+    return view('comic_detail', compact('comic'));
+});
