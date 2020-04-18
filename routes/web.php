@@ -25,5 +25,6 @@ Route::get('/comic_detail/{id}', function ($id){
 
     $comic = Comic::find($id);
 
+
     return view('comic_detail', compact('comic'));
 });

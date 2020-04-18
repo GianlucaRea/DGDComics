@@ -28,18 +28,30 @@
                         <div class="col-lg-7 col-md-6 col-12">
                             <div class="product-info-main">
                                 <div class="page-title">
-                                    <h1>{{ $comic->comic_name }}</h1>
+                                    <h1>{{ $comic->comic_name }}</h1> <!-- Nice Touch-->
                                 </div>
                                 <div class="product-info-stock-sku">
-                                    <span>In stock</span>
+                                            @if($comic->quantity > 0)
+                                           <span>In Stock</span>
+                                            @elseif($comic->quantity <= 0)
+                                           <span>Out of Stock</span>
+                                           @endif
                                     <div class="product-attribute">
-                                        <span>KSU</span> <!--VENDITORE DA FARE-->
-                                        <span class="value">24-WB05</span> <!--NON SO COSA SIA-->
+                                        <p>{{$comic->publisher}}</p> <!-- Display publisher of the comic -->
+                                        <!--<span class="value">24-WB05</span> <!--NON SO COSA SIA-->
                                     </div>
                                 </div>
-                                <div class="product-reviews-summary">
-                                    <div class="rating-summary">
-                                        <a href="#"><i class="fa fa-star"></i></a>
+                                <div class="product-info-genre">
+
+                                    <div class="product-attribute">
+                                        <p>
+                                            @foreach($comic->genre as $genres)
+                                                <a href="#">{{$genres->name_genre }}</a> <!-- Display publisher of the comic -->
+                                            @endforeach
+                                        </p>
+                                    </div>
+                                </div>
+                                    <div class="rating-summary"><a href="#"><i class="fa fa-star"></i></a>
                                         <a href="#"><i class="fa fa-star"></i></a>
                                         <a href="#"><i class="fa fa-star"></i></a>
                                         <a href="#"><i class="fa fa-star"></i></a>
@@ -52,8 +64,8 @@
                                 </div>
                                 <div class="product-info-price">
                                     <div class="price-final">
-                                        <span>$34.00</span>
-                                        <span class="old-price">$40.00</span> <!--PREZZO DA FARE-->
+                                        <span>€{{$comic->price}}</span> <!-- Price Done -->
+                                        <span class="old-price">€{{$comic->old_price}}</span> <!-- Old price created !! -->
                                     </div>
                                 </div>
                                 <div class="product-add-form">
