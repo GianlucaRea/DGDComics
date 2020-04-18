@@ -112,8 +112,12 @@ class ImageController extends Controller
         return response()->json(null,204);
     }
 
-    public static function getCover($id){ //SOLO PER FARE UNA PROVA, NON SAPEVO COME FARE UNA GETBYID->cover ALTRIMENTI IN FEATURED AREA... ANCHE SE QUESTO POTREBBE TORNARE UTILE
+    public static function getCover($id){
         return Image::where('comic_id', '=', $id)->where('cover', '=', 1)->first();
+    }
+
+    public static function getOtherImages($id){
+        return Image::where('comic_id', '=', $id)->where('cover', '=', 0)->get();
     }
 
     public function getComic($id)

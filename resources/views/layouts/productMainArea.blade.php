@@ -8,20 +8,19 @@
                     <div class="row">
                         <div class="col-lg-5 col-md-6 col-12">
                             <div class="flexslider">
+                                @php
+                                    $cover = \App\Http\Controllers\ImageController::getCover($comic->id);
+                                    $images = \App\Http\Controllers\ImageController::getOtherImages($comic->id);
+                                @endphp
                                 <ul class="slides">
-                                    <li data-thumb="img/thum-2/1.jpg">
-                                        @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
-                                        <img src="{{asset('img/comicsImages/' . $image->image_name) }}" alt="woman" />
+                                    <li data-thumb="{{asset('img/comicsImages/' . $cover->image_name) }}">
+                                        <img src="{{asset('img/comicsImages/' . $cover->image_name) }}" alt="{{ $comic->comic_name }}" />
                                     </li>
-                                    <li data-thumb="img/thum-2/4.jpg">
-                                        <img src="img/flex/5.jpg" alt="woman" /> <!-- IMMAGINI DA FARE, CI PENSO IO DF-->
+                                    @foreach($images as $image)
+                                    <li data-thumb="{{ asset('img/comicsImages/' . $image->image_name) }}">
+                                        <img src="{{ asset('img/comicsImages/' . $image->image_name) }}" alt="{{ $comic->comic_name }}" />
                                     </li>
-                                    <li data-thumb="img/thum-2/2.jpg">
-                                        <img src="img/flex/2.jpg" alt="woman" />
-                                    </li>
-                                    <li data-thumb="img/thum-2/5.jpg">
-                                        <img src="img/flex/5.jpg" alt="woman" />
-                                    </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
@@ -31,14 +30,14 @@
                                     <h1>{{ $comic->comic_name }}</h1> <!-- Nice Touch-->
                                 </div>
                                 <div class="product-info-stock-sku">
-                                            @if($comic->quantity > 0)
-                                           <span>In Stock</span>
-                                            @elseif($comic->quantity <= 0)
-                                           <span>Out of Stock</span>
-                                           @endif
+                                    @if($comic->quantity > 0)
+                                        <span>In Stock</span>
+                                    @elseif($comic->quantity <= 0)
+                                        <span>Out of Stock</span>
+                                    @endif
                                     <div class="product-attribute">
                                         <p>{{$comic->publisher}}</p> <!-- Display publisher of the comic -->
-                                        <!--<span class="value">24-WB05</span> <!--NON SO COSA SIA-->
+                                        <!--<span class="value">24-WB05</span> NON SO COSA SIA-->
                                     </div>
                                 </div>
                                 <div class="product-info-genre">
@@ -51,40 +50,39 @@
                                         </p>
                                     </div>
                                 </div>
-                                    <div class="rating-summary"><a href="#"><i class="fa fa-star"></i></a>
-                                        <a href="#"><i class="fa fa-star"></i></a>
-                                        <a href="#"><i class="fa fa-star"></i></a>
-                                        <a href="#"><i class="fa fa-star"></i></a>
-                                        <a href="#"><i class="fa fa-star"></i></a>
-                                    </div>
-                                    <div class="reviews-actions">
-                                        <a href="#">3 Reviews</a>
-                                        <a href="#" class="view">Add Your Review</a>
-                                    </div>
+                                <div class="rating-summary"><a href="#"><i class="fa fa-star"></i></a>
+                                    <a href="#"><i class="fa fa-star"></i></a>
+                                    <a href="#"><i class="fa fa-star"></i></a>
+                                    <a href="#"><i class="fa fa-star"></i></a>
+                                    <a href="#"><i class="fa fa-star"></i></a>
                                 </div>
-                                <div class="product-info-price">
-                                    <div class="price-final">
-                                        <span>€{{$comic->price}}</span> <!-- Price Done -->
-                                        <span class="old-price">€{{$comic->old_price}}</span> <!-- Old price created !! -->
-                                    </div>
+                                <div class="reviews-actions">
+                                    <a href="#">3 Reviews</a>
+                                    <a href="#" class="view">Add Your Review</a>
                                 </div>
-                                <div class="product-add-form">
-                                    <form action="#">
-                                        <div class="quality-button">
-                                            <input class="qty" type="number" value="1">
-                                        </div>
-                                        <a href="#">Add to cart</a>
-                                    </form>
+                            </div>
+                            <div class="product-info-price">
+                                <div class="price-final">
+                                    <span>€{{$comic->price}}</span> <!-- Price Done -->
+                                    <span class="old-price">€{{$comic->old_price}}</span> <!-- Old price created !! -->
                                 </div>
-                                <div class="product-social-links">
-                                    <div class="product-addto-links">
-                                        <a href="#"><i class="fa fa-heart"></i></a>
-                                        <a href="#"><i class="fa fa-pie-chart"></i></a>
-                                        <a href="#"><i class="fa fa-envelope-o"></i></a>
+                            </div>
+                            <div class="product-add-form">
+                                <form action="#">
+                                    <div class="quality-button">
+                                        <input class="qty" type="number" value="1">
                                     </div>
-                                    <div class="product-addto-links-text">
-                                        <p>{{ $comic->description }}</p>
-                                    </div>
+                                    <a href="#">Add to cart</a>
+                                </form>
+                            </div>
+                            <div class="product-social-links">
+                                <div class="product-addto-links">
+                                    <a href="#"><i class="fa fa-heart"></i></a>
+                                    <a href="#"><i class="fa fa-pie-chart"></i></a>
+                                    <a href="#"><i class="fa fa-envelope-o"></i></a>
+                                </div>
+                                <div class="product-addto-links-text">
+                                    <p>{{ $comic->description }}</p>
                                 </div>
                             </div>
                         </div>
