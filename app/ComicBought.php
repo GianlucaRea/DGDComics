@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ComicBought extends Model
 {
     protected $table = "comic_boughts";
+    public $timestamps = false;
 
     protected $fillable = [
         'comic_id',

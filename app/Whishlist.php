@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Whishlist extends Model
 {
     protected $table = "whishlists";
+    public $timestamps = false;
 
     protected $fillable = [
         'comic_id','user_id'
