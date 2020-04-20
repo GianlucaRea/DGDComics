@@ -25,11 +25,8 @@
                 <div class="link-follow">
                     <ul>
                         <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                         <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                         <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                        <li><a href="#"><i class="fa fa-flickr"></i></a></li>
-                        <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
                         <li><a href="#"><i class="fa fa-instagram"></i></a></li>
                     </ul>
                 </div>

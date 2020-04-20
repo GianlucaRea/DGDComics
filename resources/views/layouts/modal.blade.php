@@ -11,23 +11,23 @@
                         <div class="modal-tab">
                             <div class="product-details-large tab-content">
                                 <div class="tab-pane active" id="image-1">
-                                    <img src="img/product/quickview-l4.jpg" alt="" />
+                                    <img src="{{asset('img/product/quickview-l4.jpg')}}" alt="" />
                                 </div>
                                 <div class="tab-pane" id="image-2">
-                                    <img src="img/product/quickview-l2.jpg" alt="" />
+                                    <img src="{{asset('img/product/quickview-l2.jpg')}}" alt="" />
                                 </div>
                                 <div class="tab-pane" id="image-3">
-                                    <img src="img/product/quickview-l3.jpg" alt="" />
+                                    <img src="{{asset('img/product/quickview-l3.jpg')}}" alt="" />
                                 </div>
                                 <div class="tab-pane" id="image-4">
-                                    <img src="img/product/quickview-l5.jpg" alt="" />
+                                    <img src="{{asset('img/product/quickview-l5.jpg')}}" alt="" />
                                 </div>
                             </div>
                             <div class="product-details-small quickview-active owl-carousel">
-                                <a class="active" href="#image-1"><img src="img/product/quickview-s4.jpg" alt="" /></a>
-                                <a href="#image-2"><img src="img/product/quickview-s2.jpg" alt="" /></a>
-                                <a href="#image-3"><img src="img/product/quickview-s3.jpg" alt="" /></a>
-                                <a href="#image-4"><img src="img/product/quickview-s5.jpg" alt="" /></a>
+                                <a class="active" href="#image-1"><img src="{{asset('img/product/quickview-s4.jpg')}}" alt="" /></a>
+                                <a href="#image-2"><img src="{{asset('img/product/quickview-s2.jpg')}}" alt="" /></a>
+                                <a href="#image-3"><img src="{{asset('img/product/quickview-s3.jpg')}}" alt="" /></a>
+                                <a href="#image-4"><img src="{{asset('img/product/quickview-s5.jpg')}}" alt="" /></a>
                             </div>
                         </div>
                     </div>

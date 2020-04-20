@@ -10,7 +10,7 @@
                 <div class="product-total-2">
                     <div class="single-most-product bd mb-18">
                         <div class="most-product-img">
-                            <a href="#"><img src="img/product/20.jpg" alt="book" /></a>
+                            <a href="#"><img src="{{asset('img/product/20.jpg')}}" alt="book" /></a>
                         </div>
                         <div class="most-product-content">
                             <div class="product-rating">
@@ -33,7 +33,7 @@
                     </div>
                     <div class="single-most-product bd mb-18">
                         <div class="most-product-img">
-                            <a href="#"><img src="img/product/21.jpg" alt="book" /></a>
+                            <a href="#"><img src="{{asset('img/product/21.jpg')}}" alt="book" /></a>
                         </div>
                         <div class="most-product-content">
                             <div class="product-rating">
@@ -56,7 +56,7 @@
                     </div>
                     <div class="single-most-product">
                         <div class="most-product-img">
-                            <a href="#"><img src="img/product/22.jpg" alt="book" /></a>
+                            <a href="#"><img src="{{asset('img/product/22.jpg')}}" alt="book" /></a>
                         </div>
                         <div class="most-product-content">
                             <div class="product-rating">
@@ -80,7 +80,7 @@
                 <div class="product-total-2">
                     <div class="single-most-product bd mb-18">
                         <div class="most-product-img">
-                            <a href="#"><img src="img/product/23.jpg" alt="book" /></a>
+                            <a href="#"><img src="{{asset('img/product/23.jpg')}}" alt="book" /></a>
                         </div>
                         <div class="most-product-content">
                             <div class="product-rating">
@@ -103,7 +103,7 @@
                     </div>
                     <div class="single-most-product bd mb-18">
                         <div class="most-product-img">
-                            <a href="#"><img src="img/product/24.jpg" alt="book" /></a>
+                            <a href="#"><img src="{{asset('img/product/24.jpg')}}" alt="book" /></a>
                         </div>
                         <div class="most-product-content">
                             <div class="product-rating">
@@ -126,7 +126,7 @@
                     </div>
                     <div class="single-most-product">
                         <div class="most-product-img">
-                            <a href="#"><img src="img/product/22.jpg" alt="book" /></a>
+                            <a href="#"><img src="{{asset('img/product/22.jpg')}}" alt="book" /></a>
                         </div>
                         <div class="most-product-content">
                             <div class="product-rating">
@@ -148,19 +148,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="banner-area mb-30">
-            <div class="banner-img-2">
-                <a href="#"><img src="img/banner/33.jpg" alt="banner" /></a>
-            </div>
-        </div>
-        <div class="left-title-2 mb-30">
-            <h2>Compare Products</h2>
-            <p>You have no items to compare.</p>
-        </div>
-        <div class="left-title-2">
-            <h2>My Wish List</h2>
-            <p>You have no items in your wish list.</p>
         </div>
     </div>
 </div>

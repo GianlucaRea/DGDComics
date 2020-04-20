@@ -25,8 +25,8 @@
                         </div>
                         <div class="product-flag">
                             <ul>
-                                <li><span class="sale">new</span> <br></li>  <!-- da fare in base al fumetto-->
-                                <li><span class="discount-percentage">-5%</span></li> <!-- da fare in base al fumetto-->
+                                <li><span class="sale">new</span> <br></li>  <!-- da fare-->
+                                <li><span class="discount-percentage">-5%</span></li> <!-- da fare-->
                             </ul>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                         <h4><a href="#">{{ $comic->comic_name }}</a></h4>
                         <div class="product-price">
                             <ul>
-                                <li>€ {{ $comic->price }}</li>
+                                <li>$ {{ $comic->price }}</li>
                             </ul>
                         </div>
                     </div>

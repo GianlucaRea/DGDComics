@@ -1,3 +1,4 @@
+<!-- questa blade per ora ancra non è usata, quindi non ho fatto gli asset :P -->
 <!-- most-product-area-start -->
 <div class="most-product-area pb-100">
     <div class="container">

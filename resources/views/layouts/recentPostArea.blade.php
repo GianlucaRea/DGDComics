@@ -11,7 +11,7 @@
                 <div class="col-lg-12">
                     <div class="single-post">
                         <div class="post-img">
-                            <a href="#"><img src="img/post/1.jpg" alt="post" /></a>
+                            <a href="#"><img src="{{asset('img/post/1.jpg')}}" alt="post" /></a>
                             <div class="blog-date-time">
                                 <span class="day-time">06</span>
                                 <span class="moth-time">Dec</span>
@@ -27,7 +27,7 @@
                 <div class="col-lg-12">
                     <div class="single-post">
                         <div class="post-img">
-                            <a href="#"><img src="img/post/2.jpg" alt="post" /></a>
+                            <a href="#"><img src="{{asset('img/post/2.jpg')}}" alt="post" /></a>
                             <div class="blog-date-time">
                                 <span class="day-time">06</span>
                                 <span class="moth-time">Dec</span>
@@ -43,7 +43,7 @@
                 <div class="col-lg-12">
                     <div class="single-post">
                         <div class="post-img">
-                            <a href="#"><img src="img/post/3.jpg" alt="post" /></a>
+                            <a href="#"><img src="{{asset('img/post/3.jpg')}}" alt="post" /></a>
                             <div class="blog-date-time">
                                 <span class="day-time">06</span>
                                 <span class="moth-time">Dec</span>
@@ -59,7 +59,7 @@
                 <div class="col-lg-12">
                     <div class="single-post">
                         <div class="post-img">
-                            <a href="#"><img src="img/post/4.jpg" alt="post" /></a>
+                            <a href="#"><img src="{{asset('img/post/4.jpg')}}" alt="post" /></a>
                             <div class="blog-date-time">
                                 <span class="day-time">06</span>
                                 <span class="moth-time">Dec</span>
