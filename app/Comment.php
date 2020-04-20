@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     protected $table = "comments";
+    public $timestamps = false;
 
     protected $fillable = [
         'user_id','article_id','like','dislike','answer_text'

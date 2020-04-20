@@ -19,14 +19,14 @@
                             <img src="{{asset('img/comicsImages/' . $image->image_name) }}" alt="book" class="primary" />
                         </a>
                         <div class="quick-view">
-                            <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
+                            <a class="action-view" href="{{ url('/comic_detail/'.$comic->id) }}">
                                 <i class="fa fa-search-plus"></i>
                             </a>
                         </div>
                         <div class="product-flag">
                             <ul>
-                                <li><span class="sale">new</span> <br></li>
-                                <li><span class="discount-percentage">-5%</span></li>
+                                <li><span class="sale">new</span> <br></li>  <!-- da fare in base al fumetto-->
+                                <li><span class="discount-percentage">-5%</span></li> <!-- da fare in base al fumetto-->
                             </ul>
                         </div>
                     </div>
@@ -43,18 +43,13 @@
                         <h4><a href="#">{{ $comic->comic_name }}</a></h4>
                         <div class="product-price">
                             <ul>
-                                <li>$60.00</li>
+                                <li>€ {{ $comic->price }}</li>
                             </ul>
                         </div>
                     </div>
                     <div class="product-link">
                         <div class="product-button">
                             <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                        </div>
-                        <div class="add-to-link">
-                            <ul>
-                                <li><a href="{{ url('/comic_detail/'.$comic->id) }}" title="Details"><i class="fa fa-external-link"></i></a></li>
-                            </ul>
                         </div>
                     </div>
                 </div>

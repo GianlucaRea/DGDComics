@@ -15,6 +15,8 @@ class Comic extends Model
      * 
      * @var array
      */
+    public $timestamps = false;
+
     protected $fillable = [
         'user_id','author_id','comic_name','description','type','quantity','ISBN','price','publisher'
     ];

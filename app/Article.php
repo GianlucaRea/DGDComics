@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     protected $table = "articles";
+    public $timestamps = false;
+    protected $dateFormat = 'd-m-Y';
 
     protected $fillable = [
         'user_id','title','article_text'

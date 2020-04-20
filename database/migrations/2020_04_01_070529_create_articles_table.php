@@ -20,6 +20,9 @@ class CreateArticlesTable extends Migration
             $table->text('article_text');
             $table->timestamp('date');
         });
+        DB::table('articles')->insert([
+            ['user_id' => '1' , 'title' => 'Buongiorno' , 'article_text' => 'Brotherhood 1' ],
+        ]);
     }
 
     /**
