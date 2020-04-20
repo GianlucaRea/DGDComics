@@ -12,9 +12,9 @@
                 <!-- tab-menu-start -->
                 <div class="tab-menu mb-40 text-center">
                     <ul class="nav justify-content-center">
-                        <li><a class="active" href="#Audiobooks" data-toggle="tab">New Arrival</a></li>
-                        <li><a href="#books" data-toggle="tab">OnSale</a></li>
-                        <li><a href="#bussiness" data-toggle="tab">Featured Products</a></li>
+                        <li><a class="active" href="#manga" data-toggle="tab">manga</a></li>
+                        <li><a href="#americanComics" data-toggle="tab">American Comics</a></li>
+                        <li><a href="#italian" data-toggle="tab">Italian</a></li>
                     </ul>
                 </div>
                 <!-- tab-menu-end -->
@@ -22,7 +22,7 @@
         </div>
         <!-- tab-area-start -->
         <div class="tab-content">
-            <div class="tab-pane fade show active" id="Audiobooks">
+            <div class="tab-pane fade show active" id="manga">
                 <div class="tab-active owl-carousel">
                     <!-- single-product-start -->
                     <div class="product-wrapper">
@@ -308,7 +308,7 @@
                     <!-- single-product-end -->
                 </div>
             </div>
-            <div class="tab-pane fade" id="books">
+            <div class="tab-pane fade" id="americanComics">
                 <div class="tab-active owl-carousel">
                     <!-- single-product-start -->
                     <div class="product-wrapper">
@@ -593,7 +593,7 @@
                     <!-- single-product-end -->
                 </div>
             </div>
-            <div class="tab-pane fade" id="bussiness">
+            <div class="tab-pane fade" id="italian">
                 <div class="tab-active owl-carousel">
                     <!-- single-product-start -->
                     <div class="product-wrapper">

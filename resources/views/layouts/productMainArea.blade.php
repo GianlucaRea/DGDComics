@@ -63,8 +63,8 @@
                             </div>
                             <div class="product-info-price">
                                 <div class="price-final">
-                                    <span>€{{$comic->price}}</span> <!-- Price Done -->
-                                    <span class="old-price">€{{$comic->max_price}}</span> <!--Max price created !! -->
+                                    <span>${{$comic->price}}</span> <!-- Price Done -->
+                                    <span class="old-price">${{$comic->max_price}}</span> <!--Max price created !! -->
                                 </div>
                             </div>
                             <div class="product-add-form">
