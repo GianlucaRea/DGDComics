@@ -31,9 +31,9 @@
                                 </div>
                                 <div class="product-info-stock-sku">
                                     @if($comic->quantity > 0)
-                                        <span>In Stock</span>
+                                        <span>Disponibile</span>
                                     @elseif($comic->quantity <= 0)
-                                        <span>Out of Stock</span>
+                                        <span>Non disponibile</span>
                                     @endif
                                     <div class="product-attribute">
                                         <p>{{$comic->publisher}}</p> <!-- Display publisher of the comic -->
@@ -58,8 +58,8 @@
                                     <a href="#"><i class="fa fa-star"></i></a>
                                 </div>
                                 <div class="reviews-actions">
-                                    <a href="#">3 Reviews</a>
-                                    <a href="#" class="view">Add Your Review</a>
+                                    <a href="#">3 Recensioni</a>
+                                    <a href="#" class="view">Aggiungi una recensione!</a>
                                 </div>
                             </div>
                             <div class="product-info-price">
@@ -73,7 +73,7 @@
                                     <div class="quality-button">
                                         <input class="qty" type="number" value="1">
                                     </div>
-                                    <a href="#">Add to cart</a>
+                                    <a href="#">Aggiungi al carrello</a>
                                 </form>
                             </div>
                             <div class="product-social-links">

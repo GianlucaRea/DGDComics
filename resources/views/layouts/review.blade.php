@@ -4,7 +4,7 @@
         <div class="tab-pane fade show active" id="review">
             <div class="valu">
                 <div class="section-title mb-60 mt-60">
-                    <h2>Customer Reviews</h2>
+                    <h2>Recensioni</h2>
                 </div>
                 <ul>
                     <li>
@@ -57,14 +57,14 @@
             </div>
             <div>
                 <div class="review-add">
-                    <h3>You're reviewing:</h3>
+                    <h3>Stai recensendo:</h3>
                     <h4>Joust Duffle Bag</h4>
                 </div>
                 <div class="review-field-ratings">
                     <span>Your Rating <sup>*</sup></span>
                     <div class="control">
                         <div class="single-control">
-                            <span>Value</span>
+                            <span>Valore</span>
                             <div class="review-control-vote">
                                 <a href="#"><i class="fa fa-star"></i></a>
                                 <a href="#"><i class="fa fa-star"></i></a>
@@ -74,7 +74,7 @@
                             </div>
                         </div>
                         <div class="single-control">
-                            <span>Quality</span>
+                            <span>Qualità</span>
                             <div class="review-control-vote">
                                 <a href="#"><i class="fa fa-star"></i></a>
                                 <a href="#"><i class="fa fa-star"></i></a>
@@ -84,7 +84,7 @@
                             </div>
                         </div>
                         <div class="single-control">
-                            <span>Price</span>
+                            <span>Prezzo</span>
                             <div class="review-control-vote">
                                 <a href="#"><i class="fa fa-star"></i></a>
                                 <a href="#"><i class="fa fa-star"></i></a>
@@ -103,20 +103,20 @@
                         </form>
                     </div>
                     <div class="single-form single-form-2">
-                        <label>Summary <sup>*</sup></label>
+                        <label>Titolo <sup>*</sup></label>
                         <form action="#">
                             <input type="text" />
                         </form>
                     </div>
                     <div class="single-form">
-                        <label>Review <sup>*</sup></label>
+                        <label>Recensione <sup>*</sup></label>
                         <form action="#">
                             <textarea name="massage" cols="10" rows="4"></textarea>
                         </form>
                     </div>
                 </div>
                 <div class="review-form-button">
-                    <a href="#">Submit Review</a>
+                    <a href="#">Invia recensione</a>
                 </div>
             </div>
         </div>

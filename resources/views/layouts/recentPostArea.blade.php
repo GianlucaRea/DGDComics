@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title section-title-res pt-100 bt-3 text-center mb-30">
-                    <h2>Latest from our blog</h2>
+                    <h2>Gli ultimi articoli del nostro Blog!</h2>
                 </div>
             </div>
             <div class="post-active owl-carousel text-center">

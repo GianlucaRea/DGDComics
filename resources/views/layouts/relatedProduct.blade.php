@@ -3,7 +3,7 @@
 <div class="col-lg-3 col-md-12 col-12 order-lg-2 order-2">
     <div class="shop-left">
         <div class="left-title mb-20">
-            <h4>Related Products</h4>
+            <h4>Correlati</h4>
         </div>
         <div class="random-area mb-30">
             <div class="product-active-2 owl-carousel">
