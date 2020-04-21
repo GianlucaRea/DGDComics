@@ -25,8 +25,11 @@
                             </div>
                             <div class="product-flag">
                                 <ul>
-                                    <li><span class="sale">new</span> <br></li>  <!-- da fare in base al fumetto-->
-                                    <li><span class="discount-percentage">-5%</span></li> <!-- da fare in base al fumetto-->
+                                    <!-- <li><span class="sale">new</span> <br></li>  ESSENDOCI UNA PARTE NEW ARRIVAL MI SEMBRA INUTILE METTERE L'ETICHETTA NEW...-->
+                                    @if( $comic->max_price > $comic->price )
+                                        @php($x = (($comic->price * 100)/$comic->max_price))
+                                        <li><span class="discount-percentage">-{{ $x }}%</span></li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>

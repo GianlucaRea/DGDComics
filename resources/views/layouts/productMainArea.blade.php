@@ -38,6 +38,7 @@
                                     <div class="product-attribute">
                                         <p>{{$comic->publisher}}</p> <!-- Display publisher of the comic -->
                                         <!--<span class="value">24-WB05</span> NON SO COSA SIA-->
+                                        <!-- ragazzi ricordiamoci che dobbiamo inserire anche l'utente venditore qui-->
                                     </div>
                                 </div>
                                 <div class="product-info-genre">
