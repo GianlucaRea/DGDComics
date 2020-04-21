@@ -19,9 +19,19 @@ class CreateGenresTable extends Migration
         });
 
         DB::table('genres')->insert([
-            ['name_genre' => 'Adventure'],
-            ['name_genre' => 'Science Fiction'],
-            ['name_genre' => 'Dark Fantasy'],
+            ['name_genre' => 'Avventura'],
+            ['name_genre' => 'Fantascienza'],
+            ['name_genre' => 'Fantasy'],
+            ['name_genre' => 'Azione'],
+            ['name_genre' => 'Umoristico'],
+            ['name_genre' => 'Western'],
+            ['name_genre' => 'Alternativo'],
+            ['name_genre' => 'Supereroi'],
+            ['name_genre' => 'Horror'],
+            ['name_genre' => 'Thriller'],
+            ['name_genre' => 'Giallo'],
+            ['name_genre' => 'Disney'],
+
         ]);
     }
 
