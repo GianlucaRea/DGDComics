@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-6 col-md-6 col-12">
                 <div class="section-title-3">
-                    <h3>Latest Tweets</h3>
+                    <h3>Gli ultimi Tweets</h3>
                 </div>
                 <div class="twitter-content">
                     <div class="twitter-icon">
@@ -14,13 +14,13 @@
                         <p>
                             Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum notare quam
                         </p>
-                        <a href="#">koparion</a>
+                        <a href="#">DGDcomics</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-12">
                 <div class="section-title-3">
-                    <h3>Stay Connected</h3>
+                    <h3>rimani connesso!</h3>
                 </div>
                 <div class="link-follow">
                     <ul>

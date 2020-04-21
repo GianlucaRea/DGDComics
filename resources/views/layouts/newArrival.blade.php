@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title section-title-res text-center mb-30">
-                    <h2>New Arrival</h2>
+                    <h2>Pubblicati di recente</h2>
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
                         </div>
                         <div class="product-link">
                             <div class="product-button">
-                                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Aggiungi al carrello</a>
                             </div>
                         </div>
                     </div>

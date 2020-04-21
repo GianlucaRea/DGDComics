@@ -11,10 +11,10 @@
                                     @auth
                                     <li><a href="{{ url('/home') }}">Home</a></li>
                                     @else
-                                    <li><a href="{{ route('login') }}">Login</a></li>
+                                    <li><a href="{{ route('login') }}">Accesso</a></li>
 
                                         @if (Route::has('register'))
-                                            <li><a href="{{ route('register') }}">Register</a></li>
+                                            <li><a href="{{ route('register') }}">Registrazione</a></li>
                                         @endif
                                     @endauth
                             @endif
@@ -32,7 +32,7 @@
                 <div class="col-lg-3 col-md-5 col-12">
                     <div class="header-search">
                         <form action="#">
-                            <input type="text" placeholder="Search entire store here..." />
+                            <input type="text" placeholder="Cerca nello store..." />
                             <a href="#"><i class="fa fa-search"></i></a>
                         </form>
                     </div>
@@ -42,10 +42,10 @@
                         <a href="index.html"><img src="{{ asset('img/logo/lightBrown.png') }}" width="250px" height="250px" alt="logo" /></a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-12">
+                <div class="col-lg-3 col-md-3 col-12"> <!-- la parte del carrello è ancora da fare, quindi non la tocco per ora-->
                     <div class="my-cart">
                         <ul>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i>My Cart</a>
+                            <li><a href="#"><i class="fa fa-shopping-cart"></i>Carrello</a>
                                 <span>2</span>
                                 <div class="mini-cart-sub">
                                     <div class="cart-product">
@@ -99,7 +99,7 @@
                         <nav>
                             <ul>
                                 <li><a href="{{ url('/') }}">Home</a></li>
-                                <li><a href="product-details.html">Comics<i class="fa fa-angle-down"></i></a>
+                                <li><a href="product-details.html">Fumetti<i class="fa fa-angle-down"></i></a>
                                     <div class="mega-menu">
                                         <span>
                                             <a href="#" class="title">Manga</a>
@@ -109,22 +109,24 @@
                                             <a href="shop.html">Josei</a>
                                         </span>
                                         <span>
-                                            <a href="#" class="title">American Comics</a>
-                                            <a href="shop.html">Marvel</a>
-                                            <a href="shop.html">DC</a>
-                                            <a href="shop.html">The walking dead</a>
+                                            <a href="#" class="title">Marvel & DC</a>
+                                            <a href="shop.html">Iron man</a><!-- raga ne ho messi alcuni a caso, ovviamente si può modificare-->
+                                            <a href="shop.html">Spiderman</a>
+                                            <a href="shop.html">Batman</a>
+                                            <a href="shop.html">Superman</a>
                                         </span>
                                         <span>
                                             <a href="#" class="title">Italians</a>
-                                            <a href="shop.html">Bonelli</a>
+                                            <a href="shop.html">Bonelli</a><!-- raga ne ho messi alcuni a caso, ovviamente si può modificare-->
                                             <a href="shop.html">Zero Calcare</a>
+                                            <a href="shop.html">LaBadessa</a>
                                             <a href="shop.html">Topolino</a>
                                         </span>
                                         <span>
                                             <a href="#" class="title">Others</a>
-                                            <a href="shop.html">Manga</a>
-                                            <a href="shop.html">American Comics</a>
-                                            <a href="shop.html">Topolino</a>
+                                            <a href="shop.html">Giapponesi</a>
+                                            <a href="shop.html">Americani</a>
+                                            <a href="shop.html">Italiani</a>
                                         </span>
                                     </div>
                                 </li>
@@ -132,7 +134,7 @@
                                     <div class="sub-menu sub-menu-2">
                                         <ul>
                                             <li><a href="my-account.html">About</a></li>
-                                            <li><a href="cart.html">Contact</a></li>
+                                            <li><a href="cart.html">contattaci</a></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -141,9 +143,9 @@
                                 <li><a href="#">My Account<i class="fa fa-angle-down"></i></a>
                                     <div class="sub-menu sub-menu-2">
                                         <ul>
-                                            <li><a href="my-account.html">my-account</a></li>
-                                            <li><a href="cart.html">cart</a></li>
-                                            <li><a href="wishlist.html">wishlist</a></li>
+                                            <li><a href="my-account.html">Account</a></li>
+                                            <li><a href="cart.html">carrello</a></li>
+                                            <li><a href="wishlist.html">Lista dei desideri</a></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -151,7 +153,7 @@
                         </nav>
                     </div>
                     <div class="safe-area">
-                        <a href="product-details.html">sales off</a>
+                        <a href="product-details.html">sconti</a>
                     </div>
                 </div>
             </div>

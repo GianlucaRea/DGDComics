@@ -6,7 +6,7 @@
                 <div class="breadcrumbs-menu">
                     <ul>
                         <li><a href="#">Home</a></li>
-                        <li><a href="#" class="active">product-details</a></li>
+                        <li><a href="#" class="active">Dettagli prodotto</a></li>
                     </ul>
                 </div>
             </div>

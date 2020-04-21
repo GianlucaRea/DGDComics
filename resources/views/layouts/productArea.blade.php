@@ -5,17 +5,17 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title bt text-center pt-100 mb-50">
-                    <h2>Our Products</h2>
-                    <p>Browse the collection of our best selling and top interresting products. <br /> ll definitely find what you are looking for.</p>
+                    <h2>I nostri prodotti</h2>
+                    <p>Cerca nella nostra collezione i nostri prodotti più venduti ed interessanti. <br /> Troverai sicuramente ciò che cerchi!.</p>
                 </div>
             </div>
             <div class="col-lg-12">
                 <!-- tab-menu-start -->
                 <div class="tab-menu mb-40 text-center">
                     <ul class="nav justify-content-center">
-                        <li><a class="active" href="#manga" data-toggle="tab">manga</a></li>
-                        <li><a href="#americanComics" data-toggle="tab">American Comics</a></li>
-                        <li><a href="#italian" data-toggle="tab">Italian</a></li>
+                        <li><a class="active" href="#manga" data-toggle="tab">Manga</a></li>
+                        <li><a href="#americanComics" data-toggle="tab">Fumetti americani</a></li>
+                        <li><a href="#italian" data-toggle="tab">Fumetti italiani</a></li>
                     </ul>
                 </div>
                 <!-- tab-menu-end -->

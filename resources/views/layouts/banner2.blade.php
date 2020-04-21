@@ -8,8 +8,8 @@
                         <a href="#"><img src="{{ asset('img/banner/1.png') }}" alt="banner" /></a>
                     </div>
                     <div class="banner-text">
-                        <h4>Free shipping item</h4>
-                        <p>For all orders over $500</p>
+                        <h4>Spedizione gratuita</h4>
+                        <p>Per tutti gli ordini maggiori a € 500</p>
                     </div>
                 </div>
             </div>
@@ -19,8 +19,8 @@
                         <a href="#"><img src="{{ asset('img/banner/2.png') }}" alt="banner" /></a>
                     </div>
                     <div class="banner-text">
-                        <h4>Money back guarantee</h4>
-                        <p>100% money back guarante</p>
+                        <h4>Rimborso garantito</h4>
+                        <p>100% rimborso garantito</p>
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                         <a href="#"><img src="{{ asset('img/banner/3.png') }}" alt="banner" /></a>
                     </div>
                     <div class="banner-text">
-                        <h4>Cash on delivery</h4>
+                        <h4>Pagamento alla consegna</h4>
                         <p>Lorem ipsum dolor consect</p>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                     </div>
                     <div class="banner-text">
                         <h4>Help & Support</h4>
-                        <p>Call us : + 0123.4567.89</p>
+                        <p>Chiamaci : + 0123.4567.89</p>
                     </div>
                 </div>
             </div>
