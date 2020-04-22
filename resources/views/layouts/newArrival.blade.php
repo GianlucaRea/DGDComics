@@ -9,8 +9,7 @@
             </div>
         </div>
         <div class="tab-active owl-carousel">
-            @php($newcomic = \App\Http\Controllers\ComicController::getNewComic())
-            @foreach($newcomic as $comic)
+            @foreach($newComics as $comic)
                 @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
                 <div class="tab-total">
                     <!-- single-product-start -->
@@ -27,9 +26,10 @@
                             <div class="product-flag">
                                 <ul>
                                     <!-- <li><span class="sale">new</span> <br></li>  ESSENDOCI UNA PARTE NEW ARRIVAL MI SEMBRA INUTILE METTERE L'ETICHETTA NEW...-->
-                                    @if( $comic->max_price > $comic->price )
-                                        @php($x = (($comic->price * 100)/$comic->max_price))
-                                        <li><span class="discount-percentage">-{{ $x }}%</span></li>
+                                    @if( $comic->discount != 0 )
+                                        @php($valoreSconto = (($comic->price * $comic->discount) / 100));
+                                        @php($newPrice = ($comic->price - $valoreSconto));
+                                        <li><span class="discount-percentage">-{{ $comic->discount }}%</span></li>
                                     @endif
                                 </ul>
                             </div>
@@ -47,7 +47,13 @@
                             <h4><a href="#">{{ $comic->comic_name }}</a></h4>
                             <div class="product-price">
                                 <ul>
-                                    <li>$ {{ $comic->price }}</li>
+                                    @if( $comic->discount != 0 )
+                                        @php($valoreSconto = (($comic->price * $comic->discount) / 100));
+                                        @php($newPrice = ($comic->price - $valoreSconto));
+                                        <li>€ {{ $newPrice}}</li>
+                                    @else
+                                        <li>€ {{ $comic->price }}</li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>

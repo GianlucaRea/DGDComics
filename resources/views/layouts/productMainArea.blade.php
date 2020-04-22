@@ -64,8 +64,15 @@
                             </div>
                             <div class="product-info-price">
                                 <div class="price-final">
-                                    <span>${{$comic->price}}</span> <!-- Price Done -->
-                                    <span class="old-price">${{$comic->max_price}}</span> <!--Max price created !! -->
+                                    @if( $comic->discount != 0 )
+                                        @php
+                                            $valoreSconto = (($comic->price * $comic->discount) / 100);
+                                            $newPrice = ($comic->price - $valoreSconto);
+                                        @endphp
+                                        <span>${{ $newPrice }}</span> <!-- Price Done -->
+                                        <span class="old-price">${{$comic->price}}</span> <!--Old price !! -->
+                                     @else
+                                        <span class="old-price">${{$comic->price}}</span> <!--Old price !! -->
                                 </div>
                             </div>
                             <div class="product-add-form">

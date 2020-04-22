@@ -16,7 +16,8 @@ use App\Comic;
 
 Route::get('/', function () {
     $comics = Comic::all();
-    return view('welcome', compact('comics'));
+    $newComics = \App\Http\Controllers\ComicController::getNewComic();
+    return view('welcome', compact('comics'), compact('newComics'));
 });
 
 Auth::routes();

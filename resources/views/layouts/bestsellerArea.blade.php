@@ -16,9 +16,13 @@
                             <h2><a href="#">{{ $bigComic->comic_name }}</a></h2>
                             <div class="sale-area">
                                 <div class="price-box">
-                                    @if( $bigComic->max_price > $bigComic->price)
-                                        <span class="old-sale">$ {{$bigComic->max_price}}</span>
-                                        <span class="new-sale"> {{$bigComic->price}}</span>
+                                    @if( $bigComic->discount != 0)
+                                        @php
+                                            $valoreSconto = (($bigComic->price * $bigComic->discount) / 100);
+                                            $newPrice = ($bigComic->price - $valoreSconto);
+                                        @endphp
+                                        <span class="old-sale">$ {{$bigComic->price}}</span>
+                                        <span class="new-sale"> {{$newPrice}}</span>
                                     @else
                                         <span class="new-sale"> {{$bigComic->price}}</span>
                                     @endif
@@ -51,9 +55,13 @@
                                 <h3> <a href="#">{{ $comic1->comic_name }}</a></h3>
                                 <div class="price">
                                     <ul>
-                                        @if( $comic1->max_price > $comic1->price)
-                                            <li><span class="new-price">$ {{ $comic1->price }}</span></li>
-                                            <li><span class="old-price">$ {{ $comic1->max_price }}</span></li>
+                                        @if( $comic1->discount != 0)
+                                            @php
+                                                $valoreSconto1 = (($comic1->price * $comic1->discount) / 100);
+                                                $newPrice1 = ($comic1->price - $valoreSconto1);
+                                            @endphp
+                                            <li><span class="new-price">$ {{ $newPrice1 }}</span></li>
+                                            <li><span class="old-price">$ {{ $comic1->price }}</span></li>
                                         @else
                                             <li><span class="new-price">$ {{ $comic1->price }}</span></li>
                                         @endif
@@ -74,11 +82,15 @@
                                 <h3> <a href="#">{{ $comic2->comic_name }}</a></h3>
                                 <div class="price">
                                     <ul>
-                                        @if( $comic2->max_price > $comic2->price)
-                                            <li><span class="new-price">$ {{ $comic2->price }}</span></li>
-                                            <li><span class="old-price">$ {{ $comic2->max_price }}</span></li>
+                                        @if( $comic2->discount != 0)
+                                            @php
+                                                $valoreSconto2 = (($comic2->price * $comic2->discount) / 100);
+                                                $newPrice2 = ($comic2->price - $valoreSconto2);
+                                            @endphp
+                                            <li><span class="new-price">$ {{ $newPrice2 }}</span></li>
+                                            <li><span class="old-price">$ {{ $comic2->price }}</span></li>
                                         @else
-                                            <li><span class="new-price">$ {{ $comic1->price }}</span></li>
+                                            <li><span class="new-price">$ {{ $comic2->price }}</span></li>
                                         @endif
                                     </ul>
                                 </div>
@@ -99,9 +111,13 @@
                                 <h3> <a href="#">{{ $comic3->comic_name }}</a></h3>
                                 <div class="price">
                                     <ul>
-                                        @if( $comic3->max_price > $comic3->price)
-                                            <li><span class="new-price">$ {{ $comic3->price }}</span></li>
-                                            <li><span class="old-price">$ {{ $comic3->max_price }}</span></li>
+                                        @if( $comic3->discount != 0)
+                                            @php
+                                                $valoreSconto3 = (($comic3->price * $comic3->discount) / 100);
+                                                $newPrice3 = ($comic3->price - $valoreSconto3);
+                                            @endphp
+                                            <li><span class="new-price">$ {{ $newPrice3 }}</span></li>
+                                            <li><span class="old-price">$ {{ $comic3->price }}</span></li>
                                         @else
                                             <li><span class="new-price">$ {{ $comic3->price }}</span></li>
                                         @endif
@@ -122,9 +138,13 @@
                                 <h3> <a href="#">{{ $comic4->comic_name }}</a></h3>
                                 <div class="price">
                                     <ul>
-                                        @if( $comic4->max_price > $comic4->price)
-                                            <li><span class="new-price">$ {{ $comic4->price }}</span></li>
-                                            <li><span class="old-price">$ {{ $comic4->max_price }}</span></li>
+                                        @if( $comic4->discount != 0)
+                                            @php
+                                                $valoreSconto4 = (($comic4->price * $comic4->discount) / 100);
+                                                $newPrice4 = ($comic4->price - $valoreSconto4);
+                                            @endphp
+                                            <li><span class="new-price">$ {{ $newPrice4 }}</span></li>
+                                            <li><span class="old-price">$ {{ $comic4->price }}</span></li>
                                         @else
                                             <li><span class="new-price">$ {{ $comic4->price }}</span></li>
                                         @endif
@@ -147,9 +167,13 @@
                                 <h3> <a href="#">{{ $comic5->comic_name }}</a></h3>
                                 <div class="price">
                                     <ul>
-                                        @if( $comic5->max_price > $comic5->price)
-                                            <li><span class="new-price">$ {{ $comic5->price }}</span></li>
-                                            <li><span class="old-price">$ {{ $comic5->max_price }}</span></li>
+                                        @if( $comic5->discount != 0)
+                                            @php
+                                                $valoreSconto5 = (($comic5->price * $comic5->discount) / 100);
+                                                $newPrice5 = ($comic5->price - $valoreSconto5);
+                                            @endphp
+                                            <li><span class="new-price">$ {{ $newPrice5 }}</span></li>
+                                            <li><span class="old-price">$ {{ $comic5->price }}</span></li>
                                         @else
                                             <li><span class="new-price">$ {{ $comic5->price }}</span></li>
                                         @endif
@@ -170,9 +194,13 @@
                                 <h3> <a href="#">{{ $comic6->comic_name }}</a></h3>
                                 <div class="price">
                                     <ul>
-                                        @if( $comic6->max_price > $comic6->price)
-                                            <li><span class="new-price">$ {{ $comic6->price }}</span></li>
-                                            <li><span class="old-price">$ {{ $comic6->max_price }}</span></li>
+                                        @if( $comic6->discount != 0)
+                                            @php
+                                                $valoreSconto6 = (($comic6->price * $comic6->discount) / 100);
+                                                $newPrice6 = ($comic6->price - $valoreSconto6);
+                                            @endphp
+                                            <li><span class="new-price">$ {{ $newPrice6 }}</span></li>
+                                            <li><span class="old-price">$ {{ $comic6->price }}</span></li>
                                         @else
                                             <li><span class="new-price">$ {{ $comic6->price }}</span></li>
                                         @endif
