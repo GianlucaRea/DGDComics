@@ -152,5 +152,9 @@ class ComicController extends Controller
         return response()->json($comic, 200);
 
     }
+
+    public static function getNewComic(){
+        return Comic::latest()->take(6)->get();
+    }
  
 }

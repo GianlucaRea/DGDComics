@@ -46,7 +46,7 @@
                         <h4><a href="#">{{ $comic->comic_name }}</a></h4>
                         <div class="product-price">
                             <ul>
-                                <li>$ {{ $comic->price }}</li>
+                                <li>€ {{ $comic->price }}</li>
                             </ul>
                         </div>
                     </div>
