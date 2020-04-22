@@ -9,8 +9,7 @@
             </div>
         </div>
         <div class="tab-active owl-carousel">
-
-                @php($newcomic = \App\Http\Controllers\ComicController::getNewComic())
+            @php($newcomic = \App\Http\Controllers\ComicController::getNewComic())
             @foreach($newcomic as $comic)
                 @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
                 <div class="tab-total">
@@ -61,7 +60,6 @@
                     <!-- single-product-end -->
                 </div>
             @endforeach
-
         </div>
     </div>
 </div>
