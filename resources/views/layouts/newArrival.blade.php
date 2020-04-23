@@ -27,8 +27,8 @@
                                 <ul>
                                     <!-- <li><span class="sale">new</span> <br></li>  ESSENDOCI UNA PARTE NEW ARRIVAL MI SEMBRA INUTILE METTERE L'ETICHETTA NEW...-->
                                     @if( $comic->discount != 0 )
-                                        @php($valoreSconto = (($comic->price * $comic->discount) / 100));
-                                        @php($newPrice = ($comic->price - $valoreSconto));
+                                        @php($valoreSconto = (($comic->price * $comic->discount) / 100))
+                                        @php($newPrice = ($comic->price - $valoreSconto))
                                         <li><span class="discount-percentage">-{{ $comic->discount }}%</span></li>
                                     @endif
                                 </ul>
@@ -48,8 +48,8 @@
                             <div class="product-price">
                                 <ul>
                                     @if( $comic->discount != 0 )
-                                        @php($valoreSconto = (($comic->price * $comic->discount) / 100));
-                                        @php($newPrice = ($comic->price - $valoreSconto));
+                                        @php($valoreSconto = (($comic->price * $comic->discount) / 100))
+                                        @php($newPrice = ($comic->price - $valoreSconto))
                                         <li>€ {{ $newPrice}}</li>
                                     @else
                                         <li>€ {{ $comic->price }}</li>
