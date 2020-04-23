@@ -71,8 +71,9 @@
                                         @endphp
                                         <span>${{ $newPrice }}</span> <!-- Price Done -->
                                         <span class="old-price">${{$comic->price}}</span> <!--Old price !! -->
-                                     @else
+                                    @else
                                         <span class="old-price">${{$comic->price}}</span> <!--Old price !! -->
+                                    @endif
                                 </div>
                             </div>
                             <div class="product-add-form">
