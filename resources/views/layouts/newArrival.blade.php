@@ -46,7 +46,7 @@
                             </div>
                             <h4><a href="#">{{ $comic->comic_name }}</a></h4>
                             <div class="product-price">
-                                <ul>
+                                <ul> <!-- commento a caso per problema push con git-->
                                     @if( $comic->discount != 0 )
                                         @php($valoreSconto = (($comic->price * $comic->discount) / 100))
                                         @php($newPrice = ($comic->price - $valoreSconto))
