@@ -1490,7 +1490,8 @@ body {
 }
 
 .product-img a img {
-    width: 100%;
+    width: 250px;
+    height: 299px;
 }
 
 .quick-view {
