@@ -50,6 +50,12 @@ class CreateImagesTable extends Migration
             ['comic_id' => '7' , 'image_name' => 'FMA1b.jpg', 'size' => '138.50 Kb' ,'format' => 'jpg', 'cover' => '0' ],
             ['comic_id' => '7' , 'image_name' => 'FMA1c.jpg', 'size' => '203.50 Kb' ,'format' => 'jpg', 'cover' => '0' ],
             ['comic_id' => '7' , 'image_name' => 'FMA1d.jpg', 'size' => '201.90 Kb' ,'format' => 'jpg', 'cover' => '0' ],
+
+            ['comic_id' => '8' , 'image_name' => 'OP1.jpg' , 'size' => '265 kb' , 'format' => 'jpg' , 'cover' => '1'],
+            ['comic_id' => '9' , 'image_name' => 'OP2.jpg' , 'size' => '74.9 kb' , 'format' => 'jpg' , 'cover' => '1'],
+            ['comic_id' => '10' , 'image_name' => 'OP3.jpg' , 'size' => '281 kb' , 'format' => 'jpg' , 'cover' => '1'],
+            ['comic_id' => '11' , 'image_name' => 'OP4.jpg' , 'size' => '47 kb' , 'format' => 'jpg' , 'cover' => '1'],
+            ['comic_id' => '12' , 'image_name' => 'OP5.jpg' , 'size' => '81.3 kb' , 'format' => 'jpg' , 'cover' => '1'],
         ]); }
 
     /**

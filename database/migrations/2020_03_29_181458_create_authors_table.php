@@ -21,6 +21,7 @@ class CreateAuthorsTable extends Migration
         });
         DB::table('authors')->insert([
             ['name_author' => 'Hiromu' , 'surname_author' => 'Arakawa' , 'nationality' => 'japan' ],
+            ['name_author' => 'Eiichiro' , 'surname_author' => 'Oda' , 'nationality' => 'japan' ],
         ]);
     }
 
