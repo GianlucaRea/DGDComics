@@ -15,7 +15,7 @@
                     <!-- single-product-start -->
                     <div class="product-wrapper">
                         <div class="product-img">
-                            <a href="#">
+                            <a href="{{ url('/comic_detail/'.$comic->id) }}">
                                 <img src="{{asset('img/comicsImages/' . $image->image_name) }}" alt="book" class="primary" />
                             </a>
                             <div class="quick-view">

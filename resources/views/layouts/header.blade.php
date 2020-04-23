@@ -39,7 +39,7 @@
                 </div>
                 <div class="col-lg-6 col-md-4 col-12">
                     <div class="logo-area text-center logo-xs-mrg">
-                        <a href="index.html"><img src="{{ asset('img/logo/lightBrown.png') }}" width="250px" height="250px" alt="logo" /></a>
+                        <a href="{{ url('/') }}"><img src="{{ asset('img/logo/lightBrown.png') }}" width="250px" height="250px" alt="logo" /></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-12"> <!-- la parte del carrello è ancora da fare, quindi non la tocco per ora-->
