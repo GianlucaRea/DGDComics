@@ -18,7 +18,7 @@ class Comic extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'user_id','author_id','comic_name','description','type','quantity','ISBN','price','publisher',
+        'user_id','author_id','comic_name','description','discount','type','quantity','ISBN','price','publisher',
     ];
 
     public function image(){

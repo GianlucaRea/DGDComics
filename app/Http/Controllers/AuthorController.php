@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Genre;
+use App\Author;
 use Illuminate\Http\Request;
 
-class GenreController extends Controller
+class AuthorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -58,7 +59,7 @@ class GenreController extends Controller
      */
     public function show($id)
     {
-        $Author = Genre::find($id);
+        $Author = Author::find($id);
         if(is_null($Author)){
             return response()->json(["message"=>'Record not found'],404);
         }
@@ -85,7 +86,7 @@ class GenreController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $Author = Genre::find($id);
+        $Author = Author::find($id);
         if(is_null($Author)){
             return response()->json(["message"=>'Record not found'],404);
         }
@@ -101,7 +102,7 @@ class GenreController extends Controller
      */
     public function destroy($id)
     {
-        $Author = Genre::find($id);
+        $Author = Author::find($id);
         if(is_null($Author)){
             return response()->json(["message"=>'Record not found'],404);
         }

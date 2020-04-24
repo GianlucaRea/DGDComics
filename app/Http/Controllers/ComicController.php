@@ -156,5 +156,13 @@ class ComicController extends Controller
     public static function getNewComic(){
         return Comic::latest()->take(6)->get();
     }
+
+    public static function  getComicByDiscount(){
+        return Comic::orderByDesc('discount')->first();
+    }
+
+    public static function getComicByDiscountAndNumber($number){
+        return Comic::orderByDesc('discount')->skip($number)->first();
+    }
  
 }
