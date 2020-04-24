@@ -37,7 +37,9 @@
                                     @endif
                                     <div class="product-attribute">
                                         <p>{{$comic->publisher}}</p> <!-- Display publisher of the comic -->
-                                        <!--<span class="value">24-WB05</span> NON SO COSA SIA-->
+                                    @if($comic->volume > 0)
+                                        <p>Volume: {{$comic->volume}}</p> <!-- Display volume of the comic -->
+                                    @endif
                                         <!-- ragazzi ricordiamoci che dobbiamo inserire anche l'utente venditore qui-->
                                     </div>
                                 </div>
