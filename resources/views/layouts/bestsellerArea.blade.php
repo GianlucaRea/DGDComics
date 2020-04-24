@@ -14,7 +14,11 @@
                                     $bigComic = \App\Http\Controllers\ComicController::getComicByDiscount();
                                     $coverBigComic = \App\Http\Controllers\ImageController::getCover($bigComic->id)
                             @endphp
-                            <h2><a href="#">{{ $bigComic->comic_name }}</a></h2>
+                            @if($bigComic->volume != null)
+                                <h2>{{ $bigComic->comic_name }} {{ $bigComic->volume }}</h2>
+                            @else
+                                <h2>{{ $bigComic->comic_name }}{{ $bigComic->volume }}</h2>
+                            @endif
                             <div class="sale-area">
                                 <div class="price-box">
                                     @if( $bigComic->discount != 0)
@@ -53,7 +57,11 @@
                                 <a href="{{ url('/comic_detail/'.$comic1->id) }}"><img src="{{asset('img/comicsImages/' . $cover1->image_name) }}" alt="book" /></a>
                             </div>
                             <div class="bestseller-text text-center">
-                                <h3> <a href="#">{{ $comic1->comic_name }}</a></h3>
+                                @if($comic1->volume != null)
+                                    <h3>{{ $comic1->comic_name }} {{ $comic1->volume }}</h3>
+                                @else
+                                    <h3>{{ $comic1->comic_name }}{{ $comic1->volume }}</h3>
+                                @endif
                                 <div class="price">
                                     <ul>
                                         @if( $comic1->discount != 0)
@@ -79,7 +87,11 @@
                                 <a href="{{ url('/comic_detail/'.$comic2->id) }}"><img src="{{asset('img/comicsImages/' . $cover2->image_name) }}" alt="book" /></a>
                             </div>
                             <div class="bestseller-text text-center">
-                                <h3> <a href="#">{{ $comic2->comic_name }}</a></h3>
+                                @if($comic2->volume != null)
+                                    <h3>{{ $comic2->comic_name }} {{ $comic2->volume }}</h3>
+                                @else
+                                    <h3>{{ $comic2->comic_name }}{{ $comic2->volume }}</h3>
+                                @endif
                                 <div class="price">
                                     <ul>
                                         @if( $comic2->discount != 0)
@@ -107,7 +119,11 @@
                                 <a href="{{ url('/comic_detail/'.$comic3->id) }}"><img src="{{asset('img/comicsImages/' . $cover3->image_name) }}" alt="book" /></a>
                             </div>
                             <div class="bestseller-text text-center">
-                                <h3> <a href="#">{{ $comic3->comic_name }}</a></h3>
+                                @if($comic3->volume != null)
+                                    <h3>{{ $comic3->comic_name }} {{ $comic3->volume }}</h3>
+                                @else
+                                    <h3>{{ $comic3->comic_name }}{{ $comic3->volume }}</h3>
+                                @endif
                                 <div class="price">
                                     <ul>
                                         @if( $comic3->discount != 0)
@@ -134,7 +150,11 @@
                                 <a href="{{ url('/comic_detail/'.$comic4->id) }}"><img src="{{asset('img/comicsImages/' . $cover4->image_name) }}" alt="book" /></a>
                             </div>
                             <div class="bestseller-text text-center">
-                                <h3> <a href="#">{{ $comic4->comic_name }}</a></h3>
+                                @if($comic4->volume != null)
+                                    <h3>{{ $comic4->comic_name }} {{ $comic4->volume }}</h3>
+                                @else
+                                    <h3>{{ $comic4->comic_name }}{{ $comic4->volume }}</h3>
+                                @endif
                                 <div class="price">
                                     <ul>
                                         @if( $comic4->discount != 0)
@@ -163,7 +183,11 @@
                                 <a href="{{ url('/comic_detail/'.$comic5->id) }}"><img src="{{asset('img/comicsImages/' . $cover5->image_name) }}" alt="book" /></a>
                             </div>
                             <div class="bestseller-text text-center">
-                                <h3> <a href="#">{{ $comic5->comic_name }}</a></h3>
+                                @if($comic5->volume != null)
+                                    <h3>{{ $comic5->comic_name }} {{ $comic5->volume }}</h3>
+                                @else
+                                    <h3>{{ $comic5->comic_name }}{{ $comic5->volume }}</h3>
+                                @endif
                                 <div class="price">
                                     <ul>
                                         @if( $comic5->discount != 0)
@@ -189,7 +213,11 @@
                                 <a href="{{ url('/comic_detail/'.$comic6->id) }}"><img src="{{asset('img/comicsImages/' . $cover6->image_name) }}" alt="book" /></a>
                             </div>
                             <div class="bestseller-text text-center">
-                                <h3> <a href="#">{{ $comic6->comic_name }}</a></h3>
+                                @if($comic6->volume != null)
+                                    <h3>{{ $comic6->comic_name }} {{ $comic6->volume }}</h3>
+                                @else
+                                    <h3>{{ $comic6->comic_name }}{{ $comic6->volume }}</h3>
+                                @endif
                                 <div class="price">
                                     <ul>
                                         @if( $comic6->discount != 0)

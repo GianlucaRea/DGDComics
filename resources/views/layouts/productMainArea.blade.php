@@ -27,7 +27,11 @@
                         <div class="col-lg-7 col-md-6 col-12">
                             <div class="product-info-main">
                                 <div class="page-title">
-                                    <h1>{{ $comic->comic_name }}</h1> <!-- Nice Touch-->
+                                    @if($comic->volume != null)
+                                        <h1>{{ $comic->comic_name }} {{ $comic->volume }}</h1>
+                                    @else
+                                        <h1>{{ $comic->comic_name }}{{ $comi->volume }}</h1>
+                                    @endif
                                 </div>
                                 <div class="product-info-stock-sku">
                                     @if($comic->quantity > 0)
