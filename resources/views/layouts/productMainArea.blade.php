@@ -69,10 +69,10 @@
                                             $valoreSconto = (($comic->price * $comic->discount) / 100);
                                             $newPrice = ($comic->price - $valoreSconto);
                                         @endphp
-                                        <span>${{ $newPrice }}</span> <!-- Price Done -->
+                                        <span>€{{ $newPrice }}</span> <!-- Price Done -->
                                         <span class="old-price">${{$comic->price}}</span> <!--Old price !! -->
                                     @else
-                                        <span class="old-price">${{$comic->price}}</span> <!--Old price !! -->
+                                        <span">€{{$comic->price}}</span> <!--Old price !! -->
                                     @endif
                                 </div>
                             </div>

@@ -7,7 +7,7 @@
                     <li><i class="fa fa-circle"></i>ISBN: {{ $comic->ISBN }}</li>
                     <li><i class="fa fa-circle"></i>Adjustable shoulder strap.</li> <!-- i model e l'ER mi sembra non siano aggiornati, da completare-->
                     <li><i class="fa fa-circle"></i>Full-length zipper.</li>
-                    <li><i class="fa fa-circle"></i>L 29" x W 13" x H 11".</li>
+                    <li><i class="fa fa-circle"></i>L {{$comic->length}} cm x W {{$comic->width}} cm x H {{$comic->height}} cm.</li>
                 </ul>
             </div>
         </div>
