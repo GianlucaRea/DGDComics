@@ -10,8 +10,9 @@
                                 <h1>DGDeals</h1>
                             </div>
                             @php
-                                $bigComic = \App\Http\Controllers\ComicController::getByID(1); //in generale per riempire questa zona ho messo volumi a caso, basta combiare il metodo usato con quello giusto quando implementato.
-                                $coverBigComic = \App\Http\Controllers\ImageController::getCover($bigComic->id)
+
+                                    $bigComic = \App\Http\Controllers\ComicController::getComicByDiscount();
+                                    $coverBigComic = \App\Http\Controllers\ImageController::getCover($bigComic->id)
                             @endphp
                             <h2><a href="#">{{ $bigComic->comic_name }}</a></h2>
                             <div class="sale-area">
@@ -45,8 +46,8 @@
                         <div class="single-bestseller mb-25">
                             <div class="bestseller-img">
                                 @php
-                                    $number1 = random_int(1, 1); //da fare bene
-                                    $comic1 = \App\Http\Controllers\ComicController::getByID($number1);
+
+                                    $comic1 = \App\Http\Controllers\ComicController::getComicByDiscountAndNumber(1);
                                     $cover1 = \App\Http\Controllers\ImageController::getCover($comic1->id);
                                 @endphp
                                 <a href="{{ url('/comic_detail/'.$comic1->id) }}"><img src="{{asset('img/comicsImages/' . $cover1->image_name) }}" alt="book" /></a>
@@ -72,8 +73,7 @@
                         <div class="single-bestseller">
                             <div class="bestseller-img">
                                 @php
-                                    $number2 = random_int(1, 1); //da fare bene
-                                    $comic2 = \App\Http\Controllers\ComicController::getByID($number2);
+                                    $comic2 = \App\Http\Controllers\ComicController::getComicByDiscountAndNumber(2);
                                     $cover2 = \App\Http\Controllers\ImageController::getCover($comic2->id);
                                 @endphp
                                 <a href="{{ url('/comic_detail/'.$comic2->id) }}"><img src="{{asset('img/comicsImages/' . $cover2->image_name) }}" alt="book" /></a>
@@ -101,8 +101,7 @@
                         <div class="single-bestseller mb-25">
                             <div class="bestseller-img">
                                 @php
-                                    $number3 = random_int(1, 1); //da fare bene
-                                    $comic3 = \App\Http\Controllers\ComicController::getByID($number3);
+                                    $comic3 = \App\Http\Controllers\ComicController::getComicByDiscountAndNumber(3);
                                     $cover3 = \App\Http\Controllers\ImageController::getCover($comic3->id);
                                 @endphp
                                 <a href="{{ url('/comic_detail/'.$comic3->id) }}"><img src="{{asset('img/comicsImages/' . $cover3->image_name) }}" alt="book" /></a>
@@ -128,8 +127,8 @@
                         <div class="single-bestseller">
                             <div class="bestseller-img">
                                 @php
-                                    $number4 = random_int(1, 1); //da fare bene
-                                    $comic4 = \App\Http\Controllers\ComicController::getByID($number4);
+
+                                    $comic4 = \App\Http\Controllers\ComicController::getComicByDiscountAndNumber(4);
                                     $cover4 = \App\Http\Controllers\ImageController::getCover($comic4->id);
                                 @endphp
                                 <a href="{{ url('/comic_detail/'.$comic4->id) }}"><img src="{{asset('img/comicsImages/' . $cover4->image_name) }}" alt="book" /></a>
@@ -157,8 +156,8 @@
                         <div class="single-bestseller mb-25">
                             <div class="bestseller-img">
                                 @php
-                                    $number5 = random_int(1, 1); //da fare bene
-                                    $comic5 = \App\Http\Controllers\ComicController::getByID($number5);
+
+                                    $comic5 = \App\Http\Controllers\ComicController::getComicByDiscountAndNumber(5);
                                     $cover5 = \App\Http\Controllers\ImageController::getCover($comic5->id);
                                 @endphp
                                 <a href="{{ url('/comic_detail/'.$comic5->id) }}"><img src="{{asset('img/comicsImages/' . $cover5->image_name) }}" alt="book" /></a>
@@ -184,8 +183,7 @@
                         <div class="single-bestseller">
                             <div class="bestseller-img">
                                 @php
-                                    $number6 = random_int(1, 1); //da fare bene
-                                    $comic6 = \App\Http\Controllers\ComicController::getByID($number6);
+                                    $comic6 = \App\Http\Controllers\ComicController::getComicByDiscountAndNumber(6);
                                     $cover6 = \App\Http\Controllers\ImageController::getCover($comic6->id);
                                 @endphp
                                 <a href="{{ url('/comic_detail/'.$comic6->id) }}"><img src="{{asset('img/comicsImages/' . $cover6->image_name) }}" alt="book" /></a>

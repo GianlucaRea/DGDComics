@@ -26,11 +26,15 @@ class CreateComicsTable extends Migration
             $table->float('price');
             $table->integer('discount');
             $table->integer('volume')->nullable();
-            $table->string('dimensions');
+            $table->string('height');
+            $table->string('width');
+            $table->string('length');
             $table->string('language');
             $table->string('publisher');
         });
+
         DB::table('comics')->insert([
+<<<<<<< HEAD
             ['user_id' => '1' , 'author_id' => '1' , 'comic_name' => 'Fullmetal Alchemist: Brotherhood 1' , 'description' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'type' => "shonen" , 'quantity' => '1'  , 'ISBN' => 'FAKEISBN' , 'price' => '4.5','discount'=>'10','volume'=>'1','dimensions'=>'10x10x10','language'=>'italian','publisher' => 'Planet manga'],
             ['user_id' => '1' , 'author_id' => '3' , 'comic_name' => 'Iron Man' , 'description' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'type' => "marvel" , 'quantity' => '5'  , 'ISBN' => 'FAKEISBN' , 'price' => '4.5','discount'=>'10','volume'=>'1','dimensions'=>'10x10x10','language'=>'italian','publisher' => 'Panini comics'],
             ['user_id' => '1' , 'author_id' => '4' , 'comic_name' => 'Topolino (3289)' , 'description' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'type' => "italiano" , 'quantity' => '6'  , 'ISBN' => 'FAKEISBN' , 'price' => '6.6','discount'=>'12','volume'=>'3219','dimensions'=>'10x10x10','language'=>'italian','publisher' => 'Panini comics'],
@@ -57,6 +61,21 @@ class CreateComicsTable extends Migration
             ['user_id' => '1' , 'author_id' => '7' , 'comic_name' => 'The Walking Dead 5' , 'description' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'type' => "Other" , 'quantity' => '1'  , 'ISBN' => 'FAKEISBN' , 'price' => '6.0','discount'=>'0','volume'=>'5','dimensions'=>'10x10x10','language'=>'italian','publisher' => 'Saldapress'],
             ['user_id' => '1' , 'author_id' => '7' , 'comic_name' => 'The Walking Dead 6' , 'description' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'type' => "Other" , 'quantity' => '1'  , 'ISBN' => 'FAKEISBN' , 'price' => '6.0','discount'=>'0','volume'=>'6','dimensions'=>'10x10x10','language'=>'italian','publisher' => 'Saldapress'],
 
+=======
+            ['user_id' => '1' , 'author_id' => '1' , 'comic_name' => 'Fullmetal Alchemist: Brotherhood 1' , 'description' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'type' => "shonen" , 'quantity' => '1'  , 'ISBN' => 'FAKEISBN' , 'price' => '4.5','discount'=>'10','volume'=>'1', 'height'=>'8' , 'width' => '9' , 'length' => '11', 'language'=>'italian','publisher' => 'Planet manga'],
+            ['user_id' => '1' , 'author_id' => '1' , 'comic_name' => 'Iron Man' , 'description' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'type' => "marvel" , 'quantity' => '5'  , 'ISBN' => 'FAKEISBN' , 'price' => '4.5','discount'=>'10','volume'=>'1', 'height'=>'8' , 'width' => '9' , 'length' => '11', 'language'=>'italian','publisher' => 'Planet manga'],
+            ['user_id' => '1' , 'author_id' => '1' , 'comic_name' => 'Topolino' , 'description' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'type' => "italiano" , 'quantity' => '6'  , 'ISBN' => 'FAKEISBN' , 'price' => '6.6','discount'=>'12','volume'=>'1', 'height'=>'8' , 'width' => '9' , 'length' => '11', 'language'=>'italian','publisher' => 'Planet manga'],
+            ['user_id' => '1' , 'author_id' => '1' , 'comic_name' => 'Pippo' , 'description' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'type' => "italiano" , 'quantity' => '7'  , 'ISBN' => 'FAKEISBN' , 'price' => '6.5','discount'=>'13','volume'=>'1', 'height'=>'8' , 'width' => '9' , 'length' => '11', 'language'=>'italian','publisher' => 'Planet manga'],
+            ['user_id' => '1' , 'author_id' => '1' , 'comic_name' => 'Superman' , 'description' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'type' => "dc" , 'quantity' => '13'  , 'ISBN' => 'FAKEISBN' , 'price' => '7.5','discount'=>'9','volume'=>'1', 'height'=>'8' , 'width' => '9' , 'length' => '11', 'language'=>'italian','publisher' => 'Planet manga'],
+            ['user_id' => '1' , 'author_id' => '1' , 'comic_name' => 'Batman' , 'description' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'type' => "dc" , 'quantity' => '13'  , 'ISBN' => 'FAKEISBN' , 'price' => '7.5','discount'=>'9','volume'=>'1', 'height'=>'8' , 'width' => '9' , 'length' => '11', 'language'=>'italian','publisher' => 'Planet manga'],
+            ['user_id' => '1' , 'author_id' => '1' , 'comic_name' => 'flash' , 'description' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'type' => "dc" , 'quantity' => '13'  , 'ISBN' => 'FAKEISBN' , 'price' => '7.5','discount'=>'9','volume'=>'1', 'height'=>'8' , 'width' => '9' , 'length' => '11', 'language'=>'italian','publisher' => 'Planet manga'],
+
+            ['user_id' => '1' , 'author_id' => '2' , 'comic_name' => 'One Piece 1' , 'description' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'type' => "shonen" , 'quantity' => '1'  , 'ISBN' => 'FAKEISBN' , 'price' => '4.5','discount'=>'0','volume'=>'1', 'height'=>'8' , 'width' => '9' , 'length' => '11', 'language'=>'italian','publisher' => 'Planet manga'],
+            ['user_id' => '1' , 'author_id' => '2' , 'comic_name' => 'One Piece 2' , 'description' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'type' => "shonen" , 'quantity' => '1'  , 'ISBN' => 'FAKEISBN' , 'price' => '4.5','discount'=>'0','volume'=>'1', 'height'=>'8' , 'width' => '9' , 'length' => '11', 'language'=>'italian','publisher' => 'Planet manga'],
+            ['user_id' => '1' , 'author_id' => '2' , 'comic_name' => 'One Piece 3' , 'description' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'type' => "shonen" , 'quantity' => '1'  , 'ISBN' => 'FAKEISBN' , 'price' => '4.5','discount'=>'0','volume'=>'1', 'height'=>'8' , 'width' => '9' , 'length' => '11', 'language'=>'italian','publisher' => 'Planet manga'],
+            ['user_id' => '1' , 'author_id' => '2' , 'comic_name' => 'One Piece 4' , 'description' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'type' => "shonen" , 'quantity' => '1'  , 'ISBN' => 'FAKEISBN' , 'price' => '4.5','discount'=>'0','volume'=>'1', 'height'=>'8' , 'width' => '9' , 'length' => '11', 'language'=>'italian','publisher' => 'Planet manga'],
+            ['user_id' => '1' , 'author_id' => '2' , 'comic_name' => 'One Piece 5' , 'description' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'type' => "shonen" , 'quantity' => '1'  , 'ISBN' => 'FAKEISBN' , 'price' => '4.5','discount'=>'0','volume'=>'1', 'height'=>'8' , 'width' => '9' , 'length' => '11', 'language'=>'italian','publisher' => 'Planet manga'],
+>>>>>>> 802b0c2d99311a212fe32b12e90e53534a6e9715
         ]);
 
 

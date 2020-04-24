@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="tab-active owl-carousel">
-            @foreach($comics as $comic)
+            @foreach($comics->shuffle()->take(6) as $comic)
                 @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
             <div class="tab-total">
                 <!-- single-product-start -->
@@ -27,8 +27,8 @@
                             <ul>
                                 <!-- <li><span class="sale">new</span> <br></li>  ESSENDOCI UNA PARTE NEW ARRIVAL MI SEMBRA INUTILE METTERE L'ETICHETTA NEW...-->
                                 @if( $comic->discount != 0 )
-                                    @php($valoreSconto = (($comic->price * $comic->discount) / 100));
-                                    @php($newPrice = ($comic->price - $valoreSconto));
+                                    @php($valoreSconto = (($comic->price * $comic->discount) / 100))
+                                    @php($newPrice = ($comic->price - $valoreSconto))
                                     <li><span class="discount-percentage">-{{ $comic->discount }}%</span></li>
                                 @endif
                             </ul>
@@ -49,8 +49,8 @@
                             <ul>
 
                                 @if( $comic->discount != 0 )
-                                    @php($valoreSconto = (($comic->price * $comic->discount) / 100));
-                                    @php($newPrice = ($comic->price - $valoreSconto));
+                                    @php($valoreSconto = (($comic->price * $comic->discount) / 100))
+                                    @php($newPrice = ($comic->price - $valoreSconto))
                                     <li>€ {{ $newPrice}}</li>
                                 @else
                                     <li>€ {{ $comic->price }}</li>
