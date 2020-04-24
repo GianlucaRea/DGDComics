@@ -26,857 +26,186 @@
             <div class="tab-pane fade show active" id="manga">
                 <div class="tab-active owl-carousel">
                     <!-- single-product-start -->
-                    <div class="product-wrapper">
-                        <div class="product-img">
-                            <a href="#">
-                                <img src="img/product/1.jpg" alt="book" class="primary" />
-                            </a>
-                            <div class="quick-view">
-                                <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
-                                    <i class="fa fa-search-plus"></i>
-                                </a>
+                    @foreach($newComics as $comic)
+                        @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
+
+                            <!-- single-product-start -->
+                            <div class="product-wrapper">
+                                <div class="product-img">
+                                    <a href="{{ url('/comic_detail/'.$comic->id) }}">
+                                        <img src="{{asset('img/comicsImages/' . $image->image_name) }}" alt="book" class="primary" />
+                                    </a>
+                                    <div class="quick-view">
+                                        <a class="action-view" href="{{ url('/comic_detail/'.$comic->id) }}">
+                                            <i class="fa fa-search-plus"></i>
+                                        </a>
+                                    </div>
+                                    <div class="product-flag">
+                                        <ul>
+                                            <!-- <li><span class="sale">new</span> <br></li>  ESSENDOCI UNA PARTE NEW ARRIVAL MI SEMBRA INUTILE METTERE L'ETICHETTA NEW...-->
+                                            @if( $comic->discount != 0 )
+                                                @php($valoreSconto = (($comic->price * $comic->discount) / 100))
+                                                @php($newPrice = ($comic->price - $valoreSconto))
+                                                <li><span class="discount-percentage">-{{ $comic->discount }}%</span></li>
+                                            @endif
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="product-details text-center">
+                                    <div class="product-rating">
+                                        <ul>
+                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <h4><a href="#">{{ $comic->comic_name }}</a></h4>
+                                    <div class="product-price">
+                                        <ul> <!-- commento a caso per problema push con git-->
+                                            @if( $comic->discount != 0 )
+                                                @php($valoreSconto = (($comic->price * $comic->discount) / 100))
+                                                @php($newPrice = ($comic->price - $valoreSconto))
+                                                <li>€ {{ $newPrice}}</li>
+                                            @else
+                                                <li>€ {{ $comic->price }}</li>
+                                            @endif
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="product-link">
+                                    <div class="product-button">
+                                        <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Aggiungi al carrello</a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="product-flag">
-                                <ul>
-                                    <li><span class="sale">new</span> <br></li>
-                                    <li><span class="discount-percentage">-5%</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-details text-center">
-                            <div class="product-rating">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                            <h4><a href="#">Joust Duffle Bag</a></h4>
-                            <div class="product-price">
-                                <ul>
-                                    <li>$60.00</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-link">
-                            <div class="product-button">
-                                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                            </div>
-                            <div class="add-to-link">
-                                <ul>
-                                    <li><a href="{{ url('/comicDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                            <!-- single-product-end -->
+                @endforeach
                     <!-- single-product-end -->
-                    <!-- single-product-start -->
-                    <div class="product-wrapper">
-                        <div class="product-img">
-                            <a href="#">
-                                <img src="img/product/3.jpg" alt="book" class="primary" />
-                            </a>
-                            <div class="quick-view">
-                                <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
-                                    <i class="fa fa-search-plus"></i>
-                                </a>
-                            </div>
-                            <div class="product-flag">
-                                <ul>
-                                    <li><span class="sale">new</span> <br></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-details text-center">
-                            <div class="product-rating">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                            <h4><a href="#">Chaz Kangeroo Hoodie</a></h4>
-                            <div class="product-price">
-                                <ul>
-                                    <li>$52.00</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-link">
-                            <div class="product-button">
-                                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                            </div>
-                            <div class="add-to-link">
-                                <ul>
-                                    <li><a href="{{ url('/comicDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- single-product-end -->
-                    <!-- single-product-start -->
-                    <div class="product-wrapper">
-                        <div class="product-img">
-                            <a href="#">
-                                <img src="img/product/5.jpg" alt="book" class="primary" />
-                            </a>
-                            <div class="quick-view">
-                                <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
-                                    <i class="fa fa-search-plus"></i>
-                                </a>
-                            </div>
-                            <div class="product-flag">
-                                <ul>
-                                    <li><span class="sale">new</span> <br></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-details text-center">
-                            <div class="product-rating">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                            <h4><a href="#">Set of Sprite Yoga Straps</a></h4>
-                            <div class="product-price">
-                                <ul>
-                                    <li>$34.00</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-link">
-                            <div class="product-button">
-                                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                            </div>
-                            <div class="add-to-link">
-                                <ul>
-                                    <li><a href="{{ url('/comicDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- single-product-end -->
-                    <!-- single-product-start -->
-                    <div class="product-wrapper">
-                        <div class="product-img">
-                            <a href="#">
-                                <img src="img/product/7.jpg" alt="book" class="primary" />
-                            </a>
-                            <div class="quick-view">
-                                <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
-                                    <i class="fa fa-search-plus"></i>
-                                </a>
-                            </div>
-                            <div class="product-flag">
-                                <ul>
-                                    <li><span class="sale">new</span> <br></li>
-                                    <li><span class="discount-percentage">-5%</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-details text-center">
-                            <div class="product-rating">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                            <h4><a href="#">Strive Shoulder Pack</a></h4>
-                            <div class="product-price">
-                                <ul>
-                                    <li>$30.00</li>
-                                    <li class="old-price">$32.00</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-link">
-                            <div class="product-button">
-                                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                            </div>
-                            <div class="add-to-link">
-                                <ul>
-                                    <li><a href="{{ url('/comicDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- single-product-end -->
-                    <!-- single-product-start -->
-                    <div class="product-wrapper">
-                        <div class="product-img">
-                            <a href="#">
-                                <img src="img/product/9.jpg" alt="book" class="primary" />
-                            </a>
-                            <div class="quick-view">
-                                <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
-                                    <i class="fa fa-search-plus"></i>
-                                </a>
-                            </div>
-                            <div class="product-flag">
-                                <ul>
-                                    <li><span class="discount-percentage">-5%</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-details text-center">
-                            <div class="product-rating">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                            <h4><a href="#">Wayfarer Messenger Bag</a></h4>
-                            <div class="product-price">
-                                <ul>
-                                    <li>$35.00</li>
-                                    <li class="old-price">40.00</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-link">
-                            <div class="product-button">
-                                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                            </div>
-                            <div class="add-to-link">
-                                <ul>
-                                    <li><a href="{{ url('/comicDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- single-product-end -->
-                    <!-- single-product-start -->
-                    <div class="product-wrapper">
-                        <div class="product-img">
-                            <a href="#">
-                                <img src="img/product/11.jpg" alt="book" class="primary" />
-                            </a>
-                            <div class="quick-view">
-                                <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
-                                    <i class="fa fa-search-plus"></i>
-                                </a>
-                            </div>
-                            <div class="product-flag">
-                                <ul>
-                                    <li><span class="sale">new</span> <br></li>
-                                    <li><span class="discount-percentage">-5%</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-details text-center">
-                            <div class="product-rating">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                            <h4><a href="#">Impulse Duffle</a></h4>
-                            <div class="product-price">
-                                <ul>
-                                    <li>$74.00</li>
-                                    <li class="old-price">78.00</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-link">
-                            <div class="product-button">
-                                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                            </div>
-                            <div class="add-to-link">
-                                <ul>
-                                    <li><a href="{{ url('/comicDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- single-product-end -->
-                </div>
+                 </div>
             </div>
             <div class="tab-pane fade" id="americanComics">
                 <div class="tab-active owl-carousel">
                     <!-- single-product-start -->
-                    <div class="product-wrapper">
-                        <div class="product-img">
-                            <a href="#">
-                                <img src="img/product/5.jpg" alt="book" class="primary" />
-                            </a>
-                            <div class="quick-view">
-                                <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
-                                    <i class="fa fa-search-plus"></i>
-                                </a>
-                            </div>
-                            <div class="product-flag">
-                                <ul>
-                                    <li><span class="sale">new</span> <br></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-details text-center">
-                            <div class="product-rating">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                            <h4><a href="#">Chaz Kangeroo Hoodie</a></h4>
-                            <div class="product-price">
-                                <ul>
-                                    <li>$52.00</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-link">
-                            <div class="product-button">
-                                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                            </div>
-                            <div class="add-to-link">
-                                <ul>
-                                    <li><a href="{{ url('/comicDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- single-product-end -->
+                @foreach($newComics as $comic)
+                    @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
+
                     <!-- single-product-start -->
-                    <div class="product-wrapper">
-                        <div class="product-img">
-                            <a href="#">
-                                <img src="img/product/7.jpg" alt="book" class="primary" />
-                            </a>
-                            <div class="quick-view">
-                                <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
-                                    <i class="fa fa-search-plus"></i>
+                        <div class="product-wrapper">
+                            <div class="product-img">
+                                <a href="{{ url('/comic_detail/'.$comic->id) }}">
+                                    <img src="{{asset('img/comicsImages/' . $image->image_name) }}" alt="book" class="primary" />
                                 </a>
+                                <div class="quick-view">
+                                    <a class="action-view" href="{{ url('/comic_detail/'.$comic->id) }}">
+                                        <i class="fa fa-search-plus"></i>
+                                    </a>
+                                </div>
+                                <div class="product-flag">
+                                    <ul>
+                                        <!-- <li><span class="sale">new</span> <br></li>  ESSENDOCI UNA PARTE NEW ARRIVAL MI SEMBRA INUTILE METTERE L'ETICHETTA NEW...-->
+                                        @if( $comic->discount != 0 )
+                                            @php($valoreSconto = (($comic->price * $comic->discount) / 100))
+                                            @php($newPrice = ($comic->price - $valoreSconto))
+                                            <li><span class="discount-percentage">-{{ $comic->discount }}%</span></li>
+                                        @endif
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="product-flag">
-                                <ul>
-                                    <li><span class="sale">new</span></li>
-                                </ul>
+                            <div class="product-details text-center">
+                                <div class="product-rating">
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    </ul>
+                                </div>
+                                <h4><a href="#">{{ $comic->comic_name }}</a></h4>
+                                <div class="product-price">
+                                    <ul> <!-- commento a caso per problema push con git-->
+                                        @if( $comic->discount != 0 )
+                                            @php($valoreSconto = (($comic->price * $comic->discount) / 100))
+                                            @php($newPrice = ($comic->price - $valoreSconto))
+                                            <li>€ {{ $newPrice}}</li>
+                                        @else
+                                            <li>€ {{ $comic->price }}</li>
+                                        @endif
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                        <div class="product-details text-center">
-                            <div class="product-rating">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                            <h4><a href="#">Strive Shoulder Pack</a></h4>
-                            <div class="product-price">
-                                <ul>
-                                    <li>$30.00</li>
-                                    <li class="old-price">$32.00</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-link">
-                            <div class="product-button">
-                                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                            </div>
-                            <div class="add-to-link">
-                                <ul>
-                                    <li><a href="{{ url('/comicDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- single-product-end -->
-                    <!-- single-product-start -->
-                    <div class="product-wrapper">
-                        <div class="product-img">
-                            <a href="#">
-                                <img src="img/product/1.jpg" alt="book" class="primary" />
-                            </a>
-                            <div class="quick-view">
-                                <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
-                                    <i class="fa fa-search-plus"></i>
-                                </a>
-                            </div>
-                            <div class="product-flag">
-                                <ul>
-                                    <li><span class="sale">new</span></li>
-                                </ul>
+                            <div class="product-link">
+                                <div class="product-button">
+                                    <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Aggiungi al carrello</a>
+                                </div>
                             </div>
                         </div>
-                        <div class="product-details text-center">
-                            <div class="product-rating">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                            <h4><a href="#">Joust Duffle Bag</a></h4>
-                            <div class="product-price">
-                                <ul>
-                                    <li>$60.00</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-link">
-                            <div class="product-button">
-                                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                            </div>
-                            <div class="add-to-link">
-                                <ul>
-                                    <li><a href="{{ url('/comicDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- single-product-end -->
-                    <!-- single-product-start -->
-                    <div class="product-wrapper">
-                        <div class="product-img">
-                            <a href="#">
-                                <img src="img/product/3.jpg" alt="book" class="primary" />
-                            </a>
-                            <div class="quick-view">
-                                <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
-                                    <i class="fa fa-search-plus"></i>
-                                </a>
-                            </div>
-                            <div class="product-flag">
-                                <ul>
-                                    <li><span class="sale">new</span> <br></li>
-                                    <li><span class="discount-percentage">-5%</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-details text-center">
-                            <div class="product-rating">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                            <h4><a href="#">Chaz Kangeroo Hoodie</a></h4>
-                            <div class="product-price">
-                                <ul>
-                                    <li>$52.00</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-link">
-                            <div class="product-button">
-                                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                            </div>
-                            <div class="add-to-link">
-                                <ul>
-                                    <li><a href="{{ url('/comicDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- single-product-end -->
-                    <!-- single-product-start -->
-                    <div class="product-wrapper">
-                        <div class="product-img">
-                            <a href="#">
-                                <img src="img/product/9.jpg" alt="book" class="primary" />
-                            </a>
-                            <div class="quick-view">
-                                <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
-                                    <i class="fa fa-search-plus"></i>
-                                </a>
-                            </div>
-                            <div class="product-flag">
-                                <ul>
-                                    <li><span class="sale">new</span> <br></li>
-                                    <li><span class="discount-percentage">-5%</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-details text-center">
-                            <div class="product-rating">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                            <h4><a href="#">Wayfarer Messenger Bag</a></h4>
-                            <div class="product-price">
-                                <ul>
-                                    <li>$35.00</li>
-                                    <li class="old-price">40.00</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-link">
-                            <div class="product-button">
-                                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                            </div>
-                            <div class="add-to-link">
-                                <ul>
-                                    <li><a href="{{ url('/comicDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- single-product-end -->
-                    <!-- single-product-start -->
-                    <div class="product-wrapper">
-                        <div class="product-img">
-                            <a href="#">
-                                <img src="img/product/11.jpg" alt="book" class="primary" />
-                            </a>
-                            <div class="quick-view">
-                                <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
-                                    <i class="fa fa-search-plus"></i>
-                                </a>
-                            </div>
-                            <div class="product-flag">
-                                <ul>
-                                    <li><span class="discount-percentage">-5%</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-details text-center">
-                            <div class="product-rating">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                            <h4><a href="#">Impulse Duffle</a></h4>
-                            <div class="product-price">
-                                <ul>
-                                    <li>$74.00</li>
-                                    <li class="old-price">78.00</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-link">
-                            <div class="product-button">
-                                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                            </div>
-                            <div class="add-to-link">
-                                <ul>
-                                    <li><a href="{{ url('/comicDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- single-product-end -->
+                        <!-- single-product-end -->
+                @endforeach
                 </div>
             </div>
             <div class="tab-pane fade" id="italian">
                 <div class="tab-active owl-carousel">
                     <!-- single-product-start -->
-                    <div class="product-wrapper">
-                        <div class="product-img">
-                            <a href="#">
-                                <img src="img/product/9.jpg" alt="book" class="primary" />
-                            </a>
-                            <div class="quick-view">
-                                <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
-                                    <i class="fa fa-search-plus"></i>
-                                </a>
-                            </div>
-                            <div class="product-flag">
-                                <ul>
-                                    <li><span class="sale">new</span> <br></li>
-                                    <li><span class="discount-percentage">-5%</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-details text-center">
-                            <div class="product-rating">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                            <h4><a href="#">Wayfarer Messenger Bag</a></h4>
-                            <div class="product-price">
-                                <ul>
-                                    <li>$35.00</li>
-                                    <li class="old-price">40.00</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-link">
-                            <div class="product-button">
-                                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                            </div>
-                            <div class="add-to-link">
-                                <ul>
-                                    <li><a href="{{ url('/comicDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- single-product-end -->
+                @foreach($newComics as $comic)
+                    @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
+
                     <!-- single-product-start -->
-                    <div class="product-wrapper">
-                        <div class="product-img">
-                            <a href="#">
-                                <img src="img/product/11.jpg" alt="book" class="primary" />
-                            </a>
-                            <div class="quick-view">
-                                <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
-                                    <i class="fa fa-search-plus"></i>
+                        <div class="product-wrapper">
+                            <div class="product-img">
+                                <a href="{{ url('/comic_detail/'.$comic->id) }}">
+                                    <img src="{{asset('img/comicsImages/' . $image->image_name) }}" alt="book" class="primary" />
                                 </a>
+                                <div class="quick-view">
+                                    <a class="action-view" href="{{ url('/comic_detail/'.$comic->id) }}">
+                                        <i class="fa fa-search-plus"></i>
+                                    </a>
+                                </div>
+                                <div class="product-flag">
+                                    <ul>
+                                        <!-- <li><span class="sale">new</span> <br></li>  ESSENDOCI UNA PARTE NEW ARRIVAL MI SEMBRA INUTILE METTERE L'ETICHETTA NEW...-->
+                                        @if( $comic->discount != 0 )
+                                            @php($valoreSconto = (($comic->price * $comic->discount) / 100))
+                                            @php($newPrice = ($comic->price - $valoreSconto))
+                                            <li><span class="discount-percentage">-{{ $comic->discount }}%</span></li>
+                                        @endif
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="product-flag">
-                                <ul>
-                                    <li><span class="sale">new</span></li>
-                                </ul>
+                            <div class="product-details text-center">
+                                <div class="product-rating">
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    </ul>
+                                </div>
+                                <h4><a href="#">{{ $comic->comic_name }}</a></h4>
+                                <div class="product-price">
+                                    <ul> <!-- commento a caso per problema push con git-->
+                                        @if( $comic->discount != 0 )
+                                            @php($valoreSconto = (($comic->price * $comic->discount) / 100))
+                                            @php($newPrice = ($comic->price - $valoreSconto))
+                                            <li>€ {{ $newPrice}}</li>
+                                        @else
+                                            <li>€ {{ $comic->price }}</li>
+                                        @endif
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                        <div class="product-details text-center">
-                            <div class="product-rating">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                            <h4><a href="#">Impulse Duffle</a></h4>
-                            <div class="product-price">
-                                <ul>
-                                    <li>$74.00</li>
-                                    <li class="old-price">78.00</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-link">
-                            <div class="product-button">
-                                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                            </div>
-                            <div class="add-to-link">
-                                <ul>
-                                    <li><a href="{{ url('/comicDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- single-product-end -->
-                    <!-- single-product-start -->
-                    <div class="product-wrapper">
-                        <div class="product-img">
-                            <a href="#">
-                                <img src="img/product/1.jpg" alt="book" class="primary" />
-                            </a>
-                            <div class="quick-view">
-                                <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
-                                    <i class="fa fa-search-plus"></i>
-                                </a>
-                            </div>
-                            <div class="product-flag">
-                                <ul>
-                                    <li><span class="sale">new</span> <br></li>
-                                    <li><span class="discount-percentage">-5%</span></li>
-                                </ul>
+                            <div class="product-link">
+                                <div class="product-button">
+                                    <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Aggiungi al carrello</a>
+                                </div>
                             </div>
                         </div>
-                        <div class="product-details text-center">
-                            <div class="product-rating">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                            <h4><a href="#">Joust Duffle Bag</a></h4>
-                            <div class="product-price">
-                                <ul>
-                                    <li>$60.00</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-link">
-                            <div class="product-button">
-                                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                            </div>
-                            <div class="add-to-link">
-                                <ul>
-                                    <li><a href="{{ url('/comicDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- single-product-end -->
-                    <!-- single-product-start -->
-                    <div class="product-wrapper">
-                        <div class="product-img">
-                            <a href="#">
-                                <img src="img/product/3.jpg" alt="book" class="primary" />
-                            </a>
-                            <div class="quick-view">
-                                <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
-                                    <i class="fa fa-search-plus"></i>
-                                </a>
-                            </div>
-                            <div class="product-flag">
-                                <ul>
-                                    <li><span class="sale">new</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-details text-center">
-                            <div class="product-rating">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                            <h4><a href="#">Chaz Kangeroo Hoodie</a></h4>
-                            <div class="product-price">
-                                <ul>
-                                    <li>$52.00</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-link">
-                            <div class="product-button">
-                                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                            </div>
-                            <div class="add-to-link">
-                                <ul>
-                                    <li><a href="{{ url('/comicDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- single-product-end -->
-                    <!-- single-product-start -->
-                    <div class="product-wrapper">
-                        <div class="product-img">
-                            <a href="#">
-                                <img src="img/product/5.jpg" alt="book" class="primary" />
-                            </a>
-                            <div class="quick-view">
-                                <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
-                                    <i class="fa fa-search-plus"></i>
-                                </a>
-                            </div>
-                            <div class="product-flag">
-                                <ul>
-                                    <li><span class="sale">new</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-details text-center">
-                            <div class="product-rating">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                            <h4><a href="#">Set of Sprite Yoga Straps</a></h4>
-                            <div class="product-price">
-                                <ul>
-                                    <li>$34.00</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-link">
-                            <div class="product-button">
-                                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                            </div>
-                            <div class="add-to-link">
-                                <ul>
-                                    <li><a href="{{ url('/comicDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- single-product-end -->
-                    <!-- single-product-start -->
-                    <div class="product-wrapper">
-                        <div class="product-img">
-                            <a href="#">
-                                <img src="img/product/7.jpg" alt="book" class="primary" />
-                            </a>
-                            <div class="quick-view">
-                                <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
-                                    <i class="fa fa-search-plus"></i>
-                                </a>
-                            </div>
-                            <div class="product-flag">
-                                <ul>
-                                    <li><span class="discount-percentage">-5%</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-details text-center">
-                            <div class="product-rating">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                            <h4><a href="#">Strive Shoulder Pack</a></h4>
-                            <div class="product-price">
-                                <ul>
-                                    <li>$30.00</li>
-                                    <li class="old-price">$32.00</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-link">
-                            <div class="product-button">
-                                <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                            </div>
-                            <div class="add-to-link">
-                                <ul>
-                                    <li><a href="{{ url('/comicDetail') }}" title="Details"><i class="fa fa-external-link"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- single-product-end -->
+                        <!-- single-product-end -->
+                @endforeach
+               
                 </div>
             </div>
         </div>

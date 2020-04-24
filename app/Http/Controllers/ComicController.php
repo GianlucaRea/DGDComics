@@ -164,5 +164,9 @@ class ComicController extends Controller
     public static function getComicByDiscountAndNumber($number){
         return Comic::orderByDesc('discount')->skip($number)->first();
     }
+
+    public static function getManga(){
+        //$manga =
+    }
  
 }
