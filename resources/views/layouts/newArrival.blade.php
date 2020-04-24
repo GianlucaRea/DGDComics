@@ -44,7 +44,11 @@
                                     <li><a href="#"><i class="fa fa-star"></i></a></li>
                                 </ul>
                             </div>
-                            <h4><a href="#">{{ $comic->comic_name }}</a></h4>
+                            @if($comic->volume != null)
+                                <h4>{{ $comic->comic_name }} {{ $comic->volume }}</h4>
+                            @else
+                                <h4>{{ $comic->comic_name }}{{ $comic->volume }}</h4>
+                            @endif
                             <div class="product-price">
                                 <ul> <!-- commento a caso per problema push con git-->
                                     @if( $comic->discount != 0 )

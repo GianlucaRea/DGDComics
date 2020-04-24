@@ -165,8 +165,23 @@ class ComicController extends Controller
         return Comic::orderByDesc('discount')->skip($number)->first();
     }
 
-    public static function getManga(){
-        //$manga =
+    public static function getrelated($id){
+        $targetManga = Comic::find($id);
+        $collection1 = Comic::where('comic_name', '=', $targetManga->comic_name);
+        if($collection1->count() > 0){return $collection1;}
+        else{
+            $collection2 = Comic::where('author_id', '=', $targetManga->author_id);
+            if($collection2->count() > 0){return $collection2;}
+            else{
+                $collection3 = Comic::where('user_id', '=', $targetManga->user_id);
+                if($collection3->count() > 0){return $collection3;}
+                else{
+                    $emptyCollection = Comic::where('id', '=', -1);
+                    return $emptyCollection;
+                }
+            }
+        }
+
     }
  
 }
