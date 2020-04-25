@@ -26,7 +26,9 @@
             <div class="tab-pane fade show active" id="manga">
                 <div class="tab-active owl-carousel">
                     <!-- single-product-start -->
-                    @foreach($newComics as $comic)
+                    <!-- con questa linea php funziona senza no-->
+                @php ($manga = \App\Http\Controllers\ComicController::getManga())
+                    @foreach($manga as $comic)
                         @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
 
                             <!-- single-product-start -->
@@ -205,7 +207,7 @@
                         </div>
                         <!-- single-product-end -->
                 @endforeach
-               
+
                 </div>
             </div>
         </div>

@@ -165,6 +165,10 @@ class ComicController extends Controller
         return Comic::orderByDesc('discount')->skip($number)->first();
     }
 
+    public static function getManga(){
+        return Comic::whereIn('type',['shonen','seinen','shojo','josei'])->inRandomOrder()->take(7)->get();
+    }
+
     public static function getrelated($id){
         $targetManga = Comic::find($id);
         $collection1 = Comic::where('comic_name', '=', $targetManga->comic_name);
