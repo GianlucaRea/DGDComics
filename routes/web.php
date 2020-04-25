@@ -28,7 +28,6 @@ Auth::routes();
 Route::get('/comic_detail/{id}', function ($id){
 
     $comic = Comic::find($id);
-
-
-    return view('comic_detail', compact('comic'));
+    $related = \App\Http\Controllers\ComicController::getrelated($id);
+    return view('comic_detail', compact('comic'), compact('related'));
 });
