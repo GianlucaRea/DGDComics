@@ -14,7 +14,7 @@
                 <div class="tab-menu mb-40 text-center">
                     <ul class="nav justify-content-center">
                         <li><a class="active" href="#manga" data-toggle="tab">Manga</a></li>
-                        <li><a href="#americanComics" data-toggle="tab">Fumetti americani</a></li>
+                        <li><a href="#SuperHero" data-toggle="tab">SuperEroi</a></li>
                         <li><a href="#italian" data-toggle="tab">Fumetti italiani</a></li>
                     </ul>
                 </div>
@@ -63,11 +63,7 @@
                                             <li><a href="#"><i class="fa fa-star"></i></a></li>
                                         </ul>
                                     </div>
-                                    @if($comic->volume != null)
                                         <h4>{{ $comic->comic_name }} {{ $comic->volume }}</h4>
-                                    @else
-                                        <h4>{{ $comic->comic_name }}{{ $comic->volume }}</h4>
-                                    @endif
                                     <div class="product-price">
                                         <ul> <!-- commento a caso per problema push con git-->
                                             @if( $comic->discount != 0 )
@@ -91,7 +87,7 @@
                     <!-- single-product-end -->
                  </div>
             </div>
-            <div class="tab-pane fade" id="americanComics">
+            <div class="tab-pane fade" id="SuperHero">
                 <div class="tab-active owl-carousel">
                     <!-- single-product-start -->
                    @php ($america = \App\Http\Controllers\ComicController::getAmerican())
@@ -130,11 +126,7 @@
                                         <li><a href="#"><i class="fa fa-star"></i></a></li>
                                     </ul>
                                 </div>
-                                @if($comic->volume != null)
                                     <h4>{{ $comic->comic_name }} {{ $comic->volume }}</h4>
-                                @else
-                                    <h4>{{ $comic->comic_name }}{{ $comic->volume }}</h4>
-                                @endif
                                 <div class="product-price">
                                     <ul> <!-- commento a caso per problema push con git-->
                                         @if( $comic->discount != 0 )
@@ -196,11 +188,7 @@
                                         <li><a href="#"><i class="fa fa-star"></i></a></li>
                                     </ul>
                                 </div>
-                                @if($comic->volume != null)
                                     <h4>{{ $comic->comic_name }} {{ $comic->volume }}</h4>
-                                @else
-                                    <h4>{{ $comic->comic_name }}{{ $comic->volume }}</h4>
-                                @endif
                                 <div class="product-price">
                                     <ul> <!-- commento a caso per problema push con git-->
                                         @if( $comic->discount != 0 )

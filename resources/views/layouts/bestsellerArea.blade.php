@@ -14,11 +14,7 @@
                                     $bigComic = \App\Http\Controllers\ComicController::getComicByDiscount();
                                     $coverBigComic = \App\Http\Controllers\ImageController::getCover($bigComic->id)
                             @endphp
-                            @if($bigComic->volume != null)
-                                <h2>{{ $bigComic->comic_name }} {{ $bigComic->volume }}</h2>
-                            @else
-                                <h2>{{ $bigComic->comic_name }}{{ $bigComic->volume }}</h2>
-                            @endif
+                                <h2>{{ $bigComic->comic_name }} </h2>
                             <div class="sale-area">
                                 <div class="price-box">
                                     @if( $bigComic->discount != 0)
@@ -26,10 +22,10 @@
                                             $valoreSconto = (($bigComic->price * $bigComic->discount) / 100);
                                             $newPrice = ($bigComic->price - $valoreSconto);
                                         @endphp
-                                        <span class="old-sale">$ {{$bigComic->price}}</span>
-                                        <span class="new-sale"> {{$newPrice}}</span>
+                                        <span class="old-sale">€{{$bigComic->price}}</span>
+                                        <span class="new-sale">€{{$newPrice}}</span>
                                     @else
-                                        <span class="new-sale"> {{$bigComic->price}}</span>
+                                        <span class="new-sale">€{{$bigComic->price}}</span>
                                     @endif
                                 </div>
                             </div>
@@ -50,18 +46,13 @@
                         <div class="single-bestseller mb-25">
                             <div class="bestseller-img">
                                 @php
-
                                     $comic1 = \App\Http\Controllers\ComicController::getComicByDiscountAndNumber(1);
                                     $cover1 = \App\Http\Controllers\ImageController::getCover($comic1->id);
                                 @endphp
                                 <a href="{{ url('/comic_detail/'.$comic1->id) }}"><img src="{{asset('img/comicsImages/' . $cover1->image_name) }}" alt="book" /></a>
                             </div>
                             <div class="bestseller-text text-center">
-                                @if($comic1->volume != null)
-                                    <h3>{{ $comic1->comic_name }} {{ $comic1->volume }}</h3>
-                                @else
-                                    <h3>{{ $comic1->comic_name }}{{ $comic1->volume }}</h3>
-                                @endif
+                                    <h3>{{ $comic1->comic_name }} </h3>
                                 <div class="price">
                                     <ul>
                                         @if( $comic1->discount != 0)
@@ -69,10 +60,10 @@
                                                 $valoreSconto1 = (($comic1->price * $comic1->discount) / 100);
                                                 $newPrice1 = ($comic1->price - $valoreSconto1);
                                             @endphp
-                                            <li><span class="new-price">$ {{ $newPrice1 }}</span></li>
-                                            <li><span class="old-price">$ {{ $comic1->price }}</span></li>
+                                            <li><span class="new-price">€ {{ $newPrice1 }}</span></li>
+                                            <li><span class="old-price">€ {{ $comic1->price }}</span></li>
                                         @else
-                                            <li><span class="new-price">$ {{ $comic1->price }}</span></li>
+                                            <li><span class="new-price">€ {{ $comic1->price }}</span></li>
                                         @endif
                                     </ul>
                                 </div>
@@ -87,11 +78,7 @@
                                 <a href="{{ url('/comic_detail/'.$comic2->id) }}"><img src="{{asset('img/comicsImages/' . $cover2->image_name) }}" alt="book" /></a>
                             </div>
                             <div class="bestseller-text text-center">
-                                @if($comic2->volume != null)
-                                    <h3>{{ $comic2->comic_name }} {{ $comic2->volume }}</h3>
-                                @else
-                                    <h3>{{ $comic2->comic_name }}{{ $comic2->volume }}</h3>
-                                @endif
+                                    <h3>{{ $comic2->comic_name }} </h3>
                                 <div class="price">
                                     <ul>
                                         @if( $comic2->discount != 0)
@@ -99,10 +86,10 @@
                                                 $valoreSconto2 = (($comic2->price * $comic2->discount) / 100);
                                                 $newPrice2 = ($comic2->price - $valoreSconto2);
                                             @endphp
-                                            <li><span class="new-price">$ {{ $newPrice2 }}</span></li>
-                                            <li><span class="old-price">$ {{ $comic2->price }}</span></li>
+                                            <li><span class="new-price">€ {{ $newPrice2 }}</span></li>
+                                            <li><span class="old-price">€ {{ $comic2->price }}</span></li>
                                         @else
-                                            <li><span class="new-price">$ {{ $comic2->price }}</span></li>
+                                            <li><span class="new-price">€ {{ $comic2->price }}</span></li>
                                         @endif
                                     </ul>
                                 </div>
@@ -119,11 +106,7 @@
                                 <a href="{{ url('/comic_detail/'.$comic3->id) }}"><img src="{{asset('img/comicsImages/' . $cover3->image_name) }}" alt="book" /></a>
                             </div>
                             <div class="bestseller-text text-center">
-                                @if($comic3->volume != null)
-                                    <h3>{{ $comic3->comic_name }} {{ $comic3->volume }}</h3>
-                                @else
-                                    <h3>{{ $comic3->comic_name }}{{ $comic3->volume }}</h3>
-                                @endif
+                                    <h3>{{ $comic3->comic_name }} </h3>
                                 <div class="price">
                                     <ul>
                                         @if( $comic3->discount != 0)
@@ -131,10 +114,10 @@
                                                 $valoreSconto3 = (($comic3->price * $comic3->discount) / 100);
                                                 $newPrice3 = ($comic3->price - $valoreSconto3);
                                             @endphp
-                                            <li><span class="new-price">$ {{ $newPrice3 }}</span></li>
-                                            <li><span class="old-price">$ {{ $comic3->price }}</span></li>
+                                            <li><span class="new-price">€ {{ $newPrice3 }}</span></li>
+                                            <li><span class="old-price">€ {{ $comic3->price }}</span></li>
                                         @else
-                                            <li><span class="new-price">$ {{ $comic3->price }}</span></li>
+                                            <li><span class="new-price">€ {{ $comic3->price }}</span></li>
                                         @endif
                                     </ul>
                                 </div>
@@ -143,18 +126,13 @@
                         <div class="single-bestseller">
                             <div class="bestseller-img">
                                 @php
-
                                     $comic4 = \App\Http\Controllers\ComicController::getComicByDiscountAndNumber(4);
                                     $cover4 = \App\Http\Controllers\ImageController::getCover($comic4->id);
                                 @endphp
                                 <a href="{{ url('/comic_detail/'.$comic4->id) }}"><img src="{{asset('img/comicsImages/' . $cover4->image_name) }}" alt="book" /></a>
                             </div>
                             <div class="bestseller-text text-center">
-                                @if($comic4->volume != null)
-                                    <h3>{{ $comic4->comic_name }} {{ $comic4->volume }}</h3>
-                                @else
-                                    <h3>{{ $comic4->comic_name }}{{ $comic4->volume }}</h3>
-                                @endif
+                                    <h3>{{ $comic4->comic_name }} </h3>
                                 <div class="price">
                                     <ul>
                                         @if( $comic4->discount != 0)
@@ -162,10 +140,10 @@
                                                 $valoreSconto4 = (($comic4->price * $comic4->discount) / 100);
                                                 $newPrice4 = ($comic4->price - $valoreSconto4);
                                             @endphp
-                                            <li><span class="new-price">$ {{ $newPrice4 }}</span></li>
-                                            <li><span class="old-price">$ {{ $comic4->price }}</span></li>
+                                            <li><span class="new-price">€ {{ $newPrice4 }}</span></li>
+                                            <li><span class="old-price">€ {{ $comic4->price }}</span></li>
                                         @else
-                                            <li><span class="new-price">$ {{ $comic4->price }}</span></li>
+                                            <li><span class="new-price">€ {{ $comic4->price }}</span></li>
                                         @endif
                                     </ul>
                                 </div>
@@ -183,11 +161,7 @@
                                 <a href="{{ url('/comic_detail/'.$comic5->id) }}"><img src="{{asset('img/comicsImages/' . $cover5->image_name) }}" alt="book" /></a>
                             </div>
                             <div class="bestseller-text text-center">
-                                @if($comic5->volume != null)
-                                    <h3>{{ $comic5->comic_name }} {{ $comic5->volume }}</h3>
-                                @else
-                                    <h3>{{ $comic5->comic_name }}{{ $comic5->volume }}</h3>
-                                @endif
+                                    <h3>{{ $comic5->comic_name }} </h3>
                                 <div class="price">
                                     <ul>
                                         @if( $comic5->discount != 0)
@@ -195,10 +169,10 @@
                                                 $valoreSconto5 = (($comic5->price * $comic5->discount) / 100);
                                                 $newPrice5 = ($comic5->price - $valoreSconto5);
                                             @endphp
-                                            <li><span class="new-price">$ {{ $newPrice5 }}</span></li>
-                                            <li><span class="old-price">$ {{ $comic5->price }}</span></li>
+                                            <li><span class="new-price">€ {{ $newPrice5 }}</span></li>
+                                            <li><span class="old-price">€ {{ $comic5->price }}</span></li>
                                         @else
-                                            <li><span class="new-price">$ {{ $comic5->price }}</span></li>
+                                            <li><span class="new-price">€ {{ $comic5->price }}</span></li>
                                         @endif
                                     </ul>
                                 </div>
@@ -213,11 +187,7 @@
                                 <a href="{{ url('/comic_detail/'.$comic6->id) }}"><img src="{{asset('img/comicsImages/' . $cover6->image_name) }}" alt="book" /></a>
                             </div>
                             <div class="bestseller-text text-center">
-                                @if($comic6->volume != null)
-                                    <h3>{{ $comic6->comic_name }} {{ $comic6->volume }}</h3>
-                                @else
-                                    <h3>{{ $comic6->comic_name }}{{ $comic6->volume }}</h3>
-                                @endif
+                                    <h3>{{ $comic6->comic_name }} </h3>
                                 <div class="price">
                                     <ul>
                                         @if( $comic6->discount != 0)
@@ -225,10 +195,10 @@
                                                 $valoreSconto6 = (($comic6->price * $comic6->discount) / 100);
                                                 $newPrice6 = ($comic6->price - $valoreSconto6);
                                             @endphp
-                                            <li><span class="new-price">$ {{ $newPrice6 }}</span></li>
-                                            <li><span class="old-price">$ {{ $comic6->price }}</span></li>
+                                            <li><span class="new-price">€ {{ $newPrice6 }}</span></li>
+                                            <li><span class="old-price">€ {{ $comic6->price }}</span></li>
                                         @else
-                                            <li><span class="new-price">$ {{ $comic6->price }}</span></li>
+                                            <li><span class="new-price">€ {{ $comic6->price }}</span></li>
                                         @endif
                                     </ul>
                                 </div>

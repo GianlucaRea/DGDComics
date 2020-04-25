@@ -27,11 +27,7 @@
                         <div class="col-lg-7 col-md-6 col-12">
                             <div class="product-info-main">
                                 <div class="page-title">
-                                    @if($comic->volume != null)
-                                        <h1>{{ $comic->comic_name }} {{ $comic->volume }}</h1>
-                                    @else
-                                        <h1>{{ $comic->comic_name }}{{ $comi->volume }}</h1>
-                                    @endif
+                                        <h1>{{ $comic->comic_name }} </h1>
                                 </div>
                                 <div class="product-info-stock-sku">
                                     @if($comic->quantity > 0)
@@ -41,10 +37,6 @@
                                     @endif
                                     <div class="product-attribute">
                                         <p>{{$comic->publisher}}</p> <!-- Display publisher of the comic -->
-                                    @if($comic->volume > 0)
-                                        <p>Volume: {{$comic->volume}}</p> <!-- Display volume of the comic -->
-                                    @endif
-                                        <!-- ragazzi ricordiamoci che dobbiamo inserire anche l'utente venditore qui-->
                                     </div>
                                 </div>
                                 <div class="product-info-genre">
@@ -76,7 +68,7 @@
                                             $newPrice = ($comic->price - $valoreSconto);
                                         @endphp
                                         <span>€{{ $newPrice }}</span> <!-- Price Done -->
-                                        <span class="old-price">${{$comic->price}}</span> <!--Old price !! -->
+                                        <span class="old-price">€{{$comic->price}}</span> <!--Old price !! -->
                                     @else
                                         <span">€{{$comic->price}}</span> <!--Old price !! -->
                                     @endif

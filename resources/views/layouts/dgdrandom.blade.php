@@ -4,12 +4,13 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title section-title-res text-center mb-30">
-                    <h2>Pubblicati di recente</h2>
+                    <h2>DGDRandom</h2>
+                    <h6>Scelti a caso per voi</h6>
                 </div>
             </div>
         </div>
         <div class="tab-active owl-carousel">
-            @foreach($newComics as $comic)
+            @foreach($comics->shuffle()->take(6) as $comic)
                 @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
                 <div class="tab-total">
                     <!-- single-product-start -->
@@ -44,9 +45,10 @@
                                     <li><a href="#"><i class="fa fa-star"></i></a></li>
                                 </ul>
                             </div>
-                                <h4>{{ $comic->comic_name }}{{ $comic->volume }}</h4>
+                            <h4>{{ $comic->comic_name }}</h4>
                             <div class="product-price">
-                                <ul> <!-- commento a caso per problema push con git-->
+                                <ul>
+
                                     @if( $comic->discount != 0 )
                                         @php($valoreSconto = (($comic->price * $comic->discount) / 100))
                                         @php($newPrice = ($comic->price - $valoreSconto))
@@ -54,6 +56,7 @@
                                     @else
                                         <li>€ {{ $comic->price }}</li>
                                     @endif
+
                                 </ul>
                             </div>
                         </div>

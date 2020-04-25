@@ -13,7 +13,7 @@
         <div class="random-area mb-30">
             <div class="product-active-2 owl-carousel">
                 <div class="product-total-2">
-                    
+
                     <div class="single-most-product bd mb-18">
                         <div class="most-product-img">
                             <a href="#"><img src="{{asset('img/product/20.jpg')}}" alt="book" /></a>

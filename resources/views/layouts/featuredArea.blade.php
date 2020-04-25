@@ -44,11 +44,7 @@
                                 <li><a href="#"><i class="fa fa-star"></i></a></li>
                             </ul>
                         </div>
-                        @if($comic->volume != null)
-                            <h4>{{ $comic->comic_name }} {{ $comic->volume }}</h4>
-                        @else
-                            <h4>{{ $comic->comic_name }}{{ $comic->volume }}</h4>
-                        @endif
+                            <h4>{{ $comic->comic_name }}</h4>
                         <div class="product-price">
                             <ul>
 

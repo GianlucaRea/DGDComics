@@ -12,6 +12,7 @@
             @include('layouts.banner')
             @include('layouts.bestsellerArea')
             @include('layouts.newArrival')
+            @include('layouts.dgdrandom')
             @include('layouts.productArea')
             @include('layouts.recentPostArea')
             @include('layouts.banner2')
