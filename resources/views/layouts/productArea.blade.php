@@ -63,7 +63,11 @@
                                             <li><a href="#"><i class="fa fa-star"></i></a></li>
                                         </ul>
                                     </div>
-                                    <h4><a href="#">{{ $comic->comic_name }}</a></h4>
+                                    @if($comic->volume != null)
+                                        <h4>{{ $comic->comic_name }} {{ $comic->volume }}</h4>
+                                    @else
+                                        <h4>{{ $comic->comic_name }}{{ $comic->volume }}</h4>
+                                    @endif
                                     <div class="product-price">
                                         <ul> <!-- commento a caso per problema push con git-->
                                             @if( $comic->discount != 0 )
@@ -90,7 +94,8 @@
             <div class="tab-pane fade" id="americanComics">
                 <div class="tab-active owl-carousel">
                     <!-- single-product-start -->
-                @foreach($newComics as $comic)
+                   @php ($america = \App\Http\Controllers\ComicController::getAmerican())
+                @foreach($america as $comic)
                     @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
 
                     <!-- single-product-start -->
@@ -125,7 +130,11 @@
                                         <li><a href="#"><i class="fa fa-star"></i></a></li>
                                     </ul>
                                 </div>
-                                <h4><a href="#">{{ $comic->comic_name }}</a></h4>
+                                @if($comic->volume != null)
+                                    <h4>{{ $comic->comic_name }} {{ $comic->volume }}</h4>
+                                @else
+                                    <h4>{{ $comic->comic_name }}{{ $comic->volume }}</h4>
+                                @endif
                                 <div class="product-price">
                                     <ul> <!-- commento a caso per problema push con git-->
                                         @if( $comic->discount != 0 )
@@ -151,10 +160,11 @@
             <div class="tab-pane fade" id="italian">
                 <div class="tab-active owl-carousel">
                     <!-- single-product-start -->
-                @foreach($newComics as $comic)
-                    @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
+                    @php( $italian= \App\Http\Controllers\ComicController::getItalian())
+                                   @foreach($italian as $comic)
+                                       @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
 
-                    <!-- single-product-start -->
+                                       <!-- single-product-start -->
                         <div class="product-wrapper">
                             <div class="product-img">
                                 <a href="{{ url('/comic_detail/'.$comic->id) }}">
@@ -186,7 +196,11 @@
                                         <li><a href="#"><i class="fa fa-star"></i></a></li>
                                     </ul>
                                 </div>
-                                <h4><a href="#">{{ $comic->comic_name }}</a></h4>
+                                @if($comic->volume != null)
+                                    <h4>{{ $comic->comic_name }} {{ $comic->volume }}</h4>
+                                @else
+                                    <h4>{{ $comic->comic_name }}{{ $comic->volume }}</h4>
+                                @endif
                                 <div class="product-price">
                                     <ul> <!-- commento a caso per problema push con git-->
                                         @if( $comic->discount != 0 )

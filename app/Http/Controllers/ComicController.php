@@ -169,6 +169,14 @@ class ComicController extends Controller
         return Comic::whereIn('type',['shonen','seinen','shojo','josei'])->inRandomOrder()->take(7)->get();
     }
 
+    public static function getAmerican(){
+        return Comic::whereIn('type',['marvel','dc'])->inRandomOrder()->take(7)->get();
+    }
+
+    public static function getItalian(){
+       return Comic::whereIn('type',['italiano'])->inRandomOrder()->take(7)->get();
+    }
+
     public static function getrelated($id){
         $targetManga = Comic::find($id);
         $collection1 = Comic::where('comic_name', '=', $targetManga->comic_name);

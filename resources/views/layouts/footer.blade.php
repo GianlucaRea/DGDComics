@@ -7,7 +7,7 @@
                     <div class="footer-top-menu bb-2">
                         <nav>
                             <ul>
-                                <li><a href="#">Home</a></li>
+                                <li><a href="{{ url('/') }}">Home</li>
                                 <li><a href="#">Privacy e policy</a></li>
                                 <li><a href="#">Contattaci</a></li>
                                 <li><a href="#">Blog</a></li>

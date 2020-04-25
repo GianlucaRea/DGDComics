@@ -18,7 +18,9 @@ Route::get('/', function () {
     $comics = Comic::all();
     $newComics = \App\Http\Controllers\ComicController::getNewComic();
     $manga = \App\Http\Controllers\ComicController::getManga();
-    return view('welcome', compact('comics'), compact('newComics') , compact('manga'));
+    $america = \App\Http\Controllers\ComicController::getAmerican();
+    $italian= \App\Http\Controllers\ComicController::getItalian();
+    return view('welcome', compact('comics'), compact('newComics') , compact('manga') , compact('america'), compact('italian'));
 });
 
 Auth::routes();
