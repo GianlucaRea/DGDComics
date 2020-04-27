@@ -11,12 +11,13 @@
                 <h4>Correlati</h4>
             </div>
         <div class="random-area mb-30">
+            @foreach($related as $comic)
+                @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
             <div class="product-active-2 owl-carousel">
                 <div class="product-total-2">
-
                     <div class="single-most-product bd mb-18">
                         <div class="most-product-img">
-                            <a href="#"><img src="{{asset('img/product/20.jpg')}}" alt="book" /></a>
+                            <a href="#"><img src="{{asset('img/comicsImages/' . $image->image_name) }}" alt="book" /></a>
                         </div>
                         <div class="most-product-content">
                             <div class="product-rating">
@@ -28,17 +29,24 @@
                                     <li><a href="#"><i class="fa fa-star"></i></a></li>
                                 </ul>
                             </div>
-                            <h4><a href="#">Endeavor Daytrip</a></h4>
+                            <h4><a href="#">{{ $comic->comic_name }}</a></h4>
                             <div class="product-price">
                                 <ul>
-                                    <li>$30.00</li>
-                                    <li class="old-price">$33.00</li>
+                                    @if( $comic->discount != 0 )
+                                        @php($valoreSconto = (($comic->price * $comic->discount) / 100))
+                                        @php($newPrice = ($comic->price - $valoreSconto))
+                                        <li>€{{ $newPrice }}</li>
+                                        <li class="old-price">€{{$comic->price}}</li>
+                                    @else
+                                        <li>€{{$comic->price}}</li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+                @endforeach
         </div>
         @endif
     </div>

@@ -1,5 +1,4 @@
 <!-- header-area-start -->
-    <!-- header-mid-area-end -->
 <!-- header-mid-area-start -->
 <div class="header-mid-area ptb-40 " style="background-image: url('{{ asset('img/download.jpg')}}'); background-size: 100%; background-repeat: no-repeat; ">
     <div class="container">
@@ -57,52 +56,95 @@
         </div>
     </div>
 </div>
-    <!-- main-menu-area-start -->
-    <div class="main-menu-area d-md-none d-none d-lg-block sticky-header-1" id="header-sticky">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="menu-area">
-                        <nav>
+<!-- header-mid-area-end -->
+<!-- main-menu-area-start -->
+<div class="main-menu-area d-md-none d-none d-lg-block sticky-header-1" id="header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-1">
+                <div class="menu-area">
+                    <ul>
+                        <li>
+                            <a href="{{ url('/') }}">Home</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-1">
+                <div class="menu-area">
+                    <ul>
+                        <li>
+                            <a href="{{ url('/') }}">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-1">
+                <div class="menu-area">
+                    <ul>
+                        <li>
+                            <a href="{{ url('/') }}">Blog</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-1">
+                <div class="menu-area">
+                    <ul>
+                        <li>
+                            <a href="{{ url('/') }}">Sconti</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            @if (Route::has('login'))
+                @auth
+                    <div class="col-lg-3">
+                        <div class="menu-area">
                             <ul>
-                                <li><a href="{{ url('/') }}">Home</a></li>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="blog.html">blog</a></li>
-                                <li><a href="product-details.html">sconti</a></li>
-                                @if (Route::has('login'))
-                                    @auth
-                                        <li><a href="{{ url('/home') }}">MyAccount</a>
-                                            <div class="sub-menu sub-menu-2">
-                                                <ul>
-                                                    <li><a href="my-account.html">Account</a></li>
-                                                    <li><a href="cart.html">carrello</a></li>
-                                                    <li><a href="wishlist.html">Lista dei desideri</a></li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    @else
-                                        <li><a href="{{ route('login') }}">Accesso</a></li>
-
-                                        @if (Route::has('register'))
-                                            <li><a href="{{ route('register') }}">Registrazione</a></li>
-                                        @endif
-                                    @endauth
-                                @endif
                                 <li>
-                                    <div class="header-search">
-                                        <form action="#">
-                                            <input type="text" placeholder="Cerca nello store..." />
-                                            <a href="#"><i class="fa fa-search"></i></a>
-                                        </form>
-                                    </div>
+                                    <a href="{{ url('/home') }}">La tua area personale</a>
                                 </li>
                             </ul>
-                        </nav>
+                        </div>
                     </div>
+                @else
+                    <div class="col-lg-1">
+                        <div class="menu-area">
+                            <ul>
+                                <li>
+                                    <a href="{{ route('login') }}">Accesso</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    @if (Route::has('register'))
+                        <div class="col-lg-2">
+                            <div class="menu-area">
+                                <ul>
+                                    <li>
+                                        <a href="{{ route('register') }}">Registrazione</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    @endif
+                @endauth
+            @endif
+            <div class="col-lg-5">
+                <div id="search" class="header-search">
+                    <ul>
+                        <li>
+                            <form action="#">
+                                <input type="text" placeholder="Cerca nello store..." />
+                                <a href="#"><i class="fa fa-search"></i></a>
+                            </form>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-    <!-- main-menu-area-end -->
-
+</div>
+<!-- main-menu-area-end -->
 <!-- header-area-end -->
