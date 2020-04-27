@@ -60,6 +60,7 @@
                                     <a href="#" class="view">Aggiungi una recensione!</a>
                                 </div>
                             </div>
+                            <br/>
                             <div class="product-info-price">
                                 <div class="price-final">
                                     @if( $comic->discount != 0 )

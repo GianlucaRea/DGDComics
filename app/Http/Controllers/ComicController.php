@@ -179,6 +179,6 @@ class ComicController extends Controller
 
     public static function getrelated($id){
         $target = Comic::find($id);
-        return Comic::whereIn('author_id',[$target ->author_id])->orWhere('user_id',[$target->user_id])->get();
+        return Comic::whereIn('author_id',[$target ->author_id])->where('id', '!=', $id)->take(4)->get();
      }
 }
