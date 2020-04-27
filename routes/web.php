@@ -20,7 +20,12 @@ Route::get('/', function () {
     $manga = \App\Http\Controllers\ComicController::getManga();
     $america = \App\Http\Controllers\ComicController::getAmerican();
     $italian= \App\Http\Controllers\ComicController::getItalian();
-    return view('welcome', compact('comics'), compact('newComics') , compact('manga') , compact('america'), compact('italian'));
+    return view('welcome')
+        ->with( compact('comics'))
+        ->with( compact('newComics'))
+        ->with(compact('manga'))
+        ->with(compact('america'))
+        ->with(compact('italian'));
 });
 
 Auth::routes();

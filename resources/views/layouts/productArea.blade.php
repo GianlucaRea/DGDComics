@@ -27,7 +27,6 @@
                 <div class="tab-active owl-carousel">
                     <!-- single-product-start -->
                     <!-- con questa linea php funziona senza no-->
-                @php ($manga = \App\Http\Controllers\ComicController::getManga())
                     @foreach($manga as $comic)
                         @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
 
@@ -90,7 +89,6 @@
             <div class="tab-pane fade" id="SuperHero">
                 <div class="tab-active owl-carousel">
                     <!-- single-product-start -->
-                   @php ($america = \App\Http\Controllers\ComicController::getAmerican())
                 @foreach($america as $comic)
                     @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
 
@@ -152,7 +150,6 @@
             <div class="tab-pane fade" id="italian">
                 <div class="tab-active owl-carousel">
                     <!-- single-product-start -->
-                    @php( $italian= \App\Http\Controllers\ComicController::getItalian())
                                    @foreach($italian as $comic)
                                        @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
 
