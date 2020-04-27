@@ -646,7 +646,7 @@ body {
 }
 
 .header-mid-area .my-cart ul>li>a {
-    color: #444444;
+    color: #ffffff;
     display: inline-block;
     font-size: 16px;
     font-weight: 700;
@@ -667,7 +667,7 @@ body {
 }
 
 .header-mid-area .my-cart ul li>span {
-    background: #f07c29 none repeat scroll 0 0;
+    background: #f7bf4e none repeat scroll 0 0;
     border-radius: 50%;
     bottom: 0;
     color: #fff;
