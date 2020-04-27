@@ -1,12 +1,12 @@
 <!-- header-area-start -->
 <!-- header-mid-area-start -->
-<div class="header-mid-area ptb-40 " style="background-image: url('{{ asset('img/download.jpg')}}'); background-size: 100%; background-repeat: no-repeat; ">
+<div class="header-mid-area ptb-40 " style="background-image: url('{{ asset('img/immaginiNostre/headerImage.jpg')}}'); background-size: 100%; background-repeat: no-repeat;">
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-5 col-12"></div>
             <div class="col-lg-6 col-md-4 col-12">
                 <div class="logo-area text-center logo-xs-mrg">
-                    <a href="{{ url('/') }}"><img src="{{ asset('img/logo/lightBrown.png') }}" width="250px" height="250px" alt="logo" /></a>
+                    <a href="{{ url('/') }}"><img src="{{ asset('img/logo/VersionePennello/red2.png') }}" width="250px" height="250px" alt="logo" /></a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-12"> <!-- la parte del carrello è ancora da fare, quindi non la tocco per ora-->
