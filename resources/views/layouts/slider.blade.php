@@ -2,40 +2,8 @@
 <div class="slider-area mt-30">
     <div class="container">
         <div class="slider-active owl-carousel">
-            <div class="single-slider pt-100 pb-145 bg-img" style="background-image:url({{ asset('img/slider/13.jpg') }});">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="slider-content-3 slider-animated-1 pl-100">
-                            <h1>A Game <br>Fuck up</h1>
-                            <p class="slider-sale">
-                                <span class="sale1">-20%</span>
-                                <span class="sale2">
-                                        <strong>£80.00</strong>
-                                        £60.00
-                                    </span>
-                            </p>
-                            <a href="#">Shop now!</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="single-slider pt-100 pb-145 bg-img" style="background-image:url({{ asset('img/slider/12.jpg') }});">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="slider-content-3 slider-animated-1 pl-100">
-                            <h1>Wake The <br>of Thrones</h1>
-                            <p class="slider-sale">
-                                <span class="sale1">-20%</span>
-                                <span class="sale2">
-                                        <strong>£80.00</strong>
-                                        £60.00
-                                    </span>
-                            </p>
-                            <a href="#">Shop now!</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="single-slider pt-100 pb-145 bg-img" style="background-image: url('{{ asset('img/immaginiNostre/slide1.jpg')}}'); background-size: 100%; background-repeat: no-repeat; width: 1100px; height: 560px"></div>
+            <div class="single-slider pt-100 pb-145 bg-img" style="background-image: url('{{ asset('img/immaginiNostre/slide2.jpg')}}'); background-size: 100%; background-repeat: no-repeat; width: 1100px; height: 560px"></div>
         </div>
     </div>
 </div>
