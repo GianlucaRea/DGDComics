@@ -7,11 +7,11 @@
             <header>
                 @include('layouts.header')
             </header>
-            @include('layouts.slider')
             @include('layouts.featuredArea')
-            @include('layouts.banner')
-            @include('layouts.bestsellerArea')
+            @include('layouts.slider')
             @include('layouts.newArrival')
+            <div style="height: 75px"></div>
+            @include('layouts.bestsellerArea')
             @include('layouts.dgdrandom')
             @include('layouts.productArea')
             @include('layouts.recentPostArea')

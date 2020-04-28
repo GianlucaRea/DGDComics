@@ -9,7 +9,7 @@
                     </div>
                     <div class="banner-text">
                         <h4>Spedizione gratuita</h4>
-                        <p>Per tutti gli ordini maggiori a € 500</p>
+                        <p>Per tutti gli ordini maggiori a €20</p>
                     </div>
                 </div>
             </div>
