@@ -1,10 +1,10 @@
 <!-- QUEST'AREA NON L'HO COMPLETATA A DIFFERENZA DI BESTSELLER PERCHE' MENTRE LI METTIAMO COMICS RANDOM, QUNDI AVEVA UN SENSO, QUI NE METTIAMO SPECIFICI, E NON ESSENDO LE QUERY ANCORA IMPLEMENTATE SAREBBE SOLO LAVORO INUTILE ORA COME ORA -->
 <!-- product-area-start -->
-<div class="product-area pb-100">
+<div class="product-area pb-50">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="section-title bt text-center pt-100 mb-50">
+                <div class="section-title bt text-center pt-50 mb-50">
                     <h2>I nostri prodotti</h2>
                     <p>Cerca nella nostra collezione i nostri prodotti più venduti ed interessanti. <br /> Troverai sicuramente ciò che cerchi!.</p>
                 </div>
