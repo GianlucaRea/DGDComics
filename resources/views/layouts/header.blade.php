@@ -135,9 +135,9 @@
                 <div id="search" class="header-search">
                     <ul>
                         <li>
-                            <form action="#">
+                            <form action="shoplist">
                                 <input type="text" placeholder="Cerca nello store..." />
-                                <a href="#"><i class="fa fa-search"></i></a>
+                                <a href="shoplist"><i class="fa fa-search"></i></a>
                             </form>
                         </li>
                     </ul>

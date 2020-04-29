@@ -28,6 +28,13 @@ Route::get('/', function () {
         ->with(compact('italian'));
 });
 
+Route::get('/shoplist', function () {
+    return view('shoplist');
+});
+
+
+
+
 Auth::routes();
 
 Route::get('/comic_detail/{id}', function ($id){

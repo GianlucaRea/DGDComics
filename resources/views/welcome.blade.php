@@ -4,9 +4,9 @@
         @include('layouts.head')
     </head>
     <body class="home-2">
-            <header>
-                @include('layouts.header')
-            </header>
+    <header>
+        @include('layouts.header')
+    </header>
             @include('layouts.featuredArea')
             @include('layouts.slider')
             @include('layouts.newArrival')
