@@ -1,9 +1,9 @@
 <!-- recent-post-area-start -->
-<div class="recent-post-area pb-100">
+<div class="recent-post-area pb-25">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="section-title section-title-res pt-100 bt-3 text-center mb-30">
+                <div class="section-title section-title-res pt-30 bt-3 text-center mb-30">
                     <h2>Gli ultimi articoli del nostro Blog!</h2>
                 </div>
             </div>

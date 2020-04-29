@@ -1,5 +1,5 @@
 <!-- banner-area-start -->
-<div class="banner-area banner-res-large pb-70">
+<div class="banner-area banner-res-large pb-5">
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">

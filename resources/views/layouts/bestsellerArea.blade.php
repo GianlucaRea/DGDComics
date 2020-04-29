@@ -1,5 +1,5 @@
 <!-- bestseller-area-start -->
-<div class="bestseller-area pb-100">
+<div class="bestseller-area pb-25">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-12 col-12">
