@@ -7,11 +7,16 @@
 <header>
     @include('layouts.header')
 </header>
-
 <div style="height: 75px"></div>
-
-@include('layouts.banner2')
-@include('layouts.social')
+<div class="shop-main-area mb-70">
+    <div class="container">
+        <div class="row">
+    @include('layouts.shoplistLeftMenu')
+    @include('layouts.shopListComics')
+    @include('layouts.shopListPagination')
+        </div>
+    </div>
+</div>
 <footer>
     @include('layouts.footer')
 </footer>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Comic;
+use App\Genre;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +30,11 @@ Route::get('/', function () {
 });
 
 Route::get('/shoplist', function () {
-    return view('shoplist');
+    $genres = Genre::all();
+    $comics = Comic::all();
+    return view('shoplist')
+        ->with(compact('genres'))
+        ->with(compact('comics'));
 });
 
 
