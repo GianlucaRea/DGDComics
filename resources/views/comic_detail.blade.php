@@ -7,7 +7,10 @@
 <header>
     @include('layouts.header')
 </header>
-@include('layouts.breadcrumbsArea')
+@php($page = [
+    'name' =>'Dettagli Prodotto']
+    )
+@include('layouts.breadcrumbsArea', $page)
 @include('layouts.productMainArea')
 @include('layouts.productInfo')
 @include('layouts.review')
