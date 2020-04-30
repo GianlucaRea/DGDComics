@@ -153,6 +153,14 @@ class ComicController extends Controller
 
     }
 
+    public static function countByPrice($number1,$number2){
+        return Comic::where('price','>',$number1)->where('price','<',$number2)->count();
+    }
+
+    public static function countByType($text){
+        return Comic::where('type','=',$text)->count();
+    }
+
     public static function getNewComic(){
         return Comic::latest()->take(6)->get();
     }
