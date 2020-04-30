@@ -29,9 +29,19 @@ Route::get('/', function () {
         ->with(compact('italian'));
 });
 
-Route::get('/shoplist', function () {
+Route::get('/shoplist/', function () {
+
     $genres = Genre::all();
     $comics = Comic::all();
+    return view('shoplist')
+        ->with(compact('genres'))
+        ->with(compact('comics'));
+})
+;
+Route::get('/shoplist/{type}', function ($type) {
+
+    $genres = Genre::all();
+    $comics = Comic::where('type','=',$type)->get();
     return view('shoplist')
         ->with(compact('genres'))
         ->with(compact('comics'));

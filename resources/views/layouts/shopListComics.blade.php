@@ -31,22 +31,27 @@
                 <div class="tab-content">
                     <div class="tab-pane fade" id="th">
                         <div class="row">
+                            @foreach($comics as $comic)
+                                @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
                             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                                 <!-- single-product-start -->
                                 <div class="product-wrapper mb-40">
                                     <div class="product-img">
-                                        <a href="#">
-                                            <img src="img/product/1.jpg" alt="book" class="primary" />
+                                        <a href="{{ url('/comic_detail/'.$comic->id) }}">
+                                            <img src="{{asset('img/comicsImages/' . $image->image_name) }}" alt="book" class="primary" />
                                         </a>
                                         <div class="quick-view">
-                                            <a class="action-view" href="#" data-target="#productModal" data-toggle="modal" title="Quick View">
+                                            <a class="action-view" href="{{ url('/comic_detail/'.$comic->id) }}" data-target="#productModal" data-toggle="modal" title="Quick View">
                                                 <i class="fa fa-search-plus"></i>
                                             </a>
                                         </div>
                                         <div class="product-flag">
                                             <ul>
-                                                <li><span class="sale">new</span></li>
-                                                <li><span class="discount-percentage">-5%</span></li>
+                                                @if( $comic->discount != 0 )
+                                                    @php($valoreSconto = (($comic->price * $comic->discount) / 100))
+                                                    @php($newPrice = ($comic->price - $valoreSconto))
+                                                    <li><span class="discount-percentage">-{{ $comic->discount }}%</span></li>
+                                                @endif
                                             </ul>
                                         </div>
                                     </div>
@@ -60,10 +65,16 @@
                                                 <li><a href="#"><i class="fa fa-star"></i></a></li>
                                             </ul>
                                         </div>
-                                        <h4><a href="#">Joust Duffle Bag</a></h4>
+                                        <h4>{{ $comic->comic_name }}</h4>
                                         <div class="product-price">
                                             <ul>
-                                                <li>$60.00</li>
+                                                @if( $comic->discount != 0 )
+                                                    @php($valoreSconto = (($comic->price * $comic->discount) / 100))
+                                                    @php($newPrice = ($comic->price - $valoreSconto))
+                                                    <li>€ {{ $newPrice}}</li>
+                                                @else
+                                                    <li>€ {{ $comic->price }}</li>
+                                                @endif
                                             </ul>
                                         </div>
                                     </div>
@@ -79,18 +90,21 @@
                                     </div>
                                 </div>
                             </div>
+                            @endforeach
                         </div>
                     </div>
-                </div>
                 <div class="tab-pane fade show active" id="list">
                     <!-- single-shop-start -->
                     <div class="single-shop mb-30">
                         <div class="row">
+                            @foreach($comics as $comic)
+                                @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
+
                             <div class="col-lg-4 col-md-4 col-12">
                                 <div class="product-wrapper-2">
                                     <div class="product-img">
-                                        <a href="#">
-                                            <img src="img/product/3.jpg" alt="book" class="primary" />
+                                        <a href="{{ url('/comic_detail/'.$comic->id) }}">
+                                            <img src="{{asset('img/comicsImages/' . $image->image_name) }}" alt="book" class="primary" />
                                         </a>
                                     </div>
                                 </div>
@@ -107,14 +121,19 @@
                                                 <li><a href="#"><i class="fa fa-star"></i></a></li>
                                             </ul>
                                         </div>
-                                        <h4><a href="#">Crown Summit</a></h4>
+                                        <h4>{{ $comic->comic_name }}</h4>
                                         <div class="product-price">
                                             <ul>
-                                                <li>$36.00</li>
-                                                <li class="old-price">$38.00</li>
+                                                @if( $comic->discount != 0 )
+                                                    @php($valoreSconto = (($comic->price * $comic->discount) / 100))
+                                                    @php($newPrice = ($comic->price - $valoreSconto))
+                                                    <li>€ {{ $newPrice}}</li>
+                                                @else
+                                                    <li>€ {{ $comic->price }}</li>
+                                                @endif
                                             </ul>
                                         </div>
-                                        <p>The sporty Joust Duffle Bag can't be beat - not in the gym, not on the luggage carousel, not anywhere. Big enough to haul a basketball or soccer ball and some sneakers with plenty of room to spare,... </p>
+                                        <p>{{$comic->description}}</p>
                                     </div>
                                     <div class="product-link">
                                         <div class="product-button">
@@ -128,6 +147,8 @@
                                     </div>
                                 </div>
                             </div>
+                            @endforeach
                         </div>
                     </div>
+                </div>
                 </div>
