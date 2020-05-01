@@ -35,7 +35,10 @@
                     <div class="left-menu mb-30">
                         <ul>
                             @foreach($genres as $genre)
-                                <li><a href="#">{{$genre->name_genre }}<span>(15)</span></a></li>
+                            @php
+                            $numOfOcc = App\Http\Controllers\GenreController::countComics($genre->id);
+                            @endphp
+                                <li><a href="#">{{$genre->name_genre }}<span>({{$numOfOcc}})</span></a></li>
                             @endforeach
                         </ul>
                     </div>
