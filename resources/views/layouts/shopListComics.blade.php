@@ -100,7 +100,7 @@
                             @foreach($comics as $comic)
                                 @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
 
-                            <div class="col-lg-4 col-md-4 col-12">
+                            <div class="col-lg-3 col-md-4 col-12 mb-25">
                                 <div class="product-wrapper-2">
                                     <div class="product-img">
                                         <a href="{{ url('/comic_detail/'.$comic->id) }}">
