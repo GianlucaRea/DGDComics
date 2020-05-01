@@ -114,4 +114,8 @@ class GenreController extends Controller
         return response()->json($genre, 200);
 
     }
+
+    public static function countComics($id){
+        return $number = Genre::find($id)->comic()->count();
+    }
 }

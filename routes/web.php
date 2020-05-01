@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Comic;
+use App\Genre;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,14 +29,31 @@ Route::get('/', function () {
         ->with(compact('italian'));
 });
 
-Route::get('/shoplist', function () {
-    return view('shoplist');
+Route::get('/shoplist/', function () {
+
+    $genres = Genre::all();
+    $comics = Comic::all();
+    return view('shoplist')
+        ->with(compact('genres'))
+        ->with(compact('comics'));
+})
+;
+Route::get('/shoplist/{type}', function ($type) {
+
+    $genres = Genre::all();
+    $comics = Comic::where('type','=',$type)->get();
+    return view('shoplist')
+        ->with(compact('genres'))
+        ->with(compact('comics'));
 });
 
 
 
 
 Auth::routes();
+Route::get('/logout', function(){
+    return \App\Http\Controllers\Auth\LoginController::logout();
+});
 
 Route::get('/comic_detail/{id}', function ($id){
 
@@ -44,4 +62,8 @@ Route::get('/comic_detail/{id}', function ($id){
     return view('comic_detail')
         ->with(compact('comic'))
         ->with(compact('related'));
+});
+
+Route::get('/accountArea', function(){
+    return view('/accountArea');
 });

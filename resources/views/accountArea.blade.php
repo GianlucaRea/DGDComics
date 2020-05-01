@@ -7,13 +7,11 @@
 <header>
     @include('layouts.header')
 </header>
-
-<div style="height: 75px"></div>
-
-@include('layouts.breadcrumbs')
-@include('layouts.testBlade')
-
-@include('layouts.banner2')
+@php($page = [
+    'name' =>'Il tuo account']
+    )
+@include('layouts.breadcrumbsArea', $page)
+@include('layouts.accountDetail')
 @include('layouts.social')
 <footer>
     @include('layouts.footer')
