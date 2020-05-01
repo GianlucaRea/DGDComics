@@ -99,15 +99,26 @@
             </div>
             @if (Route::has('login'))
                 @auth
-                    <div class="col-lg-3">
+                    <div class="col-lg-1">
                         <div class="menu-area">
                             <ul>
                                 <li>
-                                    <a href="{{ url('/home') }}">La tua area personale</a>
+                                    <a href="{{ url('/accountArea') }}">Account</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
+                    <div class="pl-10"></div>
+                    <div class="col-lg-1">
+                        <div class="menu-area">
+                            <ul>
+                                <li>
+                                    <a href="{{ url('/logout') }}">logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="pl-20"></div>
                 @else
                     <div class="col-lg-1">
                         <div class="menu-area">
@@ -119,7 +130,7 @@
                         </div>
                     </div>
                     @if (Route::has('register'))
-                        <div class="col-lg-2">
+                        <div class="col-lg-1">
                             <div class="menu-area">
                                 <ul>
                                     <li>
@@ -128,6 +139,8 @@
                                 </ul>
                             </div>
                         </div>
+                        <div class="pl-40"></div>
+                        <div class="pl-40"></div>
                     @endif
                 @endauth
             @endif
@@ -135,9 +148,9 @@
                 <div id="search" class="header-search">
                     <ul>
                         <li>
-                            <form action="shoplist">
+                            <form action="{{ url('shoplist') }}">
                                 <input type="text" placeholder="Cerca nello store..." />
-                                <a href="shoplist"><i class="fa fa-search"></i></a>
+                                <a href="{{ url('shoplist') }}"><i class="fa fa-search"></i></a>
                             </form>
                         </li>
                     </ul>

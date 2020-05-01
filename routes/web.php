@@ -56,6 +56,9 @@ Route::get('/shoplist/{id}', function ($id) {
 });
 
 Auth::routes();
+Route::get('/logout', function(){
+    return \App\Http\Controllers\Auth\LoginController::logout();
+});
 
 Route::get('/comic_detail/{id}', function ($id){
 
@@ -64,4 +67,8 @@ Route::get('/comic_detail/{id}', function ($id){
     return view('comic_detail')
         ->with(compact('comic'))
         ->with(compact('related'));
+});
+
+Route::get('/accountArea', function(){
+    return view('/accountArea');
 });
