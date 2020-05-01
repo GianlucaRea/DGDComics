@@ -10,6 +10,9 @@
 
 <div style="height: 75px"></div>
 
+@include('layouts.breadcrumbs')
+@include('layouts.testBlade')
+
 @include('layouts.banner2')
 @include('layouts.social')
 <footer>
