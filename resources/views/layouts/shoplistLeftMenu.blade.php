@@ -37,8 +37,9 @@
                             @foreach($genres as $genre)
                             @php
                             $numOfOcc = App\Http\Controllers\GenreController::countComics($genre->id);
+
                             @endphp
-                                <li><a href="#">{{$genre->name_genre }}<span>({{$numOfOcc}})</span></a></li>
+                                <li><a href="{{url("/shoplist/{$genre->id}")}}">{{$genre->name_genre}}<span>({{$numOfOcc}})</span></a></li> <!-- Da finire -->
                             @endforeach
                         </ul>
                     </div>

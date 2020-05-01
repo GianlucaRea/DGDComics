@@ -47,8 +47,13 @@ Route::get('/shoplist/{type}', function ($type) {
         ->with(compact('comics'));
 });
 
-
-
+Route::get('/shoplist/{id}', function ($id) {
+    $genres = Genre::all();
+    $comics = \App\Http\Controllers\GenreController::getComics($id);
+    return view('shoplist')
+        ->with(compact('comics'))
+        ->with(compact('genres'));
+});
 
 Auth::routes();
 

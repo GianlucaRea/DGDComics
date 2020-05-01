@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comic;
 use App\Genre;
 use Illuminate\Http\Request;
 
@@ -107,15 +108,12 @@ class GenreController extends Controller
         return response()->json(null,204);
     }
 
-    public function getComic($id)
-    {
-        $genre = Genre::find($id)->comic()->get();
-
-        return response()->json($genre, 200);
-
-    }
 
     public static function countComics($id){
         return $number = Genre::find($id)->comic()->count();
+    }
+
+    public static function getComics($id){
+        return Genre::find($id)->comic()->get();
     }
 }
