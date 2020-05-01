@@ -113,7 +113,4 @@ class GenreController extends Controller
         return $number = Genre::find($id)->comic()->count();
     }
 
-    public static function getComics($id){
-        return Genre::find($id)->comic()->get();
-    }
 }

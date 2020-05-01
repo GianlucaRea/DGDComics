@@ -36,8 +36,7 @@ Route::get('/shoplist/', function () {
     return view('shoplist')
         ->with(compact('genres'))
         ->with(compact('comics'));
-})
-;
+});
 Route::get('/shoplist/{type}', function ($type) {
 
     $genres = Genre::all();
@@ -49,13 +48,12 @@ Route::get('/shoplist/{type}', function ($type) {
 
 Route::get('/shoplist/{id}', function ($id) {
     $genres = Genre::all();
-    $comics = \App\Http\Controllers\GenreController::getComics($id);
-    return view('shoplist')
-        ->with(compact('comics'))
-        ->with(compact('genres'));
+    $comics = Genre::find($id)->comic()->get();
+    return view('shoplist')->with(compact('comics'))->with(compact('genres'));
 });
 
 Auth::routes();
+
 Route::get('/logout', function(){
     return \App\Http\Controllers\Auth\LoginController::logout();
 });
