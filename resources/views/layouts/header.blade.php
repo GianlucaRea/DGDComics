@@ -148,9 +148,9 @@
                 <div id="search" class="header-search">
                     <ul>
                         <li>
-                            <form action="shoplist">
+                            <form action="{{ url('shoplist') }}">
                                 <input type="text" placeholder="Cerca nello store..." />
-                                <a href="shoplist"><i class="fa fa-search"></i></a>
+                                <a href="{{ url('shoplist') }}"><i class="fa fa-search"></i></a>
                             </form>
                         </li>
                     </ul>
