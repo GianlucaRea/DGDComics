@@ -37,6 +37,36 @@ Route::get('/shoplist', function () {
         ->with(compact('genres'))
         ->with(compact('comics'));
 });
+Route::get('/shoplist/price0',function (){
+    $genres = Genre::all();
+    $comics = \App\Http\Controllers\ComicController::getByPrice(0,3.99);
+    return view('shoplist')->with(compact('genres'))->with(compact('comics'));
+})->name('prezzo0');
+
+Route::get('/shoplist/price1',function (){
+    $genres = Genre::all();
+    $comics = \App\Http\Controllers\ComicController::getByPrice(3.99,8.00);
+    return view('shoplist')->with(compact('genres'))->with(compact('comics'));
+})->name('prezzo1');
+
+Route::get('/shoplist/price2',function (){
+    $genres = Genre::all();
+    $comics = \App\Http\Controllers\ComicController::getByPrice(7.99,15.00);
+    return view('shoplist')->with(compact('genres'))->with(compact('comics'));
+})->name('prezzo2');
+
+Route::get('/shoplist/price3',function (){
+    $genres = Genre::all();
+    $comics = \App\Http\Controllers\ComicController::getByPrice(14.99,25.00);
+    return view('shoplist')->with(compact('genres'))->with(compact('comics'));
+})->name('prezzo3');
+
+Route::get('/shoplist/price4',function (){
+    $genres = Genre::all();
+    $comics = \App\Http\Controllers\ComicController::getByPrice(24.99,2500);
+    return view('shoplist')->with(compact('genres'))->with(compact('comics'));
+})->name('prezzo4');
+
 Route::get('/shoplist/{type}', function ($type) {
 
     $genres = Genre::all();
@@ -48,16 +78,14 @@ Route::get('/shoplist/{type}', function ($type) {
 
 
 Route::get('/shoplist/{name_genre}',function ($name_genre){
-    $genre = Genre::all();
     $comics = \App\Http\Controllers\GenreController::getComics($name_genre);
+    $genre = Genre::all();
     return view('shoplist')->with(compact('genre'))->with(compact('comics'));
 })->name('genreshoplist');
 
-Route::get('/shoplist/{price1}_{price2}',function ($price1,$price2){
-    $genre = Genre::all();
-    $comics = \App\Http\Controllers\ComicController::getByPrice($price1,$price2);
-    return view('shoplist')->with(compact('genre'))->with(compact('comics'));
-});
+
+
+
 
 Auth::routes();
 
