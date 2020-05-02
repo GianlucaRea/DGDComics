@@ -32,7 +32,7 @@ Route::get('/', function () {
 Route::get('/shoplist', function () {
 
     $genres = Genre::all();
-    $comics = Comic::all()->take(20);
+    $comics = Comic::all()  ->take(20);
     return view('shoplist')
         ->with(compact('genres'))
         ->with(compact('comics'));
@@ -48,11 +48,16 @@ Route::get('/shoplist/{type}', function ($type) {
 
 
 Route::get('/shoplist/{name_genre}',function ($name_genre){
-    $name_genre = Genre::all();
+    $genre = Genre::all();
     $comics = \App\Http\Controllers\GenreController::getComics($name_genre);
-    return view('shoplist')->with(compact('comics'));
+    return view('shoplist')->with(compact('genre'))->with(compact('comics'));
 })->name('genreshoplist');
 
+Route::get('/shoplist/{price1}_{price2}',function ($price1,$price2){
+    $genre = Genre::all();
+    $comics = \App\Http\Controllers\ComicController::getByPrice($price1,$price2);
+    return view('shoplist')->with(compact('genre'))->with(compact('comics'));
+});
 
 Auth::routes();
 
