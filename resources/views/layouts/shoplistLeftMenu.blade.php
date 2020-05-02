@@ -38,7 +38,7 @@
                             @php
                             $numOfOcc = App\Http\Controllers\GenreController::countComics($genre->id);
                             @endphp
-                                <li><a href="#">{{$genre->name_genre}}<span>({{$numOfOcc}})</span></a></li> <!-- Da finire -->
+                                <li><a href= "{{route('genreshoplist',['name_genre' => $genre->name_genre])}}">{{$genre->name_genre}}<span>({{$numOfOcc}})</span></a></li> <!-- Da finire -->
                             @endforeach
                         </ul>
                     </div>
