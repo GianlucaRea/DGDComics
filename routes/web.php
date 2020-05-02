@@ -29,15 +29,14 @@ Route::get('/', function () {
         ->with(compact('italian'));
 });
 
-Route::get('/shoplist/', function () {
+Route::get('/shoplist', function () {
 
     $genres = Genre::all();
     $comics = Comic::all();
     return view('shoplist')
         ->with(compact('genres'))
         ->with(compact('comics'));
-})
-;
+});
 Route::get('/shoplist/{type}', function ($type) {
 
     $genres = Genre::all();
@@ -48,9 +47,15 @@ Route::get('/shoplist/{type}', function ($type) {
 });
 
 
+Route::get('/shoplist/{name_genre}',function ($name_genre){
+    $name_genre = Genre::all();
+    $comics = \App\Http\Controllers\GenreController::getComics($name_genre);
+    return view('shoplist')->with(compact('comics'));
+})->name('genreshoplist');
 
 
 Auth::routes();
+
 Route::get('/logout', function(){
     return \App\Http\Controllers\Auth\LoginController::logout();
 });

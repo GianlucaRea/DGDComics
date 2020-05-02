@@ -38,27 +38,28 @@
                             @php
                             $numOfOcc = App\Http\Controllers\GenreController::countComics($genre->id);
                             @endphp
-                                <li><a href="#">{{$genre->name_genre }}<span>({{$numOfOcc}})</span></a></li>
+                                <li><a href= "{{route('genreshoplist',['name_genre' => $genre->name_genre])}}">{{$genre->name_genre}}<span>({{$numOfOcc}})</span></a></li> <!-- Da finire -->
                             @endforeach
                         </ul>
                     </div>
                     <div class="left-title mb-20">
                         <h4>Prezzo</h4>
                     </div>
+
                     @php
-                    $integer1 = \App\Http\Controllers\ComicController::countByPrice(0,2.50);
-                    $integer2 = \App\Http\Controllers\ComicController::countByPrice(2.49,5.00);
-                    $integer3 = \App\Http\Controllers\ComicController::countByPrice(4.99,7.50);
-                    $integer4 = \App\Http\Controllers\ComicController::countByPrice(7.49,10);
-                    $integer5 = \App\Http\Controllers\ComicController::countByPrice(9.99,1000);
+                    $integer1 = \App\Http\Controllers\ComicController::countByPrice(0,4);
+                    $integer2 = \App\Http\Controllers\ComicController::countByPrice(3.99,8.00);
+                    $integer3 = \App\Http\Controllers\ComicController::countByPrice(7.99,15);
+                    $integer4 = \App\Http\Controllers\ComicController::countByPrice(14.99,25);
+                    $integer5 = \App\Http\Controllers\ComicController::countByPrice(24.99,10000);
                     @endphp
                     <div class="left-menu mb-30">
                         <ul>
-                            <li><a href="#">€0.00-€2.49<span>({{$integer1}})</span></a></li>
-                            <li><a href="#">€2.50-€4.99<span>({{$integer2}})</span></a></li>
-                            <li><a href="#">€5.00-€7.49<span>({{$integer3}})</span></a></li>
-                            <li><a href="#">€7.50-€9.99<span>({{$integer4}})</span></a></li>
-                            <li><a href="#">€10.00 +<span>({{$integer5}})</span></a></li>
+                            <li><a href="#">€0.00-€3.99<span>({{$integer1}})</span></a></li>
+                            <li><a href="#">€4.00-€7.99<span>({{$integer2}})</span></a></li>
+                            <li><a href="#">€8.00-€14.99<span>({{$integer3}})</span></a></li>
+                            <li><a href="#">€15.00-€24.99<span>({{$integer4}})</span></a></li>
+                            <li><a href="#">€25.00 +<span>({{$integer5}})</span></a></li>
                         </ul>
                     </div>
                 </div>
