@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Comic;
 use App\Genre;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 
 class GenreController extends Controller
 {
@@ -115,8 +114,8 @@ class GenreController extends Controller
     }
 
     public static function getComics($name_genre){
-        $genre = Genre::where('name_genre','=',$name_genre)->first();
-        return $comics = Comic::all();
+        return $comics = Genre::where('name_genre','=',$name_genre)->first()->comic()->get();
+
     }
 
 }
