@@ -37,6 +37,7 @@ Route::get('/shoplist', function () {
         ->with(compact('genres'))
         ->with(compact('comics'));
 });
+
 Route::get('/shoplist/price0',function (){
     $genres = Genre::all();
     $comics = \App\Http\Controllers\ComicController::getByPrice(0,3.99);
@@ -67,20 +68,23 @@ Route::get('/shoplist/price4',function (){
     return view('shoplist')->with(compact('genres'))->with(compact('comics'));
 })->name('prezzo4');
 
-Route::get('/shoplist/{name_genre}',function ($name_genre){
-    $comics = \App\Http\Controllers\GenreController::getComics($name_genre);
-    $genres = Genre::all();
-    return view('shoplist')->with(compact('genres'))->with(compact('comics'));
-})->name('genreshoplist');
+Route::group([], function() {
+
+    Route::get('/shoplist/genre/{name_genre}', function ($name_genre) {
+        $comics = \App\Http\Controllers\GenreController::getComics($name_genre);
+        $genres = Genre::all();
+        return view('shoplist')->with(compact('genres'))->with(compact('comics'));
+    })->name('genreshoplist');
 
 
-Route::get('/shoplist/{type}', function ($type) {
+    Route::get('/shoplist/type/{type}', function ($type) {
 
-    $genres = Genre::all();
-    $comics = Comic::where('type','=',$type)->get();
-    return view('shoplist')
-        ->with(compact('genres'))
-        ->with(compact('comics'));
+        $genres = Genre::all();
+        $comics = Comic::where('type', '=', $type)->get();
+        return view('shoplist')
+            ->with(compact('genres'))
+            ->with(compact('comics'));
+    });
 });
 
 
