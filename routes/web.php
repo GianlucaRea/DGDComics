@@ -32,7 +32,7 @@ Route::get('/', function () {
 Route::get('/shoplist', function () {
 
     $genres = Genre::all();
-    $comics = Comic::all();
+    $comics = Comic::all()->take(20);
     return view('shoplist')
         ->with(compact('genres'))
         ->with(compact('comics'));
