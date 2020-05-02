@@ -67,6 +67,13 @@ Route::get('/shoplist/price4',function (){
     return view('shoplist')->with(compact('genres'))->with(compact('comics'));
 })->name('prezzo4');
 
+Route::get('/shoplist/{name_genre}',function ($name_genre){
+    $comics = \App\Http\Controllers\GenreController::getComics($name_genre);
+    $genres = Genre::all();
+    return view('shoplist')->with(compact('genres'))->with(compact('comics'));
+})->name('genreshoplist');
+
+
 Route::get('/shoplist/{type}', function ($type) {
 
     $genres = Genre::all();
@@ -77,11 +84,6 @@ Route::get('/shoplist/{type}', function ($type) {
 });
 
 
-Route::get('/shoplist/{name_genre}',function ($name_genre){
-    $comics = \App\Http\Controllers\GenreController::getComics($name_genre);
-    $genre = Genre::all();
-    return view('shoplist')->with(compact('genre'))->with(compact('comics'));
-})->name('genreshoplist');
 
 
 
