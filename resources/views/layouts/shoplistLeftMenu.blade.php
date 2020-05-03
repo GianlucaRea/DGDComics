@@ -19,14 +19,14 @@
                     @endphp
                     <div class="left-menu mb-30">
                         <ul>
-                            <li><a href="{{ url('/shoplist/shonen')}}">Shonen<span>({{$text1}})</span></a></li>
-                            <li><a href="{{ url('/shoplist/seinen')}}">Seinen<span>({{$text2}})</span></a></li>
-                            <li><a href="{{ url('/shoplist/shojo')}}">Shojo<span>({{$text3}})</span></a></li>
-                            <li><a href="{{ url('/shoplist/josei')}}">Josei<span>({{$text4}})</span></a></li>
-                            <li><a href="{{ url('/shoplist/dc')}}">Dc<span>({{$text5}})</span></a></li>
-                            <li><a href="{{ url('/shoplist/marvel')}}">Marvel<span>({{$text6}})</span></a></li>
-                            <li><a href="{{ url('/shoplist/italiano')}}">Italiano<span>({{$text7}})</span></a></li>
-                            <li><a href="{{ url('/shoplist/other')}}">Other<span>({{$text8}})</span></a></li>
+                            <li><a href="{{ url('/shoplist/type/shonen')}}">Shonen<span>({{$text1}})</span></a></li>
+                            <li><a href="{{ url('/shoplist/type/seinen')}}">Seinen<span>({{$text2}})</span></a></li>
+                            <li><a href="{{ url('/shoplist/type/shojo')}}">Shojo<span>({{$text3}})</span></a></li>
+                            <li><a href="{{ url('/shoplist/type/josei')}}">Josei<span>({{$text4}})</span></a></li>
+                            <li><a href="{{ url('/shoplist/type/dc')}}">Dc<span>({{$text5}})</span></a></li>
+                            <li><a href="{{ url('/shoplist/type/marvel')}}">Marvel<span>({{$text6}})</span></a></li>
+                            <li><a href="{{ url('/shoplist/type/italiano')}}">Italiano<span>({{$text7}})</span></a></li>
+                            <li><a href="{{ url('/shoplist/type/other')}}">Other<span>({{$text8}})</span></a></li>
                         </ul>
                     </div>
                     <div class="left-title mb-20">
