@@ -38,11 +38,11 @@
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                 <div class="single-banner mb-30">
                     <div class="banner-img">
-                        <a href="#"><img src="{{ asset('img/banner/4.png') }}" alt="banner" /></a>
+                        <a href="{{ url('/contact') }}"><img src="{{ asset('img/banner/4.png') }}" alt="banner" /></a>
                     </div>
                     <div class="banner-text">
                         <h4>Help & Support</h4>
-                        <p>Chiamaci : + 0123.4567.89</p>
+                        <p>Chiamaci : (+39)000 850 4889</p>
                     </div>
                 </div>
             </div>
