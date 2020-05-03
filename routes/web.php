@@ -75,19 +75,12 @@ Route::get('/shoplist/{name_genre}',function ($name_genre){
 
 
 Route::get('/shoplist/{type}', function ($type) {
-
     $genres = Genre::all();
     $comics = Comic::where('type','=',$type)->get();
     return view('shoplist')
         ->with(compact('genres'))
         ->with(compact('comics'));
 });
-
-
-
-
-
-
 
 Auth::routes();
 
