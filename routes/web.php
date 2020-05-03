@@ -68,7 +68,6 @@ Route::get('/shoplist/price4',function (){
     return view('shoplist')->with(compact('genres'))->with(compact('comics'));
 })->name('prezzo4');
 
-Route::group([], function() {
 
     Route::get('/shoplist/genre/{name_genre}', function ($name_genre) {
         $comics = \App\Http\Controllers\GenreController::getComics($name_genre);
@@ -86,21 +85,21 @@ Route::group([], function() {
     });
 
 
-Auth::routes();
+    Auth::routes();
 
-Route::get('/logout', function(){
-    return \App\Http\Controllers\Auth\LoginController::logout();
-});
+    Route::get('/logout', function () {
+        return \App\Http\Controllers\Auth\LoginController::logout();
+    });
 
-Route::get('/comic_detail/{id}', function ($id){
+    Route::get('/comic_detail/{id}', function ($id) {
 
-    $comic = Comic::find($id);
-    $related = \App\Http\Controllers\ComicController::getrelated($id);
-    return view('comic_detail')
-        ->with(compact('comic'))
-        ->with(compact('related'));
-});
+        $comic = Comic::find($id);
+        $related = \App\Http\Controllers\ComicController::getrelated($id);
+        return view('comic_detail')
+            ->with(compact('comic'))
+            ->with(compact('related'));
+    });
 
-Route::get('/accountArea', function(){
-    return view('/accountArea');
-});
+    Route::get('/accountArea', function () {
+        return view('/accountArea');
+    });
