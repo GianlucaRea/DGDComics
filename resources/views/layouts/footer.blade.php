@@ -9,7 +9,7 @@
                             <ul>
                                 <li><a href="{{ url('/') }}">Home</li>
                                 <li><a href="#">Privacy e policy</a></li>
-                                <li><a href="#">Contattaci</a></li>
+                                <li><a href="{{ url('/contact') }}">Contattaci</a></li>
                                 <li><a href="#">Blog</a></li>
                             </ul>
                         </nav>
@@ -46,9 +46,19 @@
                                 </div>
                                 <div class="footer-mid-menu">
                                     <ul>
-                                        <li><a href="contact.html">Contattaci</a></li>
+                                        <li><a href="{{ url('/contact') }}">Contattaci</a></li>
                                         <li><a href="#">Stores</a></li>
-                                        <li><a href="register.html">Il mio account</a></li>
+                                        @if (Route::has('login'))
+                                            @auth
+                                                <li><a href="{{ url('/accountArea') }}">Account</a></li>
+                                                <li><a href="{{ url('/logout') }}">logout</a></li>
+                                            @else
+                                                <li><a href="{{ route('login') }}">Accesso</a></li>
+                                                @if (Route::has('register'))
+                                                    <li><a href="{{ route('register') }}">Registrazione</a></li>
+                                                @endif
+                                            @endauth
+                                        @endif
                                     </ul>
                                 </div>
                             </div>
