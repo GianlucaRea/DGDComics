@@ -55,9 +55,10 @@
                                                 <p>Hello, <strong>{{ $user->username }}</strong> (If Not <strong>{{ $user->username }}
                                                         </strong><a href="login-register.html" class="logout"> Logout</a>)</p>
                                             </div>
-                                            <p class="mb-0">From your account dashboard. you can easily check &
-                                                view your recent orders, manage your shipping and billing addresses
-                                                and edit your password and account details.</p>
+                                            <p class="mb-0">Vuoi diventare venditore?  <a href="#" class="logout"> Clicca qui</a></p>
+                                            <p class="mb-0">I tuoi dati:</p>
+                                            <p class="mb-0">E-mail:   <strong>{{ $user->email }} </strong></p>
+                                            <p class="mb-0">Telefono: <strong>{{ $user->phone_number }} </strong></p>
                                         </div>
                                     </div>
                                     <!-- Single Tab Content End -->

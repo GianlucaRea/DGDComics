@@ -17,10 +17,10 @@ class CreatePaymentMethodsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('payment_type');
-            $table->text('favourite');
+            $table->boolean('favourite');
         });
         DB::table('payment_methods')->insert([
-           // ['user_id' => 'Davide', 'payment_type' => 'FakePayment', 'favourire' => 'yes'],
+            ['user_id' => '1', 'payment_type' => 'FakePayment', 'favourite' => '1'],
         ]);
     }
 
