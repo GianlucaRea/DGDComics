@@ -103,5 +103,7 @@ Route::get('/comic_detail/{id}', function ($id) {
 });
 
 Route::get('/accountArea', function () {
-    return view('/accountArea');
+    $user = \Illuminate\Support\Facades\Auth::user();
+    return view('/accountArea')
+        ->with(compact('user'));
 });

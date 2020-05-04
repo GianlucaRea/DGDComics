@@ -17,7 +17,11 @@ class CreatePaymentMethodsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('payment_type');
+            $table->text('favourite');
         });
+        DB::table('payment_methods')->insert([
+           // ['user_id' => 'Davide', 'payment_type' => 'FakePayment', 'favourire' => 'yes'],
+        ]);
     }
 
     /**
@@ -29,4 +33,7 @@ class CreatePaymentMethodsTable extends Migration
     {
         Schema::dropIfExists('payment_methods');
     }
+
+
+
 }

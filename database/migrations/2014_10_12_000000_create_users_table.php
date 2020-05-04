@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
         });
         DB::table('users')->insert([
             ['name' => 'Daniele' , 'surname' => 'Fossemò' , 'username' => 'DanieleF198' , 'age' => '22' , 'iva' => 'PARTITAIVA0000X' , 'phone_number' => '123456789' , 'email' => 'daniele.fossemo@lalala.comma', 'password' => 'password'],
+           // ['name' => 'Davide' , 'surname' => 'Ricci' , 'username' => 'Cronio' , 'age' => '21' , 'iva' => 'PARTITAIVA0000Y' , 'phone_number' => '3333333333' , 'email' => 'davide.ricci@fake.fke', 'password' => 'passuord'],
         ]);
     }
 

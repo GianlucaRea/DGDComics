@@ -110,7 +110,7 @@ class AuthorController extends Controller
         return response()->json(null,204);
     }
 
-    public function getComic($id)
+    public function getAuthor($id)
     {
         $author = Author::find($id)->comic()->get();
 
