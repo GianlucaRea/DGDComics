@@ -22,9 +22,11 @@
                                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                                             @error('name')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>
+                                                        {{ $message }}
+                                                    </strong>
+                                                </span>
                                             @enderror
                                     </div>
                                 </div>
@@ -61,7 +63,7 @@
                                     <div class="single-register">
                                         <label for="name">Età<span>*</span></label>
 
-                                        <input id="age" type="number" class="form-control @error('age') is-invalid @enderror" name="age" value="{{ old('age') }}" required autocomplete="age" autofocus>
+                                        <input id="age" type="number" min="0" max="100" class="form-control  @error('age') is-invalid @enderror" name="age" value="{{ old('age') }}" required autocomplete="age" autofocus>
 
                                         @error('age')
                                         <span class="invalid-feedback" role="alert">
@@ -88,8 +90,12 @@
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="single-register">
                                         <label for="name">Telefono<span></span></label>
-
-                                        <input id="phone_number" type="text" class="form-control">
+                                        <input id="phone_number" type="text" class="form-control @error('phone_number') is-invalid @enderror" maxlength="10" name="phone_number" value="{{ old('phone_number') }}" required autocomplete="phone_number">
+                                        @error('phone_number')
+                                        <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
 
                                     </div>
                                 </div>
@@ -102,9 +108,11 @@
                                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                                         @error('password')
+                                        @foreach($messages->all() as $message)
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
+                                        @endforeach
                                         @enderror
                                     </div>
                                 </div>
