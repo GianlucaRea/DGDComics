@@ -27,7 +27,6 @@
                                         Dashboard</a>
                                     <a href="#orders" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i>
                                         Orders</a>
-
                                     <a href="#payment-method" data-toggle="tab"><i class="fa fa-credit-card"></i>
                                         Payment
                                         Method</a>
@@ -121,29 +120,30 @@
                                     <!-- Single Tab Content End -->
 
                                     <!-- Single Tab Content Start -->
-                                    @php
-
-                                        $shippingAddresses = \App\Http\Controllers\ShippingAddressController::getShippingAddressByUserId($user->id);
-
-                                    @endphp
-
-                                    @foreach($shippingAddresses as $shippingAddress)
-
-
                                     <div class="tab-pane fade" id="address-edit" role="tabpanel">
-                                        <div class="myaccount-content">
-                                            <h5>Billing Address</h5>
-                                            <address>
-                                                <p><strong>{{ $shippingAddress->città }}</strong></p>
-                                                <p>1355 Market St, Suite 900 <br>
-                                                    San Francisco, CA 94103</p>
-                                                <p>Mobile: (123) 456-7890</p>
-                                            </address>
-                                            <a href="#" class="btn btn-sqr"><i class="fa fa-edit"></i>
-                                                Edit Address</a>
-                                        </div>
+                                        @php
+                                            $shippingAddresses = \App\Http\Controllers\ShippingAddressController::getShippingAddressByUserId($user->id);
+                                        @endphp
+                                        @if($shippingAddresses->count() < 1)
+                                            <div class="myaccount-content">
+                                                <h5>NON C'E ROBA BRO</h5>
+                                            </div>
+                                        @else
+                                            @foreach($shippingAddresses as $shippingAddress)
+                                            <div class="myaccount-content">
+                                                <h5>Billing Address</h5>
+                                                <address>
+                                                    <p><strong>{{ $shippingAddress->città }}</strong></p>
+                                                    <p>1355 Market St, Suite 900 <br>
+                                                        San Francisco, CA 94103</p>
+                                                    <p>Mobile: (123) 456-7890</p>
+                                                </address>
+                                                <a href="#" class="btn btn-sqr"><i class="fa fa-edit"></i>
+                                                    Edit Address</a>
+                                            </div>
+                                            @endforeach
+                                        @endif
                                     </div>
-                                    @endforeach
                                     <!-- Single Tab Content End -->
 
                                     <!-- Single Tab Content Start -->
