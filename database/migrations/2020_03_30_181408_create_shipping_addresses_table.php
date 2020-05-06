@@ -17,7 +17,7 @@ class CreateShippingAddressesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('via');
-            $table->string('civico');
+            $table->integer('civico');
             $table->string('città');
             $table->integer('post_code');
             $table->text('other_info');
