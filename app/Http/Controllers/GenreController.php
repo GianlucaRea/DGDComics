@@ -114,7 +114,7 @@ class GenreController extends Controller
     }
 
     public static function getComics($name_genre){
-        return $comics = Genre::where('name_genre','=',$name_genre)->first()->comic()->get();
+        return $comics = Genre::where('name_genre','=',$name_genre)->first()->comic()->paginate(9);
 
     }
 

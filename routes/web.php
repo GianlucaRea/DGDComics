@@ -36,7 +36,7 @@ Route::get('/contact', function(){
 Route::get('/shoplist', function () {
 
     $genres = Genre::all();
-    $comics = Comic::all()  ->take(20);
+    $comics = Comic::paginate(9);
     return view('shoplist')
         ->with(compact('genres'))
         ->with(compact('comics'));
@@ -81,7 +81,7 @@ Route::get('/shoplist/genre/{name_genre}', function ($name_genre) {
 
 Route::get('/shoplist/type/{type}', function ($type) {
     $genres = Genre::all();
-    $comics = Comic::where('type', '=', $type)->get();
+    $comics = Comic::where('type', '=', $type)->paginate(9);
     return view('shoplist')
         ->with(compact('genres'))
         ->with(compact('comics'));

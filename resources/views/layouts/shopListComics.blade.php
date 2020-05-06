@@ -12,15 +12,15 @@
                             </ul>
                         </div>
                         <div class="list-page">
-                            <p>Items 1-9 of 11</p>
+                            <p>Items {{$comics->firstItem()}}-{{$comics->lastItem()}} of {{$comics->total()}}</p>
                         </div>
                     </div>
                     <div class="toolbar-sorter">
                         <span>Sort By</span>
                         <select id="sorter" class="sorter-options"  style="width:50px; "data-role="sorter">
-                            <option selected="selected" value="position"> Bho </option>
-                            <option value="name"> Title </option>
+                            <option selected="selected" value="comic_name"> Title </option>
                             <option value="price"> Price </option>
+                            <option value="date"> Date </option>
                         </select>
                         <a href="#"><i class="fa fa-arrow-up"></i></a>
                     </div>
@@ -31,7 +31,8 @@
                 <div class="tab-content">
                     <div class="tab-pane fade" id="th">
                         <div class="row">
-                            @foreach($comics as $comic)
+
+                        @foreach($comics->sortBy("sorter") as $comic)
                                 @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
                             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                                 <!-- single-product-start -->
@@ -90,14 +91,14 @@
                                     </div>
                                 </div>
                             </div>
-                            @endforeach
+                                @endforeach
                         </div>
                     </div>
                 <div class="tab-pane fade show active" id="list">
                     <!-- single-shop-start -->
                     <div class="single-shop mb-30">
                         <div class="row">
-                            @foreach($comics as $comic)
+                            @foreach($comics->sortBy('sorter') as $comic)
                                 @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
 
                             <div class="col-lg-3 col-md-4 col-12 mb-25">
@@ -147,6 +148,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             @endforeach
                         </div>
                     </div>

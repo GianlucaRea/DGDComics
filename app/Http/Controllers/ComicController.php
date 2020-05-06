@@ -158,7 +158,7 @@ class ComicController extends Controller
     }
 
     public static function getByPrice($number1,$number2){
-        return Comic::where('price','>',$number1)->where('price','<',$number2)->get();
+        return Comic::where('price','>',$number1)->where('price','<',$number2)->paginate(9);
     }
 
     public static function countByType($text){
@@ -193,4 +193,5 @@ class ComicController extends Controller
         $target = Comic::find($id);
         return Comic::whereIn('author_id',[$target ->author_id])->where('id', '!=', $id)->take(4)->get();
      }
+
 }
