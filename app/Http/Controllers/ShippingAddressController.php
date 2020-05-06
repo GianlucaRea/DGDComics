@@ -119,12 +119,19 @@ class ShippingAddressController extends Controller
     }
 
 
-   // public static function getShippingAddressByUserId($id)
-    //{
-      //  $shippingAddress = ShippingAddress::where('user_id','=',$id)->get();
+    public static function getShippingAddressByUserId($id)
+    {
+        return ShippingAddress::where('user_id','=',$id)->get();
 
         //return response()->json($shippingAddress, 200);
-    //}
+    }
+
+    public function getShippingAddress($id)
+    {
+        $shippingAddress = ShippingAddress::find($id)->get();
+
+        return response()->json($shippingAddress, 200);
+    }
 
 
 }
