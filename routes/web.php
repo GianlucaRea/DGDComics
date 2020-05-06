@@ -104,6 +104,8 @@ Route::get('/comic_detail/{id}', function ($id) {
 
 Route::get('/accountArea', function () {
     $user = \Illuminate\Support\Facades\Auth::user();
+  //  $shippingAddress = \App\Http\Controllers\ShippingAddressController::getShippingAddressByUserId($user->user_id);
     return view('/accountArea')
         ->with(compact('user'));
+       // ->with(compact('shippingAddress'));
 });
