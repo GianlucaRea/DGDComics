@@ -153,6 +153,36 @@ class ComicController extends Controller
 
     }
 
+    public function shoplistBase(){
+        $genres = Genre::all();
+        $comics = Comic::paginate(9);
+        return view('shoplist')
+            ->with(compact('genres'))
+            ->with(compact('comics'));
+    }
+
+    public function shoplistType($type){
+        $genres = Genre::all();
+        $comics = Comic::where('type', '=', $type)->paginate(9);
+        return view('shoplist')
+            ->with(compact('genres'))
+            ->with(compact('comics'));
+    }
+
+    public function shoplistGenre($name_genre){
+        $comics = \App\Http\Controllers\GenreController::getComics($name_genre);
+        $genres = Genre::all();
+        return view('shoplist')->with(compact('genres'))->with(compact('comics'));
+    }
+
+    public function comicDetail($id){
+        $comic = Comic::find($id);
+        $related = \App\Http\Controllers\ComicController::getrelated($id);
+        return view('comic_detail')
+            ->with(compact('comic'))
+            ->with(compact('related'));
+    }
+
     public static function countByPrice($number1,$number2){
         return Comic::where('price','>',$number1)->where('price','<',$number2)->count();
     }
@@ -193,5 +223,6 @@ class ComicController extends Controller
         $target = Comic::find($id);
         return Comic::whereIn('author_id',[$target ->author_id])->where('id', '!=', $id)->take(4)->get();
      }
+
 
 }

@@ -15,32 +15,17 @@ use App\Genre;
 |
 */
 
-Route::get('/', function () {
-    $comics = Comic::all();
-    $newComics = \App\Http\Controllers\ComicController::getNewComic();
-    $manga = \App\Http\Controllers\ComicController::getManga();
-    $america = \App\Http\Controllers\ComicController::getAmerican();
-    $italian= \App\Http\Controllers\ComicController::getItalian();
-    return view('welcome')
-        ->with(compact('comics'))
-        ->with(compact('newComics'))
-        ->with(compact('manga'))
-        ->with(compact('america'))
-        ->with(compact('italian'));
-});
+Route::get('/', 'HomeController@index');
 
 Route::get('/contact', function(){
     return view('contact');
 });
 
-Route::get('/shoplist', function () {
+Route::get('/comic_detail/{id}','ComicController@comicDetail');
 
-    $genres = Genre::all();
-    $comics = Comic::paginate(9);
-    return view('shoplist')
-        ->with(compact('genres'))
-        ->with(compact('comics'));
-});
+Route::get('/shoplist', 'ComicController@shoplistBase');
+Route::get('/shoplist/type/{type}','ComicController@shoplistType');
+Route::get('/shoplist/genre/{name_genre}','ComicController@shoplistGenre')->name('genreshoplist');
 
 Route::get('/shoplist/price0',function (){
     $genres = Genre::all();
@@ -72,34 +57,10 @@ Route::get('/shoplist/price4',function (){
     return view('shoplist')->with(compact('genres'))->with(compact('comics'));
 })->name('prezzo4');
 
-
-Route::get('/shoplist/genre/{name_genre}', function ($name_genre) {
-    $comics = \App\Http\Controllers\GenreController::getComics($name_genre);
-    $genres = Genre::all();
-    return view('shoplist')->with(compact('genres'))->with(compact('comics'));
-})->name('genreshoplist');
-
-Route::get('/shoplist/type/{type}', function ($type) {
-    $genres = Genre::all();
-    $comics = Comic::where('type', '=', $type)->paginate(9);
-    return view('shoplist')
-        ->with(compact('genres'))
-        ->with(compact('comics'));
-});
-
 Auth::routes();
 
 Route::get('/logout', function () {
     return \App\Http\Controllers\Auth\LoginController::logout();
-});
-
-Route::get('/comic_detail/{id}', function ($id) {
-
-    $comic = Comic::find($id);
-    $related = \App\Http\Controllers\ComicController::getrelated($id);
-    return view('comic_detail')
-        ->with(compact('comic'))
-        ->with(compact('related'));
 });
 
 Route::get('/accountArea', function () {

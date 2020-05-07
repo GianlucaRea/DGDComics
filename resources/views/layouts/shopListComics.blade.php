@@ -17,12 +17,13 @@
                     </div>
                     <div class="toolbar-sorter">
                         <span>Sort By</span>
-                        <select id="sorter" class="sorter-options"  style="width:50px; "data-role="sorter">
-                            <option selected="selected" value="comic_name"> Title </option>
-                            <option value="price"> Price </option>
-                            <option value="date"> Date </option>
+                        <select name="sorter" class="sorter-options"  style="width:150px; "data-role="sorter">
+                            <option selected="selected" value="'comic_name','asc'">Titolo: A-Z </option>
+                            <option value="'comic_name','desc'"> Titolo: Z-A </option>
+                            <option value="'price','asc'" > Prezzo: Crescente </option>
+                            <option value="'price','desc'"> Prezzo: Decrescente </option>
+                            <option value="'created_at','asc'"> Ultimi Arrivati </option>
                         </select>
-                        <a href="#"><i class="fa fa-arrow-up"></i></a>
                     </div>
                 </div>
 
@@ -32,7 +33,7 @@
                     <div class="tab-pane fade" id="th">
                         <div class="row">
 
-                        @foreach($comics->sortBy("sorter") as $comic)
+                        @foreach($comics as $comic)
                                 @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
                             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                                 <!-- single-product-start -->
