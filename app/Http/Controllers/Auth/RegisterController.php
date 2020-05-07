@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\Rules\italianNumber;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
 
 class RegisterController extends Controller
 {
@@ -56,7 +60,7 @@ class RegisterController extends Controller
             'username' => ['required', 'string', 'max:255'],
             'age' => ['required', 'int', 'min:18', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone_number' => ['required', 'int', 'regex:/^(\((00|\+)39\)|(00|\+)39)?(38[890]|34[7-90]|36[680]|33[3-90]|32[890])\d{7}$/'],
+            'phone_number' => ['required', 'string', 'regex:/^(\((00|\+)39\)|(00|\+)39)?(38[890]|34[0-90]|36[680]|33[3-90]|32[890])\d{7}$/'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -69,7 +73,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'surname' => $data['surname'],
             'username' => $data['username'],
@@ -78,5 +82,9 @@ class RegisterController extends Controller
             'phone_number' => $data['phone_number'],
             'password' => Hash::make($data['password']),
         ]);
+
+        $groupUser = ['group_id' => '1', 'user_id' => $user->id];
+        DB::table('group_user')->insert($groupUser);
+        return $user;
     }
 }

@@ -17,7 +17,13 @@ class CreateGroupsTable extends Migration
             $table->id();
             $table->text('group_description');
         });
+        DB::table('groups')->insert([
+            ['group_description' => 'il gruppo degli utenti'],
+            ['group_description' => 'il gruppo dei venditori'],
+            ['group_description' => 'il gruppo degli admin'],
+            ]);
     }
+
 
     /**
      * Reverse the migrations.
