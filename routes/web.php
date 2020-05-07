@@ -26,36 +26,11 @@ Route::get('/comic_detail/{id}','ComicController@comicDetail');
 Route::get('/shoplist', 'ComicController@shoplistBase');
 Route::get('/shoplist/type/{type}','ComicController@shoplistType');
 Route::get('/shoplist/genre/{name_genre}','ComicController@shoplistGenre')->name('genreshoplist');
-
-Route::get('/shoplist/price0',function (){
-    $genres = Genre::all();
-    $comics = \App\Http\Controllers\ComicController::getByPrice(0,3.99);
-    return view('shoplist')->with(compact('genres'))->with(compact('comics'));
-})->name('prezzo0');
-
-Route::get('/shoplist/price1',function (){
-    $genres = Genre::all();
-    $comics = \App\Http\Controllers\ComicController::getByPrice(3.99,8.00);
-    return view('shoplist')->with(compact('genres'))->with(compact('comics'));
-})->name('prezzo1');
-
-Route::get('/shoplist/price2',function (){
-    $genres = Genre::all();
-    $comics = \App\Http\Controllers\ComicController::getByPrice(7.99,15.00);
-    return view('shoplist')->with(compact('genres'))->with(compact('comics'));
-})->name('prezzo2');
-
-Route::get('/shoplist/price3',function (){
-    $genres = Genre::all();
-    $comics = \App\Http\Controllers\ComicController::getByPrice(14.99,25.00);
-    return view('shoplist')->with(compact('genres'))->with(compact('comics'));
-})->name('prezzo3');
-
-Route::get('/shoplist/price4',function (){
-    $genres = Genre::all();
-    $comics = \App\Http\Controllers\ComicController::getByPrice(24.99,2500);
-    return view('shoplist')->with(compact('genres'))->with(compact('comics'));
-})->name('prezzo4');
+Route::get('/shoplist/price0','ComicController@shoplistPrice0')->name('prezzo0');
+Route::get('/shoplist/price1','ComicController@shoplistPrice1')->name('prezzo1');
+Route::get('/shoplist/price2','ComicController@shoplistPrice2')->name('prezzo2');
+Route::get('/shoplist/price3','ComicController@shoplistPrice3')->name('prezzo3');
+Route::get('/shoplist/price4','ComicController@shoplistPrice4')->name('prezzo4');
 
 Auth::routes();
 

@@ -183,6 +183,31 @@ class ComicController extends Controller
             ->with(compact('related'));
     }
 
+    public function shoplistPrice0(){
+        $genres = Genre::all();
+        $comics = \App\Http\Controllers\ComicController::getByPrice(0,3.99);
+        return view('shoplist')->with(compact('genres'))->with(compact('comics'));
+    }
+    public function shoplistPrice1(){
+        $genres = Genre::all();
+        $comics = \App\Http\Controllers\ComicController::getByPrice(3.99,8.00);
+        return view('shoplist')->with(compact('genres'))->with(compact('comics'));
+    }
+    public function shoplistPrice2(){
+        $genres = Genre::all();
+        $comics = \App\Http\Controllers\ComicController::getByPrice(7.99,15.00);
+        return view('shoplist')->with(compact('genres'))->with(compact('comics'));
+    }
+    public function shoplistPrice3(){
+        $genres = Genre::all();
+        $comics = \App\Http\Controllers\ComicController::getByPrice(14.99,25.00);
+        return view('shoplist')->with(compact('genres'))->with(compact('comics'));
+    }
+    public function shoplistPrice4(){
+        $genres = Genre::all();
+        $comics = \App\Http\Controllers\ComicController::getByPrice(24.99,2500);
+        return view('shoplist')->with(compact('genres'))->with(compact('comics'));
+    }
     public static function countByPrice($number1,$number2){
         return Comic::where('price','>',$number1)->where('price','<',$number2)->count();
     }
