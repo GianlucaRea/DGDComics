@@ -23,17 +23,11 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-4">
                                 <div class="myaccount-tab-menu nav" role="tablist">
-                                    <a href="#dashboad" class="active" data-toggle="tab"><i class="fa fa-dashboard"></i>
-                                        Dashboard</a>
-                                    <a href="#orders" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i>
-                                        Orders</a>
-                                    <a href="#payment-method" data-toggle="tab"><i class="fa fa-credit-card"></i>
-                                        Payment
-                                        Method</a>
-                                    <a href="#address-edit" data-toggle="tab"><i class="fa fa-map-marker"></i>
-                                        address</a>
-                                    <a href="#account-info" data-toggle="tab"><i class="fa fa-user"></i> Account
-                                        Details</a>
+                                    <a href="#dashboad" class="active" data-toggle="tab"><i class="fa fa-dashboard"></i>Dashboard</a>
+                                    <a href="#orders" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i>Ordini</a>
+                                    <a href="#payment-method" data-toggle="tab"><i class="fa fa-credit-card"></i>Metodi di pagamento</a>
+                                    <a href="#address-edit" data-toggle="tab"><i class="fa fa-map-marker"></i>indirizzi di spedizione</a>
+                                    <a href="#account-info" data-toggle="tab"><i class="fa fa-user"></i> dettagli account</a>
                                 </div>
                             </div>
                             <!-- My Account Tab Menu End -->
@@ -46,17 +40,63 @@
                                         <div class="myaccount-content">
                                             <h5>Dashboard</h5>
                                             <div class="welcome">
-
-
-
-
                                                 <p>Hello, <strong>{{ $user->username }}</strong> (If Not <strong>{{ $user->username }}
                                                         </strong><a href="login-register.html" class="logout"> Logout</a>)</p>
                                             </div>
-                                            <p class="mb-0">Vuoi diventare venditore?  <a href="#" class="logout"> Clicca qui</a></p>
                                             <p class="mb-0">I tuoi dati:</p>
                                             <p class="mb-0">E-mail:   <strong>{{ $user->email }} </strong></p>
                                             <p class="mb-0">Telefono: <strong>{{ $user->phone_number }} </strong></p>
+                                            <p class="mb-0">Vuoi diventare venditore?  <a href="#" class="logout"> Clicca qui</a></p>
+                                        </div>
+                                        <div class="myaccount-content">
+                                            @php
+                                                $notifications = \App\Http\Controllers\NotificationController::getNotification($user->id);
+                                            @endphp
+                                            <h5>Notifiche</h5>
+                                            @if($notifications->count() < 1)
+                                                <div class="myaccount-content">
+                                                    <h5>NON C'E ROBA BRO</h5>
+                                                </div>
+                                            @else
+                                                <div class="myaccount-table table-responsive text-center">
+                                                    <table class="table table-bordered">
+                                                        <thead class="thead-light">
+                                                        <tr>
+                                                            <th>Data</th>
+                                                            <th>testo</th>
+                                                            <th>stato</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        @foreach($notifications as $notification)
+                                                            <tr>
+                                                            <td>{{ $notification->date }}</td>
+                                                            <td>
+                                                                @if(strlen($notification->notification_text) > 50 )
+                                                                    @php
+                                                                        $subnotification = substr($notification->notification_text, 0, 50)
+                                                                    @endphp
+                                                                    {{ $subnotification }}...
+                                                                @else
+                                                                    {{ $notification->notification_text }}
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                @if($notification->state == 1)
+                                                                    Letto
+                                                                @else
+                                                                    Non letto
+                                                                @endif
+                                                            </td>
+                                                            <td><a href="#" class="btn btn-sqr">View</a>
+                                                            </td>
+                                                        </tr>
+                                                        @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <!-- Single Tab Content End -->

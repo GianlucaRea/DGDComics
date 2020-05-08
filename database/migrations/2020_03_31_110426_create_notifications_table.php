@@ -17,7 +17,8 @@ class CreateNotificationsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->text('notification_text');
-            $table->string('state');
+            $table->boolean('state');
+            $table->timestamp('date')->default(\DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 
