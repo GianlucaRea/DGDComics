@@ -15,16 +15,19 @@
                             <p>Items {{$comics->firstItem()}}-{{$comics->lastItem()}} of {{$comics->total()}}</p>
                         </div>
                     </div>
-                    <div class="toolbar-sorter">
-                        <span>Sort By</span>
-                        <select name="sorter" class="sorter-options"  style="width:150px; "data-role="sorter">
-                            <option selected="selected" value="'comic_name','asc'">Titolo: A-Z </option>
-                            <option value="'comic_name','desc'"> Titolo: Z-A </option>
-                            <option value="'price','asc'" > Prezzo: Crescente </option>
-                            <option value="'price','desc'"> Prezzo: Decrescente </option>
-                            <option value="'created_at','asc'"> Ultimi Arrivati </option>
-                        </select>
-                    </div>
+                    <form action="/shoplist" method="GET">
+                        <div class="toolbar-sorter">
+                            <span>Sort By</span>
+                            <select name="sorter" class="sorter-options" style="width:150px; " data-role="sorter">
+                                <option selected="selected" value='comic_name_asc'>Titolo: A-Z</option>
+                                <option value='comic_name_desc'> Titolo: Z-A</option>
+                                <option value='price_asc'> Prezzo: Crescente</option>
+                                <option value='price_desc'> Prezzo: Decrescente</option>
+                                <option value='created_at'> Ultimi Arrivati</option>
+                            </select>
+                        </div>
+                        <button type="submit">Filter</button>
+                    </form>
                 </div>
 
 
