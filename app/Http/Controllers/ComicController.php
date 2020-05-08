@@ -155,6 +155,7 @@ class ComicController extends Controller
 
     public function shoplistBase(Request $request){
         $genres = Genre::all();
+        $comics = Comic::paginate(9);
         if ($request->has('sorter')){
             switch($request->get('sorter')){
                 case `comic_name_asc`:
@@ -173,8 +174,6 @@ class ComicController extends Controller
                     $comics = Comic::latest()->paginate(9);
                     break;
             }
-        } else {
-            $comics = Comic::paginate(9);
         }
         return view('shoplist')
             ->with(compact('genres'))

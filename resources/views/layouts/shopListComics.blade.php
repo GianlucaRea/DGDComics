@@ -15,7 +15,7 @@
                             <p>Items {{$comics->firstItem()}}-{{$comics->lastItem()}} of {{$comics->total()}}</p>
                         </div>
                     </div>
-                    <form action="/shoplist" method="GET">
+                    <form action="http://localhost/DGDComics/public/shoplist" method="GET">
                         <div class="toolbar-sorter">
                             <span>Sort By</span>
                             <select name="sorter" class="sorter-options" style="width:150px; " data-role="sorter">
