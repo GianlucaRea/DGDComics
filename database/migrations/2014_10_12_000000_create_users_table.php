@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
@@ -28,7 +29,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
         DB::table('users')->insert([
-            ['name' => 'Daniele' , 'surname' => 'Fossemò' , 'username' => 'DanieleF198' , 'age' => '22' , 'iva' => 'PARTITAIVA0000X' , 'phone_number' => '123456789' , 'email' => 'daniele.fossemo@lalala.comma', 'password' => 'password'],
+            ['name' => 'Daniele' , 'surname' => 'Fossemò' , 'username' => 'DanieleF198' , 'age' => '22' , 'iva' => 'PARTITAIVA0000X' , 'phone_number' => '123456789' , 'email' => 'daniele.fossemo@lalala.comma', 'password' => Hash::make('password')],
            // ['name' => 'Davide' , 'surname' => 'Ricci' , 'username' => 'Cronio' , 'age' => '21' , 'iva' => 'PARTITAIVA0000Y' , 'phone_number' => '3333333333' , 'email' => 'davide.ricci@fake.fke', 'password' => 'passuord'],
         ]);
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Notification;
 use Illuminate\Http\Request;
+use App\User;
 
 class NotificationController extends Controller
 {
@@ -118,5 +119,16 @@ class NotificationController extends Controller
 
     public static function getNotification($id){
         return Notification::where('user_id', '=', $id)->get();
+    }
+
+    public static function getNumber($id){
+        return Notification::where('user_id', '=', $id)->where('state', '=', '0')->count();
+    }
+
+    public static function notificationRead($id){
+        Notification::where('id', '=', $id)->update(array('state' => '1'));
+        $user = \Illuminate\Support\Facades\Auth::user();
+        return view('/accountArea')
+            ->with(compact('user'));
     }
 }

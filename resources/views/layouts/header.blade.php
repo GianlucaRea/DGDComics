@@ -58,7 +58,16 @@
                 <div class="row">
                     @if (Route::has('login'))
                         @auth
-                            <a class="notification" href="#"> <img src="{{ asset('img/immaginiNostre/notifica.png') }}" width="20%", height="20%"><span>2</span>  &nbsp;Notifiche</a>
+                            <a class="notification" href="{{ url('/accountArea') }}">
+                                <img src="{{ asset('img/immaginiNostre/notifica.png') }}" width="20%", height="20%">
+                                @php
+                                    $number = \App\Http\Controllers\NotificationController::getNumber(\Illuminate\Support\Facades\Auth::user()->id);
+                                @endphp
+                                @if($number > 0)
+                                    <span>{{ $number }}</span>
+                                @endif&nbsp;
+                                Notifiche
+                            </a>
                         @endauth
                     @endif
                 </div>

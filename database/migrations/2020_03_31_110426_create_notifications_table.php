@@ -20,6 +20,11 @@ class CreateNotificationsTable extends Migration
             $table->boolean('state');
             $table->timestamp('date')->default(\DB::raw('CURRENT_TIMESTAMP'));
         });
+        DB::table('notifications')->insert([
+            ['user_id' => '1', 'notification_text' => 'notifica lungaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'state' => '0'],
+            ['user_id' => '1', 'notification_text' => 'notifica corta', 'state' => '0'],
+            ['user_id' => '1', 'notification_text' => 'notifica media ahahahahahah', 'state' => '0'],
+        ]);
     }
 
     /**

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Comic;
 use App\Genre;
+use App\Notification;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,8 +41,8 @@ Route::get('/logout', function () {
 
 Route::get('/accountArea', function () {
     $user = \Illuminate\Support\Facades\Auth::user();
-
     return view('/accountArea')
         ->with(compact('user'));
-
 });
+
+Route::get('/accountArea/notificaLetta/{id}', 'NotificationController@notificationRead')->name('notificaLetta'); //per farlo andare per adesso, poi dovremo fare in modo che ad ogni notifica corrisponda un link di reindirizzamento (in base alla notifica). Sta roba effettivamente potrebbe non essere semplice.

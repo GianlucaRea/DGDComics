@@ -82,15 +82,21 @@
                                                                     {{ $notification->notification_text }}
                                                                 @endif
                                                             </td>
-                                                            <td>
                                                                 @if($notification->state == 1)
-                                                                    Letto
+                                                                    <td>
+                                                                        Letto
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="{{ url('/accountArea') }}" class="btn btn-sqr">View</a>
+                                                                    </td>
                                                                 @else
-                                                                    Non letto
+                                                                    <td>
+                                                                        Non letto
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="{{ route('notificaLetta', ['id' => $notification->id]) }}" class="btn btn-sqr">View</a>
+                                                                    </td>
                                                                 @endif
-                                                            </td>
-                                                            <td><a href="#" class="btn btn-sqr">View</a>
-                                                            </td>
                                                         </tr>
                                                         @endforeach
                                                         </tbody>
