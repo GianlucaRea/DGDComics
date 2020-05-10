@@ -9,4 +9,5 @@
         </ul>
     </div>
 </div>
+<div class="pt-30"></div>
 <!-- pagination-area-end -->

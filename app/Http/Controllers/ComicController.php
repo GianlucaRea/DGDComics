@@ -158,19 +158,19 @@ class ComicController extends Controller
         $comics = Comic::paginate(9);
         if ($request->has('sorter')){
             switch($request->get('sorter')){
-                case `comic_name_asc`:
+                case 'comic_name_asc':
                     $comics = Comic::orderBy('comic_name', 'asc')->paginate(9);
                     break;
-                case `comic_name_desc`:
+                case 'comic_name_desc':
                     $comics = Comic::orderBy('comic_name', 'desc')->paginate(9);
                     break;
-                case `price_asc`:
+                case 'price_asc':
                     $comics = Comic::orderBy('price', 'asc')->paginate(9);
                     break;
-                case `comic_name_desc`:
+                case 'price_desc':
                     $comics = Comic::orderBy('price', 'desc')->paginate(9);
                     break;
-                case `created_at`:
+                case 'created_at':
                     $comics = Comic::latest()->paginate(9);
                     break;
             }
