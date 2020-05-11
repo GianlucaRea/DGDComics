@@ -167,9 +167,9 @@
                 <div id="search" class="header-search">
                     <ul>
                         <li>
-                            <form action="{{ url('shoplist') }}">
-                                <input type="text" placeholder="Cerca nello store..." />
-                                <a href="{{ url('shoplist') }}"><i class="fa fa-search"></i></a>
+                            <form action="{{ route('searchroute') }}">
+                                <input type="text" name="search" placeholder="Cerca nello store..." />
+                                <a href="{{ route('searchroute') }}"><i class="fa fa-search"></i></a>
                             </form>
                         </li>
                     </ul>

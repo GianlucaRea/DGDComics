@@ -32,6 +32,7 @@ Route::get('/shoplist/price1','ComicController@shoplistPrice1')->name('prezzo1')
 Route::get('/shoplist/price2','ComicController@shoplistPrice2')->name('prezzo2');
 Route::get('/shoplist/price3','ComicController@shoplistPrice3')->name('prezzo3');
 Route::get('/shoplist/price4','ComicController@shoplistPrice4')->name('prezzo4');
+Route::get('/shoplist/search','ComicController@shoplistSearch')->name('searchroute');
 
 Auth::routes();
 
