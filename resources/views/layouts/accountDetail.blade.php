@@ -158,10 +158,40 @@
 
                                     <!-- Single Tab Content Start -->
                                     <div class="tab-pane fade" id="payment-method" role="tabpanel">
-                                        <div class="myaccount-content">
-                                            <h5>Payment Method</h5>
-                                            <p class="saved-message">You Can't Saved Your Payment Method yet.</p>
-                                        </div>
+                                        @php
+                                            $paymentMethods = \App\Http\Controllers\PaymentMethodController::getPaymentMethodByUserId($user->id);
+                                        @endphp
+
+                                        @if($paymentMethods->count() < 1)
+                                            <div class="myaccount-content">
+                                                <h5>INSERISCI ROBE NEL DB</h5>
+                                            </div>
+                                        @endif
+
+                                        @foreach($paymentMethods as $paymentMethod)
+                                            @if($paymentMethod->favourite != 0)
+                                                    <div class="myaccount-content">
+                                                        <h5>I TUOI METODI DI PAGAMENTO</h5>
+                                                        <address>
+                                                            <p>PREFERITO</p>
+                                                            <p><strong>{{ $paymentMethod->payment_type }}</strong></p>
+                                                        </address>
+                                                    </div>
+                                            @endif
+                                        @endforeach
+
+                                        @foreach($paymentMethods as $paymentMethod)
+                                            @if($paymentMethod->favourite != 1)
+                                                <div class="myaccount-content">
+                                                    <address>
+                                                        <p><strong>{{ $paymentMethod->payment_type }}</strong></p>
+                                                    </address>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                        <a href="#" class="btn btn-sqr"><i class="fa fa-edit"></i>
+                                            Edit Payment Method</a>
+
                                     </div>
                                     <!-- Single Tab Content End -->
 
@@ -174,21 +204,37 @@
                                             <div class="myaccount-content">
                                                 <h5>NON C'E ROBA BRO</h5>
                                             </div>
-                                        @else
-                                            @foreach($shippingAddresses as $shippingAddress)
-                                            <div class="myaccount-content">
-                                                <h5>Billing Address</h5>
-                                                <address>
-                                                    <p><strong>{{ $shippingAddress->città }}</strong></p>
-                                                    <p>1355 Market St, Suite 900 <br>
-                                                        San Francisco, CA 94103</p>
-                                                    <p>Mobile: (123) 456-7890</p>
-                                                </address>
-                                                <a href="#" class="btn btn-sqr"><i class="fa fa-edit"></i>
-                                                    Edit Address</a>
-                                            </div>
-                                            @endforeach
                                         @endif
+
+                                        @foreach($shippingAddresses as $shippingAddress)
+                                            @if($shippingAddress->favourite != 0)
+                                                <div class="myaccount-content">
+                                                    <h5>I TUOI INDIRIZZI</h5>
+                                                    <address>
+                                                        <p>PREFRERITO</p>
+                                                        <p><strong>{{ $shippingAddress->città }} </strong> <strong>{{ $shippingAddress->post_code }}</strong></p>
+                                                        <p><strong>{{ $shippingAddress->via }}</strong> <strong>{{ $shippingAddress->civico }}</strong></p>
+                                                        <p><strong>{{ $shippingAddress->other_info }} </strong></p>
+                                                    </address>
+                                                </div>
+                                            @endif
+                                        @endforeach
+
+                                        @foreach($shippingAddresses as $shippingAddress)
+                                            @if($shippingAddress->favourite != 1)
+                                              <div class="myaccount-content">
+                                                    <address>
+                                                        <p><strong>{{ $shippingAddress->città }} </strong> <strong>{{ $shippingAddress->post_code }}</strong></p>
+                                                        <p><strong>{{ $shippingAddress->via }}</strong> <strong>{{ $shippingAddress->civico }}</strong></p>
+                                                        <p><strong>{{ $shippingAddress->other_info }} </strong></p>
+                                                    </address>
+
+                                               </div>
+                                            @endif
+                                        @endforeach
+
+                                        <a href="#" class="btn btn-sqr"><i class="fa fa-edit"></i>
+                                            Edit Address</a>
                                     </div>
                                     <!-- Single Tab Content End -->
 
@@ -203,24 +249,24 @@
                                                             <div class="single-input-item">
                                                                 <label for="first-name" class="required">First
                                                                     Name</label>
-                                                                <input type="text" id="first-name" placeholder="First Name" />
+                                                                <input type="text" id="first-name" placeholder={{$user->name}} />
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <div class="single-input-item">
                                                                 <label for="last-name" class="required">Last
                                                                     Name</label>
-                                                                <input type="text" id="last-name" placeholder="Last Name" />
+                                                                <input type="text" id="last-name" placeholder={{$user->surname}} />
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="single-input-item">
                                                         <label for="display-name" class="required">Display Name</label>
-                                                        <input type="text" id="display-name" placeholder="Display Name" />
+                                                        <input type="text" id="display-name" placeholder={{$user->username}} />
                                                     </div>
                                                     <div class="single-input-item">
-                                                        <label for="email" class="required">Email Addres</label>
-                                                        <input type="email" id="email" placeholder="Email Address" />
+                                                        <label for="email" class="required">Email Address</label>
+                                                        <input type="email" id="email" placeholder={{$user->email}} />
                                                     </div>
                                                     <fieldset>
                                                         <legend>Password change</legend>
