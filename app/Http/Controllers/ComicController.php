@@ -155,7 +155,7 @@ class ComicController extends Controller
 
     public function shoplistBase(Request $request){
         $genres = Genre::all();
-        $comics = Comic::paginate(9);
+        $comics = Comic::orderBy('comic_name', 'asc')->paginate(9);
         if ($request->has('sorter')){
             switch($request->get('sorter')){
                 case 'comic_name_asc':
@@ -180,17 +180,56 @@ class ComicController extends Controller
             ->with(compact('comics'));
     }
 
-    public function shoplistType($type){
+    public function shoplistType($type,Request $request){
         $genres = Genre::all();
-        $comics = Comic::where('type', '=', $type)->paginate(9);
+        $comics = Comic::where('type', '=', $type)->orderBy('comic_name', 'asc')->paginate(9);
+        if ($request->has('sorter')) {
+            switch ($request->get('sorter')) {
+                case 'comic_name_asc':
+                    $comics = Comic::where('type', '=', $type)->orderBy('comic_name', 'asc')->paginate(9);
+                    break;
+                case 'comic_name_desc':
+                    $comics = Comic::where('type', '=', $type)->orderBy('comic_name', 'desc')->paginate(9);
+                    break;
+                case 'price_asc':
+                    $comics = Comic::where('type', '=', $type)->orderBy('price', 'asc')->paginate(9);
+                    break;
+                case 'price_desc':
+                    $comics = Comic::where('type', '=', $type)->orderBy('price', 'desc')->paginate(9);
+                    break;
+                case 'created_at':
+                    $comics = Comic::where('type', '=', $type)->latest()->paginate(9);
+                    break;
+            }
+        }
         return view('shoplist')
             ->with(compact('genres'))
             ->with(compact('comics'));
     }
 
-    public function shoplistGenre($name_genre){
-        $comics = \App\Http\Controllers\GenreController::getComics($name_genre);
+    public function shoplistGenre($name_genre,Request $request){
+        $comics = Genre::where('name_genre','=',$name_genre)->first()->comic()->orderBy('comic_name', 'asc')->paginate(9);
         $genres = Genre::all();
+
+            if ($request->has('sorter')) {
+                switch ($request->get('sorter')) {
+                    case 'comic_name_asc':
+                        $comics =Genre::where('name_genre','=',$name_genre)->first()->comic()->orderBy('comic_name', 'asc')->paginate(9);
+                        break;
+                    case 'comic_name_desc':
+                        $comics = Genre::where('name_genre','=',$name_genre)->first()->comic()->orderBy('comic_name', 'desc')->paginate(9);
+                        break;
+                    case 'price_asc':
+                        $comics = Genre::where('name_genre','=',$name_genre)->first()->comic()->orderBy('price', 'asc')->paginate(9);
+                        break;
+                    case 'price_desc':
+                        $comics = Genre::where('name_genre','=',$name_genre)->first()->comic()->orderBy('price', 'desc')->paginate(9);
+                        break;
+                    case 'created_at':
+                        $comics = Genre::where('name_genre','=',$name_genre)->first()->comic()->latest()->paginate(9);
+                        break;
+                }
+            }
         return view('shoplist')->with(compact('genres'))->with(compact('comics'));
     }
 

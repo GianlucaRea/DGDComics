@@ -15,18 +15,18 @@
                             <p>Items {{$comics->firstItem()}}-{{$comics->lastItem()}} of {{$comics->total()}}</p>
                         </div>
                     </div>
-                    <form action="{{ url('shoplist') }}" method="GET">
+                    <form method="GET">
                         <div class="toolbar-sorter">
                             <span>Sort By</span>
                             <select name="sorter" class="sorter-options" style="width:150px;" data-role="sorter">
-                                <option selected="selected" value='comic_name_asc'>Titolo: A-Z</option>
+                                <option value='comic_name_asc'>Titolo: A-Z</option>
                                 <option value='comic_name_desc'> Titolo: Z-A</option>
                                 <option value='price_asc'> Prezzo: Crescente</option>
                                 <option value='price_desc'> Prezzo: Decrescente</option>
                                 <option value='created_at'> Ultimi Arrivati</option>
                             </select>
-                            <div> <!-- da rendere più bello -->
-                                <button type="submit">Filter</button>
+                         <button type="submit" >Ordina </button><!-- da rendere più bello -->
+                            <div>
                             </div>
                         </div>
                     </form>
@@ -79,6 +79,7 @@
                                                     @php($valoreSconto = (($comic->price * $comic->discount) / 100))
                                                     @php($newPrice = ($comic->price - $valoreSconto))
                                                     <li>€ {{ $newPrice}}</li>
+                                                    <li class="old-price">€{{ $comic->price }}</li>
                                                 @else
                                                     <li>€ {{ $comic->price }}</li>
                                                 @endif
@@ -135,6 +136,7 @@
                                                     @php($valoreSconto = (($comic->price * $comic->discount) / 100))
                                                     @php($newPrice = ($comic->price - $valoreSconto))
                                                     <li>€ {{ $newPrice}}</li>
+                                                    <li class="old-price">€{{ $comic->price }}</li>
                                                 @else
                                                     <li>€ {{ $comic->price }}</li>
                                                 @endif
