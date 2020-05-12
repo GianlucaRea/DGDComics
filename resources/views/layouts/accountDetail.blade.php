@@ -40,8 +40,7 @@
                                         <div class="myaccount-content">
                                             <h5>Dashboard</h5>
                                             <div class="welcome">
-                                                <p>Hello, <strong>{{ $user->username }}</strong> (If Not <strong>{{ $user->username }}
-                                                        </strong><a href="login-register.html" class="logout"> Logout</a>)</p>
+                                                <p>Ciao, <strong>{{ $user->username }}</strong>! (Non sei <strong>{{ $user->username }}</strong>?<a href="{{ url('/logout') }}" class="logout"> Logout</a>)</p>
                                             </div>
                                             <p class="mb-0">I tuoi dati:</p>
                                             <p class="mb-0">E-mail:   <strong>{{ $user->email }} </strong></p>
@@ -110,16 +109,16 @@
                                     <!-- Single Tab Content Start -->
                                     <div class="tab-pane fade" id="orders" role="tabpanel">
                                         <div class="myaccount-content">
-                                            <h5>Orders</h5>
+                                            <h5>Ordini</h5>
                                             <div class="myaccount-table table-responsive text-center">
                                                 <table class="table table-bordered">
                                                     <thead class="thead-light">
                                                     <tr>
-                                                        <th>Order</th>
-                                                        <th>Date</th>
-                                                        <th>Status</th>
-                                                        <th>Total</th>
-                                                        <th>Action</th>
+                                                        <th>Ordine</th>
+                                                        <th>Data</th>
+                                                        <th>Stato</th>
+                                                        <th>Totale</th>
+                                                        <th>Azione</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -193,10 +192,13 @@
                                                 </div>
                                             @endif
                                         @endforeach
-                                        <div class="mt-20"></div>
-                                        <a href="#" class="btn btn-sqr"><i class="fa fa-edit"></i>
-                                            Aggiungi metodo di pagamento</a>
-
+                                        <div class="row mt-20">
+                                            <div class="col-md-6"></div>
+                                            <div class="col-md-6" style="text-align: right;">
+                                                <a href="#" class="btn btn-sqr"><i class="fa fa-edit;"></i>
+                                                Aggiungi metodo di pagamento</a>
+                                            </div>
+                                        </div>
                                     </div>
                                     <!-- Single Tab Content End -->
 
@@ -240,69 +242,78 @@
                                                </div>
                                             @endif
                                         @endforeach
-
-                                        <div class="mt-20"></div>
-                                        <a href="#" class="btn btn-sqr"><i class="fa fa-edit"></i>
-                                            Aggiungi metodo di pagamento</a>
+                                        <div class="row mt-20">
+                                            <div class="col-md-6"></div>
+                                            <div class="col-md-6" style="text-align: right;">
+                                                <a href="#" class="btn btn-sqr"><i class="fa fa-edit;"></i>
+                                                    Aggiungi Indirizzo di spedizione</a>
+                                            </div>
+                                        </div>
                                     </div>
                                     <!-- Single Tab Content End -->
 
                                     <!-- Single Tab Content Start -->
                                     <div class="tab-pane fade" id="account-info" role="tabpanel">
                                         <div class="myaccount-content">
-                                            <h5>Account Details</h5>
+                                            <h5>Dettagli account</h5>
                                             <div class="account-details-form">
                                                 <form action="#">
                                                     <div class="row">
                                                         <div class="col-lg-6">
-                                                            <div class="single-input-item">
-                                                                <label for="first-name" class="required">First
-                                                                    Name</label>
-                                                                <input type="text" id="first-name" placeholder={{$user->name}} />
+                                                            <div class="single-input-item-not-editable">
+                                                                <label for="first-name" class="required">Nome</label>
+                                                                <input type="text" readonly id="first-name" placeholder={{$user->name}} />
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
-                                                            <div class="single-input-item">
-                                                                <label for="last-name" class="required">Last
-                                                                    Name</label>
-                                                                <input type="text" id="last-name" placeholder={{$user->surname}} />
+                                                            <div class="single-input-item-not-editable">
+                                                                <label for="last-name" class="required">Cognome</label>
+                                                                <input type="text"  readonly id="last-name" placeholder={{$user->surname}} />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mt-2"></div>
+                                                    <div class="row">
+                                                        <div class="col-lg-10">
+                                                            <div class="single-input-item-not-editable">
+                                                                <label for="display-name" readonly class="required">Username</label>
+                                                                <input type="text"  readonly id="display-name" placeholder={{$user->username}} />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <div class="single-input-item-not-editable">
+                                                                <label for="display-name" readonly class="required">Età</label>
+                                                                <input type="text"  readonly id="display-name" placeholder={{$user->age}} />
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="single-input-item">
-                                                        <label for="display-name" class="required">Display Name</label>
-                                                        <input type="text" id="display-name" placeholder={{$user->username}} />
-                                                    </div>
-                                                    <div class="single-input-item">
-                                                        <label for="email" class="required">Email Address</label>
+                                                        <label for="email" class="required">Indirizzo Email</label>
                                                         <input type="email" id="email" placeholder={{$user->email}} />
                                                     </div>
                                                     <fieldset>
-                                                        <legend>Password change</legend>
+                                                        <legend>Cambia password</legend>
                                                         <div class="single-input-item">
-                                                            <label for="current-pwd" class="required">Current
-                                                                Password</label>
+                                                            <label for="current-pwd" class="required">Password corrente</label>
                                                             <input type="password" id="current-pwd" placeholder="Current Password" />
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-6">
                                                                 <div class="single-input-item">
-                                                                    <label for="new-pwd" class="required">New
-                                                                        Password</label>
+                                                                    <label for="new-pwd" class="required">Nuova password</label>
                                                                     <input type="password" id="new-pwd" placeholder="New Password" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
                                                                 <div class="single-input-item">
-                                                                    <label for="confirm-pwd" class="required">Confirm
-                                                                        Password</label>
+                                                                    <label for="confirm-pwd" class="required">Conferma password</label>
                                                                     <input type="password" id="confirm-pwd" placeholder="Confirm Password" />
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </fieldset>
                                                     <div class="single-input-item">
-                                                        <button class="btn btn-sqr">Save Changes</button>
+                                                        <button class="btn btn-sqr">Salva</button>
                                                     </div>
                                                 </form>
                                             </div>

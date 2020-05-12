@@ -7493,12 +7493,12 @@ p.lost-password a:hover {
     margin-bottom: 25px;
 }
 
-.myaccount-content .welcome a {
-    color: #222222;
+.myaccount-content  a {
+    color: #f07c29;
 }
 
-.myaccount-content .welcome a:hover {
-    color: #f07c29;
+.myaccount-content a:hover {
+    color: #f7bf4e;
 }
 
 .myaccount-content .welcome strong {
@@ -7551,6 +7551,15 @@ p.lost-password a:hover {
 }
 
 .account-details-form .single-input-item input,
+.single-input-item textarea {
+    color: #555555;
+    border: 1px solid #ccc;
+    padding: 12px 10px;
+    width: 100%;
+    font-size: 14px;
+    background: none;
+}
+.account-details-form .single-input-item-not-editable input,
 .single-input-item textarea {
     color: #555555;
     border: 1px solid #ccc;
