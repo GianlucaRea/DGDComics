@@ -134,7 +134,7 @@
                         <li>
                             <form action="{{ route('searchroute') }}">
                                 <input type="text" name="search" placeholder="Cerca nello store..." />
-                                <a href="{{ route('searchroute') }}"><i class="fa fa-search"></i></a>
+                                <a  href="javascript:;" onclick="parentNode.submit();"><i class="fa fa-search"></i></a>
                             </form>
                         </li>
                     </ul>

@@ -5,7 +5,7 @@
     </div>
     <div class="page-number">
         <ul>
-            <li> {{$comics->render()}} </li>
+            <li> {{$comics->withQueryString()->links()}} </li>
         </ul>
     </div>
 </div>

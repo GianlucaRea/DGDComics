@@ -237,34 +237,28 @@ class ComicController extends Controller
         $genres = Genre::all();
         $search = $request->input('search');
         $comics = Comic::where('comic_name','LIKE','%'.$search.'%')->orWhere('type','LIKE','%'.$search.'%')->orWhere('publisher','LIKE','%'.$search.'%')->paginate(9);
-        if(count($comics) > 0)
-            return view('shoplist')->with(compact('genres'))->with(compact('comics'));
-        else return view ('shoplist')->with(compact('genres'))->with(compact('comics'))->withMessage('No Details found. Try to search again !');
-
-      /**  $comics = Genre::where('name_genre','=',$name_genre)->first()->comic()->orderBy('comic_name', 'asc')->paginate(9);
-        $genres = Genre::all();
-
         if ($request->has('sorter')) {
             switch ($request->get('sorter')) {
                 case 'comic_name_asc':
-                    $comics =Genre::where('name_genre','=',$name_genre)->first()->comic()->orderBy('comic_name', 'asc')->paginate(9);
+                    $comics =Comic::where('comic_name','LIKE','%'.$search.'%')->orWhere('type','LIKE','%'.$search.'%')->orWhere('publisher','LIKE','%'.$search.'%')->orderBy('comic_name', 'asc')->paginate(9);
                     break;
                 case 'comic_name_desc':
-                    $comics = Genre::where('name_genre','=',$name_genre)->first()->comic()->orderBy('comic_name', 'desc')->paginate(9);
+                    $comics =Comic::where('comic_name','LIKE','%'.$search.'%')->orWhere('type','LIKE','%'.$search.'%')->orWhere('publisher','LIKE','%'.$search.'%')->orderBy('comic_name', 'desc')->paginate(9);
                     break;
                 case 'price_asc':
-                    $comics = Genre::where('name_genre','=',$name_genre)->first()->comic()->orderBy('price', 'asc')->paginate(9);
+                    $comics = Comic::where('comic_name','LIKE','%'.$search.'%')->orWhere('type','LIKE','%'.$search.'%')->orWhere('publisher','LIKE','%'.$search.'%')->orderBy('price', 'asc')->paginate(9);
                     break;
                 case 'price_desc':
-                    $comics = Genre::where('name_genre','=',$name_genre)->first()->comic()->orderBy('price', 'desc')->paginate(9);
+                    $comics = Comic::where('comic_name','LIKE','%'.$search.'%')->orWhere('type','LIKE','%'.$search.'%')->orWhere('publisher','LIKE','%'.$search.'%')->orderBy('price', 'desc')->paginate(9);
                     break;
                 case 'created_at':
-                    $comics = Genre::where('name_genre','=',$name_genre)->first()->comic()->latest()->paginate(9);
+                    $comics = Comic::where('comic_name','LIKE','%'.$search.'%')->orWhere('type','LIKE','%'.$search.'%')->orWhere('publisher','LIKE','%'.$search.'%')->latest()->paginate(9);
                     break;
             }
         }
-        return view('shoplist')->with(compact('genres'))->with(compact('comics'));
-       */
+      if(count($comics) > 0)
+      return view('shoplist')->with(compact('genres'))->with(compact('comics'));
+      else return view ('shoplist')->with(compact('genres'))->with(compact('comics'))->withMessage('No Details found. Try to search again !');
     }
     public function comicDetail($id){
         $comic = Comic::find($id);
