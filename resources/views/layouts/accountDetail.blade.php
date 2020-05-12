@@ -164,7 +164,7 @@
 
                                         @if($paymentMethods->count() < 1)
                                             <div class="myaccount-content">
-                                                <h5>INSERISCI ROBE NEL DB</h5>
+                                                <h5>Non sono ancora stati inseriti metodi di pagamento dall'utente</h5>
                                             </div>
                                         @endif
 
@@ -173,9 +173,11 @@
                                                     <div class="myaccount-content">
                                                         <h5>I TUOI METODI DI PAGAMENTO</h5>
                                                         <address>
-                                                            <p>PREFERITO</p>
+                                                            <h6>PREDEFINITO</h6>
                                                             <p><strong>{{ $paymentMethod->payment_type }}</strong></p>
                                                         </address>
+                                                        <a href="#" class="btn btn-sqr"><i class="fa fa-edit"></i>
+                                                            Rimuovi metodo di pagamento</a>
                                                     </div>
                                             @endif
                                         @endforeach
@@ -186,11 +188,14 @@
                                                     <address>
                                                         <p><strong>{{ $paymentMethod->payment_type }}</strong></p>
                                                     </address>
+                                                    <a href="#" class="btn btn-sqr"><i class="fa fa-edit"></i>
+                                                        Rimuovi metodo di pagamento</a>
                                                 </div>
                                             @endif
                                         @endforeach
+                                        <div class="mt-20"></div>
                                         <a href="#" class="btn btn-sqr"><i class="fa fa-edit"></i>
-                                            Edit Payment Method</a>
+                                            Aggiungi metodo di pagamento</a>
 
                                     </div>
                                     <!-- Single Tab Content End -->
@@ -202,7 +207,7 @@
                                         @endphp
                                         @if($shippingAddresses->count() < 1)
                                             <div class="myaccount-content">
-                                                <h5>NON C'E ROBA BRO</h5>
+                                                <h5>Non sono ancora stati inseriti indirizzi di spedizione dall'utente</h5>
                                             </div>
                                         @endif
 
@@ -211,11 +216,13 @@
                                                 <div class="myaccount-content">
                                                     <h5>I TUOI INDIRIZZI</h5>
                                                     <address>
-                                                        <p>PREFRERITO</p>
+                                                        <h6>PREDEFINITO</h6>
                                                         <p><strong>{{ $shippingAddress->città }} </strong> <strong>{{ $shippingAddress->post_code }}</strong></p>
                                                         <p><strong>{{ $shippingAddress->via }}</strong> <strong>{{ $shippingAddress->civico }}</strong></p>
                                                         <p><strong>{{ $shippingAddress->other_info }} </strong></p>
                                                     </address>
+                                                    <a href="#" class="btn btn-sqr"><i class="fa fa-edit"></i>
+                                                        Rimuovi indirizzo di spedizione</a>
                                                 </div>
                                             @endif
                                         @endforeach
@@ -228,13 +235,15 @@
                                                         <p><strong>{{ $shippingAddress->via }}</strong> <strong>{{ $shippingAddress->civico }}</strong></p>
                                                         <p><strong>{{ $shippingAddress->other_info }} </strong></p>
                                                     </address>
-
+                                                  <a href="#" class="btn btn-sqr"><i class="fa fa-edit"></i>
+                                                      Rimuovi indirizzo di spedizione</a>
                                                </div>
                                             @endif
                                         @endforeach
 
+                                        <div class="mt-20"></div>
                                         <a href="#" class="btn btn-sqr"><i class="fa fa-edit"></i>
-                                            Edit Address</a>
+                                            Aggiungi metodo di pagamento</a>
                                     </div>
                                     <!-- Single Tab Content End -->
 
