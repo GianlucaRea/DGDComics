@@ -261,14 +261,12 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <div class="single-input-item-not-editable">
-                                                                <label for="first-name" class="required">Nome</label>
-                                                                <input type="text" readonly id="first-name" placeholder={{$user->name}} />
+                                                                <h5>NOME <br><br>{{$user->name}}</h5>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <div class="single-input-item-not-editable">
-                                                                <label for="last-name" class="required">Cognome</label>
-                                                                <input type="text"  readonly id="last-name" placeholder={{$user->surname}} />
+                                                                <h5>COGNOME <br><br>{{$user->surname}}</h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -276,14 +274,12 @@
                                                     <div class="row">
                                                         <div class="col-lg-10">
                                                             <div class="single-input-item-not-editable">
-                                                                <label for="display-name" readonly class="required">Username</label>
-                                                                <input type="text"  readonly id="display-name" placeholder={{$user->username}} />
+                                                                <h5>NICKNAME <br><br>{{$user->username}}</h5>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-2">
                                                             <div class="single-input-item-not-editable">
-                                                                <label for="display-name" readonly class="required">Età</label>
-                                                                <input type="text"  readonly id="display-name" placeholder={{$user->age}} />
+                                                                <h5>ETA' <br><br>{{$user->age}}</h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -320,7 +316,7 @@
                                                                     @error('newPassword')
                                                                     <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
-                                                                </span>
+                                                                    </span>
                                                                     @enderror
                                                                 </div>
                                                             </div>
@@ -333,7 +329,7 @@
                                                                     @error('confirmPassword')
                                                                     <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
-                                                                </span>
+                                                                    </span>
                                                                     @enderror
                                                                 </div>
                                                             </div>
