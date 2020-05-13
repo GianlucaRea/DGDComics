@@ -291,30 +291,61 @@
                                                         <label for="email" class="required">Indirizzo Email</label>
                                                         <input type="email" id="email" placeholder={{$user->email}} />
                                                     </div>
+                                                </form>
+                                                <div class="mt-5"></div>
+                                                <form method="POST" action="{{ route('change.password') }}">
+                                                    @csrf
                                                     <fieldset>
+
                                                         <legend>Cambia password</legend>
+
                                                         <div class="single-input-item">
-                                                            <label for="current-pwd" class="required">Password corrente</label>
-                                                            <input type="password" id="current-pwd" placeholder="Current Password" />
+                                                            <label for="password" class="required">Password corrente</label>
+                                                            <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="password" placeholder="Password corrente" >
+
+                                                            @error('password')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
                                                         </div>
+
                                                         <div class="row">
+
                                                             <div class="col-lg-6">
                                                                 <div class="single-input-item">
-                                                                    <label for="new-pwd" class="required">Nuova password</label>
-                                                                    <input type="password" id="new-pwd" placeholder="New Password" />
+                                                                    <label for="newPassword" class="required">Nuova password</label>
+                                                                    <input type="password" id="newPassword" class="form-control @error('newPassword') is-invalid @enderror" name="newPassword" required autocomplete="newPassword" placeholder="Nuova password" >
+
+                                                                    @error('newPassword')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                                    @enderror
                                                                 </div>
                                                             </div>
+
                                                             <div class="col-lg-6">
                                                                 <div class="single-input-item">
-                                                                    <label for="confirm-pwd" class="required">Conferma password</label>
-                                                                    <input type="password" id="confirm-pwd" placeholder="Confirm Password" />
+                                                                    <label for="confirmPassword" class="required">Conferma password</label>
+                                                                    <input type="password" id="confirmPassword" class="form-control @error('confirmPassword') is-invalid @enderror" name="confirmPassword" required autocomplete="confirmPassword" placeholder="Conferma password" >
+
+                                                                    @error('confirmPassword')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                                    @enderror
                                                                 </div>
                                                             </div>
+
                                                         </div>
+
                                                     </fieldset>
+
                                                     <div class="single-input-item">
-                                                        <button class="btn btn-sqr">Salva</button>
+                                                        <button type="submit" class="btn btn-sqr">Salva</button>
                                                     </div>
+
                                                 </form>
                                             </div>
                                         </div>

@@ -36,6 +36,10 @@ Route::get('/shoplist/search','ComicController@shoplistSearch')->name('searchrou
 
 Auth::routes();
 
+//da qui sono da riordinare bene con i controller come ha fatto Gianluca sopra, per ora lasciamo così che funziona bene
+
+Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
+
 Route::get('/logout', function () {
     return \App\Http\Controllers\Auth\LoginController::logout();
 });
