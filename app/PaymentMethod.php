@@ -10,7 +10,7 @@ class PaymentMethod extends Model
     protected $table = "payment_methods";
 
     protected $fillable = [
-        'user_id','payment_type',  'favourite',
+        'user_id','payment_type', 'favourite', 'data_scadenza',
     ];
     
     public function user(){

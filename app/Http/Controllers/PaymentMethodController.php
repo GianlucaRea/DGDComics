@@ -43,6 +43,7 @@ class PaymentMethodController extends Controller
             'user_id' => 'required',
             'payment_type' => 'required',
             'favourite' => 'required',
+            'data_scadenza' => 'required',
 
         ];
         $validator = Validator::make($request->all(),$rules);
@@ -121,6 +122,16 @@ class PaymentMethodController extends Controller
 
 
     }
+
+    public static function getTime(){
+        return strtotime("now");
+    }
+
+    public static function getScadenza(){
+
+    }
+
+
 
     public function getPaymentMethod($id)
     {

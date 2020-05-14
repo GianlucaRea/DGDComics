@@ -159,6 +159,7 @@
                                     <div class="tab-pane fade" id="payment-method" role="tabpanel">
                                         @php
                                             $paymentMethods = \App\Http\Controllers\PaymentMethodController::getPaymentMethodByUserId($user->id);
+                                            $oggi = \App\Http\Controllers\PaymentMethodController::getTime();
                                         @endphp
 
                                         @if($paymentMethods->count() < 1)
@@ -169,11 +170,22 @@
 
                                         @foreach($paymentMethods as $paymentMethod)
                                             @if($paymentMethod->favourite != 0)
+                                                @php
+                                                    $dataScadenza = $paymentMethod->data_scadenza;
+                                                    $scadenza = strtotime($dataScadenza);
+                                                @endphp
                                                     <div class="myaccount-content">
                                                         <h5>I TUOI METODI DI PAGAMENTO</h5>
                                                         <address>
                                                             <h6>PREDEFINITO</h6>
                                                             <p><strong>{{ $paymentMethod->payment_type }}</strong></p>
+                                                            @if($scadenza - $oggi < 0)
+                                                                <h5>LA TUA CARTA È SCADUTA</h5>
+                                                            @else
+                                                                @if($scadenza - $oggi < 2592000)
+                                                                    <h5>LA TUA CARTA STA PER SCADERE</h5>
+                                                                @endif
+                                                            @endif
                                                         </address>
                                                         <a href="#" class="btn btn-sqr"><i class="fa fa-edit"></i>
                                                             Rimuovi metodo di pagamento</a>
@@ -181,11 +193,24 @@
                                             @endif
                                         @endforeach
 
+
+
                                         @foreach($paymentMethods as $paymentMethod)
                                             @if($paymentMethod->favourite != 1)
+                                                @php
+                                                    $dataScadenza = $paymentMethod->data_scadenza;
+                                                    $scadenza = strtotime($dataScadenza);
+                                                @endphp
                                                 <div class="myaccount-content">
                                                     <address>
                                                         <p><strong>{{ $paymentMethod->payment_type }}</strong></p>
+                                                        @if($scadenza - $oggi < 0)
+                                                            <h5>LA TUA CARTA È SCADUTA</h5>
+                                                        @else
+                                                            @if($scadenza - $oggi < 2592000)
+                                                                <h5>LA TUA CARTA STA PER SCADERE</h5>
+                                                            @endif
+                                                        @endif
                                                     </address>
                                                     <a href="#" class="btn btn-sqr"><i class="fa fa-edit"></i>
                                                         Rimuovi metodo di pagamento</a>
