@@ -19,12 +19,15 @@ class CreatePaymentMethodsTable extends Migration
             $table->string('payment_type');
             $table->boolean('favourite');
             $table->date('data_scadenza');
+            $table->String('cardNumber')->unique();
+            $table->string('intestatario');
+            $table->String('CVV')->unique();
 
         });
         DB::table('payment_methods')->insert([
-            ['user_id' => '1', 'payment_type' => 'FakePayment', 'favourite' => '1', 'data_scadenza'=>'2021-08-23'],
-            ['user_id' => '1', 'payment_type' => 'FakePayment 2.0', 'favourite' => '0', 'data_scadenza'=>'2019-08-23'],
-            ['user_id' => '1', 'payment_type' => 'FakePayment 3.0', 'favourite' => '0', 'data_scadenza'=>'2020-05-20']
+            ['user_id' => '1', 'payment_type' => 'FakePayment', 'favourite' => '1', 'data_scadenza'=>'2021-08-23', 'cardNumber'=>'1234123412341234', 'intestatario'=>'pinco', 'CVV'=>Hash::make('123')],
+            ['user_id' => '1', 'payment_type' => 'FakePayment 2.0', 'favourite' => '0', 'data_scadenza'=>'2019-08-23', 'cardNumber'=>'1235123412341234', 'intestatario'=>'pallo', 'CVV'=>Hash::make('321')],
+            ['user_id' => '1', 'payment_type' => 'FakePayment 3.0', 'favourite' => '0', 'data_scadenza'=>'2020-05-20', 'cardNumber'=>'1236123412341234', 'intestatario'=>'pallino', 'CVV'=>Hash::make('523')]
         ]);
     }
 

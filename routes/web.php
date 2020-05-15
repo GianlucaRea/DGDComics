@@ -39,6 +39,10 @@ Auth::routes();
 //da qui sono da riordinare bene con i controller come ha fatto Gianluca sopra, per ora lasciamo così che funziona bene
 
 Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
+Route::get('remove-method/{method}', 'PaymentMethodController@remove')->name('remove.method');
+Route::get('remove-address/{address}', 'ShippingAddressController@remove')->name('remove.address');
+Route::get('AddMethod/{id}', function (){return view('addMethod');})->name('AddMethod');
+Route::get('AddAddress/{id}', function (){return view('addAddress');})->name('AddAddress');
 
 Route::get('/logout', function () {
     return \App\Http\Controllers\Auth\LoginController::logout();

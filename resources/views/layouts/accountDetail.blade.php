@@ -187,7 +187,7 @@
                                                                 @endif
                                                             @endif
                                                         </address>
-                                                        <a href="#" class="btn btn-sqr"><i class="fa fa-edit"></i>
+                                                        <a href="{{ Route('remove.method', ['method' => $paymentMethod->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
                                                             Rimuovi metodo di pagamento</a>
                                                     </div>
                                             @endif
@@ -212,7 +212,7 @@
                                                             @endif
                                                         @endif
                                                     </address>
-                                                    <a href="#" class="btn btn-sqr"><i class="fa fa-edit"></i>
+                                                    <a href="{{ Route('remove.method', ['method' => $paymentMethod->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
                                                         Rimuovi metodo di pagamento</a>
                                                 </div>
                                             @endif
@@ -220,7 +220,7 @@
                                         <div class="row mt-20">
                                             <div class="col-md-6"></div>
                                             <div class="col-md-6" style="text-align: right;">
-                                                <a href="#" class="btn btn-sqr"><i class="fa fa-edit;"></i>
+                                                <a href="{{ Route('AddMethod', [$user->id])}}" class="btn btn-sqr"><i class="fa fa-edit;"></i>
                                                 Aggiungi metodo di pagamento</a>
                                             </div>
                                         </div>
@@ -248,7 +248,7 @@
                                                         <p><strong>{{ $shippingAddress->via }}</strong> <strong>{{ $shippingAddress->civico }}</strong></p>
                                                         <p><strong>{{ $shippingAddress->other_info }} </strong></p>
                                                     </address>
-                                                    <a href="#" class="btn btn-sqr"><i class="fa fa-edit"></i>
+                                                    <a href="{{ Route('remove.address', ['address' => $shippingAddress->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
                                                         Rimuovi indirizzo di spedizione</a>
                                                 </div>
                                             @endif
@@ -262,7 +262,7 @@
                                                         <p><strong>{{ $shippingAddress->via }}</strong> <strong>{{ $shippingAddress->civico }}</strong></p>
                                                         <p><strong>{{ $shippingAddress->other_info }} </strong></p>
                                                     </address>
-                                                  <a href="#" class="btn btn-sqr"><i class="fa fa-edit"></i>
+                                                  <a href="{{ Route('remove.address', ['address' => $shippingAddress->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
                                                       Rimuovi indirizzo di spedizione</a>
                                                </div>
                                             @endif
@@ -270,7 +270,7 @@
                                         <div class="row mt-20">
                                             <div class="col-md-6"></div>
                                             <div class="col-md-6" style="text-align: right;">
-                                                <a href="#" class="btn btn-sqr"><i class="fa fa-edit;"></i>
+                                                <a href="{{ Route('AddAddress', [$user->id])}}" class="btn btn-sqr"><i class="fa fa-edit;"></i>
                                                     Aggiungi Indirizzo di spedizione</a>
                                             </div>
                                         </div>

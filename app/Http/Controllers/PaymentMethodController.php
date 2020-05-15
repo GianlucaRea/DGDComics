@@ -44,6 +44,9 @@ class PaymentMethodController extends Controller
             'payment_type' => 'required',
             'favourite' => 'required',
             'data_scadenza' => 'required',
+            'cardNumber' => ['requred', 'min:16', 'max:16', 'Unique'],
+            'intestatario' => ['required', 'unique'],
+            'CVV' => ['requred', 'min:3', 'max:3', 'Unique'],
 
         ];
         $validator = Validator::make($request->all(),$rules);
@@ -140,5 +143,17 @@ class PaymentMethodController extends Controller
         return response()->json($paymentMethod, 200);
     }
 
+    public function remove($id){
+        $paymentMethod = PaymentMethod::find($id);
+        if(is_null($paymentMethod)){
+            return response()->json(["message"=>'Record not found'],404);
+        }
+        $paymentMethod -> delete();
+
+        $user = \Illuminate\Support\Facades\Auth::user();
+        return redirect('/accountArea')
+            ->with(compact('user'));
+
+    }
 
 }

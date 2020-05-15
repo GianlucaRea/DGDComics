@@ -35,7 +35,7 @@ class ChangePasswordController extends Controller
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->newPassword)]);
 
         $user = \Illuminate\Support\Facades\Auth::user();
-        return view('/accountArea')
+        return redirect('/accountArea')
             ->with(compact('user'));
     }
 }

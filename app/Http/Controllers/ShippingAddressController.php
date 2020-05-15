@@ -133,5 +133,17 @@ class ShippingAddressController extends Controller
         return response()->json($shippingAddress, 200);
     }
 
+    public function remove($id){
+        $address = ShippingAddress::find($id);
+        if(is_null($address)){
+            return response()->json(["message"=>'Record not found'],404);
+        }
+        $address -> delete();
+
+        $user = \Illuminate\Support\Facades\Auth::user();
+        return redirect('/accountArea')
+            ->with(compact('user'));
+
+    }
 
 }
