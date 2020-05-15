@@ -1,6 +1,9 @@
 <div class="mt-5"></div>
 <div class="container">
-<form method="POST" action="#"> <!-- route('addMethod') -->
+    @php
+    $user = \Illuminate\Support\Facades\Auth::user();
+    @endphp
+<form method="POST" action="{{ route('submitAddMethod')}}">
     @csrf
     <fieldset>
 
@@ -80,7 +83,7 @@
         </div>
 
     </fieldset>
-    <div class="mt-2"></div>
+    <div class="mt-3"></div>
 
     <div class="single-input-item">
         <button type="submit" class="btn btn-sqr">Salva</button>

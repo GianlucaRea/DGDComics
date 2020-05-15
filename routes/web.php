@@ -41,8 +41,10 @@ Auth::routes();
 Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
 Route::get('remove-method/{method}', 'PaymentMethodController@remove')->name('remove.method');
 Route::get('remove-address/{address}', 'ShippingAddressController@remove')->name('remove.address');
-Route::get('AddMethod/{id}', function (){return view('addMethod');})->name('AddMethod');
-Route::get('AddAddress/{id}', function (){return view('addAddress');})->name('AddAddress');
+Route::get('addMethod', function (){return view('addMethod');})->name('addMethod');
+Route::post('submitAddMethod', 'PaymentMethodController@store')->name('submitAddMethod');
+Route::get('addAddress', function (){return view('addAddress');})->name('addAddress');
+Route::post('submitAddAddress', 'ShippingAddressController@store')->name('submitAddMethod');
 
 Route::get('/logout', function () {
     return \App\Http\Controllers\Auth\LoginController::logout();

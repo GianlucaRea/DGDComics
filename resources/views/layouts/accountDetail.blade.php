@@ -220,7 +220,7 @@
                                         <div class="row mt-20">
                                             <div class="col-md-6"></div>
                                             <div class="col-md-6" style="text-align: right;">
-                                                <a href="{{ Route('AddMethod', [$user->id])}}" class="btn btn-sqr"><i class="fa fa-edit;"></i>
+                                                <a href="{{ Route('addMethod')}}" class="btn btn-sqr"><i class="fa fa-edit;"></i>
                                                 Aggiungi metodo di pagamento</a>
                                             </div>
                                         </div>
@@ -270,7 +270,7 @@
                                         <div class="row mt-20">
                                             <div class="col-md-6"></div>
                                             <div class="col-md-6" style="text-align: right;">
-                                                <a href="{{ Route('AddAddress', [$user->id])}}" class="btn btn-sqr"><i class="fa fa-edit;"></i>
+                                                <a href="{{ Route('addAddress')}}" class="btn btn-sqr"><i class="fa fa-edit;"></i>
                                                     Aggiungi Indirizzo di spedizione</a>
                                             </div>
                                         </div>

@@ -156,4 +156,21 @@ class PaymentMethodController extends Controller
 
     }
 
+    public function add(Request $request){
+        $request->validate([
+            'payment_type' => 'required',
+            'favourite' => 'required',
+            'data_scadenza' => 'required',
+            'cardNumber' => ['requred', 'min:16', 'max:16', 'Unique'],
+            'intestatario' => ['required', 'unique'],
+            'CVV' => ['requred', 'min:3', 'max:3', 'Unique'],
+        ]);
+        $user = \Illuminate\Support\Facades\Auth::user();
+
+        //è da finire (fare store)
+
+        return redirect('/accountArea')
+            ->with(compact('user'));
+    }
+
 }
