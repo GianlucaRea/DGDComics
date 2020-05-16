@@ -57,7 +57,7 @@
             <div class="col-lg-4">
                 <div class="single-input-item">
                     <label for="data_scadenza" class="required">data scadenza</label>
-                    <input type="date" id="data_scadenza" class="form-control @error('data_scadenza') is-invalid @enderror" name="data_scadenza"  placeholder="mese anno" >
+                    <input type="date" id="data_scadenza" class="form-control @error('data_scadenza') is-invalid @enderror" name="data_scadenza">
 
                     @error('data_scadenza')
                     <span class="invalid-feedback" role="alert">

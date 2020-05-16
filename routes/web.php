@@ -44,7 +44,7 @@ Route::get('remove-address/{address}', 'ShippingAddressController@remove')->name
 Route::get('addMethod', function (){return view('addMethod');})->name('addMethod');
 Route::post('submitAddMethod', 'PaymentMethodController@add')->name('submitAddMethod');
 Route::get('addAddress', function (){return view('addAddress');})->name('addAddress');
-//Route::post('submitAddAddress', 'ShippingAddressController@add')->name('submitAddMethod');
+Route::post('submitAddAddress', 'ShippingAddressController@add')->name('submitAddAddress');
 
 Route::get('/logout', function () {
     return \App\Http\Controllers\Auth\LoginController::logout();

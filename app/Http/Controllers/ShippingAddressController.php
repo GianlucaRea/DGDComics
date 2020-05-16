@@ -45,8 +45,8 @@ class ShippingAddressController extends Controller
             'civico' => 'required',
             'città' => 'required',
             'post_code' => 'required',
-            'other_info' => 'required',
             'favourite' => 'required',
+            'other_info' => 'nullable'
 
         ];
         $validator = Validator::make($request->all(),$rules);
@@ -144,6 +144,42 @@ class ShippingAddressController extends Controller
         return redirect('/accountArea')
             ->with(compact('user'));
 
+    }
+
+    public function add(Request $request){
+        $request->validate([
+            'via' => ['required'],
+            'civico' => ['required', 'regex:/^[0-9]*$/'],
+            'città' => ['required'],
+            'post_code' => ['required', 'regex:/^[0-9]{5}$/'],
+            'other_info' => 'nullable'
+        ]);
+        $user = \Illuminate\Support\Facades\Auth::user();
+
+        $address = new ShippingAddress; //per evitare problemi con campi che non appartengono effettivamente a paymentMethod.
+        $address->user_id = \Illuminate\Support\Facades\Auth::user()->id;
+        $address->via = $request->via;
+        $address->civico = $request->civico;
+        $address->città = $request->città;
+        $address->post_code = $request->post_code;
+        $address->other_info = $request->other_info;
+        $address->favourite = 0;
+
+        $data=array(
+            'user_id'=> $address->user_id,
+            'via'=> $address->via,
+            'civico'=> $address->civico,
+            'città'=>$address->città,
+            'post_code'=>$address->post_code,
+            'other_info'=>$address->other_info,
+            'favourite'=>$address->favourite,
+        );
+
+        DB::table('shipping_addresses')->insert($data);
+
+
+        return redirect('/accountArea')
+            ->with(compact('user'));
     }
 
 }

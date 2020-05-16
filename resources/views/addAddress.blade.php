@@ -11,7 +11,7 @@
     'name' =>'Il tuo account']
     )
 @include('layouts.breadcrumbsArea', $page)
-INDIRIZZI SPEDIZIONE
+@include('layouts.addressForm')
 <footer>
     @include('layouts.footer')
 </footer>
