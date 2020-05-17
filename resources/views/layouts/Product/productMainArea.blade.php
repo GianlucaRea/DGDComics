@@ -97,7 +97,7 @@
                     </div>
                 </div>
             </div>
-        @include('layouts.relatedProduct')
+        @include('layouts.Product.relatedProduct')
         <!-- product-main-area-end -->
         </div>
     </div>

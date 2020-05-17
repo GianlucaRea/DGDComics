@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html class="no-js" lang="it">
 <head>
-    @include('layouts.head')
+    @include('layouts.Header.head')
 </head>
 <body class="home-2">
 <header>
-    @include('layouts.header')
+    @include('layouts.Header.header')
 </header>
 @php($page = [
     'name' =>'Dettagli Prodotto']
     )
-@include('layouts.breadcrumbsArea', $page)
-@include('layouts.productMainArea')
-@include('layouts.productInfo')
-@include('layouts.review')
+@include('layouts.Header.breadcrumbsArea', $page)
+@include('layouts.Product.productMainArea')
+@include('layouts.Product.productInfo')
+@include('layouts.Product.review')
 <br><br>
-@include('layouts.banner2')
-@include('layouts.social')
+@include('layouts.Footer.banner2')
+@include('layouts.Footer.social')
 <footer>
-    @include('layouts.footer')
+    @include('layouts.Footer.footer')
 </footer>
-@include('layouts.modal')
-@include('layouts.jsImport')
+@include('layouts.Footer.modal')
+@include('layouts.Footer.jsImport')
 </body>
 </html>

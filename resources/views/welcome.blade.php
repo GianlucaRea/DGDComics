@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html class="no-js" lang="it">
     <head>
-        @include('layouts.head')
+        @include('layouts.Header.head')
     </head>
     <body class="home-2">
     <header>
-        @include('layouts.header')
+        @include('layouts.Header.header')
     </header>
-            @include('layouts.featuredArea')
-            @include('layouts.slider')
-            @include('layouts.newArrival')
+            @include('layouts.Homepage.featuredArea')
+            @include('layouts.Homepage.slider')
+            @include('layouts.Homepage.newArrival')
             <div style="height: 75px"></div>
-            @include('layouts.bestsellerArea')
-            @include('layouts.dgdrandom')
-            @include('layouts.productArea')
-            @include('layouts.recentPostArea')
-            @include('layouts.banner2')
-            @include('layouts.social')
+            @include('layouts.Homepage.bestsellerArea')
+            @include('layouts.Homepage.dgdrandom')
+            @include('layouts.Homepage.productArea')
+            @include('layouts.Homepage.recentPostArea')
+            @include('layouts.Footer.banner2')
+            @include('layouts.Footer.social')
             <footer>
-                @include('layouts.footer')
+                @include('layouts.Footer.footer')
             </footer>
-            @include('layouts.modal')
-            @include('layouts.jsImport')
+            @include('layouts.Footer.modal')
+            @include('layouts.Footer.jsImport')
     </body>
 </html>

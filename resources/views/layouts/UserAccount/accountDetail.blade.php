@@ -54,7 +54,7 @@
                                             <h5>Notifiche</h5>
                                             @if($notifications->count() < 1)
                                                 <div class="myaccount-content">
-                                                    <h5>NON C'E ROBA BRO</h5>
+                                                    <h5>Non ci sono ancora notifiche</h5>
                                                 </div>
                                             @else
                                                 <div class="myaccount-table table-responsive text-center">
