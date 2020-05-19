@@ -5112,7 +5112,7 @@ nav.menu .cr-dropdown ul {
     padding: 0 10px;
 }
 
-.product-add-form form a {
+.product-add-form form button {
     background: #333 none repeat scroll 0 0;
     border: 0 none;
     border-radius: 0;
@@ -5128,12 +5128,16 @@ nav.menu .cr-dropdown ul {
     transition: .3s;
 }
 
+.product-add-form button:hover {
+    background-color: #f07c29;
+}
+
 .product-add-form form .quality-button {
     float: left;
     margin-right: 10px;
 }
 
-.product-add-form form a {
+.product-add-form form button {
     float: left;
 }
 

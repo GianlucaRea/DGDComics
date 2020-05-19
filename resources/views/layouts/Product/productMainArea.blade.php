@@ -71,16 +71,16 @@
                                         <span>€{{ $newPrice }}</span> <!-- Price Done -->
                                         <span class="old-price">€{{$comic->price}}</span> <!--Old price !! -->
                                     @else
-                                        <span">€{{$comic->price}}</span> <!--Old price !! -->
+                                        <span>€{{$comic->price}}</span> <!--Old price !! -->
                                     @endif
                                 </div>
                             </div>
                             <div class="product-add-form">
-                                <form action="#">
+                                <form action="{{url('add-to-cart/'.$comic->id) }}">
                                     <div class="quality-button">
-                                        <input class="qty" type="number" value="1">
+                                        <input name="qty" id="qty" class="qty" type="number" value="1">
                                     </div>
-                                    <a href="#">Aggiungi al carrello</a>
+                                    <button type="submit">Aggiungi al carrello</button>
                                 </form>
                             </div>
                             <div class="product-social-links">

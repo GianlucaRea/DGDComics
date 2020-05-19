@@ -57,3 +57,15 @@ Route::get('/accountArea', function () {
 });
 
 Route::get('/accountArea/notificaLetta/{id}', 'NotificationController@notificationRead')->name('notificaLetta'); //per farlo andare per adesso, poi dovremo fare in modo che ad ogni notifica corrisponda un link di reindirizzamento (in base alla notifica). Sta roba effettivamente potrebbe non essere semplice.
+
+/*route per carrello, non toccare se non con il mio permesso - Daniele*/
+Route::get('cart', function(){
+    return view('/cart');
+}
+
+);
+Route::get('add-to-cart/{id}', 'ComicController@addToCart');
+
+Route::patch('update-cart', 'ComicController@updateCart'); //intanto ci sta, vediamo se è da usare
+
+Route::get('remove-from-cart/{id}', 'ComicController@removeFromCart');

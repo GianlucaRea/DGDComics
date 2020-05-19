@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Genre;
 use App\Http\Controllers\Controller;
+use App\Image;
 use Illuminate\Http\Request;
 use App\Comic;
 use Illuminate\Support\Facades\DB;
@@ -438,6 +439,92 @@ class ComicController extends Controller
         $target = Comic::find($id);
         return Comic::whereIn('author_id',[$target ->author_id])->where('id', '!=', $id)->take(4)->get();
      }
+     
+    public function addToCart($id, Request $request)
+    {
+        $comic = Comic::find($id);
 
+        if(!$comic) {
+
+            abort(404);
+
+        }
+
+        $cart = session()->get('cart');
+        $image = ImageController::getCover($id);
+
+        // if cart is empty then this the first comic
+        if(!$cart) {
+
+            $cart = [
+                $id => [
+                    "name" => $comic->comic_name,
+                    "quantity" => $request->qty,
+                    "price" => $comic->price,
+                    "image" => $image->image_name,
+                ]
+            ];
+
+            session()->put('cart', $cart);
+
+            return redirect()->back()->with('success', 'comic added to cart successfully!');
+        }
+
+        // if cart not empty then check if this comic exist then increment quantity
+        if(isset($cart[$id])) {
+
+            $cart[$id]['quantity'] = $cart[$id]['quantity'] + $request->qty;
+
+            session()->put('cart', $cart);
+
+            return redirect()->back()->with('success', 'comic added to cart successfully!');
+
+        }
+
+        // if item not exist in cart then add to cart with passed quantity
+        $cart[$id] = [
+            "name" => $comic->comic_name,
+            "quantity" => $request->qty,
+            "price" => $comic->price,
+            "image" => $image->image_name,
+        ];
+
+        session()->put('cart', $cart);
+
+        return redirect()->back()->with('success', 'comic added to cart successfully!');
+    }
+
+    public function updateCart($id, Request $request)
+    {
+        if($id and $request->quantity)
+        {
+            $cart = session()->get('cart');
+
+            $cart[$id]["quantity"] = $request->quantity;
+
+            session()->put('cart', $cart);
+
+            session()->flash('success', 'Cart updated successfully');
+        }
+    }
+
+    public function removeFromCart($id)
+    {
+        if($id) {
+
+            $cart = session()->get('cart');
+
+            if(isset($cart[$id])) {
+
+                unset($cart[$id]);
+
+                session()->put('cart', $cart);
+            }
+
+            session()->flash('success', 'Product removed successfully');
+
+            return redirect('/cart');
+        }
+    }
 
 }

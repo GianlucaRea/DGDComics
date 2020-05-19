@@ -229,4 +229,6 @@ return [
 
     ],
 
+    Jenssegers\Mongodb\MongodbServiceProvider::class,
+
 ];

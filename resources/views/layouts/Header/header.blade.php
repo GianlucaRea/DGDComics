@@ -13,7 +13,7 @@
                 <div class="row">
                     <div class="my-cart">
                         <ul>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i>Carrello</a>
+                            <li><a href="{{url('/cart')}}"><i class="fa fa-shopping-cart"></i>Carrello</a>
                                 <span>2</span>
                             </li>
                         </ul>
