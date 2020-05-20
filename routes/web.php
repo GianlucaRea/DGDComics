@@ -66,6 +66,10 @@ Route::get('cart', function(){
 );
 Route::get('add-to-cart/{id}', 'ComicController@addToCart');
 
-Route::patch('update-cart', 'ComicController@updateCart'); //intanto ci sta, vediamo se è da usare
+Route::get('add-to-cart-case-1/{id}', 'ComicController@addToCart1');
+
+Route::get('update-cart/{id}', 'ComicController@updateCart'); //intanto ci sta, vediamo se è da usare
 
 Route::get('remove-from-cart/{id}', 'ComicController@removeFromCart');
+
+Route::get('remove-all', 'ComicController@removeAll');

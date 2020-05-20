@@ -35,9 +35,22 @@
                                     @elseif($comic->quantity <= 0)
                                         <span>Non disponibile</span>
                                     @endif
-                                    <div class="product-attribute">
-                                        <p>{{$comic->publisher}}</p> <!-- Display publisher of the comic -->
+                                </div>
+                                <br/>
+                                <div class="mb-2"></div>
+                                <div class="row">
+                                    <div class="col-sm-2 product-info-stock-sku">
+                                        <Span>Venditore</Span>
                                     </div>
+                                    <div class=" col-sm-10 product-attribute">
+                                        @php
+                                        $seller = \App\Http\Controllers\ComicController::getSeller($comic->id);
+                                        @endphp
+                                        <p>{{ $seller->name }} {{ $seller->surname }}</p> <!-- Display seller of the comic -->
+                                    </div>
+                                </div>
+                                <div class="product-attribute">
+                                    <p>{{$comic->publisher}}</p> <!-- Display publisher of the comic -->
                                 </div>
                                 <div class="product-info-genre">
 
@@ -76,12 +89,14 @@
                                 </div>
                             </div>
                             <div class="product-add-form">
+                                @if($comic->quantity>0)
                                 <form action="{{url('add-to-cart/'.$comic->id) }}">
                                     <div class="quality-button">
-                                        <input name="qty" id="qty" class="qty" type="number" value="1">
+                                            <input name="qty" id="qty" class="qty" type="number" min="1" max="{{$comic->quantity}}" value="1">
                                     </div>
                                     <button type="submit">Aggiungi al carrello</button>
                                 </form>
+                                @endif
                             </div>
                             <div class="product-social-links">
                                 <div class="product-addto-links">

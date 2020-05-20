@@ -17,7 +17,7 @@
                 <div class="product-total-2">
                     <div class="single-most-product bd mb-18">
                         <div class="most-product-img">
-                            <a href="#"><img src="{{asset('img/comicsImages/' . $image->image_name) }}" alt="book" /></a>
+                            <a href="{{ url('/comic_detail/'.$comic->id) }}"><img src="{{asset('img/comicsImages/' . $image->image_name) }}" alt="book" /></a>
                         </div>
                         <div class="most-product-content">
                             <div class="product-rating">
@@ -29,7 +29,7 @@
                                     <li><a href="#"><i class="fa fa-star"></i></a></li>
                                 </ul>
                             </div>
-                            <h4><a href="#">{{ $comic->comic_name }}</a></h4>
+                            <h4><a href="{{ url('/comic_detail/'.$comic->id) }}">{{ $comic->comic_name }}</a></h4>
                             <div class="product-price">
                                 <ul>
                                     @if( $comic->discount != 0 )

@@ -13,9 +13,19 @@
                 <div class="row">
                     <div class="my-cart">
                         <ul>
-                            <li><a href="{{url('/cart')}}"><i class="fa fa-shopping-cart"></i>Carrello</a>
-                                <span>2</span>
-                            </li>
+                            @php
+                                $quantityCart = 0;
+                                if(session('cart')) {
+                                    foreach(session('cart') as $id => $details){$quantityCart++;}
+                                }
+                            @endphp
+                            @if($quantityCart > 0)
+                                <li><a href="{{url('/cart')}}"><i class="fa fa-shopping-cart"></i>Carrello</a>
+                                    <span>{{ $quantityCart }}</span>
+                                </li>
+                            @else
+                                <li><a href="{{url('/cart')}}"><i class="fa fa-shopping-cart"></i>Carrello</a></li>
+                            @endif
                         </ul>
                     </div>
                 </div>
