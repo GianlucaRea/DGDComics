@@ -5128,6 +5128,10 @@ nav.menu .cr-dropdown ul {
     transition: .3s;
 }
 
+.product-add-form form button:hover {
+    background: #f07c29 ;
+}
+
 .product-add-form form .quality-button {
     float: left;
     margin-right: 10px;

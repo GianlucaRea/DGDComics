@@ -102,10 +102,12 @@
                                             <span class="amount">€ {{$sellers->count() * 5}}</span>
                                         </td>
                                 @endif
+                                @if($total > 20)
                                 <th>Spedizione Gratuita per ordini maggiori di 20€ </th>
                                     <td>
                                         <span class="amount">€ 0</span>
                                     </td>
+                                @endif
                             @endif
                         </tr>
                         <tr class="order-total">
