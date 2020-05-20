@@ -11,7 +11,7 @@
     'name' =>'carrello']
     )
 @include('layouts.Header.breadcrumbsArea', $page)
-@include('layouts.Other.cartForm')
+@include('layouts.Other.cartForm');
 <footer>
     @include('layouts.Footer.footer')
 </footer>

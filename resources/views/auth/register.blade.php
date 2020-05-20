@@ -108,11 +108,9 @@
                                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                                         @error('password')
-                                        @foreach($messages->all() as $message)
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
-                                        @endforeach
                                         @enderror
                                     </div>
                                 </div>

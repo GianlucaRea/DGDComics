@@ -164,9 +164,9 @@ class PaymentMethodController extends Controller
         $request->validate([
             'payment_type' => 'required',
             'data_scadenza' => ['required', 'after:now'],
-            'cardNumber' => ['required', 'regex:/^[0-9]{16}$/'],
+            'cardNumber' => ['required', 'unique:payment_methods', 'regex:/^[0-9]{16}$/'],
             'intestatario' => ['required', 'regex:/^[a-z ,.-]+$/i'],
-            'CVV' => ['required', 'regex:/^[0-9]{3}$/'],
+            'CVV' => ['required', 'unique:payment_methods', 'regex:/^[0-9]{3}$/'],
         ]);
         $user = \Illuminate\Support\Facades\Auth::user();
 

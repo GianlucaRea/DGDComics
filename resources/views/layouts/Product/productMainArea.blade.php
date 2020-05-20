@@ -94,7 +94,7 @@
                                     <div class="quality-button">
                                             <input name="qty" id="qty" class="qty" type="number" min="1" max="{{$comic->quantity}}" value="1">
                                     </div>
-                                    <button type="submit">Aggiungi al carrello</button>
+                                    <button type="submit" class="quality-button">Aggiungi al carrello</button>
                                 </form>
                                 @endif
                             </div>
