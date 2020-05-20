@@ -5,3 +5,11 @@
 .env
 .env.backup
 .phpunit.result.cache
+<<<<<<< HEAD
+=======
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+.htaccess
+>>>>>>> parent of deff7dc... carrello add/remove
