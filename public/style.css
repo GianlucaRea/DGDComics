@@ -4898,8 +4898,6 @@ nav.menu .cr-dropdown ul {
 .review-field-ratings {
     overflow: hidden;
     margin-bottom: 25px;
-    text-align: center !important;
-    margin: auto !important;
 }
 
 .review-field-ratings>span {
