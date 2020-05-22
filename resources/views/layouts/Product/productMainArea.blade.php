@@ -8,10 +8,10 @@
                     <div class="row">
                         <div class="col-lg-5 col-md-6 col-12">
                             <div class="flexslider">
-                                @php
-                                    $cover = \App\Http\Controllers\ImageController::getCover($comic->id);
-                                    $images = \App\Http\Controllers\ImageController::getOtherImages($comic->id);
-                                @endphp
+
+                                @php($cover = \App\Http\Controllers\ImageController::getCover($comic->id))
+                                @php($images = \App\Http\Controllers\ImageController::getOtherImages($comic->id))
+
                                 <ul class="slides">
                                     <li data-thumb="{{asset('img/comicsImages/' . $cover->image_name) }}">
                                         <img src="{{asset('img/comicsImages/' . $cover->image_name) }}" alt="{{ $comic->comic_name }}" />
@@ -43,9 +43,7 @@
                                         <Span>Venditore</Span>
                                     </div>
                                     <div class=" col-sm-10 product-attribute">
-                                        @php
-                                        $seller = \App\Http\Controllers\ComicController::getSeller($comic->id);
-                                        @endphp
+                                        @php($seller = \App\Http\Controllers\ComicController::getSeller($comic->id))
                                         <p>{{ $seller->name }} {{ $seller->surname }}</p> <!-- Display seller of the comic -->
                                     </div>
                                 </div>
@@ -57,30 +55,38 @@
                                     <div class="product-attribute">
                                         <p>
                                             @foreach($comic->genre as $genres)
-                                                <a href="#">{{$genres->name_genre }}</a> <!-- Display publisher of the comic -->
+                                                <a href="{{route('genreshoplist',['name_genre' => $genres->name_genre])}}">{{$genres->name_genre }}</a> <!-- Display genre of the comic -->
                                             @endforeach
                                         </p>
                                     </div>
                                 </div>
-                                <div class="rating-summary"><a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
+                                <div class="rating-summary">
+                                    @php($id = $comic->id)
+                                    @php($avgstar = \App\Review::where('comic_id','=',$id)->avg('stars'))
+                                    @foreach(range(1,5) as $i)
+                                        @if($avgstar >0)
+                                            @if($avgstar >0.5)
+                                                <a><i class="fa fa-star"></i></a>
+                                            @else
+                                                <a><i class="fa fa-star-half-o"></i></a>
+                                            @endif
+                                        @else
+                                            <a><i class="fa  fa-star-o"></i></a>
+                                        @endif
+                                        <?php $avgstar--; ?>
+                                    @endforeach
                                 </div>
                                 <div class="reviews-actions">
-                                    <a href="#">3 Recensioni</a>
-                                    <a href="#" class="view">Aggiungi una recensione!</a>
+                                @php($numberR = $reviews->count())
+                                    <a>{{$numberR}} Recensioni</a>
                                 </div>
                             </div>
                             <br/>
                             <div class="product-info-price">
                                 <div class="price-final">
                                     @if( $comic->discount != 0 )
-                                        @php
-                                            $valoreSconto = (($comic->price * $comic->discount) / 100);
-                                            $newPrice = ($comic->price - $valoreSconto);
-                                        @endphp
+                                           @php($valoreSconto = (($comic->price * $comic->discount) / 100))
+                                           @php($newPrice = ($comic->price - $valoreSconto))
                                         <span>€{{ $newPrice }}</span> <!-- Price Done -->
                                         <span class="old-price">€{{$comic->price}}</span> <!--Old price !! -->
                                     @else

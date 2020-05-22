@@ -4821,13 +4821,20 @@ nav.menu .cr-dropdown ul {
 
 .review-right {
     float: left;
-    padding-left: 110px;
+    padding-right: 0px;
 }
 
 .review-content>h4 {
     font-size: 15px;
     margin: 0;
     font-weight: 300;
+}
+.review-content-text>h4 {
+    font-size: 15px;
+    margin: 0;
+    font-weight: 300;
+    word-wrap: break-word;
+    display:block;
 }
 
 .valu {

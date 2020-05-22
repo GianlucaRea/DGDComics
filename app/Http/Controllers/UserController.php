@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use app\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -119,7 +120,7 @@ class UserController extends Controller
 
     public static function getUserId($id)
     {
-        return User::find($id)->get();
+        return User::where('id','=',$id)->first();
 
     }
 }
