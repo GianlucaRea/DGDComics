@@ -26,12 +26,12 @@
                                     @foreach(range(1,5) as $i)
                                         @if($avgstar >0)
                                             @if($avgstar >0.5)
-                                                <a href=""><i class="fa fa-star"></i></a>
+                                                <a><i class="fa fa-star"></i></a>
                                             @else
-                                                <a href=""><i class="fa fa-star-half-o"></i></a>
+                                                <a><i class="fa fa-star-half-o"></i></a>
                                             @endif
                                         @else
-                                            <a href=""><i class="fa  fa-star-o"></i></a>
+                                            <a><i class="fa  fa-star-o"></i></a>
                                         @endif
                                         <?php $avgstar--; ?>
                                     @endforeach
