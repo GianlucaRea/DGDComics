@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Genre;
 use App\Http\Controllers\Controller;
 use App\Image;
+use App\Review;
 use App\User;
 use Illuminate\Http\Request;
 use App\Comic;
@@ -265,9 +266,14 @@ class ComicController extends Controller
     public function comicDetail($id){
         $comic = Comic::find($id);
         $related = \App\Http\Controllers\ComicController::getrelated($id);
+        $reviews = Review::where('comic_id','=',$id)->get();
+        $reviews4 = Review::where('comic_id','=',$id)->inRandomOrder()->take(4)->get();
+        $avgstar = Review::where('comic_id','=',$id)->avg('stars');
         return view('comic_detail')
             ->with(compact('comic'))
-            ->with(compact('related'));
+            ->with(compact('related'))
+            ->with(compact('reviews'))
+            ->with(compact('reviews4'));
     }
 
     public function shoplistPrice0(Request $request){

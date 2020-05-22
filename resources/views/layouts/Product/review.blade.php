@@ -1,6 +1,7 @@
 <!--review area start-->
 <div class="product-info-area mt-80">
     <div class="container">
+
         <div class="row">
             <div class="col-lg-12">
         <!-- tab-menu-start -->
@@ -13,11 +14,16 @@
             </div>
         <!-- tab-menu-end -->
         </div>
-         <div class="tab-content">
+
+        <div class="tab-content">
         <div class="tab-pane fade show active" id="review">
             <div class="valu">
                 <div class="section-title mb-25 mt-25">
-                    <center><h2>Recensioni</h2></center>
+                    @if($reviews->count() > 0)
+                        <center><h2>Recensioni</h2></center>
+                    @elseif($reviews->count() <= 0)
+                        <center><h2>Non ci sono Recensioni</h2></center>
+                    @endif
                 </div>
                 <style>
                     ul#menu li {
@@ -25,31 +31,46 @@
                     }
                 </style>
                 <ul>
+                    @foreach($reviews4 as $review)
                     <li style="width:310px; display:inline; float:left;">
                         <div class="review-title mb-25 mt-25">
-                            <h3>Review Title Here</h3>
+                            <h3>{{$review->review_title}}</h3>
                         </div>
                         <div class="review-rating">
                             <div class="rating-result">
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
-                                <a href="#"><i class="fa fa-star"></i></a>
+
+                                @php($stars = $review->stars)
+                                @foreach(range(1,5) as $i)
+                                    @if($stars >0)
+                                        @if($stars >0.5)
+                                            <a><i class="fa fa-star"></i></a>
+                                        @else
+                                            <a><i class="fa fa-star-half-o"></i></a>
+                                        @endif
+                                    @else
+                                        <a><i class="fa  fa-star-o"></i></a>
+                                    @endif
+                                    <?php $stars--; ?>
+                                @endforeach
+
                             </div>
                             <br>
                             <div class="review-details">
-                                <textarea rows="5" cols="20" style="width: 150px" readonly> Bello bello abduwidhba uaidhadhab awuhdj unnjknk</textarea>
+                                <textarea rows="5" cols="20" style="width: 150px" readonly> {{$review->review_text}}</textarea>
                                 <br>
-                                <p class="review-author">Review by plaza</p>
-                                <p class="review-date">Posted on 12/9/16 </p>
+                                  @php($userR = \App\Http\Controllers\UserController::getUserId($review->user_id))
+                                  @php($username = $userR->username)
+                                <p class="review-author">Review by {{$username}}</p>
+                                <p class="review-date">Posted on {{\Carbon\Carbon::parse($review->review_date)->format('d/m/Y')}} </p>
                             </div>
                         </div>
                     </li>
+                    @endforeach
                 </ul>
             </div>
         </div>
     </div>
+
         <div class="tab-content ">
         <div class="tab-pane fade" id="addreview">
             <div class="review-add">
