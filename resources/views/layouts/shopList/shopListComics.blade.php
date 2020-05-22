@@ -65,11 +65,20 @@
                                     <div class="product-details text-center">
                                         <div class="product-rating">
                                             <ul>
-                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                @php($id = $comic->id)
+                                                @php($avgstar = \App\Review::where('comic_id','=',$id)->avg('stars'))
+                                                @foreach(range(1,5) as $i)
+                                                    @if($avgstar >0)
+                                                        @if($avgstar >0.5)
+                                                            <a><i class="fa fa-star"></i></a>
+                                                        @else
+                                                            <a><i class="fa fa-star-half-o"></i></a>
+                                                        @endif
+                                                    @else
+                                                        <a><i class="fa  fa-star-o"></i></a>
+                                                    @endif
+                                                    <?php $avgstar--; ?>
+                                                @endforeach
                                             </ul>
                                         </div>
                                         <h4>{{ $comic->comic_name }}</h4>
@@ -122,11 +131,20 @@
                                     <div class="product-details">
                                         <div class="product-rating">
                                             <ul>
-                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                @php($id = $comic->id)
+                                                @php($avgstar = \App\Review::where('comic_id','=',$id)->avg('stars'))
+                                                @foreach(range(1,5) as $i)
+                                                    @if($avgstar >0)
+                                                        @if($avgstar >0.5)
+                                                            <a><i class="fa fa-star"></i></a>
+                                                        @else
+                                                            <a><i class="fa fa-star-half-o"></i></a>
+                                                        @endif
+                                                    @else
+                                                        <a><i class="fa  fa-star-o"></i></a>
+                                                    @endif
+                                                    <?php $avgstar--; ?>
+                                                @endforeach
                                             </ul>
                                         </div>
                                         <h4>{{ $comic->comic_name }}</h4>
