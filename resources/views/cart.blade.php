@@ -11,7 +11,11 @@
     'name' =>'carrello']
     )
 @include('layouts.Header.breadcrumbsArea', $page)
-@include('layouts.Other.cartForm');
+@if(\Illuminate\Support\Facades\Auth::user()!=null)
+    @include('layouts.UserAccount.cartForm');
+@else
+    @include('layouts.Other.errorCase');
+@endif
 <footer>
     @include('layouts.Footer.footer')
 </footer>
