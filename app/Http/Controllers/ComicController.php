@@ -129,8 +129,8 @@ class ComicController extends Controller
 
 
 
-    public static function getByID($id){  //SOLO PER FARE UNA PROVA, NON SAPEVO COME FARE UNA GETBYID ALTRIMENTI IN FEATURED AREA
-        return Comic::find($id);
+    public static function getByID($id){
+        return Comic::where('id','=',$id)->first();
     }
 
 

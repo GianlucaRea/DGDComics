@@ -66,12 +66,12 @@
                                     @foreach(range(1,5) as $i)
                                         @if($avgstar >0)
                                             @if($avgstar >0.5)
-                                                <a><i class="fa fa-star"></i></a>
+                                                <a href=#void><i class="fa fa-star"></i></a>
                                             @else
-                                                <a><i class="fa fa-star-half-o"></i></a>
+                                                <a href=#void><i class="fa fa-star-half-o"></i></a>
                                             @endif
                                         @else
-                                            <a><i class="fa  fa-star-o"></i></a>
+                                            <a href=#void><i class="fa  fa-star-o"></i></a>
                                         @endif
                                         <?php $avgstar--; ?>
                                     @endforeach
@@ -85,7 +85,7 @@
                             <div class="product-info-price">
                                 <div class="price-final">
                                     @if( $comic->discount != 0 )
-                                            @php($newPrice = \App\Http\Controllers\ComicController::priceCalculator($comic->id))
+                                           @php($newPrice = \App\Http\Controllers\ComicController::priceCalculator($comic->id))
                                         <span>€{{ $newPrice }}</span> <!-- Price Done -->
                                         <span class="old-price">€{{$comic->price}}</span> <!--Old price !! -->
                                     @else

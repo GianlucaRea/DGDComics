@@ -4868,7 +4868,8 @@ nav.menu .cr-dropdown ul {
 }
 
 .review-add {
-    margin: 30px 0;
+    margin: 30px;
+    margin-left: 350px;
 }
 
 .review-add h3 {
@@ -4906,6 +4907,7 @@ nav.menu .cr-dropdown ul {
     font-size: 22px;
     font-weight: 700;
     padding-right: 30px;
+    margin-left: 350px;
 }
 
 .review-field-ratings>span>sup {
@@ -4954,6 +4956,7 @@ nav.menu .cr-dropdown ul {
 .review-form .single-form {
     margin-bottom: 25px;
     overflow: hidden;
+    margin-left: 300px;
 }
 
 .review-form .single-form label {
@@ -4979,7 +4982,7 @@ nav.menu .cr-dropdown ul {
     border: 1px solid #c2c2c2;
     height: 35px;
     padding: 5px 9px;
-    width: 350px;
+    width: 300px;
 }
 
 .review-form .single-form form textarea {
@@ -5005,7 +5008,55 @@ nav.menu .cr-dropdown ul {
     font-weight: 700;
     font-size: 14px;
     text-transform: uppercase;
+    margin-left: 480px;
 }
+
+
+.review-form .single1-form {
+    margin-bottom: 25px;
+    overflow: hidden;
+    margin-left: 230px;
+}
+
+.review-form .single1-form label {
+    font-weight: 700;
+    font-size: 13px;
+    float: left;
+    display: inline-block;
+    text-align: right;
+    margin-left: 20px;
+}
+
+.review-form .single1-form label sup {
+    color: #e02b27;
+    padding-left: 5px;
+}
+
+.review-form .single1-form form {
+    display: inline-block;
+    float: left;
+    padding-left: 20px;
+}
+
+.review-form .single1-form form input {
+    border: 1px solid #c2c2c2;
+    height: 35px;
+    padding: 5px 9px;
+    width: 300px;
+}
+
+.review-form .single1-form form textarea {
+    border: 1px solid #c2c2c2;
+    padding: 5px 9px;
+    width: 300px;
+    margin-left: 17px;
+}
+
+.review-form .single1-form-2 form {
+    padding-left: 23px;
+}
+
+
 
 .product-info-main .page-title h1 {
     color: #333333;

@@ -1,7 +1,6 @@
 <!--review area start-->
 <div class="product-info-area mt-80">
     <div class="container">
-
         <div class="row">
             <div class="col-lg-12">
         <!-- tab-menu-start -->
@@ -14,7 +13,6 @@
             </div>
         <!-- tab-menu-end -->
         </div>
-
         <div class="tab-content">
         <div class="tab-pane fade show active" id="review">
             <div class="valu">
@@ -69,51 +67,50 @@
                 </ul>
             </div>
         </div>
-    </div>
 
-        <div class="tab-content ">
+
         <div class="tab-pane fade" id="addreview">
             <div class="review-add">
-                <center><h3>Stai recensendo:</h3>
-                <h4>Joust Duffle Bag</h4></center>
+                <h4>{{$comic->comic_name}}</h4>
             </div>
             <div class="review-field-ratings">
-                <span>Your Rating <sup>*</sup></span>
+                <span>La tua opinione <sup>*</sup></span>
                 <div class="control">
                     <div class="single-control">
                         <span>Stars</span>
                         <div class="review-control-vote">
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a onclick=""><i class="fa fa-star"></i></a>
+                            <a onclick="$i = 2"><i class="fa fa-star"></i></a>
+                            <a onclick="$i = 3"><i class="fa fa-star"></i></a>
+                            <a onclick="$i = 4"><i class="fa fa-star"></i></a>
+                            <a onclick="$i = 5"><i class="fa fa-star"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="review-form ">
-                <div class="single-form">
-                    <label>Nickname <sup>*</sup></label>
-                    <form action="#">
-                        <input type="text" />
-                    </form>
-                </div>
+            <div class="review-form">
                 <div class="single-form single-form-2">
-                    <label>Titolo <sup>*</sup></label>
-                    <form action="#">
-                        <input type="text" />
+                    <label for="review_title">Titolo <sup>*</sup></label>
+                    <form>
+                        <input id="review_title" type="text" class="form-control @error('review_title') is invalid @enderror" name="review_title"  value="{{ old('review_title') }}" required autocomplete="review_title" autofocus/>
+                        @error('review_title')
+                        <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                        @enderror
                     </form>
                 </div>
-                <div class="single-form">
+                <div class="single1-form">
                     <label>Recensione <sup>*</sup></label>
-                    <form action="#">
-                        <textarea name="massage" cols="10" rows="4"></textarea>
+                    <form>
+                        <textarea name="review" cols="10" rows="10"></textarea>
                     </form>
                 </div>
             </div>
             <div class="review-form-button">
-                <a href="#">Invia recensione</a>
+                <form action>
+                <a href="">Invia recensione</a>
+                </form>
             </div>
         </div>
     </div>

@@ -23,6 +23,7 @@ Route::get('/contact', function(){
 });
 
 Route::get('/comic_detail/{id}','ComicController@comicDetail');
+Route::post('/comic_detail/{id}','ReviewController@add')->name('submitReview');
 
 Route::get('/shoplist', 'ComicController@shoplistBase');
 Route::get('/shoplist/type/{type}','ComicController@shoplistType');
