@@ -156,6 +156,18 @@ class ComicController extends Controller
 
     }
 
+    public static function priceCalculator($id){
+        $comic = Comic::where('id','=',$id)->first();
+        if($comic->discount > 0){
+            $valoreSconto = (($comic->price * $comic->discount) / 100);
+            $price = ($comic->price - $valoreSconto);
+            return $newPrice = number_format($price, 2);
+        }
+        else{
+            return $comic->price;
+        }
+    }
+
     public function shoplistBase(Request $request){
         $genres = Genre::all();
         $comics = Comic::orderBy('comic_name', 'asc')->paginate(12);

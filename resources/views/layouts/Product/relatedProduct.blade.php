@@ -40,8 +40,7 @@
                             <div class="product-price">
                                 <ul>
                                     @if( $comic->discount != 0 )
-                                        @php($valoreSconto = (($comic->price * $comic->discount) / 100))
-                                        @php($newPrice = ($comic->price - $valoreSconto))
+                                        @php($newPrice = \App\Http\Controllers\ComicController::priceCalculator($comic->id))
                                         <li>€{{ $newPrice }}</li>
                                         <li class="old-price">€{{$comic->price}}</li>
                                     @else
