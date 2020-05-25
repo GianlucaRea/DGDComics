@@ -59,6 +59,18 @@ Route::get('/accountArea', function () {
         ->with(compact('user'));
 });
 
+Route::get('/adminArea', function () {
+    $user = \Illuminate\Support\Facades\Auth::user();
+    $users = \App\User::where('username','!=','admin')->get();
+    $comics = Comic::all();
+    $reviews = \App\Review::all();
+    return view('adminPanel')
+        ->with(compact('user'))
+        ->with(compact('users'))
+        ->with(compact('comics'))
+        ->with(compact('reviews'));
+});
+
 Route::get('/vendor', function () {
     $user = \Illuminate\Support\Facades\Auth::user();
     return view('/vendor')

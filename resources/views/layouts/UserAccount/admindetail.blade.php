@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="entry-header-title">
-                    <h2>My-Account</h2>
+                    <h2>Admin</h2>
                 </div>
             </div>
         </div>
@@ -24,10 +24,9 @@
                             <div class="col-lg-3 col-md-4">
                                 <div class="myaccount-tab-menu nav" role="tablist">
                                     <a href="#dashboad" class="active" data-toggle="tab"><i class="fa fa-dashboard"></i>Dashboard</a>
-                                    <a href="#orders" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i>Ordini</a>
-                                    <a href="#payment-method" data-toggle="tab"><i class="fa fa-credit-card"></i>Metodi di pagamento</a>
-                                    <a href="#address-edit" data-toggle="tab"><i class="fa fa-map-marker"></i>indirizzi di spedizione</a>
-                                    <a href="#account-info" data-toggle="tab"><i class="fa fa-user"></i> dettagli account</a>
+                                    <a href="#users" data-toggle="tab"><i class="fa fa-user"></i>Gestione Utenti</a>
+                                    <a href="#comics" data-toggle="tab"><i class="fa fa-book"></i>Gestione Fumetti</a>
+                                    <a href="#reviews" data-toggle="tab"><i class="fa fa-map-marker"></i>Gestione Recensione</a>
                                 </div>
                             </div>
                             <!-- My Account Tab Menu End -->
@@ -44,8 +43,6 @@
                                             </div>
                                             <p class="mb-0">I tuoi dati:</p>
                                             <p class="mb-0">E-mail:   <strong>{{ $user->email }} </strong></p>
-                                            <p class="mb-0">Telefono: <strong>{{ $user->phone_number }} </strong></p>
-                                            <p class="mb-0">Vuoi diventare venditore?  <a href="#" class="logout"> Clicca qui</a></p>
                                         </div>
                                         <div class="myaccount-content">
                                             @php
@@ -107,45 +104,30 @@
                                     <!-- Single Tab Content End -->
 
                                     <!-- Single Tab Content Start -->
-                                    <div class="tab-pane fade" id="orders" role="tabpanel">
+                                    <div class="tab-pane fade" id="users" role="tabpanel">
                                         <div class="myaccount-content">
-                                            <h5>Ordini</h5>
+                                            <h5>Utenti</h5>
                                             <div class="myaccount-table table-responsive text-center">
                                                 <table class="table table-bordered">
                                                     <thead class="thead-light">
                                                     <tr>
-                                                        <th>Ordine</th>
-                                                        <th>Data</th>
-                                                        <th>Stato</th>
-                                                        <th>Totale</th>
-                                                        <th>Azione</th>
+                                                        <th>Nickname</th>
+                                                        <th>Phone</th>
+                                                        <th>Email</th>
+                                                        <th>Modifica</th>
+                                                        <th>Elimina</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
+                                                    @foreach($users as $user)
                                                     <tr>
-                                                        <td>1</td>
-                                                        <td>Aug 22, 2018</td>
-                                                        <td>Pending</td>
-                                                        <td>$3000</td>
-                                                        <td><a href="cart.html" class="btn btn-sqr">View</a>
-                                                        </td>
+                                                        <td>{{$user->username}}</td>
+                                                        <td>{{$user->phone_number}}</td>
+                                                        <td>{{$user->email}}</td>
+                                                        <td><a href="" class="fa fa-check"></a></td>
+                                                        <td><a href="cart.html" class="fa fa-remove"></a></td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>July 22, 2018</td>
-                                                        <td>Approved</td>
-                                                        <td>$200</td>
-                                                        <td><a href="cart.html" class="btn btn-sqr">View</a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>3</td>
-                                                        <td>June 12, 2017</td>
-                                                        <td>On Hold</td>
-                                                        <td>$990</td>
-                                                        <td><a href="cart.html" class="btn btn-sqr">View</a>
-                                                        </td>
-                                                    </tr>
+                                                    @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -156,122 +138,71 @@
 
 
                                     <!-- Single Tab Content Start -->
-                                    <div class="tab-pane fade" id="payment-method" role="tabpanel">
-                                        @php
-                                            $paymentMethods = \App\Http\Controllers\PaymentMethodController::getPaymentMethodByUserId($user->id);
-                                            $oggi = \App\Http\Controllers\PaymentMethodController::getTime();
-                                        @endphp
-
-                                        @if($paymentMethods->count() < 1)
-                                            <div class="myaccount-content">
-                                                <h5>Non sono ancora stati inseriti metodi di pagamento dall'utente</h5>
-                                            </div>
-                                        @endif
-
-                                        @foreach($paymentMethods as $paymentMethod)
-                                            @if($paymentMethod->favourite != 0)
-                                                @php
-                                                    $dataScadenza = $paymentMethod->data_scadenza;
-                                                    $scadenza = strtotime($dataScadenza);
-                                                @endphp
-                                                <div class="myaccount-content">
-                                                    <h5>I TUOI METODI DI PAGAMENTO</h5>
-                                                    <address>
-                                                        <h6>PREDEFINITO</h6>
-                                                        <p><strong>{{ $paymentMethod->payment_type }}</strong></p>
-                                                        @if($scadenza - $oggi < 0)
-                                                            <h5>LA TUA CARTA È SCADUTA</h5>
-                                                        @else
-                                                            @if($scadenza - $oggi < 2592000)
-                                                                <h5>LA TUA CARTA STA PER SCADERE</h5>
-                                                            @endif
-                                                        @endif
-                                                    </address>
-                                                    <a href="{{ Route('remove.method', ['method' => $paymentMethod->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
-                                                        Rimuovi metodo di pagamento</a>
-                                                </div>
-                                            @endif
-                                        @endforeach
-
-
-
-                                        @foreach($paymentMethods as $paymentMethod)
-                                            @if($paymentMethod->favourite != 1)
-                                                @php
-                                                    $dataScadenza = $paymentMethod->data_scadenza;
-                                                    $scadenza = strtotime($dataScadenza);
-                                                @endphp
-                                                <div class="myaccount-content">
-                                                    <address>
-                                                        <p><strong>{{ $paymentMethod->payment_type }}</strong></p>
-                                                        @if($scadenza - $oggi < 0)
-                                                            <h5>LA TUA CARTA È SCADUTA</h5>
-                                                        @else
-                                                            @if($scadenza - $oggi < 2592000)
-                                                                <h5>LA TUA CARTA STA PER SCADERE</h5>
-                                                            @endif
-                                                        @endif
-                                                    </address>
-                                                    <a href="{{ Route('remove.method', ['method' => $paymentMethod->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
-                                                        Rimuovi metodo di pagamento</a>
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                        <div class="row mt-20">
-                                            <div class="col-md-6"></div>
-                                            <div class="col-md-6" style="text-align: right;">
-                                                <a href="{{ Route('addMethod')}}" class="btn btn-sqr"><i class="fa fa-edit;"></i>
-                                                    Aggiungi metodo di pagamento</a>
+                                    <div class="tab-pane fade" id="comics" role="tabpanel">
+                                        <div class="myaccount-content">
+                                            <h5>Fumetti</h5>
+                                            <div class="myaccount-table table-responsive text-center">
+                                                <table class="table table-bordered">
+                                                    <thead class="thead-dark">
+                                                    <tr>
+                                                        <th>Titolo</th>
+                                                        <th>ISBN</th>
+                                                        <th>Quantità</th>
+                                                        <th>Utente</th>
+                                                        <th>Modifica</th>
+                                                        <th>Elimina</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($comics as $comic)
+                                                        @php
+                                                            $userNeed = App\User::where('id','=',$comic->user_id)->first();
+                                                        @endphp
+                                                        <tr>
+                                                            <td>{{$comic->comic_name}}</td>
+                                                            <td>{{$comic->ISBN}}</td>
+                                                            <td>{{$comic->quantity}}</td>
+                                                            <td>{{$userNeed->username}}</td>
+                                                            <td><a href="" class="fa fa-check"></a></td>
+                                                            <td><a href="cart.html" class="fa fa-remove"></a></td>
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- Single Tab Content End -->
 
                                     <!-- Single Tab Content Start -->
-                                    <div class="tab-pane fade" id="address-edit" role="tabpanel">
-                                        @php
-                                            $shippingAddresses = \App\Http\Controllers\ShippingAddressController::getShippingAddressByUserId($user->id);
-                                        @endphp
-                                        @if($shippingAddresses->count() < 1)
-                                            <div class="myaccount-content">
-                                                <h5>Non sono ancora stati inseriti indirizzi di spedizione dall'utente</h5>
-                                            </div>
-                                        @endif
-
-                                        @foreach($shippingAddresses as $shippingAddress)
-                                            @if($shippingAddress->favourite != 0)
-                                                <div class="myaccount-content">
-                                                    <h5>I TUOI INDIRIZZI</h5>
-                                                    <address>
-                                                        <h6>PREDEFINITO</h6>
-                                                        <p><strong>{{ $shippingAddress->città }} </strong> <strong>{{ $shippingAddress->post_code }}</strong></p>
-                                                        <p><strong>{{ $shippingAddress->via }}</strong> <strong>{{ $shippingAddress->civico }}</strong></p>
-                                                        <p><strong>{{ $shippingAddress->other_info }} </strong></p>
-                                                    </address>
-                                                    <a href="{{ Route('remove.address', ['address' => $shippingAddress->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
-                                                        Rimuovi indirizzo di spedizione</a>
-                                                </div>
-                                            @endif
-                                        @endforeach
-
-                                        @foreach($shippingAddresses as $shippingAddress)
-                                            @if($shippingAddress->favourite != 1)
-                                                <div class="myaccount-content">
-                                                    <address>
-                                                        <p><strong>{{ $shippingAddress->città }} </strong> <strong>{{ $shippingAddress->post_code }}</strong></p>
-                                                        <p><strong>{{ $shippingAddress->via }}</strong> <strong>{{ $shippingAddress->civico }}</strong></p>
-                                                        <p><strong>{{ $shippingAddress->other_info }} </strong></p>
-                                                    </address>
-                                                    <a href="{{ Route('remove.address', ['address' => $shippingAddress->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
-                                                        Rimuovi indirizzo di spedizione</a>
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                        <div class="row mt-20">
-                                            <div class="col-md-6"></div>
-                                            <div class="col-md-6" style="text-align: right;">
-                                                <a href="{{ Route('addAddress')}}" class="btn btn-sqr"><i class="fa fa-edit;"></i>
-                                                    Aggiungi Indirizzo di spedizione</a>
+                                    <div class="tab-pane fade" id="reviews" role="tabpanel">
+                                        <div class="myaccount-content">
+                                            <h5>Recensione</h5>
+                                            <div class="myaccount-table table-responsive text-center">
+                                                <table class="table table-bordered">
+                                                    <thead class="thead-dark">
+                                                    <tr>
+                                                        <th>Titolo</th>
+                                                        <th>Fumetto</th>
+                                                        <th>Recensore</th>
+                                                        <th>Elimina</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($reviews as $review)
+                                                        @php
+                                                            $userReview = App\User::where('id','=',$review->user_id)->first();
+                                                            $comicReview = App\Comic::where('id','=',$review->comic_id)->first();
+                                                        @endphp
+                                                        <tr>
+                                                            <td>{{$review->review_title}}</td>
+                                                            <td>{{$comicReview->comic_name}}</td>
+                                                            <td>{{$userReview->username}}</td>
+                                                            <td><a href="cart.html" class="fa fa-remove"></a></td>
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
@@ -380,4 +311,3 @@
         </div>
     </div>
 </div>
-<!-- my account wrapper end -->

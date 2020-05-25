@@ -174,16 +174,27 @@
             </div>
             @if (Route::has('login'))
                 @auth
-                   @php($user = Auth::user());
+                   @if(Auth::user()->hasGroup('il gruppo degli admin'));
                     <div class="col-lg-1">
                         <div class="menu-area">
                             <ul>
                                 <li>
-                                    <a href="{{ url('/accountArea') }}">Account</a>
+                                    <a href="{{ url('/adminArea') }}">Admin</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
+                    @else
+                        <div class="col-lg-1">
+                            <div class="menu-area">
+                                <ul>
+                                    <li>
+                                        <a href="{{ url('/accountArea') }}">Account</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    @endif
                     <div class="pl-10"></div>
                     <div class="col-lg-1">
                         <div class="menu-area">

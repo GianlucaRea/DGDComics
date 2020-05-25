@@ -92,5 +92,12 @@ public function notification(){
     return $this->hasMany('App/Notification');
 }
 
+    public function hasGroup($group = null) {
+        $hasGroup = false;
+        $hasGroup = !$this->group->filter(function($item) use ($group) {
+            return $item->group_description == $group;
+        })->isEmpty();
+        return $hasGroup;
+    }
 
 }
