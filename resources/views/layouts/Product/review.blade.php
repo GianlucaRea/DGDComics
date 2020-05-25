@@ -88,7 +88,7 @@
                     </div>
                 </div>
             </div>
-            <div class="review-form">
+            <div class="review-form">.
                 <div class="single-form single-form-2">
                     <label for="review_title">Titolo <sup>*</sup></label>
                     <form>

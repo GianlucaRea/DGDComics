@@ -18,6 +18,9 @@ class CreateGroupUserTable extends Migration
             $table->foreignId('group_id')->constrained();
             $table->foreignId('user_id')->constrained();
         });
+
+        DB::table('group_user')->insert(
+            ['group_id' => '3' , 'user_id' => '4']);
     }
 
     /**

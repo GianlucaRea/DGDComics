@@ -93,6 +93,7 @@
             </div>
             @if (Route::has('login'))
                 @auth
+                   @php($user = Auth::user());
                     <div class="col-lg-1">
                         <div class="menu-area">
                             <ul>
