@@ -21,9 +21,27 @@ class CreateNotificationsTable extends Migration
             $table->timestamp('date')->default(\DB::raw('CURRENT_TIMESTAMP'));
         });
         DB::table('notifications')->insert([
-            ['user_id' => '1', 'notification_text' => 'notifica lungaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'state' => '0'],
-            ['user_id' => '1', 'notification_text' => 'notifica corta', 'state' => '0'],
-            ['user_id' => '1', 'notification_text' => 'notifica media ahahahahahah', 'state' => '0'],
+            ['user_id' => '3', 'notification_text' => 'notifica lungaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'state' => '0'],
+            ['user_id' => '3', 'notification_text' => 'notifica corta', 'state' => '0'],
+            ['user_id' => '3', 'notification_text' => 'notifica media ahahahahahah', 'state' => '0'],
+            ['user_id' => '3', 'notification_text' => 'notifica lungeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'state' => '0'],
+            ['user_id' => '3', 'notification_text' => 'notifica corta', 'state' => '0'],
+            ['user_id' => '3', 'notification_text' => 'notifica media ahahahahahah', 'state' => '0'],
+            ['user_id' => '3', 'notification_text' => 'notifica lungoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'state' => '0'],
+            ['user_id' => '3', 'notification_text' => 'notifica corta', 'state' => '0'],
+            ['user_id' => '3', 'notification_text' => 'notifica media ahahahahahah', 'state' => '0'],
+            ['user_id' => '3', 'notification_text' => 'notifica lunguaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'state' => '0'],
+            ['user_id' => '3', 'notification_text' => 'notifica corta', 'state' => '0'],
+            ['user_id' => '3', 'notification_text' => 'notifica media ahahahahahah', 'state' => '0'],
+            ['user_id' => '3', 'notification_text' => 'notifica lungiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'state' => '0'],
+            ['user_id' => '3', 'notification_text' => 'notifica corta', 'state' => '0'],
+            ['user_id' => '3', 'notification_text' => 'notifica media ahahahahahah', 'state' => '0'],
+            ['user_id' => '3', 'notification_text' => 'notifica lhwaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'state' => '0'],
+            ['user_id' => '3', 'notification_text' => 'notifica corta', 'state' => '0'],
+            ['user_id' => '3', 'notification_text' => 'notifica media ahahahahahah', 'state' => '0'],
+            ['user_id' => '3', 'notification_text' => 'notifica wgagwagawaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'state' => '0'],
+            ['user_id' => '3', 'notification_text' => 'notifica corta', 'state' => '0'],
+            ['user_id' => '3', 'notification_text' => 'notifica media ahahahahahah', 'state' => '0'],
         ]);
     }
 

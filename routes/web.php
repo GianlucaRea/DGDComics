@@ -23,6 +23,7 @@ Route::get('/contact', function(){
 });
 
 Route::get('/comic_detail/{id}','ComicController@comicDetail');
+Route::post('/comic_detail/{id}','ReviewController@add')->name('submitReview');
 
 Route::get('/shoplist', 'ComicController@shoplistBase');
 Route::get('/shoplist/type/{type}','ComicController@shoplistType');
@@ -43,8 +44,10 @@ Route::post('change.email', 'UserController@changeEmail')->name('change.email');
 Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
 Route::get('remove-method/{method}', 'PaymentMethodController@remove')->name('remove.method');
 Route::get('remove-address/{address}', 'ShippingAddressController@remove')->name('remove.address');
-Route::get('AddMethod/{id}', function (){return view('addMethod');})->name('AddMethod');
-Route::get('AddAddress/{id}', function (){return view('addAddress');})->name('AddAddress');
+Route::get('addMethod', function (){return view('addMethod');})->name('addMethod');
+Route::post('submitAddMethod', 'PaymentMethodController@add')->name('submitAddMethod');
+Route::get('addAddress', function (){return view('addAddress');})->name('addAddress');
+Route::post('submitAddAddress', 'ShippingAddressController@add')->name('submitAddAddress');
 
 Route::get('/logout', function () {
     return \App\Http\Controllers\Auth\LoginController::logout();
@@ -63,3 +66,22 @@ Route::get('/vendor', function () {
 });
 
 Route::get('/accountArea/notificaLetta/{id}', 'NotificationController@notificationRead')->name('notificaLetta'); //per farlo andare per adesso, poi dovremo fare in modo che ad ogni notifica corrisponda un link di reindirizzamento (in base alla notifica). Sta roba effettivamente potrebbe non essere semplice.
+
+
+Route::get('cart', function(){
+    return view('/cart');
+});
+
+Route::get('add-to-cart/{id}', 'ComicController@addToCart');
+
+Route::get('add-to-cart-case-1/{id}', 'ComicController@addToCart1');
+
+Route::get('update-cart/{id}', 'ComicController@updateCart');
+
+Route::get('remove-from-cart/{id}', 'ComicController@removeFromCart');
+
+Route::get('remove-all', 'ComicController@removeAll');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

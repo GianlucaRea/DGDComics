@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\PaymentMethod;
 
 use Illuminate\Http\Request;
-use validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class PaymentMethodController extends Controller
 {
@@ -154,6 +157,43 @@ class PaymentMethodController extends Controller
         return redirect('/accountArea')
             ->with(compact('user'));
 
+    }
+
+    public function add(Request $request){
+        $now = Carbon::now();
+        $request->validate([
+            'payment_type' => 'required',
+            'data_scadenza' => ['required', 'after:now'],
+            'cardNumber' => ['required', 'unique:payment_methods', 'regex:/^[0-9]{16}$/'],
+            'intestatario' => ['required', 'regex:/^[a-z ,.-]+$/i'],
+            'CVV' => ['required', 'unique:payment_methods', 'regex:/^[0-9]{3}$/'],
+        ]);
+        $user = \Illuminate\Support\Facades\Auth::user();
+
+        $paymentMethod = new PaymentMethod; //per evitare problemi con campi che non appartengono effettivamente a paymentMethod.
+        $paymentMethod->user_id = \Illuminate\Support\Facades\Auth::user()->id;
+        $paymentMethod->payment_type = $request->payment_type;
+        $paymentMethod->favourite = 0;
+        $paymentMethod->data_scadenza = $request->data_scadenza;
+        $paymentMethod->cardNumber = $request->cardNumber;
+        $paymentMethod->intestatario = $request->intestatario;
+        $paymentMethod->CVV = $request->CVV;
+
+        $data=array(
+            'user_id'=> $paymentMethod->user_id,
+            'payment_type'=> $paymentMethod->payment_type,
+            'favourite'=> $paymentMethod->favourite,
+            'data_scadenza'=>$paymentMethod->data_scadenza,
+            'cardNumber'=>$paymentMethod->cardNumber,
+            'intestatario'=>$paymentMethod->intestatario,
+            'CVV'=>Hash::make($paymentMethod->CVV),
+        );
+
+        DB::table('payment_methods')->insert($data);
+
+
+        return redirect('/accountArea')
+            ->with(compact('user'));
     }
 
 }

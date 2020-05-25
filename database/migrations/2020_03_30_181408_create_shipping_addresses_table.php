@@ -20,7 +20,7 @@ class CreateShippingAddressesTable extends Migration
             $table->integer('civico');
             $table->string('città');
             $table->integer('post_code');
-            $table->text('other_info');
+            $table->text('other_info')->nullable();
             $table->boolean('favourite');
             $table->string('sede')->nullable();
         });

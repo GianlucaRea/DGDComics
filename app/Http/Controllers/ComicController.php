@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 
 use App\Genre;
 use App\Http\Controllers\Controller;
+use App\Image;
+use App\Review;
+use App\User;
 use Illuminate\Http\Request;
 use App\Comic;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Validator;
 
@@ -126,8 +130,8 @@ class ComicController extends Controller
 
 
 
-    public static function getByID($id){  //SOLO PER FARE UNA PROVA, NON SAPEVO COME FARE UNA GETBYID ALTRIMENTI IN FEATURED AREA
-        return Comic::find($id);
+    public static function getByID($id){
+        return Comic::where('id','=',$id)->first();
     }
 
 
@@ -153,25 +157,37 @@ class ComicController extends Controller
 
     }
 
+    public static function priceCalculator($id){
+        $comic = Comic::where('id','=',$id)->first();
+        if($comic->discount > 0){
+            $valoreSconto = (($comic->price * $comic->discount) / 100);
+            $price = ($comic->price - $valoreSconto);
+            return $newPrice = number_format($price, 2);
+        }
+        else{
+            return $comic->price;
+        }
+    }
+
     public function shoplistBase(Request $request){
         $genres = Genre::all();
-        $comics = Comic::orderBy('comic_name', 'asc')->paginate(9);
+        $comics = Comic::orderBy('comic_name', 'asc')->paginate(12);
         if ($request->has('sorter')){
             switch($request->get('sorter')){
                 case 'comic_name_asc':
-                    $comics = Comic::orderBy('comic_name', 'asc')->paginate(9);
+                    $comics = Comic::orderBy('comic_name', 'asc')->paginate(12);
                     break;
                 case 'comic_name_desc':
-                    $comics = Comic::orderBy('comic_name', 'desc')->paginate(9);
+                    $comics = Comic::orderBy('comic_name', 'desc')->paginate(12);
                     break;
                 case 'price_asc':
-                    $comics = Comic::orderBy('price', 'asc')->paginate(9);
+                    $comics = Comic::orderBy('price', 'asc')->paginate(12);
                     break;
                 case 'price_desc':
-                    $comics = Comic::orderBy('price', 'desc')->paginate(9);
+                    $comics = Comic::orderBy('price', 'desc')->paginate(12);
                     break;
                 case 'created_at':
-                    $comics = Comic::latest()->paginate(9);
+                    $comics = Comic::latest()->paginate(12);
                     break;
             }
         }
@@ -182,23 +198,23 @@ class ComicController extends Controller
 
     public function shoplistType($type,Request $request){
         $genres = Genre::all();
-        $comics = Comic::where('type', '=', $type)->orderBy('comic_name', 'asc')->paginate(9);
+        $comics = Comic::where('type', '=', $type)->orderBy('comic_name', 'asc')->paginate(12);
         if ($request->has('sorter')) {
             switch ($request->get('sorter')) {
                 case 'comic_name_asc':
-                    $comics = Comic::where('type', '=', $type)->orderBy('comic_name', 'asc')->paginate(9);
+                    $comics = Comic::where('type', '=', $type)->orderBy('comic_name', 'asc')->paginate(12);
                     break;
                 case 'comic_name_desc':
-                    $comics = Comic::where('type', '=', $type)->orderBy('comic_name', 'desc')->paginate(9);
+                    $comics = Comic::where('type', '=', $type)->orderBy('comic_name', 'desc')->paginate(12);
                     break;
                 case 'price_asc':
-                    $comics = Comic::where('type', '=', $type)->orderBy('price', 'asc')->paginate(9);
+                    $comics = Comic::where('type', '=', $type)->orderBy('price', 'asc')->paginate(12);
                     break;
                 case 'price_desc':
-                    $comics = Comic::where('type', '=', $type)->orderBy('price', 'desc')->paginate(9);
+                    $comics = Comic::where('type', '=', $type)->orderBy('price', 'desc')->paginate(12);
                     break;
                 case 'created_at':
-                    $comics = Comic::where('type', '=', $type)->latest()->paginate(9);
+                    $comics = Comic::where('type', '=', $type)->latest()->paginate(12);
                     break;
             }
         }
@@ -208,25 +224,25 @@ class ComicController extends Controller
     }
 
     public function shoplistGenre($name_genre,Request $request){
-        $comics = Genre::where('name_genre','=',$name_genre)->first()->comic()->orderBy('comic_name', 'asc')->paginate(9);
+        $comics = Genre::where('name_genre','=',$name_genre)->first()->comic()->orderBy('comic_name', 'asc')->paginate(12);
         $genres = Genre::all();
 
             if ($request->has('sorter')) {
                 switch ($request->get('sorter')) {
                     case 'comic_name_asc':
-                        $comics =Genre::where('name_genre','=',$name_genre)->first()->comic()->orderBy('comic_name', 'asc')->paginate(9);
+                        $comics =Genre::where('name_genre','=',$name_genre)->first()->comic()->orderBy('comic_name', 'asc')->paginate(12);
                         break;
                     case 'comic_name_desc':
-                        $comics = Genre::where('name_genre','=',$name_genre)->first()->comic()->orderBy('comic_name', 'desc')->paginate(9);
+                        $comics = Genre::where('name_genre','=',$name_genre)->first()->comic()->orderBy('comic_name', 'desc')->paginate(12);
                         break;
                     case 'price_asc':
-                        $comics = Genre::where('name_genre','=',$name_genre)->first()->comic()->orderBy('price', 'asc')->paginate(9);
+                        $comics = Genre::where('name_genre','=',$name_genre)->first()->comic()->orderBy('price', 'asc')->paginate(12);
                         break;
                     case 'price_desc':
-                        $comics = Genre::where('name_genre','=',$name_genre)->first()->comic()->orderBy('price', 'desc')->paginate(9);
+                        $comics = Genre::where('name_genre','=',$name_genre)->first()->comic()->orderBy('price', 'desc')->paginate(12);
                         break;
                     case 'created_at':
-                        $comics = Genre::where('name_genre','=',$name_genre)->first()->comic()->latest()->paginate(9);
+                        $comics = Genre::where('name_genre','=',$name_genre)->first()->comic()->latest()->paginate(12);
                         break;
                 }
             }
@@ -236,23 +252,23 @@ class ComicController extends Controller
     public function shoplistSearch(Request $request){
         $genres = Genre::all();
         $search = $request->input('search');
-        $comics = Comic::where('comic_name','LIKE','%'.$search.'%')->orWhere('type','LIKE','%'.$search.'%')->orWhere('publisher','LIKE','%'.$search.'%')->paginate(9);
+        $comics = Comic::where('comic_name','LIKE','%'.$search.'%')->orWhere('type','LIKE','%'.$search.'%')->orWhere('publisher','LIKE','%'.$search.'%')->paginate(12);
         if ($request->has('sorter')) {
             switch ($request->get('sorter')) {
                 case 'comic_name_asc':
-                    $comics =Comic::where('comic_name','LIKE','%'.$search.'%')->orWhere('type','LIKE','%'.$search.'%')->orWhere('publisher','LIKE','%'.$search.'%')->orderBy('comic_name', 'asc')->paginate(9);
+                    $comics =Comic::where('comic_name','LIKE','%'.$search.'%')->orWhere('type','LIKE','%'.$search.'%')->orWhere('publisher','LIKE','%'.$search.'%')->orderBy('comic_name', 'asc')->paginate(12);
                     break;
                 case 'comic_name_desc':
-                    $comics =Comic::where('comic_name','LIKE','%'.$search.'%')->orWhere('type','LIKE','%'.$search.'%')->orWhere('publisher','LIKE','%'.$search.'%')->orderBy('comic_name', 'desc')->paginate(9);
+                    $comics =Comic::where('comic_name','LIKE','%'.$search.'%')->orWhere('type','LIKE','%'.$search.'%')->orWhere('publisher','LIKE','%'.$search.'%')->orderBy('comic_name', 'desc')->paginate(12);
                     break;
                 case 'price_asc':
-                    $comics = Comic::where('comic_name','LIKE','%'.$search.'%')->orWhere('type','LIKE','%'.$search.'%')->orWhere('publisher','LIKE','%'.$search.'%')->orderBy('price', 'asc')->paginate(9);
+                    $comics = Comic::where('comic_name','LIKE','%'.$search.'%')->orWhere('type','LIKE','%'.$search.'%')->orWhere('publisher','LIKE','%'.$search.'%')->orderBy('price', 'asc')->paginate(12);
                     break;
                 case 'price_desc':
-                    $comics = Comic::where('comic_name','LIKE','%'.$search.'%')->orWhere('type','LIKE','%'.$search.'%')->orWhere('publisher','LIKE','%'.$search.'%')->orderBy('price', 'desc')->paginate(9);
+                    $comics = Comic::where('comic_name','LIKE','%'.$search.'%')->orWhere('type','LIKE','%'.$search.'%')->orWhere('publisher','LIKE','%'.$search.'%')->orderBy('price', 'desc')->paginate(12);
                     break;
                 case 'created_at':
-                    $comics = Comic::where('comic_name','LIKE','%'.$search.'%')->orWhere('type','LIKE','%'.$search.'%')->orWhere('publisher','LIKE','%'.$search.'%')->latest()->paginate(9);
+                    $comics = Comic::where('comic_name','LIKE','%'.$search.'%')->orWhere('type','LIKE','%'.$search.'%')->orWhere('publisher','LIKE','%'.$search.'%')->latest()->paginate(12);
                     break;
             }
         }
@@ -263,32 +279,37 @@ class ComicController extends Controller
     public function comicDetail($id){
         $comic = Comic::find($id);
         $related = \App\Http\Controllers\ComicController::getrelated($id);
+        $reviews = Review::where('comic_id','=',$id)->get();
+        $reviews4 = Review::where('comic_id','=',$id)->inRandomOrder()->take(4)->get();
+        $avgstar = Review::where('comic_id','=',$id)->avg('stars');
         return view('comic_detail')
             ->with(compact('comic'))
-            ->with(compact('related'));
+            ->with(compact('related'))
+            ->with(compact('reviews'))
+            ->with(compact('reviews4'));
     }
 
     public function shoplistPrice0(Request $request){
         $number1 = 0;
         $number2 = 3.99;
         $genres = Genre::all();
-        $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->paginate(9);
+        $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->paginate(12);
         if ($request->has('sorter')) {
             switch ($request->get('sorter')) {
                 case 'comic_name_asc':
-                    $comics =Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('comic_name', 'asc')->paginate(9);
+                    $comics =Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('comic_name', 'asc')->paginate(12);
                     break;
                 case 'comic_name_desc':
-                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('comic_name', 'desc')->paginate(9);
+                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('comic_name', 'desc')->paginate(12);
                     break;
                 case 'price_asc':
-                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('price', 'asc')->paginate(9);
+                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('price', 'asc')->paginate(12);
                     break;
                 case 'price_desc':
-                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('price', 'desc')->paginate(9);
+                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('price', 'desc')->paginate(12);
                     break;
                 case 'created_at':
-                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->latest()->paginate(9);
+                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->latest()->paginate(12);
                     break;
             }
         }
@@ -298,23 +319,23 @@ class ComicController extends Controller
         $number1 = 3.99;
         $number2 = 8;
         $genres = Genre::all();
-        $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->paginate(9);
+        $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->paginate(12);
         if ($request->has('sorter')) {
             switch ($request->get('sorter')) {
                 case 'comic_name_asc':
-                    $comics =Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('comic_name', 'asc')->paginate(9);
+                    $comics =Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('comic_name', 'asc')->paginate(12);
                     break;
                 case 'comic_name_desc':
-                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('comic_name', 'desc')->paginate(9);
+                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('comic_name', 'desc')->paginate(12);
                     break;
                 case 'price_asc':
-                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('price', 'asc')->paginate(9);
+                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('price', 'asc')->paginate(12);
                     break;
                 case 'price_desc':
-                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('price', 'desc')->paginate(9);
+                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('price', 'desc')->paginate(12);
                     break;
                 case 'created_at':
-                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->latest()->paginate(9);
+                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->latest()->paginate(12);
                     break;
             }
         }
@@ -324,23 +345,23 @@ class ComicController extends Controller
         $number1 = 7.99;
         $number2 = 15.00;
         $genres = Genre::all();
-        $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->paginate(9);
+        $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->paginate(12);
         if ($request->has('sorter')) {
             switch ($request->get('sorter')) {
                 case 'comic_name_asc':
-                    $comics =Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('comic_name', 'asc')->paginate(9);
+                    $comics =Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('comic_name', 'asc')->paginate(12);
                     break;
                 case 'comic_name_desc':
-                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('comic_name', 'desc')->paginate(9);
+                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('comic_name', 'desc')->paginate(12);
                     break;
                 case 'price_asc':
-                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('price', 'asc')->paginate(9);
+                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('price', 'asc')->paginate(12);
                     break;
                 case 'price_desc':
-                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('price', 'desc')->paginate(9);
+                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('price', 'desc')->paginate(12);
                     break;
                 case 'created_at':
-                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->latest()->paginate(9);
+                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->latest()->paginate(12);
                     break;
             }
         }
@@ -350,23 +371,23 @@ class ComicController extends Controller
         $number1 = 14.99;
         $number2 = 25.00;
         $genres = Genre::all();
-        $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->paginate(9);
+        $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->paginate(12);
         if ($request->has('sorter')) {
             switch ($request->get('sorter')) {
                 case 'comic_name_asc':
-                    $comics =Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('comic_name', 'asc')->paginate(9);
+                    $comics =Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('comic_name', 'asc')->paginate(12);
                     break;
                 case 'comic_name_desc':
-                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('comic_name', 'desc')->paginate(9);
+                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('comic_name', 'desc')->paginate(12);
                     break;
                 case 'price_asc':
-                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('price', 'asc')->paginate(9);
+                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('price', 'asc')->paginate(12);
                     break;
                 case 'price_desc':
-                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('price', 'desc')->paginate(9);
+                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('price', 'desc')->paginate(12);
                     break;
                 case 'created_at':
-                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->latest()->paginate(9);
+                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->latest()->paginate(12);
                     break;
             }
         }
@@ -376,23 +397,23 @@ class ComicController extends Controller
         $number1 = 24.99;
         $number2 = 2500;
         $genres = Genre::all();
-        $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->paginate(9);
+        $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->paginate(12);
         if ($request->has('sorter')) {
             switch ($request->get('sorter')) {
                 case 'comic_name_asc':
-                    $comics =Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('comic_name', 'asc')->paginate(9);
+                    $comics =Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('comic_name', 'asc')->paginate(12);
                     break;
                 case 'comic_name_desc':
-                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('comic_name', 'desc')->paginate(9);
+                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('comic_name', 'desc')->paginate(12);
                     break;
                 case 'price_asc':
-                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('price', 'asc')->paginate(9);
+                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('price', 'asc')->paginate(12);
                     break;
                 case 'price_desc':
-                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('price', 'desc')->paginate(9);
+                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->orderBy('price', 'desc')->paginate(12);
                     break;
                 case 'created_at':
-                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->latest()->paginate(9);
+                    $comics = Comic::where('price','>',$number1)->where('price','<',$number2)->latest()->paginate(12);
                     break;
             }
         }
@@ -403,7 +424,7 @@ class ComicController extends Controller
     }
 
     public static function getByPrice($number1,$number2){
-        return Comic::where('price','>',$number1)->where('price','<',$number2)->paginate(9);
+        return Comic::where('price','>',$number1)->where('price','<',$number2)->paginate(12);
     }
 
     public static function countByType($text){
@@ -411,7 +432,7 @@ class ComicController extends Controller
     }
 
     public static function getNewComic(){
-        return Comic::latest()->take(6)->get();
+        return Comic::latest()->where('quantity', '>', 0)->take(6)->get();
     }
 
     public static function  getComicByDiscount(){
@@ -423,15 +444,15 @@ class ComicController extends Controller
     }
 
     public static function getManga(){
-        return Comic::whereIn('type',['shonen','seinen','shojo','josei'])->inRandomOrder()->take(7)->get();
+        return Comic::whereIn('type',['shonen','seinen','shojo','josei'])->where('quantity', '>', 0)->inRandomOrder()->take(7)->get();
     }
 
     public static function getAmerican(){
-        return Comic::whereIn('type',['marvel','dc'])->inRandomOrder()->take(7)->get();
+        return Comic::whereIn('type',['marvel','dc'])->where('quantity', '>', 0)->inRandomOrder()->take(7)->get();
     }
 
     public static function getItalian(){
-       return Comic::whereIn('type',['italiano'])->inRandomOrder()->take(7)->get();
+       return Comic::whereIn('type',['italiano'])->where('quantity', '>', 0)->inRandomOrder()->take(7)->get();
     }
 
     public static function getrelated($id){
@@ -439,5 +460,232 @@ class ComicController extends Controller
         return Comic::whereIn('author_id',[$target ->author_id])->where('id', '!=', $id)->take(4)->get();
      }
 
+     public static function getSeller($id){
+        $sold = Comic::find($id);
+        return User::find($sold->user_id);
+     }
+     
+    public function addToCart($id, Request $request)
+    {
+        $comic = Comic::find($id);
+        $user = Auth::user();
+        if($comic->quantity>0) {
+
+            if (!$comic) {
+
+                abort(404);
+
+            }
+
+            $cart = session()->get('cart');
+            $image = ImageController::getCover($id);
+
+            // if cart is empty then this the first comic
+            if (!$cart) {
+
+                $cart = [
+                    $id => [
+                        "user" => $user->id,
+                        "name" => $comic->comic_name,
+                        "quantity" => $request->qty,
+                        "price" => $comic->price,
+                        "image" => $image->image_name,
+                    ]
+                ];
+
+                session()->put('cart', $cart);
+
+                $newQuantity = $comic->quantity - $request->qty;
+                DB::table('comics')->where('id', $comic->id)->update(['quantity' => $newQuantity]);
+                return redirect()->back()->with('success', 'comic added to cart successfully!');
+            }
+
+            // if cart not empty then check if this comic exist then increment quantity
+            if (isset($cart[$id])) {
+
+                $cart[$id]['quantity'] = $cart[$id]['quantity'] + $request->qty;
+
+                session()->put('cart', $cart);
+
+                $newQuantity = $comic->quantity - $request->qty;
+                DB::table('comics')->where('id', $comic->id)->update(['quantity' => $newQuantity]);
+                return redirect()->back()->with('success', 'comic added to cart successfully!');
+
+
+            }
+
+            // if item not exist in cart then add to cart with passed quantity
+            $cart[$id] = [
+                "user" => $user->id,
+                "name" => $comic->comic_name,
+                "quantity" => $request->qty,
+                "price" => $comic->price,
+                "image" => $image->image_name,
+            ];
+
+            session()->put('cart', $cart);
+
+            $newQuantity = $comic->quantity - $request->qty;
+            DB::table('comics')->where('id', $comic->id)->update(['quantity' => $newQuantity]);
+            return redirect()->back()->with('success', 'comic added to cart successfully!');
+        }
+        else{
+            return redirect()->back()->with('error', 'seems something went wrong!');
+        }
+    }
+
+    public function addToCart1($id)
+    {
+        $comic = Comic::find($id);
+        $user = Auth::user();
+        if($comic->quantity>0) {
+
+            if (!$comic) {
+
+                abort(404);
+
+            }
+
+            $cart = session()->get('cart');
+            $image = ImageController::getCover($id);
+
+            // if cart is empty then this the first comic
+            if (!$cart) {
+
+                $cart = [
+                    $id => [
+                        "user" => $user->id,
+                        "name" => $comic->comic_name,
+                        "quantity" => 1,
+                        "price" => $comic->price,
+                        "image" => $image->image_name,
+                    ]
+                ];
+
+                session()->put('cart', $cart);
+
+                $newQuantity = $comic->quantity - 1;
+                DB::table('comics')->where('id', $comic->id)->update(['quantity' => $newQuantity]);
+                return redirect()->back()->with('success', 'comic added to cart successfully!');
+            }
+
+            // if cart not empty then check if this comic exist then increment quantity
+            if (isset($cart[$id])) {
+
+                $cart[$id]['quantity'] = $cart[$id]['quantity'] + 1;
+
+                session()->put('cart', $cart);
+
+                $newQuantity = $comic->quantity - 1;
+                DB::table('comics')->where('id', $comic->id)->update(['quantity' => $newQuantity]);
+                return redirect()->back()->with('success', 'comic added to cart successfully!');
+            }
+
+            // if item not exist in cart then add to cart with passed quantity
+            $cart[$id] = [
+                "user" => $user->id,
+                "name" => $comic->comic_name,
+                "quantity" => 1,
+                "price" => $comic->price,
+                "image" => $image->image_name,
+            ];
+
+            session()->put('cart', $cart);
+
+            $newQuantity = $comic->quantity - 1;
+            DB::table('comics')->where('id', $comic->id)->update(['quantity' => $newQuantity]);
+            return redirect('/')->with('success', 'comic added to cart successfully!');
+
+        }
+        else{
+            return redirect('/')->with('error', 'seems something went wrong!');
+        }
+    }
+
+    public function updateCart($id, Request $request)
+    {
+        if($id and $request->qty)
+        {
+            $cart = session()->get('cart');
+
+            if($request->qty > $cart[$id]["quantity"]){ //caso in cui sto aumentando la quantità
+                $comic = Comic::find($id);
+                $added = $request->qty - $cart[$id]["quantity"];
+                $newQuantity = $comic->quantity - $added;
+                DB::table('comics')->where('id', $comic->id)->update(['quantity' => $newQuantity]);
+            }
+
+            if($request->qty < $cart[$id]["quantity"]){ //caso in cui sto rimuovendo la quantità
+                $comic = Comic::find($id);
+                $removed = $cart[$id]["quantity"] - $request->qty;
+                $newQuantity = $comic->quantity + $removed;
+                DB::table('comics')->where('id', $comic->id)->update(['quantity' => $newQuantity]);
+            }
+
+            $cart[$id]["quantity"] = $request->qty;
+
+            session()->put('cart', $cart);
+
+            return redirect()->back()->with('success', 'comic updated!');
+        }
+
+        return redirect()->back()->with('error', 'comic not updated!');
+
+    }
+
+    public function removeFromCart($id)
+    {
+        if($id) {
+
+            $cart = session()->get('cart');
+            $quantityInCart = $cart[$id]["quantity"];
+
+            if(isset($cart[$id])) {
+
+                unset($cart[$id]);
+
+                session()->put('cart', $cart);
+            }
+
+            session()->flash('success', 'Product removed successfully');
+
+            $comic = Comic::find($id);
+            $newQuantity = $comic->quantity + $quantityInCart;
+            DB::table('comics')->where('id', $comic->id)->update(['quantity' => $newQuantity]);
+
+            return redirect()->back();
+        }
+    }
+
+    public function removeAll(){
+        $cart = session()->get('cart');
+
+        // if cart is empty then this the first comic
+        if($cart == []) {
+            return redirect('/cart');
+        }
+        else{
+            foreach (session('cart') as $id => $details){
+                if($id) {
+
+                    $quantityInCart = $cart[$id]["quantity"];
+
+                    if (isset($cart[$id])) {
+
+                        unset($cart[$id]);
+
+                        session()->put('cart', $cart);
+                    }
+
+                    session()->flash('success', 'Product removed successfully');
+
+                    $comic = Comic::find($id);
+                    $newQuantity = $comic->quantity + $quantityInCart;
+                    DB::table('comics')->where('id', $comic->id)->update(['quantity' => $newQuantity]);
+                }
+            }
+        }
+        return redirect()->back();
+    }
 
 }

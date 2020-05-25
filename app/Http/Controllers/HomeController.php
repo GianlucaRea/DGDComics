@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Comic;
 use App\Http\Controllers\ComicController;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -15,7 +16,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $comics = Comic::all();
+        $comics = DB::table('comics')->where('quantity', '>', 0)->get();
         $newComics = \App\Http\Controllers\ComicController::getNewComic();
         $manga = \App\Http\Controllers\ComicController::getManga();
         $america = \App\Http\Controllers\ComicController::getAmerican();
