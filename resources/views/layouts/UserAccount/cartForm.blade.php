@@ -34,6 +34,8 @@
                         @php($sellers = collect())
                         @if(session('cart'))
                             @foreach(session('cart') as $id => $details)
+                                @php($user = \Illuminate\Support\Facades\Auth::user())
+                                @if($details['user'] == $user->id)
                                 @php($subtotal = $details['price'] * $details['quantity'])
                                 @php($total += $details['price'] * $details['quantity'])
                                 @php($comic = \App\Http\Controllers\ComicController::getByID($id))
@@ -62,6 +64,7 @@
                                     <td class="product-subtotal">{{ $subtotal }}</td>
                                     <td class="product-remove"><a href="{{url('remove-from-cart/'.$id) }}"><i class="fa fa-times"></i></a></td>
                                 </tr>
+                                @endif
                             @endforeach
                         @endif
                         </tbody>

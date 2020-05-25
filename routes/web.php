@@ -72,8 +72,6 @@ Route::get('update-cart/{id}', 'ComicController@updateCart');
 
 Route::get('remove-from-cart/{id}', 'ComicController@removeFromCart');
 
-Route::get('remove-from-cart-logo/{id}', 'ComicController@removeFromCartLogo');
-
 Route::get('remove-all', 'ComicController@removeAll');
 
 Auth::routes();

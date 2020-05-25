@@ -32,36 +32,36 @@
                                                 @php($tmp =0)
                                                 @php($user = \Illuminate\Support\Facades\Auth::user())
                                                 @foreach(session('cart') as $id => $details)
-                                                    @if ($tmp++ < 5)
-                                                        @if($details['user'] == $user->id)
-                                                        @php($comic = \App\Http\Controllers\ComicController::getByID($id))
+                                                    @if($details['user'] == $user->id)
                                                         @php($total += $details['price'] * $details['quantity'])
-                                                        <div class="single-cart">
-                                                            <div class="cart-img">
-                                                                <a href="{{ url('/comic_detail/'.$comic->id) }}"><img src="{{asset('img/comicsImages/' . $details['image']) }}" alt="man" /></a>
+                                                        @if ($tmp++ < 5)
+                                                            @php($comic = \App\Http\Controllers\ComicController::getByID($id))
+                                                            <div class="single-cart">
+                                                                <div class="cart-img">
+                                                                    <a href="{{ url('/comic_detail/'.$comic->id) }}"><img src="{{asset('img/comicsImages/' . $details['image']) }}" alt="man" /></a>
+                                                                </div>
+                                                                <div class="cart-info">
+                                                                    <h5><a href="{{ url('/comic_detail/'.$comic->id) }}">{{ $details['name']}}</a></h5>
+                                                                    <p>{{ $details['quantity'] }} x {{ $details['price'] }}</p>
+                                                                </div>
+                                                                <div class="cart-icon">
+                                                                    <a href="{{url('remove-from-cart/'.$id) }}"><i class="fa fa-remove"></i></a>
+                                                                </div>
                                                             </div>
-                                                            <div class="cart-info">
-                                                                <h5><a href="{{ url('/comic_detail/'.$comic->id) }}">{{ $details['name']}}</a></h5>
-                                                                <p>{{ $details['quantity'] }} x {{ $details['price'] }}</p>
-                                                            </div>
-                                                            <div class="cart-icon">
-                                                                <a href="{{url('remove-from-cart-logo/'.$id) }}"><i class="fa fa-remove"></i></a>
-                                                            </div>
-                                                        </div>
                                                         @endif
                                                     @endif
-                                                    @if($tmp > 5)
-                                                        <div class="mb-2"></div>
-                                                        <div class="text-center font-weight-bold">.<br/>.<br/>.</div>
-                                                        <div class="mb-3"></div>
-                                                    @endif
                                                 @endforeach
+                                                @if($tmp > 5)
+                                                    <div class="mb-2"></div>
+                                                    <div class="text-center font-weight-bold">.<br/>.<br/>.</div>
+                                                    <div class="mb-3"></div>
+                                                @endif
                                             </div>
                                             <div class="cart-totals">
                                                 <h5>Total <span>{{ $total }}</span></h5>
                                             </div>
                                             <div class="cart-bottom">
-                                                <a class="view-cart" href="cart.html">vedi carrello</a>
+                                                <a class="view-cart" href="{{url('/cart')}}">vedi carrello</a>
                                                 <a href="checkout.html">effettua l'ordine</a>
                                             </div>
                                         </div>
@@ -91,10 +91,10 @@
                                             Notifiche
                                                 <div class="mini-cart-sub">
                                                     <div class="cart-product">
-                                                        @php($tmp =0)
-                                                        @php($notifications = \App\Http\Controllers\NotificationController::getNotification($user->id))
+                                                        @php($tmp2 =0)
+                                                        @php($notifications = \App\Http\Controllers\NotificationController::getNotificationToRead($user->id))
                                                         @foreach($notifications as $notification)
-                                                            @if ($tmp++ < 5)
+                                                            @if ($tmp2++ < 10)
                                                                 <div class="single-cart">
                                                                     @if(strlen($notification->notification_text) > 33 )
                                                                         @php($subnotification = substr($notification->notification_text, 0, 33))
@@ -108,12 +108,12 @@
                                                                     @endif
                                                                 </div>
                                                             @endif
-                                                            @if($tmp > 5)
-                                                                <div class="mb-2"></div>
-                                                                <div class="text-center font-weight-bold">.<br/>.<br/>.</div>
-                                                                <div class="mb-3"></div>
-                                                            @endif
                                                         @endforeach
+                                                        @if($tmp2 > 10)
+                                                            <div class="mb-2"></div>
+                                                            <div class="text-center font-weight-bold">.<br/>.<br/>.</div>
+                                                            <div class="mb-3"></div>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             @else
