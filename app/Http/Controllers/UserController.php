@@ -46,6 +46,7 @@ class UserController extends Controller
             'email' => 'required',
             'email_verified_at' => 'required',
             'password' => 'required',
+            'partitaIva' => 'required',
 
         ];
         $validator = Validator::make($request->all(),$rules);
@@ -122,4 +123,21 @@ class UserController extends Controller
         return User::find($id)->get();
 
     }
+
+    public function changeEmail(Request $request){
+
+        $request->validate([
+
+            'email' => 'required',
+            'newEmail' => 'required',
+
+        ]);
+
+        User::find(auth()->user()->id)->update(['email'=> Hash::make($request->newEmail)]);
+
+        $user = \Illuminate\Support\Facades\Auth::user();
+        return redirect('/accountArea')
+            ->with(compact('user'));
+    }
+
 }

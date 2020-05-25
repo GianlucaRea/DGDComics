@@ -38,6 +38,8 @@ Auth::routes();
 
 //da qui sono da riordinare bene con i controller come ha fatto Gianluca sopra, per ora lasciamo così che funziona bene
 
+Route::post('change.email', 'UserController@changeEmail')->name('change.email');
+
 Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
 Route::get('remove-method/{method}', 'PaymentMethodController@remove')->name('remove.method');
 Route::get('remove-address/{address}', 'ShippingAddressController@remove')->name('remove.address');
@@ -51,6 +53,12 @@ Route::get('/logout', function () {
 Route::get('/accountArea', function () {
     $user = \Illuminate\Support\Facades\Auth::user();
     return view('/accountArea')
+        ->with(compact('user'));
+});
+
+Route::get('/vendor', function () {
+    $user = \Illuminate\Support\Facades\Auth::user();
+    return view('/vendor')
         ->with(compact('user'));
 });
 

@@ -11,7 +11,7 @@ class ShippingAddress extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'user_id','via','civico','other_info', 'favourite',
+        'user_id','via','civico','other_info', 'favourite', 'sede',
     ];
 
     public function user(){

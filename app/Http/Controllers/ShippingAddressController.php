@@ -47,6 +47,7 @@ class ShippingAddressController extends Controller
             'post_code' => 'required',
             'other_info' => 'required',
             'favourite' => 'required',
+            'sede' => 'required',
 
         ];
         $validator = Validator::make($request->all(),$rules);

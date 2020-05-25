@@ -45,7 +45,7 @@
                                             <p class="mb-0">I tuoi dati:</p>
                                             <p class="mb-0">E-mail:   <strong>{{ $user->email }} </strong></p>
                                             <p class="mb-0">Telefono: <strong>{{ $user->phone_number }} </strong></p>
-                                            <p class="mb-0">Vuoi diventare venditore?  <a href="#" class="logout"> Clicca qui</a></p>
+                                            <p class="mb-0">Vuoi diventare venditore?  <a href="{{ url('/vendor') }}" > Clicca qui</a></p>
                                         </div>
                                         <div class="myaccount-content">
                                             @php
@@ -308,11 +308,20 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="single-input-item">
-                                                        <label for="email" class="required">Indirizzo Email</label>
-                                                        <input type="email" id="email" placeholder={{$user->email}} />
-                                                    </div>
+
+                                                <form method="POST" action="{{ route('change.email') }}">
+                                                    <fieldset>
+                                                        <div class="single-input-item">
+                                                            <label for="email" class="required">Indirizzo Email</label>
+                                                            <input type="email" id="email" name="email" required autocomplete="email" placeholder={{$user->email}} />
+                                                            <input type="email" id="newEmail" name="newEmail" required autocomplete="newEmail" placeholder= 'inserire nuova e-mail' />
+                                                        </div>
+                                                    </fieldset>
+                                                        <div class="single-input-item">
+                                                            <button type="submit" class="btn btn-sqr">Cambia E-mail</button>
+                                                        </div>
                                                 </form>
+
                                                 <div class="mt-5"></div>
                                                 <form method="POST" action="{{ route('change.password') }}">
                                                     @csrf
