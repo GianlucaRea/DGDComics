@@ -4,52 +4,133 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-5 col-12"></div>
-            <div class="col-lg-6 col-md-4 col-12">
+            <div class="col-lg-5 col-md-4 col-12">
                 <div class="logo-area text-center logo-xs-mrg">
                     <a href="{{ url('/') }}"><img src="{{ asset('img/logo/VersionePennello/red2.png') }}" width="250px" height="250px" alt="logo" /></a>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-3 col-12"> <!-- la parte del carrello è ancora da fare, quindi non la tocco per ora-->
+            <div class="col-lg-2 col-md-3 col-12"> <!-- la parte del carrello è ancora da fare, quindi non la tocco per ora-->
                 <div class="row">
                     <div class="my-cart">
                         <ul>
-                            @php
-                                $quantityCart = 0;
-                                if(session('cart')) {
-                                    foreach(session('cart') as $id => $details){$quantityCart++;}
-                                }
-                            @endphp
-                            @if($quantityCart > 0)
+                            @if(\Illuminate\Support\Facades\Auth::user()!=null)
                                 <li><a href="{{url('/cart')}}"><i class="fa fa-shopping-cart"></i>Carrello</a>
-                                    <span>{{ $quantityCart }}</span>
-                                </li>
-                            @else
-                                <li><a href="{{url('/cart')}}"><i class="fa fa-shopping-cart"></i>Carrello</a></li>
+                                    @php($quantityCart = 0)
+                                    @if(session('cart'))
+                                        @foreach(session('cart') as $id => $details)
+                                            @php($user = \Illuminate\Support\Facades\Auth::user())
+                                            @if($details['user'] == $user->id)
+                                                @php($quantityCart++)
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                    @if($quantityCart > 0)
+                                        @php($total = 0)
+                                        <span>{{ $quantityCart }}</span>
+                                        <div class="mini-cart-sub">
+                                            <div class="cart-product">
+                                                @php($tmp =0)
+                                                @php($user = \Illuminate\Support\Facades\Auth::user())
+                                                @foreach(session('cart') as $id => $details)
+                                                    @if($details['user'] == $user->id)
+                                                        @php($total += $details['price'] * $details['quantity'])
+                                                        @if ($tmp++ < 5)
+                                                            @php($comic = \App\Http\Controllers\ComicController::getByID($id))
+                                                            <div class="single-cart">
+                                                                <div class="cart-img">
+                                                                    <a href="{{ url('/comic_detail/'.$comic->id) }}"><img src="{{asset('img/comicsImages/' . $details['image']) }}" alt="man" /></a>
+                                                                </div>
+                                                                <div class="cart-info">
+                                                                    <h5><a href="{{ url('/comic_detail/'.$comic->id) }}">{{ $details['name']}}</a></h5>
+                                                                    <p>{{ $details['quantity'] }} x {{ $details['price'] }}</p>
+                                                                </div>
+                                                                <div class="cart-icon">
+                                                                    <a href="{{url('remove-from-cart/'.$id) }}"><i class="fa fa-remove"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                    @endif
+                                                @endforeach
+                                                @if($tmp > 5)
+                                                    <div class="mb-2"></div>
+                                                    <div class="text-center font-weight-bold">.<br/>.<br/>.</div>
+                                                    <div class="mb-3"></div>
+                                                @endif
+                                            </div>
+                                            <div class="cart-totals">
+                                                <h5>Total <span>{{ $total }}</span></h5>
+                                            </div>
+                                            <div class="cart-bottom">
+                                                <a class="view-cart" href="{{url('/cart')}}">vedi carrello</a>
+                                                <a href="checkout.html">effettua l'ordine</a>
+                                            </div>
+                                        </div>
                             @endif
+                            @else
+                                <li><a href="{{url('/login')}}"><i class="fa fa-shopping-cart"></i>Carrello</a>
+                                    @endif
+                                </li>
                         </ul>
                     </div>
                 </div>
-                <br/>
+            </div>
+            <div class="col-lg-2 col-md-3 col-12">
                 <div class="row">
-                    @if (Route::has('login'))
-                        @auth
-                            <a class="notification" href="{{ url('/accountArea') }}">
-                                <img src="{{ asset('img/immaginiNostre/notifica.png') }}" width="20%", height="20%">
-                                @php
-                                    $number = \App\Http\Controllers\NotificationController::getNumber(\Illuminate\Support\Facades\Auth::user()->id);
-                                @endphp
-                                @if($number > 0)
-                                    <span>{{ $number }}</span>
-                                @endif&nbsp;
-                                Notifiche
-                            </a>
-                        @endauth
-                    @endif
+                    <div class="my-cart"> <!--uso la stessa classe perché non ho voglia di rifa, semplicemente dovrei rifare una cosa uguale con nome diverso-->
+                        <ul>
+                            <li>
+                                @if (Route::has('login'))
+                                    @auth
+                                        <a class="notification" href="{{url('/accountArea')}}">
+                                            <img src="{{ asset('img/immaginiNostre/notifica.png') }}" width="30%", height="30%">
+                                            @php($user = \Illuminate\Support\Facades\Auth::user())
+                                            @php($number = \App\Http\Controllers\NotificationController::getNumber($user->id))
+
+                                            @if($number > 0)
+                                                <span>{{ $number }}</span>
+                                            Notifiche
+                                                <div class="mini-cart-sub">
+                                                    <div class="cart-product">
+                                                        @php($tmp2 =0)
+                                                        @php($notifications = \App\Http\Controllers\NotificationController::getNotificationToRead($user->id))
+                                                        @foreach($notifications as $notification)
+                                                            @if ($tmp2++ < 10)
+                                                                <div class="single-cart">
+                                                                    @if(strlen($notification->notification_text) > 33 )
+                                                                        @php($subnotification = substr($notification->notification_text, 0, 33))
+                                                                        <div class="cart-info">
+                                                                            <h5><a href="{{ url('/accountArea') }}">{{ $subnotification}}...</a></h5>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="cart-info">
+                                                                            <h5><a href="{{ url('/accountArea') }}">{{ $notification->notification_text}}</a></h5>
+                                                                        </div>
+                                                                    @endif
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
+                                                        @if($tmp2 > 10)
+                                                            <div class="mb-2"></div>
+                                                            <div class="text-center font-weight-bold">.<br/>.<br/>.</div>
+                                                            <div class="mb-3"></div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            @else
+                                                Notifiche
+                                            @endif
+                                        </a>
+                                    @endauth
+                                @endif
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <!-- header-mid-area-end -->
 <!-- main-menu-area-start -->
 <div class="main-menu-area d-md-none d-none d-lg-block sticky-header-1" id="header-sticky">

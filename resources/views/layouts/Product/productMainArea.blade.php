@@ -94,13 +94,20 @@
                                 </div>
                             </div>
                             <div class="product-add-form">
-                                @if($comic->quantity>0)
+                                @if($comic->quantity>0 && \Illuminate\Support\Facades\Auth::user()!=null)
                                 <form action="{{url('add-to-cart/'.$comic->id) }}">
                                     <div class="quality-button">
                                             <input name="qty" id="qty" class="qty" type="number" min="1" max="{{$comic->quantity}}" value="1">
                                     </div>
                                     <button type="submit" class="quality-button">Aggiungi al carrello</button>
                                 </form>
+                                @elseif($comic->quantity>0)
+                                    <form action="{{url('/login') }}">
+                                        <div class="quality-button">
+                                            <input name="qty" id="qty" class="qty" type="number" min="1" max="{{$comic->quantity}}" value="1">
+                                        </div>
+                                        <button type="submit" class="quality-button">Aggiungi al carrello</button>
+                                    </form>
                                 @endif
                             </div>
                             <div class="product-social-links">

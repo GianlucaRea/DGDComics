@@ -78,3 +78,5 @@ Route::get('remove-all', 'ComicController@removeAll');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//commento di prova github

@@ -46,11 +46,12 @@
                                             <p class="mb-0">E-mail:   <strong>{{ $user->email }} </strong></p>
                                             <p class="mb-0">Telefono: <strong>{{ $user->phone_number }} </strong></p>
                                             <p class="mb-0">Vuoi diventare venditore?  <a href="#" class="logout"> Clicca qui</a></p>
-                                        </div>
-                                        <div class="myaccount-content">
+
                                             @php
                                                 $notifications = \App\Http\Controllers\NotificationController::getNotification($user->id);
                                             @endphp
+
+                                            <div class="mb-30"></div>
                                             <h5>Notifiche</h5>
                                             @if($notifications->count() < 1)
                                                 <div class="myaccount-content">

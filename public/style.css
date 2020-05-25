@@ -763,6 +763,7 @@ body {
     position: relative;
 }
 
+
 .cart-icon {
     display: flex;
     flex-grow: 100;
@@ -7720,6 +7721,8 @@ p.lost-password a:hover {
     font-weight: 400;
     background-color: #f8f8f8;
     border-color: #ccc;
+    border-left:0;
+    border-right:0;
     border-bottom: 0;
 }
 
@@ -7728,6 +7731,8 @@ p.lost-password a:hover {
     padding: 10px;
     vertical-align: middle;
     border-color: #ccc;
+    border-left: 0px;
+    border-right: 0px;
 }
 
 .saved-message {

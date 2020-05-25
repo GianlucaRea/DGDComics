@@ -121,6 +121,10 @@ class NotificationController extends Controller
         return Notification::where('user_id', '=', $id)->get();
     }
 
+    public static function getNotificationToRead($id){
+        return Notification::where('user_id', '=', $id)->where('state', '=', 0)->get();
+    }
+
     public static function getNumber($id){
         return Notification::where('user_id', '=', $id)->where('state', '=', '0')->count();
     }

@@ -10,6 +10,7 @@ use App\Review;
 use App\User;
 use Illuminate\Http\Request;
 use App\Comic;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Validator;
 
@@ -467,6 +468,7 @@ class ComicController extends Controller
     public function addToCart($id, Request $request)
     {
         $comic = Comic::find($id);
+        $user = Auth::user();
         if($comic->quantity>0) {
 
             if (!$comic) {
@@ -483,6 +485,7 @@ class ComicController extends Controller
 
                 $cart = [
                     $id => [
+                        "user" => $user->id,
                         "name" => $comic->comic_name,
                         "quantity" => $request->qty,
                         "price" => $comic->price,
@@ -494,7 +497,7 @@ class ComicController extends Controller
 
                 $newQuantity = $comic->quantity - $request->qty;
                 DB::table('comics')->where('id', $comic->id)->update(['quantity' => $newQuantity]);
-                return redirect('/cart')->with('success', 'comic added to cart successfully!');
+                return redirect()->back()->with('success', 'comic added to cart successfully!');
             }
 
             // if cart not empty then check if this comic exist then increment quantity
@@ -506,13 +509,14 @@ class ComicController extends Controller
 
                 $newQuantity = $comic->quantity - $request->qty;
                 DB::table('comics')->where('id', $comic->id)->update(['quantity' => $newQuantity]);
-                return redirect('/cart')->with('success', 'comic added to cart successfully!');
+                return redirect()->back()->with('success', 'comic added to cart successfully!');
 
 
             }
 
             // if item not exist in cart then add to cart with passed quantity
             $cart[$id] = [
+                "user" => $user->id,
                 "name" => $comic->comic_name,
                 "quantity" => $request->qty,
                 "price" => $comic->price,
@@ -523,16 +527,17 @@ class ComicController extends Controller
 
             $newQuantity = $comic->quantity - $request->qty;
             DB::table('comics')->where('id', $comic->id)->update(['quantity' => $newQuantity]);
-            return redirect('/cart')->with('success', 'comic added to cart successfully!');
+            return redirect()->back()->with('success', 'comic added to cart successfully!');
         }
         else{
-            return redirect('/cart')->with('error', 'seems something went wrong!');
+            return redirect()->back()->with('error', 'seems something went wrong!');
         }
     }
 
     public function addToCart1($id)
     {
         $comic = Comic::find($id);
+        $user = Auth::user();
         if($comic->quantity>0) {
 
             if (!$comic) {
@@ -549,6 +554,7 @@ class ComicController extends Controller
 
                 $cart = [
                     $id => [
+                        "user" => $user->id,
                         "name" => $comic->comic_name,
                         "quantity" => 1,
                         "price" => $comic->price,
@@ -560,7 +566,7 @@ class ComicController extends Controller
 
                 $newQuantity = $comic->quantity - 1;
                 DB::table('comics')->where('id', $comic->id)->update(['quantity' => $newQuantity]);
-                return redirect('/cart')->with('success', 'comic added to cart successfully!');
+                return redirect()->back()->with('success', 'comic added to cart successfully!');
             }
 
             // if cart not empty then check if this comic exist then increment quantity
@@ -572,11 +578,12 @@ class ComicController extends Controller
 
                 $newQuantity = $comic->quantity - 1;
                 DB::table('comics')->where('id', $comic->id)->update(['quantity' => $newQuantity]);
-                return redirect('/cart')->with('success', 'comic added to cart successfully!');
+                return redirect()->back()->with('success', 'comic added to cart successfully!');
             }
 
             // if item not exist in cart then add to cart with passed quantity
             $cart[$id] = [
+                "user" => $user->id,
                 "name" => $comic->comic_name,
                 "quantity" => 1,
                 "price" => $comic->price,
@@ -587,11 +594,11 @@ class ComicController extends Controller
 
             $newQuantity = $comic->quantity - 1;
             DB::table('comics')->where('id', $comic->id)->update(['quantity' => $newQuantity]);
-            return redirect('/cart')->with('success', 'comic added to cart successfully!');
+            return redirect('/')->with('success', 'comic added to cart successfully!');
 
         }
         else{
-            return redirect('/cart')->with('error', 'seems something went wrong!');
+            return redirect('/')->with('error', 'seems something went wrong!');
         }
     }
 
@@ -646,7 +653,7 @@ class ComicController extends Controller
             $newQuantity = $comic->quantity + $quantityInCart;
             DB::table('comics')->where('id', $comic->id)->update(['quantity' => $newQuantity]);
 
-            return redirect('/cart');
+            return redirect()->back();
         }
     }
 
@@ -678,7 +685,7 @@ class ComicController extends Controller
                 }
             }
         }
-        return redirect('/cart');
+        return redirect()->back();
     }
 
 }
