@@ -15,8 +15,8 @@ class CreateComicBoughtOrderTable extends Migration
     {
         Schema::create('comic_bought_order', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('comic_bought_id')->constrained();
-            $table->foreignId('order_id')->constrained();
+            $table->foreignId('comic_bought_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('order_id')->constrained()->cascadeOnDelete();
             $table->integer('quantity');
         });
     }

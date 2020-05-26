@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use app\User;
+use App\User;
+use App\Comic;
+use App\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -113,10 +115,10 @@ class UserController extends Controller
     {
         $User = User::find($id);
         if(is_null($User)){
-            return response()->json(["message"=>'Record not found'],404);
+            return redirect()->route("AdminAccount")->with('message','Alredy Deleted');
         }
         $User -> delete();
-        return response()->json(null,204);
+        return redirect()->route("AdminAccount")->with('message','Success');
     }
 
     public static function getUserId($id)

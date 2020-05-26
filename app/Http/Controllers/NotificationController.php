@@ -32,11 +32,10 @@ class NotificationController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param array $genre_id
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,array $genre_id) //array $genre_id passa un array di id che corrispondono
-    {                                                       //ai generi che prenderà il fumetto
+    public function store(Request $request)
+    {
         $rules = [
             'user_id'=>'required',
             'Notification_text'=>'required',
@@ -50,9 +49,6 @@ class NotificationController extends Controller
 
 
         $Notification = Notification::create($request->all());
-        $Genre = Genre::find($genre_id); // Prendi genere in base all'id passato
-        $Notification->genre()->attach($Genre); // Attacca al Notification i generi passati come argomento
-        //Questo codice non è sicuro sia funzionante Codice di Gianluca Rea
         return response()->json($Notification,201);
     }
 

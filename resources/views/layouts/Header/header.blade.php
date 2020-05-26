@@ -14,6 +14,9 @@
                     <div class="my-cart">
                         <ul>
                             @if(\Illuminate\Support\Facades\Auth::user()!=null)
+                                @if(Auth::user()->hasGroup('il gruppo degli admin'))
+
+                                @else
                                 <li><a href="{{url('/cart')}}"><i class="fa fa-shopping-cart"></i>Carrello</a>
                                     @php($quantityCart = 0)
                                     @if(session('cart'))
@@ -65,6 +68,7 @@
                                                 <a href="checkout.html">effettua l'ordine</a>
                                             </div>
                                         </div>
+                                @endif
                             @endif
                             @else
                                 <li><a href="{{url('/login')}}"><i class="fa fa-shopping-cart"></i>Carrello</a>
@@ -174,7 +178,7 @@
             </div>
             @if (Route::has('login'))
                 @auth
-                   @if(Auth::user()->hasGroup('il gruppo degli admin'));
+                   @if(Auth::user()->hasGroup('il gruppo degli admin'))
                     <div class="col-lg-1">
                         <div class="menu-area">
                             <ul>

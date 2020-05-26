@@ -22,7 +22,7 @@ Route::get('/contact', function(){
     return view('contact');
 });
 
-Route::get('/comic_detail/{id}','ComicController@comicDetail');
+Route::get('/comic_detail/{id}','ComicController@comicDetail')->name('comicdetail');
 Route::post('/comic_detail/{id}','ReviewController@add')->name('submitReview');
 
 Route::get('/shoplist', 'ComicController@shoplistBase');
@@ -61,15 +61,15 @@ Route::get('/accountArea', function () {
 
 Route::get('/adminArea', function () {
     $user = \Illuminate\Support\Facades\Auth::user();
-    $users = \App\User::where('username','!=','admin')->get();
-    $comics = Comic::all();
-    $reviews = \App\Review::all();
+    $users = \App\User::where('username','!=','admin')->orderBy('username', 'asc')->paginate(12);
+    $comics =Comic::orderBy('comic_name', 'asc')->paginate(12);
+    $reviews = \App\Review::orderBy('review_title', 'asc')->paginate(12);
     return view('adminPanel')
         ->with(compact('user'))
         ->with(compact('users'))
         ->with(compact('comics'))
         ->with(compact('reviews'));
-});
+})->name('AdminAccount');
 
 Route::get('/vendor', function () {
     $user = \Illuminate\Support\Facades\Auth::user();
@@ -97,3 +97,8 @@ Route::get('remove-all', 'ComicController@removeAll');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('user-delete/{id}','UserController@destroy')->name('user-delete');
+Route::get('comic-delete/{id}','ComicController@destroy')->name('comic-delete');
+Route::get('review-delete/{id}','ReviewController@destroy')->name('review-delete');
+Route::get('review-deletelocal/{id}','ReviewController@destroylocal')->name('review-delete-local');
