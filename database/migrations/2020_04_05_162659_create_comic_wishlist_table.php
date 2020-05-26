@@ -15,7 +15,7 @@ class CreateComicWishlistTable extends Migration
     {
         Schema::create('comic_wishlist', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('comic_id')->constrained();
+            $table->foreignId('comic_id')->constrained()->cascadeOnDelete();
             $table->foreignId('wishlist_id')->constrained();
         });
     }

@@ -122,10 +122,10 @@ class ComicController extends Controller
     {
         $Comic = Comic::find($id);
         if(is_null($Comic)){
-            return response()->json(["message"=>'Record not found'],404);
+            return redirect()->back()->with('message','Alredy Deleted');
         }
-        $Comic-> delete();
-        return response()->json(null,204);
+        $Comic -> delete();
+        return redirect()->back()->with('message','Success');
     }
 
 

@@ -15,7 +15,7 @@ class CreateComicBoughtsTable extends Migration
     {
         Schema::create('comic_boughts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('comic_id');
+            $table->foreignId('comic_id')->cascadeOnDelete();
             $table->timestamps();
         });
     }

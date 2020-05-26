@@ -15,7 +15,7 @@ class CreateImagesTable extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->bigIncrements('id')->unique();
-            $table->foreignId('comic_id')->constrained();
+            $table->foreignId('comic_id')->constrained()->cascadeOnDelete();
             $table->text('image_name');
             $table->text('size');
             $table->text('format');

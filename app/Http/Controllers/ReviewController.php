@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Comic;
 use App\PaymentMethod;
+use App\User;
+use App\Review;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -39,4 +42,30 @@ class ReviewController extends Controller
         return redirect('comic_detail/$id')
             ->with(compact('comics'));
     }
+
+
+    public function destroy($id)
+    {
+        $Review = Review::find($id);
+        if(is_null($Review)){
+            return redirect()->route("AdminAccount")->with('message','Alredy Deleted');
+        }
+        $Review -> delete();
+        return redirect()->route("AdminAccount")->with('message','Success');
+    }
+    public function destroylocal($id)
+    {
+
+        $Review = Review::find($id);
+        $comic_id = Review::find($id)->comic_id;
+        $comic = Comic::where('id','=', $comic_id)->get();
+        if(is_null($Review)){
+            return redirect()->back()->with('message','Alredy Deleted');
+        }
+        $Review -> delete();
+
+
+        return redirect()->back()->with('message','Success');
+    }
+
 }
