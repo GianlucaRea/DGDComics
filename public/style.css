@@ -4553,8 +4553,21 @@ nav.menu .cr-dropdown ul {
     border-radius: 0;
     color: #908f8f;
     font-size: 14px;
-    height: 35px;
+    height: 40px;
     min-width: 95px;
+    padding: 0 5px;
+    font-family: 'Rufina', serif;
+    font-weight: 400;
+    color: #333;
+}
+
+.toolbar-sorter2 .sorter-options2 {
+    border: 1px solid #ccc;
+    border-radius: 0;
+    color: #908f8f;
+    font-size: 14px;
+    height: 40px;
+    width: 100%;
     padding: 0 5px;
     font-family: 'Rufina', serif;
     font-weight: 400;

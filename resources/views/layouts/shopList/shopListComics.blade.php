@@ -17,15 +17,14 @@
                     </div>
                     <form method="GET">
                         <div class="toolbar-sorter">
-                            <span>Sort By</span>
-                            <select name="sorter" class="sorter-options" style="width:150px;" data-role="sorter">
+                            <select name="sorter" class="sorter-options" data-role="sorter">
                                 <option value='comic_name_asc'>Titolo: A-Z</option>
                                 <option value='comic_name_desc'> Titolo: Z-A</option>
                                 <option value='price_asc'> Prezzo: Crescente</option>
                                 <option value='price_desc'> Prezzo: Decrescente</option>
                                 <option value='created_at'> Ultimi Arrivati</option>
                             </select>
-                         <button type="submit" >Ordina </button><!-- da rendere più bello -->
+                         <button class="btn btn-sqr" type="submit" >Ordina </button><!-- da rendere più bello -->
                             <div>
                             </div>
                         </div>

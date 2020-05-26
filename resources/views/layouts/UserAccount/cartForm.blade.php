@@ -72,69 +72,142 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-8 col-md-6 col-12">
-                <div class="buttons-cart mb-30">
-                    <ul>
-                        <li><a href="{{ url('remove-all') }}">Svuota carrello</a></li>
-                        <li><a href="{{ url('/') }}">Torna al negozio</a></li>
-                    </ul>
+        <form action="POST" action="#">
+            @csrf
+            <div class="row">
+                <div class="col-lg-8 col-md-6 col-12">
+                    <div class="buttons-cart mb-30">
+                        <ul>
+                            <li><a href="{{ url('remove-all') }}">Svuota carrello</a></li>
+                            <li><a href="{{ url('/') }}">Torna al negozio</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="toolbar-sorter2">
+                        @php($user = \Illuminate\Support\Facades\Auth::user())
+                        @php($shippingAddresses = \App\Http\Controllers\ShippingAddressController::getShippingAddressByUserId($user->id))
+
+                        @if($shippingAddresses->count() < 1)
+                            <h4>Indirizzo di spedizione</h4>
+                            <p>non hai indirizzi di spedizione validi, vai nella sezione account ed aggiungine uno</p>
+                        @else
+                            <h4>Indirizzo di spedizione</h4>
+                            <select name="shippingAddress" class="sorter-options2" data-role="sorter">
+
+                                @foreach($shippingAddresses as $shippingAddress)
+                                    @if($shippingAddress->favourite != 0)
+                                        <option value='{{$shippingAddress->id}}'>{{ $shippingAddress->via }} {{ $shippingAddress->civico }}, {{ $shippingAddress->città }} ({{ $shippingAddress->post_code }})</option>
+                                    @endif
+                                @endforeach
+
+                                @foreach($shippingAddresses as $shippingAddress)
+                                    @if($shippingAddress->favourite != 1)
+                                        <option value='{{$shippingAddress->id}}'>{{ $shippingAddress->via }} {{ $shippingAddress->civico }}, {{ $shippingAddress->città }} ({{ $shippingAddress->post_code }})</option>
+                                    @endif
+                                @endforeach
+
+                            </select>
+                        @endif
+                    </div>
+
+                    <div class="mb-5"></div>
+
+                    <div class="toolbar-sorter2">
+                        @php($user = \Illuminate\Support\Facades\Auth::user())
+                        @php($paymentMethods = \App\Http\Controllers\PaymentMethodController::getPaymentMethodByUserId($user->id))
+                        @php($oggi = \App\Http\Controllers\PaymentMethodController::getTime())
+
+                        @if($paymentMethods->count() < 1)
+                            <h4>Medoto di pagamento</h4>
+                            <p>non hai metodi di pagamento validi, vai nella sezione account ed aggiungine uno</p>
+                        @else
+                            <h4>Metodo di pagamento</h4>
+                            <select name="shippingAddress" class="sorter-options2" data-role="sorter">
+
+                                @foreach($paymentMethods as $paymentMethod)
+                                    @if($paymentMethod->favourite != 0)
+                                        @php($dataScadenza = $paymentMethod->data_scadenza)
+                                        @php($scadenza = strtotime($dataScadenza))
+                                        @if($scadenza - $oggi > 0)
+                                            @php($last_four_digits = substr($paymentMethod->cardNumber, 12, 16))
+                                            <option value='{{$paymentMethod->id}}'>{{ $paymentMethod->payment_type }}, ****-****-****-{{ $last_four_digits }}, {{ $paymentMethod->data_scadenza }}, {{ $paymentMethod->intestatario }}</option>
+                                        @endif
+                                    @endif
+                                @endforeach
+
+
+                                @foreach($paymentMethods as $paymentMethod)
+                                    @if($paymentMethod->favourite != 1)
+                                        @php($dataScadenza = $paymentMethod->data_scadenza)
+                                        @php($scadenza = strtotime($dataScadenza))
+                                        @if($scadenza - $oggi > 0)
+                                            @php($last_four_digits = substr($paymentMethod->cardNumber, 12, 16))
+                                            <option value='{{$paymentMethod->id}}'>{{ $paymentMethod->payment_type }}, ****-****-****-{{ $last_four_digits }}, {{ $paymentMethod->data_scadenza }}, {{ $paymentMethod->intestatario }}</option>
+                                        @endif
+                                    @endif
+                                @endforeach
+
+                            </select>
+                        @endif
+                    </div>
+
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-12">
-                <div class="cart_totals">
-                    <h2>Totale del carrello</h2>
-                    <table>
-                        <tbody>
-                        <tr class="cart-subtotal">
-                            <th>Subtotale</th>
-                            <td>
-                                <span class="amount">€ {{ $total }}</span>
-                            </td>
-                        </tr>
-                        <tr class="cart-subtotal">
-                            @if($total > 0 && $total < 20)
-                                <th>Costi di spedizione</th>
+
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="cart_totals">
+                        <h2>Totale del carrello</h2>
+                        <table>
+                            <tbody>
+                            <tr class="cart-subtotal">
+                                <th>Subtotale</th>
+                                <td>
+                                    <span class="amount">€ {{ $total }}</span>
+                                </td>
+                            </tr>
+                            <tr class="cart-subtotal">
+                                @if($total > 0 && $total < 20)
+                                    <th>Costi di spedizione</th>
                                     <td>
                                         <span class="amount">€ {{$sellers->count() * 5}}</span>
                                     </td>
-                            @else
-                                @if($total == 0)
-                                    <th>Costi di spedizione</th>
+                                @else
+                                    @if($total == 0)
+                                        <th>Costi di spedizione</th>
                                         <td>
                                             <span class="amount">€ {{$sellers->count() * 5}}</span>
                                         </td>
+                                    @endif
+                                    @if($total > 20)
+                                        <th>Spedizione Gratuita per ordini maggiori di 20€ </th>
+                                        <td>
+                                            <span class="amount">€ 0</span>
+                                        </td>
+                                    @endif
                                 @endif
-                                @if($total > 20)
-                                <th>Spedizione Gratuita per ordini maggiori di 20€ </th>
-                                    <td>
-                                        <span class="amount">€ 0</span>
-                                    </td>
-                                @endif
-                            @endif
-                        </tr>
-                        <tr class="order-total">
-                            <th>Totale</th>
-                            <td>
-                                @if($total>0 && $total <20)
-                                    <strong>
-                                        <span class="amount">€ {{ $total + $sellers->count() * 5 }}</span>
-                                    </strong>
-                                @else
-                                    <strong>
-                                        <span class="amount">€ {{ $total }}</span>
-                                    </strong>
-                                @endif
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <div class="wc-proceed-to-checkout">
-                        <a href="#">procedi all'acquisto</a>
+                            </tr>
+                            <tr class="order-total">
+                                <th>Totale</th>
+                                <td>
+                                    @if($total>0 && $total <20)
+                                        <strong>
+                                            <span class="amount">€ {{ $total + $sellers->count() * 5 }}</span>
+                                        </strong>
+                                    @else
+                                        <strong>
+                                            <span class="amount">€ {{ $total }}</span>
+                                        </strong>
+                                    @endif
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="wc-proceed-to-checkout">
+                            <button class="btn btn-sqr" type="submit" >Procedi all'acquisto </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 

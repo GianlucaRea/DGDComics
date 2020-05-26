@@ -181,6 +181,12 @@
                                                         <address>
                                                             <h6>PREDEFINITO</h6>
                                                             <p><strong>{{ $paymentMethod->payment_type }}</strong></p>
+                                                            <p><strong>Intestatario: </strong>{{ $paymentMethod->intestatario }}</p>
+                                                            @php
+                                                                $last_four_digits = substr($paymentMethod->cardNumber, 12, 16)
+                                                            @endphp
+                                                            <p><strong>Numero carta: </strong>****-****-****-{{ $last_four_digits }}</p>
+                                                            <p><strong>Data scadenza: </strong>{{ $paymentMethod->data_scadenza }}</p>
                                                             @if($scadenza - $oggi < 0)
                                                                 <h5>LA TUA CARTA È SCADUTA</h5>
                                                             @else
@@ -206,6 +212,12 @@
                                                 <div class="myaccount-content">
                                                     <address>
                                                         <p><strong>{{ $paymentMethod->payment_type }}</strong></p>
+                                                        <p><strong>Intestatario: </strong>{{ $paymentMethod->intestatario }}</p>
+                                                        @php
+                                                            $last_four_digits = substr($paymentMethod->cardNumber, 12, 16)
+                                                        @endphp
+                                                        <p><strong>Numero carta: </strong>****-****-****-{{ $last_four_digits }}</p>
+                                                        <p><strong>Data scadenza: </strong>{{ $paymentMethod->data_scadenza }}</p>
                                                         @if($scadenza - $oggi < 0)
                                                             <h5>LA TUA CARTA È SCADUTA</h5>
                                                         @else
