@@ -42,6 +42,8 @@ class OrderController extends Controller
             'payment_method_id' => 'required',
             'shipping_address_id' => 'required',
             'total' => 'required',
+            'state' => 'required',
+            'date' => 'required'
         ];
         $validator = Validator::make($request->all(),$rules);
         if($validator->fails()){
@@ -128,7 +130,7 @@ class OrderController extends Controller
             'payment_method_id' => $order->payment_method_id,
             'shipping_address_id' => $order->shipping_adress_id,
             'total' => $order->total,
-            'state' => '0',
+            'state' => 'ordinato',
         );
 
         $order_id = Order::create($data1);
@@ -165,7 +167,17 @@ class OrderController extends Controller
 
             return redirect('/orderSuccess');
         }
-        return redirect()->back();
+        return redirect('/orderFailure');
+    }
+
+    public static function getAllOrderByUser($id){
+        return DB::table('orders')->where('user_id', '=', $id)->get();
+    }
+
+    public static function orderDetail($id){
+        $order = DB::table('orders')->where('id', '=', $id)->get();
+        return view('orderDetail')
+            ->with(compact('order'));
     }
 
 }

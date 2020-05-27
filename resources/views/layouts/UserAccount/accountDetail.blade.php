@@ -109,49 +109,43 @@
                                     <!-- Single Tab Content End -->
 
                                     <!-- Single Tab Content Start -->
+
                                     <div class="tab-pane fade" id="orders" role="tabpanel">
-                                        <div class="myaccount-content">
-                                            <h5>Ordini</h5>
-                                            <div class="myaccount-table table-responsive text-center">
-                                                <table class="table table-bordered">
-                                                    <thead class="thead-light">
-                                                    <tr>
-                                                        <th>Ordine</th>
-                                                        <th>Data</th>
-                                                        <th>Stato</th>
-                                                        <th>Totale</th>
-                                                        <th>Azione</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>Aug 22, 2018</td>
-                                                        <td>Pending</td>
-                                                        <td>$3000</td>
-                                                        <td><a href="cart.html" class="btn btn-sqr">View</a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>July 22, 2018</td>
-                                                        <td>Approved</td>
-                                                        <td>$200</td>
-                                                        <td><a href="cart.html" class="btn btn-sqr">View</a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>3</td>
-                                                        <td>June 12, 2017</td>
-                                                        <td>On Hold</td>
-                                                        <td>$990</td>
-                                                        <td><a href="cart.html" class="btn btn-sqr">View</a>
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
+                                        @php($orders = \App\Http\Controllers\OrderController::getAllOrderByUser($user->id))
+                                        @if($orders->count()<1)
+                                            <div class="myaccount-content">
+                                                <h5>Non sono ancora stati inseriti metodi di pagamento dall'utente</h5>
                                             </div>
-                                        </div>
+                                        @else
+                                            <div class="myaccount-content">
+                                                <h5>Ordini</h5>
+                                                <div class="myaccount-table table-responsive text-center">
+                                                    <table class="table table-bordered">
+                                                        <thead class="thead-light">
+                                                        <tr>
+                                                            <th>Ordine</th>
+                                                            <th>Data</th>
+                                                            <th>Stato</th>
+                                                            <th>Totale</th>
+                                                            <th>Azione</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        @foreach($orders as $order)
+                                                        <tr>
+                                                            <td>{{ $order->id }}</td>
+                                                            <td>{{ $order->date }}</td>
+                                                            <td>{{ $order->state }}</td>
+                                                            <td>€ {{ $order->total }}</td>
+                                                            <td><a href="{{ route('orderDetail', ['id' => $order->id]) }}" class="btn btn-sqr">View</a>
+                                                            </td>
+                                                        </tr>
+                                                        @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        @endif
                                     </div>
                                     <!-- Single Tab Content End -->
 
@@ -159,10 +153,8 @@
 
                                     <!-- Single Tab Content Start -->
                                     <div class="tab-pane fade" id="payment-method" role="tabpanel">
-                                        @php
-                                            $paymentMethods = \App\Http\Controllers\PaymentMethodController::getPaymentMethodByUserId($user->id);
-                                            $oggi = \App\Http\Controllers\PaymentMethodController::getTime();
-                                        @endphp
+                                        @php($paymentMethods = \App\Http\Controllers\PaymentMethodController::getPaymentMethodByUserId($user->id))
+                                        @php($oggi = \App\Http\Controllers\PaymentMethodController::getTime())
 
                                         @if($paymentMethods->count() < 1)
                                             <div class="myaccount-content">
@@ -170,52 +162,42 @@
                                             </div>
                                         @endif
 
+                                        <div class="myaccount-content">
                                         @foreach($paymentMethods as $paymentMethod)
                                             @if($paymentMethod->favourite != 0)
-                                                @php
-                                                    $dataScadenza = $paymentMethod->data_scadenza;
-                                                    $scadenza = strtotime($dataScadenza);
-                                                @endphp
-                                                    <div class="myaccount-content">
-                                                        <h5>I TUOI METODI DI PAGAMENTO</h5>
-                                                        <address>
-                                                            <h6>PREDEFINITO</h6>
-                                                            <p><strong>{{ $paymentMethod->payment_type }}</strong></p>
-                                                            <p><strong>Intestatario: </strong>{{ $paymentMethod->intestatario }}</p>
-                                                            @php
-                                                                $last_four_digits = substr($paymentMethod->cardNumber, 12, 16)
-                                                            @endphp
-                                                            <p><strong>Numero carta: </strong>****-****-****-{{ $last_four_digits }}</p>
-                                                            <p><strong>Data scadenza: </strong>{{ $paymentMethod->data_scadenza }}</p>
-                                                            @if($scadenza - $oggi < 0)
-                                                                <h5>LA TUA CARTA È SCADUTA</h5>
-                                                            @else
-                                                                @if($scadenza - $oggi < 2592000)
-                                                                    <h5>LA TUA CARTA STA PER SCADERE</h5>
-                                                                @endif
+                                                @php($dataScadenza = $paymentMethod->data_scadenza) <!--Raga so che andava bene anche con php ed end php, ma a caso ha cominciato a dare errore ovunque, vallo a capi-->
+                                                    @php($scadenza = strtotime($dataScadenza))
+                                                    <h5>I TUOI METODI DI PAGAMENTO</h5>
+                                                    <address>
+                                                        <h6>PREDEFINITO</h6>
+                                                        <p><strong>{{ $paymentMethod->payment_type }}</strong></p>
+                                                        <p><strong>Intestatario: </strong>{{ $paymentMethod->intestatario }}</p>
+                                                        @php($last_four_digits = substr($paymentMethod->cardNumber, 12, 16))
+                                                        <p><strong>Numero carta: </strong>****-****-****-{{ $last_four_digits }}</p>
+                                                        <p><strong>Data scadenza: </strong>{{ $paymentMethod->data_scadenza }}</p>
+                                                        @if($scadenza - $oggi < 0)
+                                                            <h5>LA TUA CARTA È SCADUTA</h5>
+                                                        @else
+                                                            @if($scadenza - $oggi < 2592000)
+                                                                <h5>LA TUA CARTA STA PER SCADERE</h5>
                                                             @endif
-                                                        </address>
-                                                        <a href="{{ Route('remove.method', ['method' => $paymentMethod->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
-                                                            Rimuovi metodo di pagamento</a>
-                                                    </div>
-                                            @endif
-                                        @endforeach
-
-
+                                                        @endif
+                                                    </address>
+                                                    <a href="{{ Route('remove.method', ['method' => $paymentMethod->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
+                                                        Rimuovi metodo di pagamento</a>
+                                                @endif
+                                            @endforeach
+                                        </div>
 
                                         @foreach($paymentMethods as $paymentMethod)
                                             @if($paymentMethod->favourite != 1)
-                                                @php
-                                                    $dataScadenza = $paymentMethod->data_scadenza;
-                                                    $scadenza = strtotime($dataScadenza);
-                                                @endphp
+                                                @php($dataScadenza = $paymentMethod->data_scadenza)
+                                                @php($scadenza = strtotime($dataScadenza))
                                                 <div class="myaccount-content">
                                                     <address>
                                                         <p><strong>{{ $paymentMethod->payment_type }}</strong></p>
                                                         <p><strong>Intestatario: </strong>{{ $paymentMethod->intestatario }}</p>
-                                                        @php
-                                                            $last_four_digits = substr($paymentMethod->cardNumber, 12, 16)
-                                                        @endphp
+                                                        @php($last_four_digits = substr($paymentMethod->cardNumber, 12, 16))
                                                         <p><strong>Numero carta: </strong>****-****-****-{{ $last_four_digits }}</p>
                                                         <p><strong>Data scadenza: </strong>{{ $paymentMethod->data_scadenza }}</p>
                                                         @if($scadenza - $oggi < 0)
@@ -243,19 +225,17 @@
 
                                     <!-- Single Tab Content Start -->
                                     <div class="tab-pane fade" id="address-edit" role="tabpanel">
-                                        @php
-                                            $shippingAddresses = \App\Http\Controllers\ShippingAddressController::getShippingAddressByUserId($user->id);
-                                        @endphp
+                                        @php($shippingAddresses = \App\Http\Controllers\ShippingAddressController::getShippingAddressByUserId($user->id))
                                         @if($shippingAddresses->count() < 1)
                                             <div class="myaccount-content">
                                                 <h5>Non sono ancora stati inseriti indirizzi di spedizione dall'utente</h5>
                                             </div>
                                         @endif
 
-                                        @foreach($shippingAddresses as $shippingAddress)
-                                            @if($shippingAddress->favourite != 0)
-                                                <div class="myaccount-content">
-                                                    <h5>I TUOI INDIRIZZI</h5>
+                                        <div class="myaccount-content">
+                                            <h5>I TUOI INDIRIZZI</h5>
+                                            @foreach($shippingAddresses as $shippingAddress)
+                                                @if($shippingAddress->favourite != 0)
                                                     <address>
                                                         <h6>PREDEFINITO</h6>
                                                         <p><strong>{{ $shippingAddress->città }} </strong> <strong>{{ $shippingAddress->post_code }}</strong></p>
@@ -264,9 +244,10 @@
                                                     </address>
                                                     <a href="{{ Route('remove.address', ['address' => $shippingAddress->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
                                                         Rimuovi indirizzo di spedizione</a>
-                                                </div>
-                                            @endif
-                                        @endforeach
+                                                @endif
+                                            @endforeach
+                                        </div>
+
 
                                         @foreach($shippingAddresses as $shippingAddress)
                                             @if($shippingAddress->favourite != 1)
