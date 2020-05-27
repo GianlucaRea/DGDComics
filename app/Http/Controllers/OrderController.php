@@ -128,6 +128,7 @@ class OrderController extends Controller
             'payment_method_id' => $order->payment_method_id,
             'shipping_address_id' => $order->shipping_adress_id,
             'total' => $order->total,
+            'state' => '0',
         );
 
         $order_id = Order::create($data1);
