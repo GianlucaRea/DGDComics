@@ -60,7 +60,8 @@
                                   @php($username = $userR->username)
                                 <p class="review-author">Review by {{$username}}</p>
                                 <p class="review-date">Posted on {{\Carbon\Carbon::parse($review->review_date)->format('d/m/Y')}} </p>
-                                @if(Auth::user()->hasGroup('il gruppo degli admin'))
+                                @if(Auth::user())
+                                    @if(Auth::user()->hasGroup('il gruppo degli admin'))
                                     <div style="font-size: 24px;">
                                     <a class="btn btn-danger" onclick="return myFunction();"  href="{{route('review-delete-local', $review->id)}}"><i class="fa fa-trash" ></i></a>
                                         <script>
@@ -72,6 +73,7 @@
                                             }
 
                                         }
+                                        @endif
                                     </script>
                                     </div>
                                 @endif
