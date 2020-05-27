@@ -98,7 +98,9 @@ Route::post('submitOrder', 'OrderController@submitOrder')->name('submitOrder');
 
 Route::get('/orderSuccess', function () {return view('/orderSuccess');});
 
-Route::get('/orderSuccess', function () {return view('/orderFailure');});
+Route::get('/orderFailure', function () {return view('/orderFailure');});
+
+Route::get('/accountArea/orderDetail/{id}', 'OrderController@orderDetail')->name('orderDetail');
 
 Auth::routes(); //ehm... perché è stato scritto due volte? nel caso mi leggete rispondetemi su WA DF
 
