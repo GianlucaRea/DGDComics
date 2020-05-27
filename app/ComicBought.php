@@ -10,7 +10,7 @@ class ComicBought extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'comic_id',
+        'comic_id', 'quantity', 'price'
     ];
 
     public function comic(){

@@ -17,7 +17,6 @@ class CreateComicBoughtOrderTable extends Migration
             $table->id();
             $table->foreignId('comic_bought_id')->constrained()->cascadeOnDelete();
             $table->foreignId('order_id')->constrained()->cascadeOnDelete();
-            $table->integer('quantity');
         });
     }
 

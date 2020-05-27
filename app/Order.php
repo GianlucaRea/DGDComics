@@ -10,7 +10,7 @@ class Order extends Model
     protected $table = "orders";
 
     protected $fillable = [
-        'comic_id','user_id','payment_method_id','shipping_address_id'
+        'user_id','payment_method_id','shipping_address_id', 'total'
     ];
     public function shipping_adress(){
         return $this->hasMany('App\ShippingAdress');

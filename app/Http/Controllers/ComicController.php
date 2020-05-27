@@ -657,7 +657,7 @@ class ComicController extends Controller
         }
     }
 
-    public function removeAll(){
+    public static function removeAll(){
         $cart = session()->get('cart');
 
         // if cart is empty then this the first comic

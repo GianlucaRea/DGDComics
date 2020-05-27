@@ -65,7 +65,6 @@
                                             </div>
                                             <div class="cart-bottom">
                                                 <a class="view-cart" href="{{url('/cart')}}">vedi carrello</a>
-                                                <a href="checkout.html">effettua l'ordine</a>
                                             </div>
                                         </div>
                                 @endif

@@ -72,7 +72,7 @@
                 </div>
             </div>
         </div>
-        <form action="POST" action="#">
+        <form method="POST" action="{{ Route('submitOrder') }}">
             @csrf
             <div class="row">
                 <div class="col-lg-8 col-md-6 col-12">
@@ -92,7 +92,7 @@
                             <p>non hai indirizzi di spedizione validi, vai nella sezione account ed aggiungine uno</p>
                         @else
                             <h4>Indirizzo di spedizione</h4>
-                            <select name="shippingAddress" class="sorter-options2" data-role="sorter">
+                            <select name="shippingAddress" id="shippingAddress" class="sorter-options2" data-role="sorter">
 
                                 @foreach($shippingAddresses as $shippingAddress)
                                     @if($shippingAddress->favourite != 0)
@@ -122,7 +122,7 @@
                             <p>non hai metodi di pagamento validi, vai nella sezione account ed aggiungine uno</p>
                         @else
                             <h4>Metodo di pagamento</h4>
-                            <select name="shippingAddress" class="sorter-options2" data-role="sorter">
+                            <select name="paymentMethod" id="paymentMethod" class="sorter-options2" data-role="sorter">
 
                                 @foreach($paymentMethods as $paymentMethod)
                                     @if($paymentMethod->favourite != 0)
@@ -190,11 +190,12 @@
                                 <td>
                                     @if($total>0 && $total <20)
                                         <strong>
-                                            <span class="amount">€ {{ $total + $sellers->count() * 5 }}</span>
+                                            @php($total += $sellers->count() * 5 )
+                                            <span class="amount">€ <input type="number" name="total" id="total"  class="totalNumber" value="{{ $total }}" readonly></span>
                                         </strong>
                                     @else
                                         <strong>
-                                            <span class="amount">€ {{ $total }}</span>
+                                            <span class="amount">€ <input type="number" name="total" id="total"  class="totalNumber" value="{{ $total }}" readonly></span>
                                         </strong>
                                     @endif
                                 </td>
@@ -202,7 +203,7 @@
                             </tbody>
                         </table>
                         <div class="wc-proceed-to-checkout">
-                            <button class="btn btn-sqr" type="submit" >Procedi all'acquisto </button>
+                            <button type="submit" class="btn btn-sqr" >Procedi all'acquisto </button>
                         </div>
                     </div>
                 </div>

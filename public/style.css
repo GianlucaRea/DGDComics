@@ -4548,6 +4548,22 @@ nav.menu .cr-dropdown ul {
     font-weight: 400;
 }
 
+
+ input[class=totalNumber]::-webkit-outer-spin-button,
+ input[class=totalNumber]::-webkit-inner-spin-button {
+     -webkit-appearance: none;
+     margin: 0;
+ }
+
+ .totalNumber{
+     background: transparent;
+     border: none;
+     text-align: right;
+     color: red;
+     width: 60px;
+     height: 30px;
+ }
+
 .toolbar-sorter .sorter-options {
     border: 1px solid #ccc;
     border-radius: 0;
