@@ -150,7 +150,16 @@ class OrderController extends Controller
                 'order_id' => $order_id->id,
             );
             DB::table('comic_bought_order')->insert($data3);
+
+            $data4=array(
+                'user_id' => ComicController::getSeller($comic_Bought_id->id)->id,
+                'notification_text' => 'un utente ha acquistato un tuo fumetto!',
+                'state' => '0',
+            );
+            DB::table('notifications')->insert($data4);
         }
+
+
         ComicController::removeAll(); //svuotamento carrello
 
             return redirect('/orderSuccess');
