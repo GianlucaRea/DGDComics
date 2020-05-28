@@ -41,12 +41,12 @@
                                 @foreach(range(1,5) as $i)
                                     @if($stars >0)
                                         @if($stars >0.5)
-                                            <a><i class="fa fa-star"></i></a>
+                                            <a href="#void"><i class="fa fa-star"></i></a>
                                         @else
-                                            <a><i class="fa fa-star-half-o"></i></a>
+                                            <a href="#void"><i class="fa fa-star-half-o"></i></a>
                                         @endif
                                     @else
-                                        <a><i class="fa  fa-star-o"></i></a>
+                                        <a href="#void"><i class="fa  fa-star-o"></i></a>
                                     @endif
                                     <?php $stars--; ?>
                                 @endforeach
