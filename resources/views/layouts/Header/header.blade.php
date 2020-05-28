@@ -152,7 +152,7 @@
                 <div class="menu-area">
                     <ul>
                         <li>
-                            <a href="{{ url('/') }}">About</a>
+                            <a href="{{ url('/aboutUs') }}">About</a>
                         </li>
                     </ul>
                 </div>
@@ -170,7 +170,7 @@
                 <div class="menu-area">
                     <ul>
                         <li>
-                            <a href="{{ url('/') }}">Sconti</a>
+                            <a href="{{route('sconto')}}">Sconti</a>
                         </li>
                     </ul>
                 </div>

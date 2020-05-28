@@ -33,7 +33,8 @@ Route::get('/shoplist/price1','ComicController@shoplistPrice1')->name('prezzo1')
 Route::get('/shoplist/price2','ComicController@shoplistPrice2')->name('prezzo2');
 Route::get('/shoplist/price3','ComicController@shoplistPrice3')->name('prezzo3');
 Route::get('/shoplist/price4','ComicController@shoplistPrice4')->name('prezzo4');
-Route::get('/shoplist/search','ComicController@shoplistSearch')->name('searchroute');
+Route::get('/shoplist/sconto','ComicController@shoplistSale')->name('sconto');
+Route::get('/shoplist/search/','ComicController@shoplistSearch')->name('searchroute');
 
 Auth::routes();
 
@@ -57,6 +58,10 @@ Route::get('/accountArea', function () {
     $user = \Illuminate\Support\Facades\Auth::user();
     return view('/accountArea')
         ->with(compact('user'));
+});
+
+Route::get('/aboutUs',function(){
+    return view('aboutus');
 });
 
 Route::get('/adminArea', function () {

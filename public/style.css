@@ -1569,10 +1569,11 @@ body {
 
 .product-rating ul li {
     display: inline-block;
+    color: #F07C29;
 }
 
 .product-rating ul li a {
-    color: #f07c29;
+    color: #F07C29;
     font-size: 12px;
 }
 
@@ -2978,6 +2979,10 @@ a#scrollUp:hover {
     margin-bottom: 12px;
     padding-bottom: 15px;
     text-transform: uppercase;
+}
+
+.fa_custom {
+    color: #f07c29;
 }
 
 .category-menu ul li .left-menu span a {
@@ -5148,6 +5153,7 @@ nav.menu .cr-dropdown ul {
 .rating-summary {
     display: inline-block;
     float: left;
+    color: #F07C29;
 }
 
 .rating-summary>a {

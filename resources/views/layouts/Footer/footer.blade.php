@@ -32,9 +32,9 @@
                                 </div>
                                 <div class="footer-mid-menu">
                                     <ul>
-                                        <li><a href="about.html">About us</a></li>
-                                        <li><a href="#">Gli ultimi arrivi</a></li>
-                                        <li><a href="#">Gli sconti migliori</a></li>
+                                        <li><a href="{{ url('/aboutUs') }}">About us</a></li>
+                                        <li><a href="{{url('/shoplist/search?sorter=created_at')}}">Gli ultimi arrivi</a></li>
+                                        <li><a href="{{route('sconto')}}">Gli sconti migliori</a></li>
                                     </ul>
                                 </div>
                             </div>

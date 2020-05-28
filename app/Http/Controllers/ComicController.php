@@ -419,6 +419,36 @@ class ComicController extends Controller
         }
         return view('shoplist')->with(compact('genres'))->with(compact('comics'));    }
 
+    public function shoplistSale(Request $request){
+        $genres = Genre::all();
+        $comics = Comic::where('discount','>','0')->orderBy('discount','asc')->paginate(12);
+        if ($request->has('sorter')) {
+            switch ($request->get('sorter')) {
+                case 'comic_name_asc':
+                    $comics =Comic::where('discount','>','0')->orderBy('comic_name', 'asc')->paginate(12);
+                    break;
+                case 'comic_name_desc':
+                    $comics = Comic::where('discount','>','0')->orderBy('comic_name', 'desc')->paginate(12);
+                    break;
+                case 'price_asc':
+                    $comics = Comic::where('discount','>','0')->orderBy('price', 'asc')->paginate(12);
+                    break;
+                case 'price_desc':
+                    $comics = Comic::where('discount','>','0')->orderBy('price', 'desc')->paginate(12);
+                    break;
+                case 'created_at':
+                    $comics = Comic::where('discount','>','0')->latest()->paginate(12);
+                    break;
+            }
+        }
+        return view('shoplist')->with(compact('genres'))->with(compact('comics'));
+    }
+
+
+    public static function countByDiscount(){
+        return Comic::where('discount','>','0')->count();
+    }
+
     public static function countByPrice($number1,$number2){
         return Comic::where('price','>',$number1)->where('price','<',$number2)->count();
     }

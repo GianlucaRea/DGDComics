@@ -53,10 +53,11 @@
                     $integer3 = \App\Http\Controllers\ComicController::countByPrice(7.99,15);
                     $integer4 = \App\Http\Controllers\ComicController::countByPrice(14.99,25);
                     $integer5 = \App\Http\Controllers\ComicController::countByPrice(24.99,10000);
-
+                    $integer6 = \App\Http\Controllers\ComicController::countByDiscount();
                     @endphp
                     <div class="left-menu mb-30">
                         <ul>
+                            <li><a href="{{route('sconto')}}">In Sconto<span>({{$integer6}})</span></a></li>
                             <li><a href="{{route('prezzo0')}}">€0.00-€3.99<span>({{$integer1}})</span></a></li>
                             <li><a href="{{route('prezzo1')}}">€4.00-€7.99<span>({{$integer2}})</span></a></li>
                             <li><a href="{{route('prezzo2')}}">€8.00-€14.99<span>({{$integer3}})</span></a></li>
