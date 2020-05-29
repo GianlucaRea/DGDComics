@@ -130,7 +130,7 @@
                                         @php($scadenza = strtotime($dataScadenza))
                                         @if($scadenza - $oggi > 0)
                                             @php($last_four_digits = substr($paymentMethod->cardNumber, 12, 16))
-                                            <option value='{{$paymentMethod->id}}'>{{ $paymentMethod->payment_type }}, ****-****-****-{{ $last_four_digits }}, {{ $paymentMethod->data_scadenza }}, {{ $paymentMethod->intestatario }}</option>
+                                            <option value='{{$paymentMethod->id}}'>{{ $paymentMethod->payment_type }}, ****-****-****-{{ $last_four_digits }}, {{ substr($paymentMethod->data_scadenza, 0,7) }}, {{ $paymentMethod->intestatario }}</option>
                                         @endif
                                     @endif
                                 @endforeach
@@ -142,7 +142,7 @@
                                         @php($scadenza = strtotime($dataScadenza))
                                         @if($scadenza - $oggi > 0)
                                             @php($last_four_digits = substr($paymentMethod->cardNumber, 12, 16))
-                                            <option value='{{$paymentMethod->id}}'>{{ $paymentMethod->payment_type }}, ****-****-****-{{ $last_four_digits }}, {{ $paymentMethod->data_scadenza }}, {{ $paymentMethod->intestatario }}</option>
+                                            <option value='{{$paymentMethod->id}}'>{{ $paymentMethod->payment_type }}, ****-****-****-{{ $last_four_digits }}, {{ substr($paymentMethod->data_scadenza, 0,7) }}, {{ $paymentMethod->intestatario }}</option>
                                         @endif
                                     @endif
                                 @endforeach

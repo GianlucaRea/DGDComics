@@ -28,7 +28,7 @@
                                 <div><b>indirizzo di spedizione:</b> {{ $shippingAddress->via }} {{ $shippingAddress->civico }}, {{ $shippingAddress->città }} ({{ $shippingAddress->post_code }})</div>
                                 <br/>
                                 @php($last_four_digits = substr($paymentMethod->cardNumber, 12, 16))
-                                <div><b>metodo di pagamento:</b> {{ $paymentMethod->payment_type }}, ****-****-****-{{ $last_four_digits }}, {{ $paymentMethod->data_scadenza }}, {{ $paymentMethod->intestatario }}</div>
+                                <div><b>metodo di pagamento:</b> {{ $paymentMethod->payment_type }}, ****-****-****-{{ $last_four_digits }}, {{ substr($paymentMethod->data_scadenza, 0,7) }}, {{ $paymentMethod->intestatario }}</div>
                             </div>
                         </div>
                         <div class="mb-5"></div>

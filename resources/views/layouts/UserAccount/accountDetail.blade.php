@@ -134,7 +134,7 @@
                                                         @foreach($orders as $order)
                                                         <tr>
                                                             <td>{{ $order->id }}</td>
-                                                            <td>{{ $order->date }}</td>
+                                                            <td>{{ substr($order->date, 0,10) }}</td>
                                                             <td>{{ $order->state }}</td>
                                                             <td>€ {{ $order->total }}</td>
                                                             <td><a href="{{ route('orderDetail', ['id' => $order->id]) }}" class="btn btn-sqr">View</a>
@@ -174,7 +174,7 @@
                                                         <p><strong>Intestatario: </strong>{{ $paymentMethod->intestatario }}</p>
                                                         @php($last_four_digits = substr($paymentMethod->cardNumber, 12, 16))
                                                         <p><strong>Numero carta: </strong>****-****-****-{{ $last_four_digits }}</p>
-                                                        <p><strong>Data scadenza: </strong>{{ substr($paymentMethod->data_scadenza, 5,10) }}</p>
+                                                        <p><strong>Data scadenza: </strong>{{ substr($paymentMethod->data_scadenza, 0,7) }}</p>
                                                         @if($scadenza - $oggi < 0)
                                                             <h5>LA TUA CARTA È SCADUTA</h5>
                                                         @else
@@ -199,7 +199,7 @@
                                                         <p><strong>Intestatario: </strong>{{ $paymentMethod->intestatario }}</p>
                                                         @php($last_four_digits = substr($paymentMethod->cardNumber, 12, 16))
                                                         <p><strong>Numero carta: </strong>****-****-****-{{ $last_four_digits }}</p>
-                                                        <p><strong>Data scadenza: </strong>{{ substr($paymentMethod->data_scadenza, 5,10) }}</p>
+                                                        <p><strong>Data scadenza: </strong>{{ substr($paymentMethod->data_scadenza, 0,7) }}</p>
                                                         @if($scadenza - $oggi < 0)
                                                             <h5>LA TUA CARTA È SCADUTA</h5>
                                                         @else
