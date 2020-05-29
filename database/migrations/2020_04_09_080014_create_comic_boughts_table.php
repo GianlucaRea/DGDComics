@@ -18,7 +18,7 @@ class CreateComicBoughtsTable extends Migration
             $table->foreignId('comic_id')->cascadeOnDelete();
             $table->integer('quantity');
             $table->double('price');
-            $table->timestamps();
+            $table->timestamp('date')->default(\DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

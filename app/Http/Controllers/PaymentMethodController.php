@@ -196,4 +196,8 @@ class PaymentMethodController extends Controller
             ->with(compact('user'));
     }
 
+    public static function getPaymentMethodByOrderId($id){
+        return DB::table("payment_methods")->where("id", "=", $id)->first();
+    }
+
 }

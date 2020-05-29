@@ -178,6 +178,10 @@ body {
     border: 1px solid #ddd;
 }
 
+.border-1-colored {
+    border: 1px solid rgba(14, 14, 14, 0.38);
+}
+
 .mtb-70 {
     margin: 70px 0;
 }
@@ -6431,6 +6435,7 @@ nav.menu .cr-dropdown ul {
     font-family: 'Rufina', serif;
     font-weight: 400;
 }
+
 
 .table-content table {
     background: #fff none repeat scroll 0 0;

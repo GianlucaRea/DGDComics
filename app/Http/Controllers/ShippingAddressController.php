@@ -184,4 +184,8 @@ class ShippingAddressController extends Controller
             ->with(compact('user'));
     }
 
+    public static function getShippingAddressByOrderId($id){
+        return DB::table("shipping_addresses")->where("id", "=", $id)->first();
+    }
+
 }
