@@ -182,7 +182,7 @@
                         <div class="menu-area">
                             <ul>
                                 <li>
-                                    <a href="{{ url('/adminArea') }}">Admin</a>
+                                    <a href="{{ url('/adminArea/dashboard') }}">Admin</a>
                                 </li>
                             </ul>
                         </div>

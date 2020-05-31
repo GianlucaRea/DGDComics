@@ -23,10 +23,10 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-4">
                                 <div class="myaccount-tab-menu nav" role="tablist" id="myTab">
-                                    <a href="#dashboad" class="active" data-toggle="tab"><i class="fa fa-dashboard"></i>Dashboard</a>
-                                    <a href="#users" data-toggle="tab"><i class="fa fa-user"></i>Gestione Utenti</a>
-                                    <a href="#comics" data-toggle="tab"><i class="fa fa-book"></i>Gestione Fumetti</a>
-                                    <a href="#reviews" data-toggle="tab"><i class="fa fa-map-marker"></i>Gestione Recensione</a>
+                                    <a href="{{route('admindashboard')}}" class="{{ (Route::currentRouteName() == 'admindashboard') ? 'active' : '' }}" ><i class="fa fa-dashboard"></i>Dashboard</a>
+                                    <a href="{{route('adminusers')}}" class="{{ (Route::currentRouteName() == 'adminusers') ? 'active' : '' }}" ><i class="fa fa-user"></i>Gestione Utenti</a>
+                                    <a href="{{route('admincomics')}}" class="{{ (Route::currentRouteName() == 'admincomics') ? 'active' : '' }}" code><i class="fa fa-book"></i>Gestione Fumetti</a>
+                                    <a href="{{route('adminreviews')}}" class="{{ (Route::currentRouteName() == 'adminreviews') ? 'active' : '' }}"><i class="fa fa-map-marker"></i>Gestione Recensione</a>
                                 </div>
                             </div>
                             <!-- My Account Tab Menu End -->
@@ -34,7 +34,7 @@
                             <div class="col-lg-9 col-md-8">
                                 <div class="tab-content" id="myaccountContent">
                                     <!-- Single Tab Content Start -->
-                                    <div class="tab-pane fade show active" id="dashboad" role="tabpanel">
+                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'admindashboard') ? 'active' : '' }}" id="dashboad" role="tabpanel">
                                         <div class="myaccount-content">
                                             <h5>Dashboard</h5>
                                             <div class="welcome">
@@ -105,7 +105,7 @@
                                     {{session('message')}}
                                 @endif
                                     <!-- Single Tab Content Start -->
-                                    <div class="tab-pane fade" id="users" role="tabpanel">
+                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'adminusers') ? 'active' : '' }}" id="users" role="tabpanel">
                                         <div class="myaccount-content">
                                             <h5>Utenti</h5>
                                             <div class="myaccount-table table-responsive text-center">
@@ -151,7 +151,7 @@
 
 
                                     <!-- Single Tab Content Start -->
-                                    <div class="tab-pane fade" id="comics" role="tabpanel">
+                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'admincomics') ? 'active' : '' }}" id="comics" role="tabpanel">
                                         <div class="myaccount-content">
                                             <h5>Fumetti</h5>
                                             <div class="myaccount-table table-responsive text-center">
@@ -193,7 +193,7 @@
                                     <!-- Single Tab Content End -->
 
                                     <!-- Single Tab Content Start -->
-                                    <div class="tab-pane fade" id="reviews" role="tabpanel">
+                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'adminreviews') ? 'active' : '' }}" id="reviews" role="tabpanel">
                                         <div class="myaccount-content">
                                             <h5>Recensione</h5>
                                             <div class="myaccount-table table-responsive text-center">

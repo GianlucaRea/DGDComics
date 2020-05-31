@@ -64,17 +64,11 @@ Route::get('/aboutUs',function(){
     return view('aboutus');
 });
 
-Route::get('/adminArea', function () {
-    $user = \Illuminate\Support\Facades\Auth::user();
-    $users = \App\User::where('username','!=','admin')->orderBy('username', 'asc')->paginate(12);
-    $comics =Comic::orderBy('comic_name', 'asc')->paginate(12);
-    $reviews = \App\Review::orderBy('review_title', 'asc')->paginate(12);
-    return view('adminPanel')
-        ->with(compact('user'))
-        ->with(compact('users'))
-        ->with(compact('comics'))
-        ->with(compact('reviews'));
-})->name('AdminAccount');
+Route::get('/adminArea/dashboard', 'AdminController@dashboard')->name('admindashboard');
+Route::get('/adminArea/users', 'AdminController@adminUsers')->name('adminusers');
+Route::get('/adminArea/comics', 'AdminController@adminComics')->name('admincomics');
+Route::get('/adminArea/reviews', 'AdminController@adminReviews')->name('adminreviews');
+
 
 Route::get('/vendor', function () {
     $user = \Illuminate\Support\Facades\Auth::user();
