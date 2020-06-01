@@ -122,9 +122,6 @@
                             <div class="single-blog-post">
                                 <div class="author-destils mb-30">
                                     <div class="author-left">
-                                        <div class="author-img">
-                                            <a href="#"><img src="img/author/1.jpg" alt="man" /></a>
-                                        </div>
                                         <div class="author-description">
                                             <p>Pubblicato da:
                                                 <a href="#"><span>{{ $articleAuth->username }}</span>in</a>
