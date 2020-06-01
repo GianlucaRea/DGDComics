@@ -8,10 +8,10 @@
     @include('layouts.Header.header')
 </header>
 @php($page = [
-    'name' =>'contatti']
+    'name' =>'blog']
     )
 @include('layouts.Header.breadcrumbsArea', $page)
-@include('layouts.Other.contactForm')
+@include('layouts.blog.blogMainArea')
 @include('layouts.Footer.social')
 <footer>
     @include('layouts.Footer.footer')

@@ -10,7 +10,7 @@
                                 <li><a href="{{ url('/') }}">Home</li>
                                 <li><a href="#">Privacy e policy</a></li>
                                 <li><a href="{{ url('/contact') }}">Contattaci</a></li>
-                                <li><a href="#">Blog</a></li>
+                                <li><a href="{{ url('blog') }}">Blog</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -110,7 +110,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="payment-img text-right">
-                        <a href="#"><img src="{{asset('img/1.png')}}" alt="payment" /></a>
+                        <img src="{{asset('img/1.png')}}" alt="payment" />
                     </div>
                 </div>
             </div>

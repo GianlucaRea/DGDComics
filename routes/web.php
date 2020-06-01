@@ -16,6 +16,8 @@ use App\Notification;
 |
 */
 
+// RAGA NA ROBA IMPORTANTE... NOI DA BRAVI IGNORANTI STIAMO A FA TUTTE GET, PRIMA DI CONSEGNARE DOVREMMO AGGIUSTARE UN MINIMO CON POST, PATCH, PUT ETC IN BASE ALLA NECESSITA
+
 Route::get('/', 'HomeController@index');
 
 Route::get('/contact', function(){
@@ -35,6 +37,7 @@ Route::get('/shoplist/price3','ComicController@shoplistPrice3')->name('prezzo3')
 Route::get('/shoplist/price4','ComicController@shoplistPrice4')->name('prezzo4');
 Route::get('/shoplist/sconto','ComicController@shoplistSale')->name('sconto');
 Route::get('/shoplist/search/','ComicController@shoplistSearch')->name('searchroute');
+
 
 Auth::routes();
 
@@ -109,3 +112,5 @@ Route::get('user-delete/{id}','UserController@destroy')->name('user-delete');
 Route::get('comic-delete/{id}','ComicController@destroy')->name('comic-delete');
 Route::get('review-delete/{id}','ReviewController@destroy')->name('review-delete');
 Route::get('review-deletelocal/{id}','ReviewController@destroylocal')->name('review-delete-local');
+
+Route::get('/blog', function(){return view('/blogHome');});

@@ -161,7 +161,7 @@
                 <div class="menu-area">
                     <ul>
                         <li>
-                            <a href="{{ url('/') }}">Blog</a>
+                            <a href="{{ url('blog') }}">Blog</a>
                         </li>
                     </ul>
                 </div>
