@@ -117,7 +117,7 @@ class CommentController extends Controller
 
     public function addToArticle(Article $article, Request $request){
         $request->validate([
-            'answer' => ['required', 'string', 'max:511', 'alpha'],
+            'comment_text' => ['required', 'string', 'max:511', 'alpha'],
         ]);
         $user = \Illuminate\Support\Facades\Auth::user();
 
@@ -126,7 +126,7 @@ class CommentController extends Controller
         $comment->article_id = $article->id;
         $comment->like = 0;
         $comment->dislike = 0;
-        $comment->answer = $request->answer;
+        $comment->answer = $request->comment_text;
 
         $data=array(
             'user_id'=> $comment->user_id,
@@ -144,7 +144,7 @@ class CommentController extends Controller
 
     public function addToComment(int $id, Request $request){
         $request->validate([
-            'answer'.$id => ['required'],
+            'answer' => ['required'],
         ]);
 
         $article = CommentController::getArticleIdBycommentId($id);
@@ -155,7 +155,7 @@ class CommentController extends Controller
         $comment->article_id = $article->article_id;
         $comment->like = 0;
         $comment->dislike = 0;
-        $comment->answer = $request->answer.$id;
+        $comment->answer = $request->answer;
         $comment->parent_comment = $id;
 
         $data=array(
@@ -175,5 +175,20 @@ class CommentController extends Controller
 
     public static function answers($id){
         return DB::table('comments')->where("parent_comment", "=", $id)->get();
+    }
+
+    public static function destroyComment($id){
+        $answers = CommentController::answers($id);
+        foreach($answers as $answer){
+            DB::table("comments")->where("id", "=", $answer->id)->delete();
+        }
+        DB::table("comments")->where("id", "=", $id)->delete();
+
+        return redirect()->back();
+    }
+
+    public static function destroyAnswer($id){
+        DB::table("comments")->where("id", "=", $id)->delete();
+        return redirect()->back();
     }
 }

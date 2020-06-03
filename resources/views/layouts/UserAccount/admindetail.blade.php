@@ -133,7 +133,7 @@
                                                         <td><a class="btn btn-danger" onclick="return myFunction();"  href="{{route('user-delete', $user->id)}}"><i class="fa fa-trash"></i></a></td>
                                                         <script>
                                                             function myFunction() {
-                                                                if(!confirm("Sei sicuro di voler eliminare questo utente"))
+                                                                if(!confirm("Sei sicuro di voler eliminare questo utente?"))
                                                                     event.preventDefault();
                                                             }
                                                         </script>
@@ -178,7 +178,7 @@
                                                             <td><a class="btn btn-danger" onclick="return myFunction();"  href="{{route('comic-delete', $comic->id)}}"><i class="fa fa-trash"></i></a></td>
                                                             <script>
                                                                 function myFunction() {
-                                                                    if(!confirm("Sei sicuro di voler eliminare questo fumetto"))
+                                                                    if(!confirm("Sei sicuro di voler eliminare questo fumetto?"))
                                                                         event.preventDefault();
                                                                 }
                                                             </script>
@@ -219,7 +219,7 @@
                                                             <td><a class="btn btn-danger" onclick="return myFunction();"  href="{{route('review-delete-local', $review->id)}}"><i class="fa fa-trash"></i></a></td>
                                                             <script>
                                                                 function myFunction() {
-                                                                    if(!confirm("Sei sicuro di voler eliminare questa recensione"))
+                                                                    if(!confirm("Sei sicuro di voler eliminare questa recensione?"))
                                                                         event.preventDefault();
                                                                 }
                                                             </script>

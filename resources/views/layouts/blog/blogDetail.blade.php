@@ -30,7 +30,7 @@
                     <div class="comment-title-wrap mt-30">
                         @if($articleComments->count() == 1)
                             <h3>{{ $articleComments->count() }} commento</h3>
-                        @else
+                        @elseif($articleComments->count() > 1)
                             <h3>{{ $articleComments->count() }} commenti</h3>
                         @endif
                     </div>
@@ -53,7 +53,20 @@
                                     <div class="public-comment">
                                         <div class="public-text">
                                             <div class="single-comm-top">
-                                                <h5>{{ $userComment->username }}</h5>
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                    <h5>{{ $userComment->username }}</h5>
+                                                    </div>
+                                                    <div class="col-lg-7"></div>
+
+                                                        <a class="btn btn-danger" onclick="return myFunction();"  href="{{route('comment-delete-local', $articleComment->id)}}"><i class="fa fa-trash"></i></a>
+                                                        <script>
+                                                            function myFunction() {
+                                                                if(!confirm("Sei sicuro di voler eliminare questo commento?"))
+                                                                    event.preventDefault();
+                                                            }
+                                                        </script>
+                                                </div>
                                                 <p>{{ substr($article->date, 0,10) }} {{--<a href="#">Rispondi</a></p>--}}
                                             </div>
                                             <p>{{ $articleComment->answer }}</p>
@@ -76,7 +89,20 @@
                                                     <div class="public-text">
                                                         <div class="single-comm-top">
                                                             @php($u = \App\Http\Controllers\UserController::getUserId($answer->user_id))
-                                                            <h5>{{ $u->username }}</h5>
+                                                            <div class="row">
+                                                                <div class="col-lg-4">
+                                                                    <h5>{{ $u->username }}</h5>
+                                                                </div>
+                                                                <div class="col-lg-7"></div>
+
+                                                                <a class="btn btn-danger" onclick="return myFunction();"  href="{{route('answer-delete-local', $answer->id)}}"><i class="fa fa-trash"></i></a>
+                                                                <script>
+                                                                    function myFunction() {
+                                                                        if(!confirm("Sei sicuro di voler eliminare questo commento?"))
+                                                                            event.preventDefault();
+                                                                    }
+                                                                </script>
+                                                            </div>
                                                             <p>{{ substr($answer->date, 0,10) }} {{--<a href="#">Rispondi</a></p>--}}
                                                         </div>
                                                         <p>{{ $answer->answer }}</p>
@@ -96,9 +122,9 @@
                                         <label>Rispondi</label>
                                         <div class="row">
                                             <div class="col-lg-8">
-                                        <textarea name="{{'answer'.$articleComment->id}}" id="{{'answer'.$articleComment->id}}" class="form-control @error('answer'.$articleComment->id) is-invalid @enderror" cols="30" rows="10" placeholder="Scrivi qui il tuo commento" style="resize: none; height: 70px;"></textarea>
+                                        <textarea name="{{'answer'}}" id="{{'answer'}}" class="form-control @error('answer') is-invalid @enderror" cols="30" rows="10" placeholder="Scrivi qui il tuo commento" style="resize: none; height: 70px;"></textarea>
 
-                                                @error('answer'.$articleComment->id)
+                                                @error('answer')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -124,9 +150,9 @@
                             <form method="POST" action="{{ Route('submitComment', ['article' => $article->id])}}">
                                 @csrf
                                 <label>Commento</label>
-                                <textarea name="answer" id="answer" class="form-control @error('answer') is-invalid @enderror" cols="30" rows="10" placeholder="Scrivi qui il tuo commento" style="resize: none; height: 10em;"></textarea>
+                                <textarea name="comment_text" id="comment_text" class="form-control @error('comment_text') is-invalid @enderror" cols="30" rows="10" placeholder="Scrivi qui il tuo commento" style="resize: none; height: 10em;"></textarea>
 
-                                @error('answer')
+                                @error('comment_text')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
