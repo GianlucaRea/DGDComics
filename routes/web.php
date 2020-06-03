@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Comic;
 use App\Genre;
@@ -52,6 +53,10 @@ Route::get('addMethod', function (){return view('addMethod');})->name('addMethod
 Route::post('submitAddMethod', 'PaymentMethodController@add')->name('submitAddMethod');
 Route::get('addAddress', function (){return view('addAddress');})->name('addAddress');
 Route::post('submitAddAddress', 'ShippingAddressController@add')->name('submitAddAddress');
+Route::post('submitVendorAddAddress', function(Request $request){
+    /*qui la roba per l'iban*/
+    \App\Http\Controllers\ShippingAddressController::addVendorShippingAdress($request);
+} )->name('submitAddVendorAddress');
 
 Route::get('/logout', function () {
     return \App\Http\Controllers\Auth\LoginController::logout();

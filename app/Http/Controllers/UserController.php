@@ -143,4 +143,15 @@ class UserController extends Controller
             ->with(compact('user'));
     }
 
+    public function addPartitaIva(Request $request){
+
+        $qualcosa = new User();
+
+        $IVA = $request->partitaIva;
+
+        DB::transaction(function () {
+            DB::table('users')->update(['partitaIva' => $IVA]);
+        });
+    }
+
 }
