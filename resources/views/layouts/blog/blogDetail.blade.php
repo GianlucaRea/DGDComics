@@ -75,8 +75,11 @@
                                                 <div class="public-comment">
                                                     <div class="public-text">
                                                         <div class="single-comm-top">
-                                                            caso in cui ci sono risposte
+                                                            @php($u = \App\Http\Controllers\UserController::getUserId($answer->user_id))
+                                                            <h5>{{ $u->username }}</h5>
+                                                            <p>{{ substr($answer->date, 0,10) }} {{--<a href="#">Rispondi</a></p>--}}
                                                         </div>
+                                                        <p>{{ $answer->answer }}</p>
                                                     </div>
                                                 </div>
                                             </li>

@@ -155,7 +155,7 @@ class CommentController extends Controller
         $comment->article_id = $article->article_id;
         $comment->like = 0;
         $comment->dislike = 0;
-        $comment->answer = $request->answer;
+        $comment->answer = $request->answer.$id;
         $comment->parent_comment = $id;
 
         $data=array(
