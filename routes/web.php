@@ -119,3 +119,6 @@ Route::get('review-delete/{id}','ReviewController@destroy')->name('review-delete
 Route::get('review-deletelocal/{id}','ReviewController@destroylocal')->name('review-delete-local');
 
 Route::get('/blog', function(){return view('/blogHome');});
+Route::get('/blogDetail/{id}', "ArticleController@getArticleById")->name('blogDetail');
+Route::post('submitComment/{article}', 'CommentController@addToArticle')->name('submitComment');
+Route::post('submitAnswer/{comment}', 'CommentController@addToComment')->name('submitAnswer');

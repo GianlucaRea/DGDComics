@@ -10,7 +10,7 @@ class Comment extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'user_id','article_id','like','dislike','answer_text'
+        'user_id','article_id','like','dislike','answer', 'parent_comment',
     ];
 
     public function user(){

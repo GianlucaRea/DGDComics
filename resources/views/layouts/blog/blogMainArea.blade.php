@@ -114,56 +114,53 @@
                 <h4>non ci sono articoli nel blog :(</h4>
             @endif
             @if($articles->count() > 0)
-                @foreach($articles as $article)
-                    @php($articleAuth = \App\Http\Controllers\UserController::getUserId($article->user_id))
-                    @php($articleComments = \App\Http\Controllers\CommentController::getcommentsByArticleId($article->id))
                     <div class="col-lg-9 col-md-12 col-12 order-lg-2 order-1">
+                        @foreach($articles as $article)
+                            @php($articleAuth = \App\Http\Controllers\UserController::getUserId($article->user_id))
+                            @php($articleComments = \App\Http\Controllers\CommentController::getcommentsByArticleId($article->id))
                         <div class="blog-main-wrapper">
                             <div class="single-blog-post">
                                 <div class="author-destils mb-30">
                                     <div class="author-left">
                                         <div class="author-description">
                                             <p>Pubblicato da:
-                                                <a href="#"><span>{{ $articleAuth->username }}</span>in</a>
+                                                <span>{{ $articleAuth->username }}</span>in
                                             </p>
-                                            <span>{{ substr($article->date, 0,10) }}</span>
+                                            <span>il {{ substr($article->date, 0,10) }}</span>
                                         </div>
                                     </div>
-                                    <div class="author-right">
-                                        <span>Condividi: </span>
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                        </ul>
-                                    </div>
                                 </div>
-                                <div class="blog-img mb-30">
+                                {{--<div class="blog-img mb-30">
                                     <a href="#"><img src="img/blog/1.jpg" alt="blog" /></a>
-                                </div>
+                                </div>--}}
                                 <div class="single-blog-content">
                                     <div class="single-blog-title">
-                                        <h3><a href="#">{{ $article->title }}</a></h3>
+                                        <h3><a href="{{ url('/blogDetail/'.$article->id) }}">{{ $article->title }}</a></h3>
                                     </div>
                                     <div class="blog-single-content">
+                                        @if(strlen($article->article_text)>680)
+                                        <p>{{ substr($article->article_text, 0, 680)}}...</p>
+                                        @else
                                         <p>{{ $article->article_text }}</p>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="blog-comment-readmore">
                                     <div class="blog-readmore">
-                                        <a href="#">Leggi di più<i class="fa fa-long-arrow-right"></i></a>
+                                        <a href="{{ url('/blogDetail/'.$article->id) }}">Leggi di più<i class="fa fa-long-arrow-right"></i></a>
                                     </div>
                                     <div class="blog-com">
-
-                                        <a href="#">{{ $articleComments->count() }} commenti</a>
+                                        @if($articleComments->count() == 1)
+                                            {{ $articleComments->count() }} commento
+                                        @else
+                                            {{ $articleComments->count() }} commenti
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        @endforeach
                     </div>
-                @endforeach
             @endif
         </div>
     </div>

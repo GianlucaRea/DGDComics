@@ -36,10 +36,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'ComicBought_description' => 'required',
-        ];
-        $validator = Validator::make($request->all(),$rules);
+        $validator = Validator::make($request->all());
         if($validator->fails()){
             return response()->json($validator->errors(),400);
         }
@@ -110,5 +107,10 @@ class ArticleController extends Controller
 
     public static function getArticles(){
         return DB::table("articles")->get();
+    }
+
+    public static function getArticleById($id){
+        $article = DB::table("articles")->where("id", "=", $id)->first();
+        return view('blogArticleDetail')->with(compact('article'));
     }
 }
