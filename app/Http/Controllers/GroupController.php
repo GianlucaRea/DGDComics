@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Group;
+use Illuminate\Support\Facades\DB;
 
 class GroupController extends Controller
 {
@@ -105,5 +106,15 @@ class GroupController extends Controller
         }
         $Group-> delete();
         return response()->json(null,204);
+    }
+
+    public static function isAdmin($id){
+        $n = DB::table("group_user")->where("user_id", "=", $id)->where("group_id", "=", 3)->count();
+        if($n>0){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

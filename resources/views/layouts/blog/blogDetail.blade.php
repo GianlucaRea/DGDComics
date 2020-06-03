@@ -93,7 +93,13 @@
                                         <label>Rispondi</label>
                                         <div class="row">
                                             <div class="col-lg-8">
-                                        <textarea name="answer" id="answer" class="form-control @error('answer') is-invalid @enderror" cols="30" rows="10" placeholder="Scrivi qui il tuo commento" style="resize: none; height: 70px;"></textarea>
+                                        <textarea name="{{'answer'.$articleComment->id}}" id="{{'answer'.$articleComment->id}}" class="form-control @error('answer'.$articleComment->id) is-invalid @enderror" cols="30" rows="10" placeholder="Scrivi qui il tuo commento" style="resize: none; height: 70px;"></textarea>
+
+                                                @error('answer'.$articleComment->id)
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
                                             </div>
                                         <div class="col-lg-4">
                                             <button type="submit" class="btn btn-sqr">Pubblica</button>
@@ -116,6 +122,13 @@
                                 @csrf
                                 <label>Commento</label>
                                 <textarea name="answer" id="answer" class="form-control @error('answer') is-invalid @enderror" cols="30" rows="10" placeholder="Scrivi qui il tuo commento" style="resize: none; height: 10em;"></textarea>
+
+                                @error('answer')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+
                                 <div class="mb-3"></div>
                                 <div class="single-post-button">
                                     <button type="submit" class="btn btn-sqr">Pubblica</button>

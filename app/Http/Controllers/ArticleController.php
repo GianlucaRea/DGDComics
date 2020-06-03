@@ -113,4 +113,32 @@ class ArticleController extends Controller
         $article = DB::table("articles")->where("id", "=", $id)->first();
         return view('blogArticleDetail')->with(compact('article'));
     }
+
+    public static function addArticle($id, Request $request){
+        $request->validate([
+            'title' => ['required', 'string', 'max:127'],
+            'article_text' => ['required'],
+        ]);
+
+        if(GroupController::isAdmin($id)){
+            $article = new Article(); //per evitare problemi con campi che non appartengono effettivamente a paymentMethod.
+            $article->user_id = $id;
+            $article->title = $request->title;
+            $article->article_text = $request->article_text;
+
+            $data=array(
+                'user_id'=> $id,
+                'title' => $article->title,
+                'article_text' => $article->article_text,
+            );
+
+            DB::table('articles')->insert($data);
+
+
+            return view('/blogHome');
+        }
+        else{
+            return view("errorCase");
+        }
+    }
 }
