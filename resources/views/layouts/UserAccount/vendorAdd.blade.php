@@ -7,7 +7,7 @@
 
         <div class="offset-lg-2 col-lg-8 col-md-12 col-12">
             <div class="billing-fields">
-                <form method="POST" action="{{ url('/submitAddVendorAddress') }}">
+                <form method="POST" action="{{ route('submitAddVendorAddress')}}">
                     @csrf
 
                     <div class="row">

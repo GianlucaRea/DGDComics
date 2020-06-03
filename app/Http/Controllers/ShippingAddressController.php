@@ -184,7 +184,7 @@ class ShippingAddressController extends Controller
             ->with(compact('user'));
     }
 
-    public function addVendorShippingAdress(Request $request){
+    public static function addVendorShippingAdress(Request $request){
         $request->validate([
             'via' => ['required'],
             'civico' => ['required', 'regex:/^[0-9]*$/'],
@@ -217,10 +217,6 @@ class ShippingAddressController extends Controller
         );
 
         DB::table('shipping_addresses')->insert($data);
-
-
-        return redirect('/accountArea')
-            ->with(compact('user'));
     }
 
     public static function getShippingAddressByOrderId($id){

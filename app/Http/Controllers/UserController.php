@@ -44,12 +44,12 @@ class UserController extends Controller
             'surname' => 'required',
             'username' => 'required',
             'age' => 'required',
-            'iva' => 'required',
+            'partitaIva' => 'nullable',
             'phone_number' => 'required',
             'email' => 'required',
             'email_verified_at' => 'required',
             'password' => 'required',
-            'partitaIva' => 'nullable',
+
 
         ];
         $validator = Validator::make($request->all(),$rules);
@@ -136,22 +136,22 @@ class UserController extends Controller
 
         ]);
 
-        User::find(auth()->user()->id)->update(['email'=> Hash::make($request->newEmail)]);
+        User::find(auth()->user()->id)->update(['email'=> ($request->newEmail)]);
 
         $user = \Illuminate\Support\Facades\Auth::user();
-        return redirect('/accountArea')
+        return view('/accountArea')
             ->with(compact('user'));
     }
 
-    public function addPartitaIva(Request $request){
+    public static function addPartitaIva(Request $request){
 
-        $qualcosa = new User();
+        $request->validate([
+            'partitaIva' => ['required', 'regex:/^[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}$/'],
+        ]);
 
-        $IVA = $request->partitaIva;
+        User::find(auth()->user()->id)->update(['partitaIva'=> ($request->partitaIva)]);
 
-        DB::transaction(function () {
-            DB::table('users')->update(['partitaIva' => $IVA]);
-        });
+
     }
 
 }

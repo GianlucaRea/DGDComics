@@ -106,4 +106,10 @@ class GroupController extends Controller
         $Group-> delete();
         return response()->json(null,204);
     }
+
+    public static function vendorUpdate($id){
+
+        Group::find(auth()->user()->id)->update(['group_id'=> '2']);
+
+    }
 }

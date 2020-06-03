@@ -54,8 +54,12 @@ Route::post('submitAddMethod', 'PaymentMethodController@add')->name('submitAddMe
 Route::get('addAddress', function (){return view('addAddress');})->name('addAddress');
 Route::post('submitAddAddress', 'ShippingAddressController@add')->name('submitAddAddress');
 Route::post('submitVendorAddAddress', function(Request $request){
-    /*qui la roba per l'iban*/
     \App\Http\Controllers\ShippingAddressController::addVendorShippingAdress($request);
+    \App\Http\Controllers\UserController::addPartitaIva($request);
+    \App\Http\Controllers\GroupController::vendorUpdate($request);
+    $user = \Illuminate\Support\Facades\Auth::user();
+    return view('/accountArea')
+        ->with(compact('user'));
 } )->name('submitAddVendorAddress');
 
 Route::get('/logout', function () {
