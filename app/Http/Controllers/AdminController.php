@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Comic;
 use App\User;
 use App\Review;
+use Illuminate\Support\Facades\Auth;
+
 class AdminController extends Controller
 {
 public static function dashboard() {
@@ -54,6 +56,16 @@ public static function adminReviews(){
         ->with(compact('users'))
         ->with(compact('comics'))
         ->with(compact('reviews'));
+}
+
+public static function checkForWriteArticle(){
+    $user = Auth::user();
+    if(GroupController::isAdmin($user->id)){
+        return view("articleForm");
+    }
+    else{
+        return view("errorCase");
+    }
 }
 
 }

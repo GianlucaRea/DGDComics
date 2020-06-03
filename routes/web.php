@@ -126,3 +126,5 @@ Route::get('/blog', function(){return view('/blogHome');});
 Route::get('/blogDetail/{id}', "ArticleController@getArticleById")->name('blogDetail');
 Route::post('submitComment/{article}', 'CommentController@addToArticle')->name('submitComment');
 Route::post('submitAnswer/{comment}', 'CommentController@addToComment')->name('submitAnswer');
+Route::get('/writeArticle', 'AdminController@checkForWriteArticle')->name('writeArticle');
+Route::post('submitArticle/{user_id}', 'ArticleController@addArticle')->name('submitArticle');

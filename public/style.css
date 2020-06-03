@@ -7041,6 +7041,26 @@ p.lost-password a:hover {
     font-weight: 400;
 }
 
+.write-button a {
+    background: #333 none repeat scroll 0 0;
+    border: 0 none;
+    border-radius: 0;
+    color: #fff;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 700;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 28px;
+    text-transform: uppercase;
+    width: auto;
+    transition: .3s;
+}
+
+.write-button a:hover {
+    background: #f07c29 none repeat scroll 0 0;
+}
+
 .country-select {
     margin-bottom: 30px;
     position: relative;
