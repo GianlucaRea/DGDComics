@@ -130,3 +130,4 @@ Route::get('/writeArticle', 'AdminController@checkForWriteArticle')->name('write
 Route::post('submitArticle/{user_id}', 'ArticleController@addArticle')->name('submitArticle');
 Route::get('comment-deletelocal/{id}','CommentController@destroyComment')->name('comment-delete-local');
 Route::get('answer-deletelocal/{id}','CommentController@destroyAnswer')->name('answer-delete-local');
+Route::get('article-deletelocal/{id}','ArticleController@destroyArticle')->name('article-delete-local');

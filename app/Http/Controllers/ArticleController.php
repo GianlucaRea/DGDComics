@@ -141,4 +141,10 @@ class ArticleController extends Controller
             return view("errorCase");
         }
     }
+
+    public static function destroyArticle($id){
+        DB::table("articles")->where("id", "=", $id)->delete();
+
+        return redirect('/blog');
+    }
 }
