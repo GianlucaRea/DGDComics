@@ -721,7 +721,7 @@ class ComicController extends Controller
 
 
     public static function topSold() {
-      return $comics = ComicBought::groupBy('comic_id')->orderBy('quantity')clear;
+      //return $comics = ComicBought::groupBy('comic_id')->orderBy('quantity')clear;
     }
 
 }

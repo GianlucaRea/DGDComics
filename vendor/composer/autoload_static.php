@@ -465,7 +465,6 @@ class ComposerStaticInit4d6bcfbc3ce423c65849ffa78fc23b8b
     );
 
     public static $classMap = array (
-        'App\\AccessLog' => __DIR__ . '/../..' . '/app/AccessLog.php',
         'App\\Article' => __DIR__ . '/../..' . '/app/Article.php',
         'App\\Author' => __DIR__ . '/../..' . '/app/Author.php',
         'App\\Comic' => __DIR__ . '/../..' . '/app/Comic.php',
@@ -475,7 +474,7 @@ class ComposerStaticInit4d6bcfbc3ce423c65849ffa78fc23b8b
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Genre' => __DIR__ . '/../..' . '/app/Genre.php',
         'App\\Group' => __DIR__ . '/../..' . '/app/Group.php',
-        'App\\Http\\Controllers\\AccessLogController' => __DIR__ . '/../..' . '/app/Http/Controllers/AccessLogController.php',
+        'App\\Http\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminController.php',
         'App\\Http\\Controllers\\ArticleController' => __DIR__ . '/../..' . '/app/Http/Controllers/ArticleController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -493,7 +492,6 @@ class ComposerStaticInit4d6bcfbc3ce423c65849ffa78fc23b8b
         'App\\Http\\Controllers\\GroupController' => __DIR__ . '/../..' . '/app/Http/Controllers/GroupController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\ImageController' => __DIR__ . '/../..' . '/app/Http/Controllers/ImageController.php',
-        'App\\Http\\Controllers\\MessageController' => __DIR__ . '/../..' . '/app/Http/Controllers/MessageController.php',
         'App\\Http\\Controllers\\NotificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/NotificationController.php',
         'App\\Http\\Controllers\\OrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/OrderController.php',
         'App\\Http\\Controllers\\PaymentMethodController' => __DIR__ . '/../..' . '/app/Http/Controllers/PaymentMethodController.php',
@@ -512,7 +510,6 @@ class ComposerStaticInit4d6bcfbc3ce423c65849ffa78fc23b8b
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Image' => __DIR__ . '/../..' . '/app/Image.php',
-        'App\\Message' => __DIR__ . '/../..' . '/app/Message.php',
         'App\\Notification' => __DIR__ . '/../..' . '/app/Notification.php',
         'App\\Order' => __DIR__ . '/../..' . '/app/Order.php',
         'App\\PaymentMethod' => __DIR__ . '/../..' . '/app/PaymentMethod.php',

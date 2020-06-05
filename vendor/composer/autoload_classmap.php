@@ -6,7 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'App\\AccessLog' => $baseDir . '/app/AccessLog.php',
     'App\\Article' => $baseDir . '/app/Article.php',
     'App\\Author' => $baseDir . '/app/Author.php',
     'App\\Comic' => $baseDir . '/app/Comic.php',
@@ -16,7 +15,7 @@ return array(
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Genre' => $baseDir . '/app/Genre.php',
     'App\\Group' => $baseDir . '/app/Group.php',
-    'App\\Http\\Controllers\\AccessLogController' => $baseDir . '/app/Http/Controllers/AccessLogController.php',
+    'App\\Http\\Controllers\\AdminController' => $baseDir . '/app/Http/Controllers/AdminController.php',
     'App\\Http\\Controllers\\ArticleController' => $baseDir . '/app/Http/Controllers/ArticleController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -34,7 +33,6 @@ return array(
     'App\\Http\\Controllers\\GroupController' => $baseDir . '/app/Http/Controllers/GroupController.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\ImageController' => $baseDir . '/app/Http/Controllers/ImageController.php',
-    'App\\Http\\Controllers\\MessageController' => $baseDir . '/app/Http/Controllers/MessageController.php',
     'App\\Http\\Controllers\\NotificationController' => $baseDir . '/app/Http/Controllers/NotificationController.php',
     'App\\Http\\Controllers\\OrderController' => $baseDir . '/app/Http/Controllers/OrderController.php',
     'App\\Http\\Controllers\\PaymentMethodController' => $baseDir . '/app/Http/Controllers/PaymentMethodController.php',
@@ -53,7 +51,6 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Image' => $baseDir . '/app/Image.php',
-    'App\\Message' => $baseDir . '/app/Message.php',
     'App\\Notification' => $baseDir . '/app/Notification.php',
     'App\\Order' => $baseDir . '/app/Order.php',
     'App\\PaymentMethod' => $baseDir . '/app/PaymentMethod.php',

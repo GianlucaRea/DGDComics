@@ -16,11 +16,13 @@ class CreateRankingsTable extends Migration
         Schema::create('rankings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->integer('feedback_number');
-            $table->integer('stars_number');
-            $table->float('avg_stars');
-            $table->integer('number_selling_products');
+            $table->integer('feedback_number')->default(0);
+            $table->integer('stars_number')->default(0);
+            $table->float('avg_stars')->default(0);
+            $table->integer('number_selling_products')->default(0);
         });
+
+        DB::table('rankings')->insert([ ['user_id'=>'1'],['user_id'=>2]]);
     }
 
     /**

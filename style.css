@@ -150,6 +150,10 @@ ul {
     clear: both
 }
 
+ul#menu li {
+    display:inline;
+}
+
 body {
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;

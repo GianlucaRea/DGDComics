@@ -28,6 +28,15 @@ Route::get('/contact', function(){
 Route::get('/comic_detail/{id}','ComicController@comicDetail')->name('comicdetail');
 Route::post('/comic_detail/{id}','ReviewController@add')->name('submitReview');
 
+Route::get('/vendor_detail/{id}' , function($id){
+    $user = App\User::where('id','=',$id)->first();
+    $ranking = App\Ranking::where('user_id','=',$id)->first();
+    return view('/vendorinfo')
+        ->with(compact('user'))
+        ->with(compact('ranking'));
+})->name('vendorpublic');
+
+
 Route::get('/shoplist', 'ComicController@shoplistBase');
 Route::get('/shoplist/type/{type}','ComicController@shoplistType');
 Route::get('/shoplist/genre/{name_genre}','ComicController@shoplistGenre')->name('genreshoplist');
