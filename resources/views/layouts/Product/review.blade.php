@@ -71,7 +71,7 @@
     <div class="tab-content">
     <div class="tab-pane fade show active" id="addreview">
         <div class="review-add">
-            <h4><center>{{$comic->comic_name}}</center></h4>
+            <h4>{{$comic->comic_name}}</h4>
         </div>
         <div class="review-field-ratings">
             <span>La tua opinione <sup>*</sup></span>
@@ -79,11 +79,11 @@
                 <div class="single-control">
                     <span>Stars</span>
                     <div class="review-control-vote">
-                        <a  ><i class="fa fa-star"></i></a>
-                        <a  ><i class="fa fa-star"></i></a>
-                        <a  ><i class="fa fa-star"></i></a>
-                        <a  ><i class="fa fa-star"></i></a>
-                        <a  ><i class="fa fa-star"></i></a>
+                        <a><i class="fa fa-star"></i></a>
+                        <a><i class="fa fa-star"></i></a>
+                        <a><i class="fa fa-star"></i></a>
+                        <a><i class="fa fa-star"></i></a>
+                        <a><i class="fa fa-star"></i></a>
                     </div>
                 </div>
             </div>
@@ -94,9 +94,7 @@
                 <form>
                     <input id="review_title" type="text" class="form-control @error('review_title') is invalid @enderror" name="review_title"  value="{{ old('review_title') }}" required autocomplete="review_title"/>
                     @error('review_title')
-                    <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                     @enderror
                 </form>
             </div>
@@ -108,7 +106,7 @@
             </div>
         </div>
         <div class="review-form-button">
-            <form action>
+            <form action=" {!! route('submitReview',$comic->id) !!}" method="POST">>
                 <a href="">Invia recensione</a>
             </form>
         </div>

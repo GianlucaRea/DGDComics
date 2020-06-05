@@ -28,6 +28,17 @@
                                     <a href="#payment-method" data-toggle="tab"><i class="fa fa-credit-card"></i>Metodi di pagamento</a>
                                     <a href="#address-edit" data-toggle="tab"><i class="fa fa-map-marker"></i>indirizzi di spedizione</a>
                                     <a href="#account-info" data-toggle="tab"><i class="fa fa-user"></i> dettagli account</a>
+
+                                    @php
+                                        $isvendor = \App\Http\Controllers\GroupController::isVendor($user->id);
+                                    @endphp
+
+                                    @if($isvendor = '2')
+                                        <a href="#venditore-info" data-toggle="tab"><i class="fa fa-user"></i> dettagli account venditore</a>
+                                    @endif
+
+
+
                                 </div>
                             </div>
                             <!-- My Account Tab Menu End -->
@@ -72,17 +83,17 @@
                                                         <tbody>
                                                         @foreach($notifications as $notification)
                                                             <tr>
-                                                            <td>{{ substr($notification->date, 0, 16) }}</td>
-                                                            <td>
-                                                                @if(strlen($notification->notification_text) > 50 )
-                                                                    @php
-                                                                        $subnotification = substr($notification->notification_text, 0, 50)
-                                                                    @endphp
-                                                                    {{ $subnotification }}...
-                                                                @else
-                                                                    {{ $notification->notification_text }}
-                                                                @endif
-                                                            </td>
+                                                                <td>{{ substr($notification->date, 0, 16) }}</td>
+                                                                <td>
+                                                                    @if(strlen($notification->notification_text) > 50 )
+                                                                        @php
+                                                                            $subnotification = substr($notification->notification_text, 0, 50)
+                                                                        @endphp
+                                                                        {{ $subnotification }}...
+                                                                    @else
+                                                                        {{ $notification->notification_text }}
+                                                                    @endif
+                                                                </td>
                                                                 @if($notification->state == 1)
                                                                     <td>
                                                                         Letto
@@ -98,7 +109,7 @@
                                                                         <a href="{{ route('notificaLetta', ['id' => $notification->id]) }}" class="btn btn-sqr">View</a>
                                                                     </td>
                                                                 @endif
-                                                        </tr>
+                                                            </tr>
                                                         @endforeach
                                                         </tbody>
                                                     </table>
@@ -132,14 +143,14 @@
                                                         </thead>
                                                         <tbody>
                                                         @foreach($orders as $order)
-                                                        <tr>
-                                                            <td>{{ $order->id }}</td>
-                                                            <td>{{ substr($order->date, 0,10) }}</td>
-                                                            <td>{{ $order->state }}</td>
-                                                            <td>€ {{ $order->total }}</td>
-                                                            <td><a href="{{ route('orderDetail', ['id' => $order->id]) }}" class="btn btn-sqr">View</a>
-                                                            </td>
-                                                        </tr>
+                                                            <tr>
+                                                                <td>{{ $order->id }}</td>
+                                                                <td>{{ substr($order->date, 0,10) }}</td>
+                                                                <td>{{ $order->state }}</td>
+                                                                <td>€ {{ $order->total }}</td>
+                                                                <td><a href="{{ route('orderDetail', ['id' => $order->id]) }}" class="btn btn-sqr">View</a>
+                                                                </td>
+                                                            </tr>
                                                         @endforeach
                                                         </tbody>
                                                     </table>
@@ -148,6 +159,51 @@
                                         @endif
                                     </div>
                                     <!-- Single Tab Content End -->
+
+
+
+                                    <!-- Single Tab Content Start -->
+
+                                    <div class="tab-pane fade" id="venditore-info" role="tabpanel">
+                                        @php($orders = \App\Http\Controllers\OrderController::getAllOrderByUser($user->id))
+                                        @if($orders->count()<1)
+                                            <div class="myaccount-content">
+                                                <h5>FRONT PROVVISORIO</h5>
+                                            </div>
+                                        @else
+                                            <div class="myaccount-content">
+                                                <h5>Ordini</h5>
+                                                <div class="myaccount-table table-responsive text-center">
+                                                    <table class="table table-bordered">
+                                                        <thead class="thead-light">
+                                                        <tr>
+                                                            <th>Ordine</th>
+                                                            <th>Data</th>
+                                                            <th>Stato</th>
+                                                            <th>Totale</th>
+                                                            <th>Azione</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        @foreach($orders as $order)
+                                                            <tr>
+                                                                <td>{{ $order->id }}</td>
+                                                                <td>{{ substr($order->date, 0,10) }}</td>
+                                                                <td>{{ $order->state }}</td>
+                                                                <td>€ {{ $order->total }}</td>
+                                                                <td><a href="{{ route('orderDetail', ['id' => $order->id]) }}" class="btn btn-sqr">View</a>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <!-- Single Tab Content End -->
+
+
 
 
 
@@ -217,7 +273,7 @@
                                             <div class="col-md-6"></div>
                                             <div class="col-md-6" style="text-align: right;">
                                                 <a href="{{ Route('addMethod')}}" class="btn btn-sqr"><i class="fa fa-edit;"></i>
-                                                Aggiungi metodo di pagamento</a>
+                                                    Aggiungi metodo di pagamento</a>
                                             </div>
                                         </div>
                                     </div>
@@ -251,15 +307,15 @@
 
                                         @foreach($shippingAddresses as $shippingAddress)
                                             @if($shippingAddress->favourite != 1)
-                                              <div class="myaccount-content">
+                                                <div class="myaccount-content">
                                                     <address>
                                                         <p><strong>{{ $shippingAddress->città }} </strong> <strong>{{ $shippingAddress->post_code }}</strong></p>
                                                         <p><strong>{{ $shippingAddress->via }}</strong> <strong>{{ $shippingAddress->civico }}</strong></p>
                                                         <p><strong>{{ $shippingAddress->other_info }} </strong></p>
                                                     </address>
-                                                  <a href="{{ Route('remove.address', ['address' => $shippingAddress->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
-                                                      Rimuovi indirizzo di spedizione</a>
-                                               </div>
+                                                    <a href="{{ Route('remove.address', ['address' => $shippingAddress->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
+                                                        Rimuovi indirizzo di spedizione</a>
+                                                </div>
                                             @endif
                                         @endforeach
                                         <div class="row mt-20">
@@ -304,73 +360,73 @@
                                                         </div>
                                                     </div>
 
-                                                <form method="POST" action="{{ route('change.email') }}">
-                                                    <fieldset>
-                                                        <div class="single-input-item">
-                                                            <label for="email" class="required">Indirizzo Email</label>
-                                                            <input type="email" id="email" name="email" required autocomplete="email" placeholder={{$user->email}} />
-                                                            <input type="email" id="newEmail" name="newEmail" required autocomplete="newEmail" placeholder= 'inserire nuova e-mail' />
-                                                        </div>
-                                                    </fieldset>
+                                                    <form method="POST" action="{{ route('change.email') }}">
+                                                        <fieldset>
+                                                            <div class="single-input-item">
+                                                                <label for="email" class="required">Indirizzo Email</label>
+                                                                <input type="email" id="email" name="email" required autocomplete="email" placeholder={{$user->email}} />
+                                                                <input type="email" id="newEmail" name="newEmail" required autocomplete="newEmail" placeholder= 'inserire nuova e-mail' />
+                                                            </div>
+                                                        </fieldset>
                                                         <div class="single-input-item">
                                                             <button type="submit" class="btn btn-sqr">Cambia E-mail</button>
                                                         </div>
-                                                </form>
+                                                    </form>
 
-                                                <div class="mt-5"></div>
-                                                <form method="POST" action="{{ route('change.password') }}">
-                                                    @csrf
-                                                    <fieldset>
+                                                    <div class="mt-5"></div>
+                                                    <form method="POST" action="{{ route('change.password') }}">
+                                                        @csrf
+                                                        <fieldset>
 
-                                                        <legend>Cambia password</legend>
+                                                            <legend>Cambia password</legend>
 
-                                                        <div class="single-input-item">
-                                                            <label for="password" class="required">Password corrente</label>
-                                                            <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="password" placeholder="Password corrente" >
+                                                            <div class="single-input-item">
+                                                                <label for="password" class="required">Password corrente</label>
+                                                                <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="password" placeholder="Password corrente" >
 
-                                                            @error('password')
+                                                                @error('password')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
-                                                            @enderror
-                                                        </div>
-
-                                                        <div class="row">
-
-                                                            <div class="col-lg-6">
-                                                                <div class="single-input-item">
-                                                                    <label for="newPassword" class="required">Nuova password</label>
-                                                                    <input type="password" id="newPassword" class="form-control @error('newPassword') is-invalid @enderror" name="newPassword" required autocomplete="newPassword" placeholder="Nuova password" >
-
-                                                                    @error('newPassword')
-                                                                    <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                    </span>
-                                                                    @enderror
-                                                                </div>
+                                                                @enderror
                                                             </div>
 
-                                                            <div class="col-lg-6">
-                                                                <div class="single-input-item">
-                                                                    <label for="confirmPassword" class="required">Conferma password</label>
-                                                                    <input type="password" id="confirmPassword" class="form-control @error('confirmPassword') is-invalid @enderror" name="confirmPassword" required autocomplete="confirmPassword" placeholder="Conferma password" >
+                                                            <div class="row">
 
-                                                                    @error('confirmPassword')
-                                                                    <span class="invalid-feedback" role="alert">
+                                                                <div class="col-lg-6">
+                                                                    <div class="single-input-item">
+                                                                        <label for="newPassword" class="required">Nuova password</label>
+                                                                        <input type="password" id="newPassword" class="form-control @error('newPassword') is-invalid @enderror" name="newPassword" required autocomplete="newPassword" placeholder="Nuova password" >
+
+                                                                        @error('newPassword')
+                                                                        <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                     </span>
-                                                                    @enderror
+                                                                        @enderror
+                                                                    </div>
                                                                 </div>
+
+                                                                <div class="col-lg-6">
+                                                                    <div class="single-input-item">
+                                                                        <label for="confirmPassword" class="required">Conferma password</label>
+                                                                        <input type="password" id="confirmPassword" class="form-control @error('confirmPassword') is-invalid @enderror" name="confirmPassword" required autocomplete="confirmPassword" placeholder="Conferma password" >
+
+                                                                        @error('confirmPassword')
+                                                                        <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+
                                                             </div>
 
+                                                        </fieldset>
+
+                                                        <div class="single-input-item">
+                                                            <button type="submit" class="btn btn-sqr">Salva</button>
                                                         </div>
-
-                                                    </fieldset>
-
-                                                    <div class="single-input-item">
-                                                        <button type="submit" class="btn btn-sqr">Salva</button>
-                                                    </div>
-
+                                                    </form>
                                                 </form>
                                             </div>
                                         </div>

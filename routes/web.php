@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Comic;
 use App\Genre;
 use App\Notification;
+use App\Review;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,15 +29,8 @@ Route::get('/contact', function(){
 Route::get('/comic_detail/{id}','ComicController@comicDetail')->name('comicdetail');
 Route::post('/comic_detail/{id}','ReviewController@add')->name('submitReview');
 
-Route::get('/vendor_detail/{id}' , function($id){
-    $user = App\User::where('id','=',$id)->first();
-    $ranking = App\Ranking::where('user_id','=',$id)->first();
-    $comics = Comic::where('user_id','=',$id)->get();
-    return view('/vendorinfo')
-        ->with(compact('user'))
-        ->with(compact('ranking'))
-        ->with(compact('comics'));
-})->name('vendorpublic');
+Route::get('/vendor_detail/{id}' , 'RankingController@vendorRanking')->name('vendorpublic');
+
 
 
 Route::get('/shoplist', 'ComicController@shoplistBase');
@@ -67,7 +61,7 @@ Route::post('submitAddAddress', 'ShippingAddressController@add')->name('submitAd
 Route::post('submitVendorAddAddress', function(Request $request){
     \App\Http\Controllers\ShippingAddressController::addVendorShippingAdress($request);
     \App\Http\Controllers\UserController::addPartitaIva($request);
-    \App\Http\Controllers\GroupController::vendorUpdate($request);
+    \App\Http\Controllers\GroupController::vendorUpdate();
     $user = \Illuminate\Support\Facades\Auth::user();
     return view('/accountArea')
         ->with(compact('user'));
