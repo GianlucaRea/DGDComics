@@ -11,7 +11,7 @@
     'name' =>'Info Venditore']
     )
 @include('layouts.Header.breadcrumbsArea', $page)
-@include('layouts.UserAccount.VendorpublicDetail')
+@include('layouts.UserAccount.vendorPublicDetail')
 <div style="height: 75px"></div>
 <footer>
     @include('layouts.Footer.footer')

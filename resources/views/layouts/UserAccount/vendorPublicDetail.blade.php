@@ -22,7 +22,7 @@
     <br>
 <center>Totale Prodotti Venduti : {{$ranking->number_selling_products}}</center>
     <br>
- 
+
 
 <!-- new-book-area-start -->
 <div class="new-book-area pb-100">

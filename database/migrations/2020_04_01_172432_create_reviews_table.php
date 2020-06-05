@@ -22,10 +22,7 @@ class CreateReviewsTable extends Migration
             $table->float('stars');
             $table->timestamp('review_date');
         });
-        DB::table('reviews')->insert([
-            ['comic_id' => '1' , 'user_id' => '2' , 'review_title' => 'Bello' , 'review_text' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'stars' => '5'],
-            ['comic_id' => '1' , 'user_id' => '3' , 'review_title' => 'Brutto' , 'review_text' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'stars' => '2'],
-        ]);
+
     }
 
     /**

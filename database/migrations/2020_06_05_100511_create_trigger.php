@@ -38,6 +38,15 @@ class CreateTrigger extends Migration
                 END'
         );
 
+        DB::table('reviews')->insert([
+            ['comic_id' => '1' , 'user_id' => '2' , 'review_title' => 'Bello' , 'review_text' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'stars' => '5'],
+            ['comic_id' => '1' , 'user_id' => '3' , 'review_title' => 'Brutto' , 'review_text' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'stars' => '2'],
+            ['comic_id' => '2' , 'user_id' => '4' , 'review_title' => 'Bello' , 'review_text' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'stars' => '5'],
+            ['comic_id' => '2' , 'user_id' => '3' , 'review_title' => 'Brutto' , 'review_text' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'stars' => '1'],
+            ['comic_id' => '3' , 'user_id' => '4' , 'review_title' => 'Bello' , 'review_text' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'stars' => '4'],
+            ['comic_id' => '4' , 'user_id' => '3' , 'review_title' => 'Brutto' , 'review_text' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'stars' => '2'],
+        ]);
+
     }
 
     /**
