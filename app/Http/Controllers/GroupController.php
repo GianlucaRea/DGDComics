@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Group;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class GroupController extends Controller
@@ -109,10 +110,25 @@ class GroupController extends Controller
     }
 
 
-    public static function vendorUpdate($id){
+    public static function vendorUpdate(){
+        $user = Auth::user();
+        $data=array(
+            'group_id'=> 2,
+            'user_id' => $user->id,
+        );
+        DB::table('group_user')->where("user_id", "=", $user->id)->update($data);
 
-        Group::find(auth()->user()->id)->update(['group_id'=> '2']);
     }
+
+    public static function isVendor($id){
+
+        $isvendor = DB::table("group_user")->where("user_id", "=", $id);
+
+        return $isvendor;
+
+    }
+
+
 
 
     public static function isAdmin($id){

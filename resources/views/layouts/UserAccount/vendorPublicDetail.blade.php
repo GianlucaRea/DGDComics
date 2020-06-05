@@ -1,9 +1,6 @@
-
-
-
-        <div class="section-title bt text-center pt-100 mb-30 section-title-res">
-            <h1>{{$user->name}} {{$user->surname}}</h1>
-        </div>
+<div class="section-title bt text-center pt-100 mb-30 section-title-res">
+    <h1>{{$user->name}} {{$user->surname}}</h1>
+</div>
 
 <center>Media delle Recesioni  : @foreach(range(1,5) as $i)
         @if($ranking->avg_stars >0)
@@ -17,11 +14,11 @@
         @endif
         <?php $ranking->avg_stars--; ?>
     @endforeach</center>
-    <br>
+<br>
 <center>Totale Recensioni: {{$ranking->feedback_number}}</center>
-    <br>
+<br>
 <center>Totale Prodotti Venduti : {{$ranking->number_selling_products}}</center>
-    <br>
+<br>
 
 
 <!-- new-book-area-start -->
@@ -35,8 +32,8 @@
             </div>
         </div>
         <div class="tab-active owl-carousel">
-            @foreach($comics as $comic)
-                <!-- single-product-start -->
+        @foreach($comics as $comic)
+            <!-- single-product-start -->
                 <div class="product-wrapper">
                     <div class="product-img">
                         @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
@@ -98,8 +95,8 @@
                         @endif
                     </div>
                 </div>
-            @endforeach
-                <!-- single-product-end -->
-            </div>
-            </div>
+        @endforeach
+        <!-- single-product-end -->
         </div>
+    </div>
+</div>

@@ -67,7 +67,7 @@ Route::post('submitAddAddress', 'ShippingAddressController@add')->name('submitAd
 Route::post('submitVendorAddAddress', function(Request $request){
     \App\Http\Controllers\ShippingAddressController::addVendorShippingAdress($request);
     \App\Http\Controllers\UserController::addPartitaIva($request);
-    \App\Http\Controllers\GroupController::vendorUpdate($request);
+    \App\Http\Controllers\GroupController::vendorUpdate();
     $user = \Illuminate\Support\Facades\Auth::user();
     return view('/accountArea')
         ->with(compact('user'));
