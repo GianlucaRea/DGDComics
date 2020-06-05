@@ -9,7 +9,8 @@
             </div>
         </div>
         <div class="tab-active owl-carousel">
-            @foreach($comics->shuffle()->take(6) as $comic)
+            @php($comics = \App\Http\Controllers\ComicController::topSold())
+            @foreach($comics as $comic)
                 @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
             <div class="tab-total">
                 <!-- single-product-start -->

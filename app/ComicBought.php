@@ -14,7 +14,7 @@ class ComicBought extends Model
     ];
 
     public function comic(){
-        return $this->belongsTo('App\Comic');
+        return $this->belongsToMany('App\Comic');
     }
 
     public function order(){
