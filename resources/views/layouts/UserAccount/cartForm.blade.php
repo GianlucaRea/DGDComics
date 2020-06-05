@@ -33,12 +33,14 @@
                         @php($total = 0)
                         @php($sellers = collect())
                         @if(session('cart'))
-                            @foreach(session('cart') as $id => $details)
+                            @php($cart = session()->get('cart'))
+                            @php($sessions = \Illuminate\Support\Facades\DB::table('sessions')->get())
+                            @foreach($sessions as $session)
                                 @php($user = \Illuminate\Support\Facades\Auth::user())
-                                @if($details['user'] == $user->id)
-                                @php($subtotal = $details['price'] * $details['quantity'])
-                                @php($total += $details['price'] * $details['quantity'])
-                                @php($comic = \App\Http\Controllers\ComicController::getByID($id))
+                                @if($cart[$session->sessionId]['user'] == $user->id)
+                                @php($subtotal = $cart[$session->sessionId]['price'] * $cart[$session->sessionId]['quantity'])
+                                @php($total += $cart[$session->sessionId]['price'] * $cart[$session->sessionId]['quantity'])
+                                @php($comic = \App\Http\Controllers\ComicController::getByID($cart[$session->sessionId]["comic_id"]))
                                 @php($seller = \App\Http\Controllers\ComicController::getSeller($comic->id))
                                 @if($sellers->isEmpty())
                                     @php($sellers->push($seller->id))
@@ -49,20 +51,20 @@
                                 @endif
 
                                 <tr>
-                                    <td class="product-thumbnail"><a href="{{ url('/comic_detail/'.$comic->id) }}"><img src="{{asset('img/comicsImages/' . $details['image']) }}" alt="man" /></a></td>
-                                    <td class="product-name">{{ $details['name']}}</td>
+                                    <td class="product-thumbnail"><a href="{{ url('/comic_detail/'.$comic->id) }}"><img src="{{asset('img/comicsImages/' . $cart[$session->sessionId]['image']) }}" alt="man" /></a></td>
+                                    <td class="product-name">{{ $cart[$session->sessionId]['name']}}</td>
                                     <td class="product-seller">{{ $seller->name }} {{ $seller->surname }}</td>
-                                    <td class="product-price"><span class="amount">{{ $details['price'] }}</span></td>
+                                    <td class="product-price"><span class="amount">{{ $cart[$session->sessionId]['price'] }}</span></td>
                                     <form></form>
                                     <td class="product-quantity">
-                                        <form action="{{url('update-cart/'.$id) }}">
-                                            <input type="number" name="qty" id="qty" min="1" max="{{$comic->quantity + $details['quantity']}}" value="{{ $details['quantity'] }}">
+                                        <form action="{{url('update-cart/'.$cart[$session->sessionId]["comic_id"]) }}">
+                                            <input type="number" name="qty" id="qty" min="1" max="{{$comic->quantity + $cart[$session->sessionId]['quantity']}}" value="{{ $cart[$session->sessionId]['quantity'] }}">
                                             <div class="mb-2"></div>
                                             <button type="submit">modifica</button>
                                         </form>
                                     </td>
                                     <td class="product-subtotal">{{ $subtotal }}</td>
-                                    <td class="product-remove"><a href="{{url('remove-from-cart/'.$id) }}"><i class="fa fa-times"></i></a></td>
+                                    <td class="product-remove"><a href="{{url('remove-from-cart/'.$cart[$session->sessionId]["comic_id"]) }}"><i class="fa fa-times"></i></a></td>
                                 </tr>
                                 @endif
                             @endforeach

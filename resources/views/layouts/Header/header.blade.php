@@ -20,9 +20,11 @@
                                 <li><a href="{{url('/cart')}}"><i class="fa fa-shopping-cart"></i>Carrello</a>
                                     @php($quantityCart = 0)
                                     @if(session('cart'))
-                                        @foreach(session('cart') as $id => $details)
+                                        @php($cart = session()->get('cart'))
+                                        @php($sessions = \Illuminate\Support\Facades\DB::table('sessions')->get())
+                                        @foreach($sessions as $session)
                                             @php($user = \Illuminate\Support\Facades\Auth::user())
-                                            @if($details['user'] == $user->id)
+                                            @if($cart[$session->sessionId]['user'] == $user->id)
                                                 @php($quantityCart++)
                                             @endif
                                         @endforeach
@@ -34,21 +36,23 @@
                                             <div class="cart-product">
                                                 @php($tmp =0)
                                                 @php($user = \Illuminate\Support\Facades\Auth::user())
-                                                @foreach(session('cart') as $id => $details)
-                                                    @if($details['user'] == $user->id)
-                                                        @php($total += $details['price'] * $details['quantity'])
+                                                @php($sessions = \Illuminate\Support\Facades\DB::table('sessions')->get())
+                                                @php($cart = session()->get('cart'))
+                                                @foreach($sessions as $session)
+                                                    @if($cart[$session->sessionId]['user'] == $user->id)
+                                                        @php($total += $cart[$session->sessionId]['price'] * $cart[$session->sessionId]['quantity'])
                                                         @if ($tmp++ < 5)
-                                                            @php($comic = \App\Http\Controllers\ComicController::getByID($id))
+                                                            @php($comic = \App\Http\Controllers\ComicController::getByID($cart[$session->sessionId]['comic_id']))
                                                             <div class="single-cart">
                                                                 <div class="cart-img">
-                                                                    <a href="{{ url('/comic_detail/'.$comic->id) }}"><img src="{{asset('img/comicsImages/' . $details['image']) }}" alt="man" /></a>
+                                                                    <a href="{{ url('/comic_detail/'.$comic->id) }}"><img src="{{asset('img/comicsImages/' . $cart[$session->sessionId]['image']) }}" alt="man" /></a>
                                                                 </div>
                                                                 <div class="cart-info">
-                                                                    <h5><a href="{{ url('/comic_detail/'.$comic->id) }}">{{ $details['name']}}</a></h5>
-                                                                    <p>{{ $details['quantity'] }} x {{ $details['price'] }}</p>
+                                                                    <h5><a href="{{ url('/comic_detail/'.$comic->id) }}">{{ $cart[$session->sessionId]['name']}}</a></h5>
+                                                                    <p>{{ $cart[$session->sessionId]['quantity'] }} x {{ $cart[$session->sessionId]['price'] }}</p>
                                                                 </div>
                                                                 <div class="cart-icon">
-                                                                    <a href="{{url('remove-from-cart/'.$id) }}"><i class="fa fa-remove"></i></a>
+                                                                    <a href="{{url('remove-from-cart/'.$cart[$session->sessionId]['comic_id']) }}"><i class="fa fa-remove"></i></a>
                                                                 </div>
                                                             </div>
                                                         @endif
