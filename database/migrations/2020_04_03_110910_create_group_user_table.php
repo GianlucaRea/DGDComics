@@ -19,9 +19,14 @@ class CreateGroupUserTable extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
         });
 
-        DB::table('group_user')->insert(
-            ['group_id' => '3' , 'user_id' => '4']);
+        DB::table('group_user')->insert([
+            ['group_id' => '2' , 'user_id' => '1'],
+            ['group_id' => '2' , 'user_id' => '2'],
+            ['group_id' => '1' , 'user_id' => '3'],
+            ['group_id' => '3' , 'user_id' => '5']
+        ]);
     }
+
 
     /**
      * Reverse the migrations.

@@ -109,66 +109,217 @@
                     </div>
                 </div>
             </div>
-            @php($articles = \App\Http\Controllers\ArticleController::getArticles())
-            @if($articles->count() < 1)
-                <h4>non ci sono articoli nel blog :(</h4>
-            @endif
-            @if($articles->count() > 0)
-                @foreach($articles as $article)
-                    @php($articleAuth = \App\Http\Controllers\UserController::getUserId($article->user_id))
-                    @php($articleComments = \App\Http\Controllers\CommentController::getcommentsByArticleId($article->id))
-                    <div class="col-lg-9 col-md-12 col-12 order-lg-2 order-1">
-                        <div class="blog-main-wrapper">
-                            <div class="single-blog-post">
-                                <div class="author-destils mb-30">
-                                    <div class="author-left">
-                                        <div class="author-img">
-                                            <a href="#"><img src="img/author/1.jpg" alt="man" /></a>
+            @if(\Illuminate\Support\Facades\Auth::user()) <!-- zona admin -->
+                @php($u = \Illuminate\Support\Facades\Auth::user())
+                @if(\App\Http\Controllers\GroupController::isAdmin($u->id))
+                        @php($articles = \App\Http\Controllers\ArticleController::getArticles())
+                        @if($articles->count() < 1)
+                            <div class="col-lg-9 col-md-12 col-12 order-lg-2 order-1">
+                                <h4>non ci sono articoli nel blog :(</h4>
+                                <div class="row">
+                                    <div class="col-lg-8"></div>
+                                    <div class="col-lg-4">
+                                        <div class="write-button">
+                                            <a href="{{route('/writeArticle')}}">scrivi articolo</a>
                                         </div>
-                                        <div class="author-description">
-                                            <p>Pubblicato da:
-                                                <a href="#"><span>{{ $articleAuth->username }}</span>in</a>
-                                            </p>
-                                            <span>{{ substr($article->date, 0,10) }}</span>
-                                        </div>
-                                    </div>
-                                    <div class="author-right">
-                                        <span>Condividi: </span>
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="blog-img mb-30">
-                                    <a href="#"><img src="img/blog/1.jpg" alt="blog" /></a>
-                                </div>
-                                <div class="single-blog-content">
-                                    <div class="single-blog-title">
-                                        <h3><a href="#">{{ $article->title }}</a></h3>
-                                    </div>
-                                    <div class="blog-single-content">
-                                        <p>{{ $article->article_text }}</p>
-                                    </div>
-                                </div>
-                                <div class="blog-comment-readmore">
-                                    <div class="blog-readmore">
-                                        <a href="#">Leggi di più<i class="fa fa-long-arrow-right"></i></a>
-                                    </div>
-                                    <div class="blog-com">
-
-                                        <a href="#">{{ $articleComments->count() }} commenti</a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
+                        @if($articles->count() > 0)
+                            <div class="col-lg-9 col-md-12 col-12 order-lg-2 order-1">
+                                @foreach($articles as $article)
+                                    @php($articleAuth = \App\Http\Controllers\UserController::getUserId($article->user_id))
+                                    @php($articleComments = \App\Http\Controllers\CommentController::getcommentsByArticleId($article->id))
+                                    <div class="blog-main-wrapper">
+                                        <div class="single-blog-post">
+                                            <div class="author-destils mb-30">
+                                                <div class="author-left">
+                                                    <div class="author-description">
+                                                        <p>Pubblicato da:
+                                                            <span>{{ $articleAuth->username }}</span>in
+                                                        </p>
+                                                        <span>il {{ substr($article->date, 0,10) }}</span>
+                                                    </div>
+                                                </div>
+                                                <div style="margin-left: 90%;">
+                                                    @if(\Illuminate\Support\Facades\Auth::user()!=null)
+                                                        @if(\App\Http\Controllers\GroupController::isAdmin(\Illuminate\Support\Facades\Auth::user()->id))
+                                                            <div class ="row">
+                                                                <a class="btn btn-light" onclick="return modifyArticle();"  href="#"><i class="fa fa-pencil"></i></a>
+                                                                <div class="mr-1"></div>
+                                                                <a class="btn btn-danger" onclick="return deleteArticle();"  href="{{route('article-delete-local', $article->id)}}"><i class="fa fa-trash"></i></a>
+                                                            </div>
+                                                        @endif
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            {{--<div class="blog-img mb-30">
+                                                <a href="#"><img src="img/blog/1.jpg" alt="blog" /></a>
+                                            </div>--}}
+                                            <div class="single-blog-content">
+                                                <div class="single-blog-title">
+                                                    <h3><a href="{{ url('/blogDetail/'.$article->id) }}">{{ $article->title }}</a></h3>
+                                                </div>
+                                                <div class="blog-single-content">
+                                                    @if(strlen($article->article_text)>680)
+                                                        <p>{{ substr($article->article_text, 0, 680)}}...</p>
+                                                    @else
+                                                        <p>{{ $article->article_text }}</p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="blog-comment-readmore">
+                                                <div class="blog-readmore">
+                                                    <a href="{{ url('/blogDetail/'.$article->id) }}">Leggi di più<i class="fa fa-long-arrow-right"></i></a>
+                                                </div>
+                                                <div class="blog-com">
+                                                    @if($articleComments->count() == 1)
+                                                        {{ $articleComments->count() }} commento
+                                                    @else
+                                                        {{ $articleComments->count() }} commenti
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                                    <div class="row">
+                                        <div class="col-lg-8"></div>
+                                        <div class="col-lg-4">
+                                            <div class="write-button">
+                                                <a href="{{url('/writeArticle')}}">scrivi articolo</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        @endif
                     </div>
-                @endforeach
+                @else <!-- zona non admin -->
+                    @php($articles = \App\Http\Controllers\ArticleController::getArticles())
+                    @if($articles->count() < 1)
+                        <div class="col-lg-9 col-md-12 col-12 order-lg-2 order-1">
+                            <h4>non ci sono articoli nel blog :(</h4>
+                        </div>
+                    @endif
+                    @if($articles->count() > 0)
+                        <div class="col-lg-9 col-md-12 col-12 order-lg-2 order-1">
+                            @foreach($articles as $article)
+                                @php($articleAuth = \App\Http\Controllers\UserController::getUserId($article->user_id))
+                                @php($articleComments = \App\Http\Controllers\CommentController::getcommentsByArticleId($article->id))
+                                <div class="blog-main-wrapper">
+                                    <div class="single-blog-post">
+                                        <div class="author-destils mb-30">
+                                            <div class="author-left">
+                                                <div class="author-description">
+                                                    <p>Pubblicato da:
+                                                        <span>{{ $articleAuth->username }}</span>in
+                                                    </p>
+                                                    <span>il {{ substr($article->date, 0,10) }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{--<div class="blog-img mb-30">
+                                            <a href="#"><img src="img/blog/1.jpg" alt="blog" /></a>
+                                        </div>--}}
+                                        <div class="single-blog-content">
+                                            <div class="single-blog-title">
+                                                <h3><a href="{{ url('/blogDetail/'.$article->id) }}">{{ $article->title }}</a></h3>
+                                            </div>
+                                            <div class="blog-single-content">
+                                                @if(strlen($article->article_text)>680)
+                                                    <p>{{ substr($article->article_text, 0, 680)}}...</p>
+                                                @else
+                                                    <p>{{ $article->article_text }}</p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="blog-comment-readmore">
+                                            <div class="blog-readmore">
+                                                <a href="{{ url('/blogDetail/'.$article->id) }}">Leggi di più<i class="fa fa-long-arrow-right"></i></a>
+                                            </div>
+                                            <div class="blog-com">
+                                                @if($articleComments->count() == 1)
+                                                    {{ $articleComments->count() }} commento
+                                                @else
+                                                    {{ $articleComments->count() }} commenti
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+                @endif
+            @else <!-- zona user non loggato -->
+                @php($articles = \App\Http\Controllers\ArticleController::getArticles())
+                @if($articles->count() < 1)
+                    <div class="col-lg-9 col-md-12 col-12 order-lg-2 order-1">
+                        <h4>non ci sono articoli nel blog :(</h4>
+                    </div>
+                @endif
+                @if($articles->count() > 0)
+                    <div class="col-lg-9 col-md-12 col-12 order-lg-2 order-1">
+                        @foreach($articles as $article)
+                            @php($articleAuth = \App\Http\Controllers\UserController::getUserId($article->user_id))
+                            @php($articleComments = \App\Http\Controllers\CommentController::getcommentsByArticleId($article->id))
+                            <div class="blog-main-wrapper">
+                                <div class="single-blog-post">
+                                    <div class="author-destils mb-30">
+                                        <div class="author-left">
+                                            <div class="author-description">
+                                                <p>Pubblicato da:
+                                                    <span>{{ $articleAuth->username }}</span>in
+                                                </p>
+                                                <span>il {{ substr($article->date, 0,10) }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{--<div class="blog-img mb-30">
+                                        <a href="#"><img src="img/blog/1.jpg" alt="blog" /></a>
+                                    </div>--}}
+                                    <div class="single-blog-content">
+                                        <div class="single-blog-title">
+                                            <h3><a href="{{ url('/blogDetail/'.$article->id) }}">{{ $article->title }}</a></h3>
+                                        </div>
+                                        <div class="blog-single-content">
+                                            @if(strlen($article->article_text)>680)
+                                                <p>{{ substr($article->article_text, 0, 680)}}...</p>
+                                            @else
+                                                <p>{{ $article->article_text }}</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="blog-comment-readmore">
+                                        <div class="blog-readmore">
+                                            <a href="{{ url('/blogDetail/'.$article->id) }}">Leggi di più<i class="fa fa-long-arrow-right"></i></a>
+                                        </div>
+                                        <div class="blog-com">
+                                            @if($articleComments->count() == 1)
+                                                {{ $articleComments->count() }} commento
+                                            @else
+                                                {{ $articleComments->count() }} commenti
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
             @endif
         </div>
     </div>
-</div>
+<script>
+    function deleteArticle() {
+        if(!confirm("Sei sicuro di voler eliminare questo articolo?"))
+            event.preventDefault();
+    }
+    function modifyArticle() {
+        if(!confirm("Sei sicuro di voler modificare questo articolo?"))
+            event.preventDefault();
+    }
+</script>
+</div> <!-- questo div è necessario senno si sminchia il footer -->
 <!-- blog-main-area-end -->

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Comic;
 use App\Genre;
@@ -52,6 +53,14 @@ Route::get('addMethod', function (){return view('AddMethod');})->name('addMethod
 Route::post('submitAddMethod', 'PaymentMethodController@add')->name('submitAddMethod');
 Route::get('addAddress', function (){return view('addAddress');})->name('addAddress');
 Route::post('submitAddAddress', 'ShippingAddressController@add')->name('submitAddAddress');
+Route::post('submitVendorAddAddress', function(Request $request){
+    \App\Http\Controllers\ShippingAddressController::addVendorShippingAdress($request);
+    \App\Http\Controllers\UserController::addPartitaIva($request);
+    \App\Http\Controllers\GroupController::vendorUpdate($request);
+    $user = \Illuminate\Support\Facades\Auth::user();
+    return view('/accountArea')
+        ->with(compact('user'));
+} )->name('submitAddVendorAddress');
 
 Route::get('/logout', function () {
     return \App\Http\Controllers\Auth\LoginController::logout();
@@ -114,3 +123,11 @@ Route::get('review-delete/{id}','ReviewController@destroy')->name('review-delete
 Route::get('review-deletelocal/{id}','ReviewController@destroylocal')->name('review-delete-local');
 
 Route::get('/blog', function(){return view('/blogHome');});
+Route::get('/blogDetail/{id}', "ArticleController@getArticleById")->name('blogDetail');
+Route::post('submitComment/{article}', 'CommentController@addToArticle')->name('submitComment');
+Route::post('submitAnswer/{comment}', 'CommentController@addToComment')->name('submitAnswer');
+Route::get('/writeArticle', 'AdminController@checkForWriteArticle')->name('writeArticle');
+Route::post('submitArticle/{user_id}', 'ArticleController@addArticle')->name('submitArticle');
+Route::get('comment-deletelocal/{id}','CommentController@destroyComment')->name('comment-delete-local');
+Route::get('answer-deletelocal/{id}','CommentController@destroyAnswer')->name('answer-delete-local');
+Route::get('article-deletelocal/{id}','ArticleController@destroyArticle')->name('article-delete-local');

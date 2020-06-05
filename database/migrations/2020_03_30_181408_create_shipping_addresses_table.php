@@ -22,7 +22,7 @@ class CreateShippingAddressesTable extends Migration
             $table->integer('post_code');
             $table->text('other_info')->nullable();
             $table->boolean('favourite');
-            $table->string('sede')->nullable();
+            $table->string('sede')->default(false);
         });
         DB::table('shipping_addresses')->insert([
             ['user_id' => '3', 'via' => 'le mani dal naso', 'civico' => '123', 'città' => 'Pescara', 'post_code' => '65123', 'other_info' => 'nothing', 'favourite' => '1'],

@@ -46,7 +46,7 @@ class ShippingAddressController extends Controller
             'città' => 'required',
             'post_code' => 'required',
             'favourite' => 'required',
-            'sede' => 'nullable',
+            'sede' => 'required',
             'other_info' => 'nullable'
 
 
@@ -184,8 +184,42 @@ class ShippingAddressController extends Controller
             ->with(compact('user'));
     }
 
+    public static function addVendorShippingAdress(Request $request){
+        $request->validate([
+            'via' => ['required'],
+            'civico' => ['required', 'regex:/^[0-9]*$/'],
+            'città' => ['required'],
+            'post_code' => ['required', 'regex:/^[0-9]{5}$/'],
+            'other_info' => 'nullable',
+
+        ]);
+        $user = \Illuminate\Support\Facades\Auth::user();
+
+        $address = new ShippingAddress; //per evitare problemi con campi che non appartengono effettivamente a paymentMethod.
+        $address->user_id = \Illuminate\Support\Facades\Auth::user()->id;
+        $address->via = $request->via;
+        $address->civico = $request->civico;
+        $address->città = $request->città;
+        $address->post_code = $request->post_code;
+        $address->other_info = $request->other_info;
+        $address->favourite = 0;
+        $address->sede = 1;
+
+        $data=array(
+            'user_id'=> $address->user_id,
+            'via'=> $address->via,
+            'civico'=> $address->civico,
+            'città'=>$address->città,
+            'post_code'=>$address->post_code,
+            'other_info'=>$address->other_info,
+            'favourite'=>$address->favourite,
+            'sede'=>$address->sede,
+        );
+
+        DB::table('shipping_addresses')->insert($data);
+    }
+
     public static function getShippingAddressByOrderId($id){
         return DB::table("shipping_addresses")->where("id", "=", $id)->first();
     }
-
 }

@@ -36,10 +36,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'ComicBought_description' => 'required',
-        ];
-        $validator = Validator::make($request->all(),$rules);
+        $validator = Validator::make($request->all());
         if($validator->fails()){
             return response()->json($validator->errors(),400);
         }
@@ -110,5 +107,44 @@ class ArticleController extends Controller
 
     public static function getArticles(){
         return DB::table("articles")->get();
+    }
+
+    public static function getArticleById($id){
+        $article = DB::table("articles")->where("id", "=", $id)->first();
+        return view('blogArticleDetail')->with(compact('article'));
+    }
+
+    public static function addArticle($id, Request $request){
+        $request->validate([
+            'title' => ['required', 'string', 'max:127'],
+            'article_text' => ['required'],
+        ]);
+
+        if(GroupController::isAdmin($id)){
+            $article = new Article(); //per evitare problemi con campi che non appartengono effettivamente a paymentMethod.
+            $article->user_id = $id;
+            $article->title = $request->title;
+            $article->article_text = $request->article_text;
+
+            $data=array(
+                'user_id'=> $id,
+                'title' => $article->title,
+                'article_text' => $article->article_text,
+            );
+
+            DB::table('articles')->insert($data);
+
+
+            return view('/blogHome');
+        }
+        else{
+            return view("errorCase");
+        }
+    }
+
+    public static function destroyArticle($id){
+        DB::table("articles")->where("id", "=", $id)->delete();
+
+        return redirect('/blog');
     }
 }
