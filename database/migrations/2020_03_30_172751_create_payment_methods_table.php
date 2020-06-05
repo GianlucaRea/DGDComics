@@ -27,7 +27,8 @@ class CreatePaymentMethodsTable extends Migration
         DB::table('payment_methods')->insert([
             ['user_id' => '3', 'payment_type' => 'FakePayment', 'favourite' => '1', 'data_scadenza'=>'2021-08-23', 'cardNumber'=>'1234123412341234', 'intestatario'=>'pinco', 'CVV'=>Hash::make('123')],
             ['user_id' => '3', 'payment_type' => 'FakePayment 2.0', 'favourite' => '0', 'data_scadenza'=>'2019-08-23', 'cardNumber'=>'1235123412341234', 'intestatario'=>'pallo', 'CVV'=>Hash::make('321')],
-            ['user_id' => '3', 'payment_type' => 'FakePayment 3.0', 'favourite' => '0', 'data_scadenza'=>'2020-06-25', 'cardNumber'=>'1236123412341234', 'intestatario'=>'pallino', 'CVV'=>Hash::make('523')]
+            ['user_id' => '3', 'payment_type' => 'FakePayment 3.0', 'favourite' => '0', 'data_scadenza'=>'2020-06-25', 'cardNumber'=>'1236123412341234', 'intestatario'=>'pallino', 'CVV'=>Hash::make('523')],
+            ['user_id' => '4', 'payment_type' => 'FakePayment ', 'favourite' => '0', 'data_scadenza'=>'2020-06-25', 'cardNumber'=>'4326123412341234', 'intestatario'=>'gianluca', 'CVV'=>Hash::make('723')]
         ]);
     }
 

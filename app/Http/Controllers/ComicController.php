@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\ComicBought;
 use App\Genre;
 use App\Http\Controllers\Controller;
 use App\Image;
@@ -147,7 +148,7 @@ class ComicController extends Controller
 
         return response()->json($comic, 200);
     }
- 
+
 
     public function getGenre($id)
     {
@@ -494,7 +495,7 @@ class ComicController extends Controller
         $sold = Comic::find($id);
         return User::find($sold->user_id);
      }
-     
+
     public function addToCart($id, Request $request)
     {
         $comic = Comic::find($id);
@@ -716,6 +717,11 @@ class ComicController extends Controller
             }
         }
         return redirect()->back();
+    }
+
+
+    public static function topSold() {
+      return $comics = ComicBought::groupBy('comic_id')->orderBy('quantity')clear;
     }
 
 }

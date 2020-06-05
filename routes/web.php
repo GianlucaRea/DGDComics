@@ -48,7 +48,7 @@ Route::post('change.email', 'UserController@changeEmail')->name('change.email');
 Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
 Route::get('remove-method/{method}', 'PaymentMethodController@remove')->name('remove.method');
 Route::get('remove-address/{address}', 'ShippingAddressController@remove')->name('remove.address');
-Route::get('addMethod', function (){return view('addMethod');})->name('addMethod');
+Route::get('addMethod', function (){return view('AddMethod');})->name('addMethod');
 Route::post('submitAddMethod', 'PaymentMethodController@add')->name('submitAddMethod');
 Route::get('addAddress', function (){return view('addAddress');})->name('addAddress');
 Route::post('submitAddAddress', 'ShippingAddressController@add')->name('submitAddAddress');
