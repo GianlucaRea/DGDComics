@@ -31,9 +31,11 @@ Route::post('/comic_detail/{id}','ReviewController@add')->name('submitReview');
 Route::get('/vendor_detail/{id}' , function($id){
     $user = App\User::where('id','=',$id)->first();
     $ranking = App\Ranking::where('user_id','=',$id)->first();
+    $comics = Comic::where('user_id','=',$id)->get();
     return view('/vendorinfo')
         ->with(compact('user'))
-        ->with(compact('ranking'));
+        ->with(compact('ranking'))
+        ->with(compact('comics'));
 })->name('vendorpublic');
 
 
