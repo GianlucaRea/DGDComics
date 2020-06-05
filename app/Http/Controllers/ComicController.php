@@ -721,7 +721,9 @@ class ComicController extends Controller
 
 
     public static function topSold() {
-      //return $comics = ComicBought::groupBy('comic_id')->orderBy('quantity')clear;
+
+      return  $comics = DB::table('comics')->join('comic_boughts','comics.id','=','comic_id')->groupBy('comic_boughts.quantity','comics.id','comics.comic_name','comics.price','comics.discount')->orderBy('comic_boughts.quantity','desc')->select('comic_boughts.quantity','comics.id','comics.comic_name','comics.price','comics.discount')->take(6)->get();
+
     }
 
 }
