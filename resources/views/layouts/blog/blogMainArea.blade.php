@@ -146,8 +146,6 @@
                                                     @if(\Illuminate\Support\Facades\Auth::user()!=null)
                                                         @if(\App\Http\Controllers\GroupController::isAdmin(\Illuminate\Support\Facades\Auth::user()->id))
                                                             <div class ="row">
-                                                                <a class="btn btn-light" onclick="return modifyArticle();"  href="#"><i class="fa fa-pencil"></i></a>
-                                                                <div class="mr-1"></div>
                                                                 <a class="btn btn-danger" onclick="return deleteArticle();"  href="{{route('article-delete-local', $article->id)}}"><i class="fa fa-trash"></i></a>
                                                             </div>
                                                         @endif
@@ -314,10 +312,6 @@
 <script>
     function deleteArticle() {
         if(!confirm("Sei sicuro di voler eliminare questo articolo?"))
-            event.preventDefault();
-    }
-    function modifyArticle() {
-        if(!confirm("Sei sicuro di voler modificare questo articolo?"))
             event.preventDefault();
     }
 </script>

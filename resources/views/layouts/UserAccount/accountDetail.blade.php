@@ -168,7 +168,7 @@
                                         @php($orders = \App\Http\Controllers\OrderController::getAllOrderByUser($user->id))
                                         @if($orders->count()<1)
                                             <div class="myaccount-content">
-                                                <h5>FRONT PROVVISORIO</h5>
+                                                <h5>non ci sono ancora ordini</h5>
                                             </div>
                                         @else
                                             <div class="myaccount-content">

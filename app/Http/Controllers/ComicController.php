@@ -788,6 +788,35 @@ class ComicController extends Controller
         return redirect()->back();
     }
 
+    public static function removeAllForOrder(){
+        $cart = session()->get('cart');
+        $user = Auth::user();
+
+        // if cart is empty then this the first comic
+        if($cart == []) {
+            return redirect('/cart');
+        }
+        else{
+            foreach (session('cart') as $id => $details){
+                if($id) {
+                    if($cart[$id]['user'] == $user->id){
+
+                        if (isset($cart[$id])) {
+
+                            DB::table('sessions')->where("sessionId", "=", $id)->delete();
+
+                            unset($cart[$id]);
+
+                            session()->put('cart', $cart);
+                        }
+
+                        session()->flash('success', 'Product removed successfully');
+                    }
+                }
+            }
+        }
+    }
+
 
     public static function topSold() {
 
