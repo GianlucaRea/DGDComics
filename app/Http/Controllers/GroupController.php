@@ -113,7 +113,7 @@ class GroupController extends Controller
     public static function vendorUpdate(){
         $user = Auth::user();
         $data=array(
-            'group_id'=> 2,
+            'group_id'=> '2',
             'user_id' => $user->id,
         );
         DB::table('group_user')->where("user_id", "=", $user->id)->update($data);
@@ -122,10 +122,15 @@ class GroupController extends Controller
 
     public static function isVendor($id){
 
-        $isvendor = DB::table("group_user")->where("user_id", "=", $id);
 
-        return $isvendor;
 
+        $n = DB::table("group_user")->where("user_id", "=", $id)->where("group_id", "=", 2)->count();
+        if($n>0){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 
@@ -139,6 +144,5 @@ class GroupController extends Controller
         else{
             return false;
         }
-
     }
 }

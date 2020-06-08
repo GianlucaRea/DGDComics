@@ -26,6 +26,20 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="col-lg-6">
+                            <div class="single-input-item">
+                                <label for="tuaIva" class="required">Il nome della tua Attività<span>*</span></label>
+
+                                <input id="attivita" type="text" class="form-control @error('attivita') is-invalid @enderror" name="attivita" placeholder="Nome Attività">
+                                @error('attivita')
+                                <span class="invalid-feedback" role="alert">
+                                                    <strong>
+                                                        {{ $message }}
+                                                    </strong>
+                                                </span>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
 
 
