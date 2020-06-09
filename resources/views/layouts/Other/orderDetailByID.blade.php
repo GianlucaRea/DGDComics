@@ -48,8 +48,8 @@
                                 <tbody>
                                 @php($boughtComicCollection = \App\Http\Controllers\ComicBoughtController::getComicsIdByOrderId($orderDetail->id))
                                 @foreach($boughtComicCollection as $boughtComic)
-                                    @php($comicOrderDetail = \App\Http\Controllers\ComicBoughtController::getComicBoughtDetailById($boughtComic->id))
-                                    @if(\App\Http\Controllers\ComicController::getByID($comicOrderDetail->id) != null)
+                                    @php($comicOrderDetail = \App\Http\Controllers\ComicBoughtController::getComicBoughtDetailById($boughtComic->comic_bought_id))
+                                    @if(\App\Http\Controllers\ComicController::checkIfExists($comicOrderDetail->comic_id))
                                         @php($comic = \App\Http\Controllers\ComicController::getByID($comicOrderDetail->comic_id))
                                         @php($seller = \App\Http\Controllers\ComicController::getSeller($comic->id))
                                         @php($cover = \App\Http\Controllers\ImageController::getCover($comic->id))
