@@ -33,7 +33,7 @@
                                         $isvendor = \App\Http\Controllers\GroupController::isVendor($user->id);
                                     @endphp
 
-                                    @if($isvendor = '2')
+                                    @if($isvendor)
                                         <a href="#venditore-info" data-toggle="tab"><i class="fa fa-user"></i> dettagli account venditore</a>
                                     @endif
 
@@ -56,7 +56,9 @@
                                             <p class="mb-0">I tuoi dati:</p>
                                             <p class="mb-0">E-mail:   <strong>{{ $user->email }} </strong></p>
                                             <p class="mb-0">Telefono: <strong>{{ $user->phone_number }} </strong></p>
+                                            @if(!$isvendor)
                                             <p class="mb-0">Vuoi diventare venditore?  <a href="{{ url('/vendor') }}" > Clicca qui</a></p>
+                                            @endif
                                         </div>
                                         <div class="myaccount-content">
                                             @php
@@ -159,53 +161,6 @@
                                         @endif
                                     </div>
                                     <!-- Single Tab Content End -->
-
-
-
-                                    <!-- Single Tab Content Start -->
-
-                                    <div class="tab-pane fade" id="venditore-info" role="tabpanel">
-                                        @php($orders = \App\Http\Controllers\OrderController::getAllOrderByUser($user->id))
-                                        @if($orders->count()<1)
-                                            <div class="myaccount-content">
-                                                <h5>non ci sono ancora ordini</h5>
-                                            </div>
-                                        @else
-                                            <div class="myaccount-content">
-                                                <h5>Ordini</h5>
-                                                <div class="myaccount-table table-responsive text-center">
-                                                    <table class="table table-bordered">
-                                                        <thead class="thead-light">
-                                                        <tr>
-                                                            <th>Ordine</th>
-                                                            <th>Data</th>
-                                                            <th>Stato</th>
-                                                            <th>Totale</th>
-                                                            <th>Azione</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        @foreach($orders as $order)
-                                                            <tr>
-                                                                <td>{{ $order->id }}</td>
-                                                                <td>{{ substr($order->date, 0,10) }}</td>
-                                                                <td>{{ $order->state }}</td>
-                                                                <td>€ {{ $order->total }}</td>
-                                                                <td><a href="{{ route('orderDetail', ['id' => $order->id]) }}" class="btn btn-sqr">View</a>
-                                                                </td>
-                                                            </tr>
-                                                        @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        @endif
-                                    </div>
-                                    <!-- Single Tab Content End -->
-
-
-
-
 
                                     <!-- Single Tab Content Start -->
                                     <div class="tab-pane fade" id="payment-method" role="tabpanel">
@@ -431,6 +386,21 @@
                                             </div>
                                         </div>
                                     </div> <!-- Single Tab Content End -->
+                                    <!-- Single Tab Content Start -->
+                                <div class="tab-pane fade" id="venditore-info" role="tabpanel">
+                                    <table class="table table-bordered">
+                                        <thead class="thead-light">
+                                        <tr>
+                                            <th>Comic</th>
+                                            <th>Quantità</th>
+                                            <th>Acquirente</th>
+                                            <th>Stato</th>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                    <h5>Dashboard in allestimento</h5>
+                                </div>
+                                    <!-- Single Tab Content End -->
                                 </div>
                             </div> <!-- My Account Tab Content End -->
                         </div>

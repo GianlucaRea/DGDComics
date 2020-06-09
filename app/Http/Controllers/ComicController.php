@@ -824,4 +824,14 @@ class ComicController extends Controller
 
     }
 
+    public static function checkIfExists($id){
+        $n = DB::table("comics")->where('id', '=', $id)->count();
+        if ($n > 0){
+            return true;}
+        else{
+            return false;}
+    }
+
+
+
 }

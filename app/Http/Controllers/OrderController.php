@@ -163,7 +163,7 @@ class OrderController extends Controller
                     DB::table('comic_bought_order')->insert($data3);
 
                     $data4=array(
-                        'user_id' => ComicController::getSeller($comic_Bought_id->id)->id,
+                        'user_id' => ComicController::getSeller($comic_Bought_id->comic_id)->id,
                         'notification_text' => 'un utente ha acquistato un tuo fumetto!',
                         'state' => '0',
                     );
