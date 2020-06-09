@@ -19,7 +19,6 @@ class CreateOrdersTable extends Migration
             $table->foreignId('payment_method_id')->constrained();
             $table->foreignId('shipping_address_id')->constrained();
             $table->double('total');
-            $table->string('state');
             $table->timestamp('date')->default(\DB::raw('CURRENT_TIMESTAMP'));
         });
     }

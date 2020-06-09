@@ -20,6 +20,7 @@ class CreateComicBoughtsTable extends Migration
             $table->String('vendor');
             $table->integer('quantity');
             $table->double('price');
+            $table->String('state');
             $table->timestamp('date')->default(\DB::raw('CURRENT_TIMESTAMP'));
         });
     }

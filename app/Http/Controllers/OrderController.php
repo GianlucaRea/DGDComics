@@ -130,7 +130,6 @@ class OrderController extends Controller
             'payment_method_id' => $order->payment_method_id,
             'shipping_address_id' => $order->shipping_adress_id,
             'total' => $order->total,
-            'state' => 'ordinato',
         );
 
         $order_id = Order::create($data1);
@@ -146,6 +145,7 @@ class OrderController extends Controller
                     $comicBought->comic_id = $details["comic_id"];
                     $comicBought->quantity = $details['quantity'];
                     $comicBought->price = $details['price'];
+                    $comicBought->state = "ordinato";
 
                     $data2=array(
                         'comic_id' => $comicBought->comic_id,
@@ -153,6 +153,7 @@ class OrderController extends Controller
                         'vendor' => $comicBought->vendor,
                         'quantity' => $comicBought->quantity,
                         'price' => $comicBought->price,
+                        'state' => $comicBought->state
                     );
 
                     $comic_Bought_id = ComicBought::create($data2);
@@ -187,6 +188,16 @@ class OrderController extends Controller
         $order = DB::table('orders')->where('id', '=', $id)->get();
         return view('orderDetail')
             ->with(compact('order'));
+    }
+
+    public static function orderDetailVendor($id){
+        $order = DB::table('orders')->where('id', '=', $id)->get();
+        return view('orderDetailVendor')
+            ->with(compact('order'));
+    }
+
+    public static function getAllOrdersOfVendor($id){
+        return DB::table('orders')->join('comic_bought_order', 'orders.id', '=', 'comic_bought_order.order_id')->join('comic_boughts', 'comic_bought_order.comic_bought_id', '=', 'comic_boughts.comic_id')->join('comics', 'comic_boughts.comic_id', '=', 'comics.id')->where('comics.user_id', '=', $id)->get();
     }
 
 }

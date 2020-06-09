@@ -118,6 +118,8 @@ Route::get('/orderFailure', function () {return view('/orderFailure');});
 
 Route::get('/accountArea/orderDetail/{id}', 'OrderController@orderDetail')->name('orderDetail');
 
+Route::get('/accountArea/orderDetailVendor/{id}', 'OrderController@orderDetailVendor')->name('orderDetailVendor');
+
 Auth::routes(); //ehm... perché è stato scritto due volte? nel caso mi leggete rispondetemi su WA DF
 
 Route::get('/home', 'HomeController@index')->name('home');

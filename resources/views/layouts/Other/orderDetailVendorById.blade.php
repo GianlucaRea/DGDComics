@@ -3,6 +3,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="contact-info">
+                @php($vendor = \Illuminate\Support\Facades\Auth::user())
             @foreach($order as $orderDetail) <!-- è un for ma in realta order contiene solo un elemento -->
                 @php($paymentMethod = \App\Http\Controllers\PaymentMethodController::getPaymentMethodByOrderId($orderDetail->payment_method_id))
                 @php($shippingAddress = \App\Http\Controllers\ShippingAddressController::getShippingAddressByOrderId($orderDetail->shipping_address_id))
@@ -16,9 +17,6 @@
                                 </div>
                                 <div class=" col-lg-4">
                                     <div><h4><b>Data: </b> {{ substr($orderDetail->date, 0, 10) }}</h4></div>
-                                </div>
-                                <div class=" col-lg-4">
-                                    <div><h4><b>totale:</b> € {{ $orderDetail->total }}</h4></div>
                                 </div>
                             </div>
                             <br/>
@@ -51,25 +49,29 @@
                                         @php($comic = \App\Http\Controllers\ComicController::getByID($comicOrderDetail->comic_id))
                                         @php($seller = \App\Http\Controllers\ComicController::getSeller($comic->id))
                                         @php($cover = \App\Http\Controllers\ImageController::getCover($comic->id))
-                                        <tr>
-                                            <td class="product-thumbnail"><a href="{{ url('/comic_detail/'.$comic->id) }}"><img src="{{asset('img/comicsImages/'.$cover->image_name) }}" alt="man" /></a></td>
-                                            <td class="product-name">{{ $comicOrderDetail->name}}</td>
-                                            <td class="product-seller">{{ $comicOrderDetail->vendor }}</td>
-                                            <td class="product-seller">{{ $comicOrderDetail->state }}</td>
-                                            <td class="product-price"><span class="amount">€ {{ $comicOrderDetail->price }}</span></td>
-                                            <td class="product-price">{{ $comicOrderDetail->quantity }}</td>
-                                            <td class="product-subtotal">€ {{ $comicOrderDetail->price * $comicOrderDetail->quantity }}</td>
-                                        </tr>
+                                        @if($seller->id == $vendor->id)
+                                            <tr>
+                                                <td class="product-thumbnail"><a href="{{ url('/comic_detail/'.$comic->id) }}"><img src="{{asset('img/comicsImages/'.$cover->image_name) }}" alt="man" /></a></td>
+                                                <td class="product-name">{{ $comicOrderDetail->name}}</td>
+                                                <td class="product-seller">{{ $comicOrderDetail->vendor }}</td>
+                                                <td class="product-seller">{{ $comicOrderDetail->state }}</td>
+                                                <td class="product-price"><span class="amount">€ {{ $comicOrderDetail->price }}</span></td>
+                                                <td class="product-price">{{ $comicOrderDetail->quantity }}</td>
+                                                <td class="product-subtotal">€ {{ $comicOrderDetail->price * $comicOrderDetail->quantity }}</td>
+                                            </tr>
+                                        @endif
                                     @else
-                                        <tr>
-                                            <td class="product-thumbnail"><img src="{{asset('img/immaginiNostre/noImageDisclaimer.jpg') }}" alt="man" /></td>
-                                            <td class="product-name">{{ $comicOrderDetail->name }}</td>
-                                            <td class="product-seller">{{ $comicOrderDetail->vendor }}</td>
-                                            <td class="product-seller">{{ $comicOrderDetail->state }}</td>
-                                            <td class="product-price"><span class="amount">€ {{ $comicOrderDetail->price }}</span></td>
-                                            <td class="product-price">{{ $comicOrderDetail->quantity }}</td>
-                                            <td class="product-subtotal">€ {{ $comicOrderDetail->price * $comicOrderDetail->quantity }}</td>
-                                        </tr>
+                                        @if($comicOrderDetail->vendor == $vendor->username)
+                                            <tr>
+                                                <td class="product-thumbnail"><img src="{{asset('img/immaginiNostre/noImageDisclaimer.jpg') }}" alt="man" /></td>
+                                                <td class="product-name">{{ $comicOrderDetail->name }}</td>
+                                                <td class="product-seller">{{ $comicOrderDetail->vendor }}</td>
+                                                <td class="product-seller">{{ $comicOrderDetail->state }}</td>
+                                                <td class="product-price"><span class="amount">€ {{ $comicOrderDetail->price }}</span></td>
+                                                <td class="product-price">{{ $comicOrderDetail->quantity }}</td>
+                                                <td class="product-subtotal">€ {{ $comicOrderDetail->price * $comicOrderDetail->quantity }}</td>
+                                            </tr>
+                                        @endif
                                     @endif
                                 @endforeach
                                 </tbody>
