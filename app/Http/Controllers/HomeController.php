@@ -21,11 +21,13 @@ class HomeController extends Controller
         $manga = \App\Http\Controllers\ComicController::getManga();
         $america = \App\Http\Controllers\ComicController::getAmerican();
         $italian= \App\Http\Controllers\ComicController::getItalian();
+        $articles =  DB::table("articles")->take(6)->get();
         return view('welcome')
             ->with(compact('comics'))
             ->with(compact('newComics'))
             ->with(compact('manga'))
             ->with(compact('america'))
-            ->with(compact('italian'));
+            ->with(compact('italian'))
+            ->with(compact('articles'));
     }
 }

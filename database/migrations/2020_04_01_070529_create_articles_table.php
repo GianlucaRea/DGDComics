@@ -18,6 +18,7 @@ class CreateArticlesTable extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('title');
             $table->text('article_text');
+            $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('date')->default(\DB::raw('CURRENT_TIMESTAMP'));
         });
         DB::table('articles')->insert([

@@ -129,8 +129,8 @@ Route::get('comic-delete/{id}','ComicController@destroy')->name('comic-delete');
 Route::get('review-delete/{id}','ReviewController@destroy')->name('review-delete');
 Route::get('review-deletelocal/{id}','ReviewController@destroylocal')->name('review-delete-local');
 
-Route::get('/blog', function(){return view('/blogHome');});
-Route::get('/blogDetail/{id}', "ArticleController@getArticleById")->name('blogDetail');
+Route::get('blog', 'ArticleController@getArticles');
+Route::get('/blogDetail/{id}', 'ArticleController@getArticleById')->name('blogDetail');
 Route::post('submitComment/{article}', 'CommentController@addToArticle')->name('submitComment');
 Route::post('submitAnswer/{comment}', 'CommentController@addToComment')->name('submitAnswer');
 Route::get('/writeArticle', 'AdminController@checkForWriteArticle')->name('writeArticle');

@@ -7,14 +7,14 @@
             </div>
         </div>
         <div class="row">
-            @if(\App\Http\Controllers\ArticleController::getArticles()->count()<1)
+            @if($articles->count()<1)
                 <div class="post-active owl-carousel text-center">
                     <div class="col-lg-12">
                         <h5>Oh, sembra che il blog sia vuoto, torna più tardi</h5>
                     </div>
                 </div>
             @else
-                @php($articles = \App\Http\Controllers\ArticleController::getArticles()->take(6))
+
                 <div class="post-active owl-carousel text-center">
                         @foreach($articles as $article)
                             @php($authorOfArticle = \App\Http\Controllers\UserController::getUserId($article->user_id))

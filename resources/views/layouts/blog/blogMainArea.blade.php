@@ -1,13 +1,14 @@
 <!-- blog-main-area-start -->
 <div class="blog-main-area mb-70">
     <div class="container">
+
         <div class="row">
             @if(\Illuminate\Support\Facades\Auth::user()) <!-- zona admin -->
                 @php($u = \Illuminate\Support\Facades\Auth::user())
                 @if(\App\Http\Controllers\GroupController::isAdmin($u->id))
-                        @php($articles = \App\Http\Controllers\ArticleController::getArticles())
+
                         @if($articles->count() < 1)
-                            <div class="col-lg-9 col-md-12 col-12 order-lg-2 order-1">
+                            <div class="col-lg-12 col-md-12 col-12 order-lg-2 order-1">
                                 <h4>non ci sono articoli nel blog :(</h4>
                                 <div class="row">
                                     <div class="col-lg-8"></div>
@@ -20,7 +21,7 @@
                             </div>
                         @endif
                         @if($articles->count() > 0)
-                            <div class="col-lg-9 col-md-12 col-12 order-lg-2 order-1">
+                            <div class="col-lg-12 col-md-12 col-12 order-lg-2 order-1">
                                 @foreach($articles as $article)
                                     @php($articleAuth = \App\Http\Controllers\UserController::getUserId($article->user_id))
                                     @php($articleComments = \App\Http\Controllers\CommentController::getcommentsByArticleId($article->id))
@@ -85,16 +86,16 @@
                                     </div>
                             </div>
                         @endif
-                    </div>
+
                 @else <!-- zona non admin -->
-                    @php($articles = \App\Http\Controllers\ArticleController::getArticles())
+
                     @if($articles->count() < 1)
-                        <div class="col-lg-9 col-md-12 col-12 order-lg-2 order-1">
+                        <div class="col-lg-12 col-md-12 col-12 order-lg-2 order-1">
                             <h4>non ci sono articoli nel blog :(</h4>
                         </div>
                     @endif
                     @if($articles->count() > 0)
-                        <div class="col-lg-9 col-md-12 col-12 order-lg-2 order-1">
+                        <div class="col-lg-12 col-md-12 col-12 order-lg-2 order-1">
                             @foreach($articles as $article)
                                 @php($articleAuth = \App\Http\Controllers\UserController::getUserId($article->user_id))
                                 @php($articleComments = \App\Http\Controllers\CommentController::getcommentsByArticleId($article->id))
@@ -144,14 +145,14 @@
                     @endif
                 @endif
             @else <!-- zona user non loggato -->
-                @php($articles = \App\Http\Controllers\ArticleController::getArticles())
+
                 @if($articles->count() < 1)
-                    <div class="col-lg-9 col-md-12 col-12 order-lg-2 order-1">
+                    <div class="col-lg-12 col-md-12 col-12 order-lg-2 order-1">
                         <h4>non ci sono articoli nel blog :(</h4>
                     </div>
                 @endif
                 @if($articles->count() > 0)
-                    <div class="col-lg-9 col-md-12 col-12 order-lg-2 order-1">
+                    <div class="col-lg-12 col-md-12 col-12 order-lg-2 order-1">
                         @foreach($articles as $article)
                             @php($articleAuth = \App\Http\Controllers\UserController::getUserId($article->user_id))
                             @php($articleComments = \App\Http\Controllers\CommentController::getcommentsByArticleId($article->id))
@@ -200,13 +201,27 @@
                     </div>
                 @endif
             @endif
+                <div class="col-lg-12 col-md-12 col-12 order-lg-2 order-1">
+                    <div class="pagination-area mt-50">
+                        <div class="list-page-2">
+                            <p>Items {{$articles->count()}} of {{$articles->total()}}</p>
+                        </div>
+                        <div class="page-number">
+                            <ul>
+                                <li> {{$articles->links()}} </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="pt-30"></div>
+                </div>
         </div>
     </div>
+
 <script>
     function deleteArticle() {
         if(!confirm("Sei sicuro di voler eliminare questo articolo?"))
             event.preventDefault();
     }
 </script>
-</div> <!-- questo div è necessario senno si sminchia il footer -->
+</div>
 <!-- blog-main-area-end -->

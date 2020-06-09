@@ -106,8 +106,10 @@ class ArticleController extends Controller
     }
 
     public static function getArticles(){
-        return DB::table("articles")->get();
+        $articles = DB::table("articles")->latest()->paginate(2) ;
+        return view('blogHome')->with(compact('articles'));
     }
+
 
     public static function getArticleById($id){
         $article = DB::table("articles")->where("id", "=", $id)->first();
@@ -126,6 +128,7 @@ class ArticleController extends Controller
             $article->title = $request->title;
             $article->article_text = $request->article_text;
 
+
             $data=array(
                 'user_id'=> $id,
                 'title' => $article->title,
@@ -135,7 +138,7 @@ class ArticleController extends Controller
             DB::table('articles')->insert($data);
 
 
-            return view('/blogHome');
+            return redirect('/blog');
         }
         else{
             return view("errorCase");
