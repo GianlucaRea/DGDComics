@@ -55,8 +55,8 @@
                                         @php($cover = \App\Http\Controllers\ImageController::getCover($comic->id))
                                         <tr>
                                             <td class="product-thumbnail"><a href="{{ url('/comic_detail/'.$comic->id) }}"><img src="{{asset('img/comicsImages/'.$cover->image_name) }}" alt="man" /></a></td>
-                                            <td class="product-name">{{ $comic->comic_name}}</td>
-                                            <td class="product-seller">{{ $seller->name }} {{ $seller->surname }}</td>
+                                            <td class="product-name">{{ $comicOrderDetail->name}}</td>
+                                            <td class="product-seller">{{ $comicOrderDetail->vendor }}</td>
                                             <td class="product-price"><span class="amount">€ {{ $comicOrderDetail->price }}</span></td>
                                             <td class="product-price">{{ $comicOrderDetail->quantity }}</td>
                                             <td class="product-subtotal">€ {{ $comicOrderDetail->price * $comicOrderDetail->quantity }}</td>
@@ -64,8 +64,8 @@
                                     @else
                                         <tr>
                                             <td class="product-thumbnail"><img src="{{asset('img/immaginiNostre/noImageDisclaimer.jpg') }}" alt="man" /></td>
-                                            <td class="product-name">Fumetto</td>
-                                            <td class="product-seller">Venditore</td>
+                                            <td class="product-name">{{ $comicOrderDetail->name }}</td>
+                                            <td class="product-seller">{{ $comicOrderDetail->vendor }}</td>
                                             <td class="product-price"><span class="amount">€ {{ $comicOrderDetail->price }}</span></td>
                                             <td class="product-price">{{ $comicOrderDetail->quantity }}</td>
                                             <td class="product-subtotal">€ {{ $comicOrderDetail->price * $comicOrderDetail->quantity }}</td>

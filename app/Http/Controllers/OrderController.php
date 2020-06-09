@@ -137,14 +137,20 @@ class OrderController extends Controller
 
             foreach (session('cart') as $id => $details){
                 if ($details["user"] == $user->id) {
+                    $comic = ComicController::getByID($details["comic_id"]);
+                    $vendor = ComicController::getSeller($details["comic_id"]);
 
                     $comicBought = new ComicBought();
+                    $comicBought->name = $comic->comic_name;
+                    $comicBought->vendor = $vendor->username;
                     $comicBought->comic_id = $details["comic_id"];
                     $comicBought->quantity = $details['quantity'];
                     $comicBought->price = $details['price'];
 
                     $data2=array(
                         'comic_id' => $comicBought->comic_id,
+                        'name' => $comicBought->name,
+                        'vendor' => $comicBought->vendor,
                         'quantity' => $comicBought->quantity,
                         'price' => $comicBought->price,
                     );

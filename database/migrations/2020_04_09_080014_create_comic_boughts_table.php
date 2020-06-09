@@ -16,6 +16,8 @@ class CreateComicBoughtsTable extends Migration
         Schema::create('comic_boughts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('comic_id')->cascadeOnDelete();
+            $table->String('name');
+            $table->String('vendor');
             $table->integer('quantity');
             $table->double('price');
             $table->timestamp('date')->default(\DB::raw('CURRENT_TIMESTAMP'));
