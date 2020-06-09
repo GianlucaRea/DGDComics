@@ -162,43 +162,6 @@
                                     </div>
                                     <!-- Single Tab Content End -->
 
-
-
-                                    <!-- Single Tab Content Start -->
-
-                                    <div class="tab-pane fade" id="venditore-info" role="tabpanel">
-
-                                        <table class="table table-bordered">
-                                            <thead class="thead-light">
-                                            <tr>
-                                                <th>Comic</th>
-                                                <th>Quantità</th>
-                                                <th>Acquirente</th>
-                                                <th>Stato</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach($comic as $comicBought) <!-- creare funzioni per prendere i fumetti-->
-                                                <tr>
-                                                    <td>{{  }}</td>
-                                                    <td>{{  }}</td>
-                                                    <td>{{  }}</td>
-                                                    <td>{{  }}</td>
-                                                    <td><a href="{{ route('orderDetail', ['id' => $order->id]) }}" class="btn btn-sqr">View</a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                    <!-- Single Tab Content End -->
-
-
-
-
-
                                     <!-- Single Tab Content Start -->
                                     <div class="tab-pane fade" id="payment-method" role="tabpanel">
                                         @php($paymentMethods = \App\Http\Controllers\PaymentMethodController::getPaymentMethodByUserId($user->id))
@@ -423,6 +386,21 @@
                                             </div>
                                         </div>
                                     </div> <!-- Single Tab Content End -->
+                                    <!-- Single Tab Content Start -->
+                                <div class="tab-pane fade" id="venditore-info" role="tabpanel">
+                                    <table class="table table-bordered">
+                                        <thead class="thead-light">
+                                        <tr>
+                                            <th>Comic</th>
+                                            <th>Quantità</th>
+                                            <th>Acquirente</th>
+                                            <th>Stato</th>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                    <h5>Dashboard in allestimento</h5>
+                                </div>
+                                    <!-- Single Tab Content End -->
                                 </div>
                             </div> <!-- My Account Tab Content End -->
                         </div>

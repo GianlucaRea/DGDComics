@@ -125,6 +125,7 @@ class ComicController extends Controller
         if(is_null($Comic)){
             return redirect()->back()->with('message','Alredy Deleted');
         }
+        $this->removeForAdmin($id);
         $Comic -> delete();
         return redirect()->back()->with('message','Success');
     }
@@ -655,11 +656,12 @@ class ComicController extends Controller
 
     public function updateCart($id, Request $request)
     {
+        $user = Auth::user();
         if($id and $request->qty)
         {
             $cart = session()->get('cart');
             foreach (session('cart') as $id2 => $details) {
-                if($cart[$id2]["comic_id"] == $id) {
+                if($cart[$id2]["comic_id"] == $id && $cart[$id2]["user"] == $user->id) {
                     $idSession = DB::table('sessions')->where("sessionId", "=", $id2)->first()->sessionId;
                 }
             }
@@ -691,11 +693,12 @@ class ComicController extends Controller
 
     public function removeFromCart($id)
     {
+        $user = Auth::user();
         if($id) {
 
             $cart = session()->get('cart');
             foreach (session('cart') as $id2 => $details) {
-                if($cart[$id2]["comic_id"] == $id) {
+                if($cart[$id2]["comic_id"] == $id && $cart[$id2]["user"] == $user->id) {
                     $idSession = DB::table('sessions')->where("sessionId", "=", $id2)->first()->sessionId;
                 }
             }
@@ -716,6 +719,36 @@ class ComicController extends Controller
             $newQuantity = $comic->quantity + $quantityInCart;
             DB::table('comics')->where('id', $comic->id)->update(['quantity' => $newQuantity]);
 
+            return redirect()->back();
+        }
+    }
+
+    public function removeForAdmin($id)
+    {
+        if($id) {
+
+            $cart = session()->get('cart');
+            foreach (session('cart') as $id2 => $details) {
+                if($cart[$id2]["comic_id"] == $id) {
+                    $idSession = DB::table('sessions')->where("sessionId", "=", $id2)->first()->sessionId;
+                    $quantityInCart = $cart[$idSession]["quantity"];
+
+                    if(isset($cart[$idSession])) {
+
+                        DB::table('sessions')->where("sessionId", "=", $idSession)->delete();
+
+                        unset($cart[$idSession]);
+
+                        session()->put('cart', $cart);
+                    }
+
+                    session()->flash('success', 'Product removed successfully');
+
+                    $comic = Comic::find($id);
+                    $newQuantity = $comic->quantity + $quantityInCart;
+                    DB::table('comics')->where('id', $comic->id)->update(['quantity' => $newQuantity]);
+                }
+            }
             return redirect()->back();
         }
     }
@@ -755,10 +788,39 @@ class ComicController extends Controller
         return redirect()->back();
     }
 
+    public static function removeAllForOrder(){
+        $cart = session()->get('cart');
+        $user = Auth::user();
+
+        // if cart is empty then this the first comic
+        if($cart == []) {
+            return redirect('/cart');
+        }
+        else{
+            foreach (session('cart') as $id => $details){
+                if($id) {
+                    if($cart[$id]['user'] == $user->id){
+
+                        if (isset($cart[$id])) {
+
+                            DB::table('sessions')->where("sessionId", "=", $id)->delete();
+
+                            unset($cart[$id]);
+
+                            session()->put('cart', $cart);
+                        }
+
+                        session()->flash('success', 'Product removed successfully');
+                    }
+                }
+            }
+        }
+    }
+
 
     public static function topSold() {
 
-      return  $comics = DB::table('comics')->join('comic_boughts','comics.id','=','comic_id')->groupBy('comic_boughts.quantity','comics.id','comics.comic_name','comics.price','comics.discount')->orderBy('comic_boughts.quantity','desc')->select('comic_boughts.quantity','comics.id','comics.comic_name','comics.price','comics.discount')->take(6)->get();
+      return  $comics = DB::table('comics')->where('comics.quantity', '>', 0)->join('comic_boughts','comics.id','=','comic_id')->groupBy('comic_boughts.quantity','comics.id','comics.comic_name','comics.price','comics.discount')->orderBy('comic_boughts.quantity','desc')->select('comic_boughts.quantity','comics.id','comics.comic_name','comics.price','comics.discount')->take(6)->get();
 
     }
 

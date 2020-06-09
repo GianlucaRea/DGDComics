@@ -166,7 +166,7 @@ class OrderController extends Controller
             }
 
 
-        ComicController::removeAll(); //svuotamento carrello
+        ComicController::removeAllForOrder(); //svuotamento carrello
 
             return redirect('/orderSuccess');
         }
