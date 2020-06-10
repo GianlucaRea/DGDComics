@@ -4885,7 +4885,7 @@ nav.menu .cr-dropdown ul {
 }
 
 .review-details p {
-    font-size: 13px;
+    font-size: 20px;
     margin: 0;
 }
 
@@ -4946,7 +4946,7 @@ nav.menu .cr-dropdown ul {
     font-size: 22px;
     font-weight: 700;
     padding-right: 30px;
-    margin-left: 350px;
+    margin-left: 5%;
 }
 
 .review-field-ratings>span>sup {
@@ -4995,7 +4995,7 @@ nav.menu .cr-dropdown ul {
 .review-form .single-form {
     margin-bottom: 25px;
     overflow: hidden;
-    margin-left: 300px;
+    margin-left: 3.5%;
 }
 
 .review-form .single-form label {
@@ -5014,7 +5014,7 @@ nav.menu .cr-dropdown ul {
 .review-form .single-form form {
     display: inline-block;
     float: left;
-    padding-left: 20px;
+    margin-left: 3%;
 }
 
 .review-form .single-form form input {
@@ -5054,7 +5054,7 @@ nav.menu .cr-dropdown ul {
 .review-form .single1-form {
     margin-bottom: 25px;
     overflow: hidden;
-    margin-left: 230px;
+    margin-left: 2.5%;
 }
 
 .review-form .single1-form label {

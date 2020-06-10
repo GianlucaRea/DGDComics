@@ -1,6 +1,6 @@
 <!--product info area start-->
 <div class="product-info-area mt-80">
-    <div class="tab-content">
+    <div class="tab-content border-0" style="background-color: #fff0e6 ">
         <div class="tab-pane fade show active" id="Details">
             <div class="valu">
                 <ul>

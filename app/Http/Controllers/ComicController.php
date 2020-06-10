@@ -282,7 +282,7 @@ class ComicController extends Controller
         $comic = Comic::find($id);
         $related = \App\Http\Controllers\ComicController::getrelated($id);
         $reviews = Review::where('comic_id','=',$id)->get();
-        $reviews4 = Review::where('comic_id','=',$id)->inRandomOrder()->take(4)->get();
+        $reviews4 = Review::where('comic_id','=',$id)->orderBy('review_date', 'desc')->get();
         $avgstar = Review::where('comic_id','=',$id)->avg('stars');
         return view('comic_detail')
             ->with(compact('comic'))

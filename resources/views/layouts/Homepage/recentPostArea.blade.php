@@ -20,7 +20,7 @@
                             @php($authorOfArticle = \App\Http\Controllers\UserController::getUserId($article->user_id))
                             <div class="single-post">
                                 <div class="post-content">
-                                    <h3><a href="#">{{ $article->title }}</a></h3>
+                                    <h3><a href="{{ url('/blogDetail/'.$article->id) }}">{{ $article->title }}</a></h3>
                                     <span class="meta-author"> {{ $authorOfArticle->username }} </span>
                                     <p>{{substr($article->article_text,0, 99)}}...</p>
                                 </div>
