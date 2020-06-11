@@ -25,6 +25,7 @@
                                 <div class="myaccount-tab-menu nav" role="tablist">
                                     <a href="#dashboad" class="active" data-toggle="tab"><i class="fa fa-dashboard"></i>Dashboard</a>
                                     <a href="#orders" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i>Ordini</a>
+                                    <a href="#wishlist" data-toggle="tab"><i class="fa fa-shopping-bag"></i>Lista dei desideri</a>
                                     <a href="#payment-method" data-toggle="tab"><i class="fa fa-credit-card"></i>Metodi di pagamento</a>
                                     <a href="#address-edit" data-toggle="tab"><i class="fa fa-map-marker"></i>indirizzi di spedizione</a>
                                     <a href="#account-info" data-toggle="tab"><i class="fa fa-user"></i> dettagli account</a>
@@ -127,7 +128,7 @@
                                         @php($orders = \App\Http\Controllers\OrderController::getAllOrderByUser($user->id))
                                         @if($orders->count()<1)
                                             <div class="myaccount-content">
-                                                <h5>Non sono ancora stati inseriti metodi di pagamento dall'utente</h5>
+                                                <h5>Non sono ancora stati effettuati degli ordini</h5>
                                             </div>
                                         @else
                                             <div class="myaccount-content">
@@ -154,6 +155,54 @@
                                                         </tbody>
                                                     </table>
                                                 </div>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <!-- Single Tab Content End -->
+
+                                    <!-- Single Tab Content Start -->
+
+                                    <div class="tab-pane fade" id="wishlist" role="tabpanel">
+                                        @php($list = \App\Http\Controllers\WishlistController::getAllListByUser($user->id))
+                                        @if($list->count()<1)
+                                            <div class="myaccount-content">
+                                                <h5>Non sono presenti fumetti nella lista dei desideri</h5>
+                                            </div>
+                                        @else
+                                            <div class="table-cart table-responsive mb-15">
+                                            <table>
+                                                <thead>
+                                                <tr>
+                                                    <th class="product-thumbnail">immagine</th>
+                                                    <th class="product-name">nome fumetto</th>
+                                                    <th class="product-seller">venditore</th>
+                                                    <th class="product-price">prezzo</th>
+                                                    <th class="product-price">quantità disponibile</th>
+                                                    <th class="product-remove">Rimuovi</th>
+                                                    <th class="product-seller"></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach($list as $item)
+                                                    @php($comic = \App\Http\Controllers\WishlistController::getComicWishlistTuple($item->id))
+                                                    @php($cover = \App\Http\Controllers\ImageController::getCover($comic->id))
+                                                    @php($seller = \App\Http\Controllers\ComicController::getSeller($comic->user_id))
+                                                <tr>
+                                                    <td class="product-thumbnail"><a href="{{ url('/comic_detail/'.$comic->id) }}"><img src="{{asset('img/comicsImages/' . $cover->image_name) }}" alt="man" /></a></td>
+                                                    <td class="product-name">{{ $comic->comic_name }}</td>
+                                                    <td class="product-seller">{{ $seller->username }}</td>
+                                                    <td class="product-price"><span class="amount">{{ $comic->price }}</span></td>
+                                                    <td class="product-price"><span class="amount">{{ $comic->quantity }}</span></td>
+                                                    <td class="product-remove"><a href="{{url('remove-from-list/'.$comic->id) }}"><i class="fa fa-times"></i></a></td>
+                                                    @if(\App\Http\Controllers\ComicController::getrelated($comic->id)->count()<1)
+                                                        <td class="product-seller"><p style="font-size: 13px;"><b>Purtroppo nel negozio non ci sono prodotti simili</b></p></td>
+                                                    @else
+                                                        <td class="product-seller"><p style="font-size: 13px;"><b>Ehy! a quanto pare nel negozio ci sono prodotti simili!</b></p></td>
+                                                    @endif
+                                                </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
                                             </div>
                                         @endif
                                     </div>

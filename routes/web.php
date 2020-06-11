@@ -138,3 +138,5 @@ Route::post('submitArticle/{user_id}', 'ArticleController@addArticle')->name('su
 Route::get('comment-deletelocal/{id}','CommentController@destroyComment')->name('comment-delete-local');
 Route::get('answer-deletelocal/{id}','CommentController@destroyAnswer')->name('answer-delete-local');
 Route::get('article-deletelocal/{id}','ArticleController@destroyArticle')->name('article-delete-local');
+Route::get('add-to-list/{id}', 'WishlistController@addToList');
+Route::get('remove-from-list/{id}', 'WishlistController@removeToList');

@@ -168,6 +168,10 @@ class OrderController extends Controller
                         'notification_text' => 'un utente ha acquistato un tuo fumetto!',
                         'state' => '0',
                     );
+                    if(WishlistController::alreadyToList($details["comic_id"], $user->id)) {
+                        WishlistController::removeToList($details["comic_id"]);
+                    }
+
                     DB::table('notifications')->insert($data4);
                 }
             }
