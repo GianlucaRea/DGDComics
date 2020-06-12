@@ -53,7 +53,7 @@
                                 <tr>
                                     <td class="product-thumbnail"><a href="{{ url('/comic_detail/'.$comic->id) }}"><img src="{{asset('img/comicsImages/' . $cart[$session->sessionId]['image']) }}" alt="man" /></a></td>
                                     <td class="product-name">{{ $cart[$session->sessionId]['name']}}</td>
-                                    <td class="product-seller">{{ $seller->name }} {{ $seller->surname }}</td>
+                                    <td class="product-seller">{{ $seller->username }}</td>
                                     <td class="product-price"><span class="amount">{{ $cart[$session->sessionId]['price'] }}</span></td>
                                     <form></form>
                                     <td class="product-quantity">

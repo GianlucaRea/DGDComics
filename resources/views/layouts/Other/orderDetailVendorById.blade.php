@@ -34,11 +34,12 @@
                                 <tr>
                                     <th class="product-thumbnail">immagine</th>
                                     <th class="product-name">nome fumetto</th>
-                                    <th class="product-seller">venditore</th>
+                                    {{--<th class="product-seller">venditore</th>--}}
                                     <th class="product-seller">stato</th>
                                     <th class="product-price">prezzo</th>
                                     <th class="product-quantity">quantità</th>
                                     <th class="product-subtotal">totale</th>
+                                    <th class="azione">azione</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -53,19 +54,29 @@
                                             <tr>
                                                 <td class="product-thumbnail"><a href="{{ url('/comic_detail/'.$comic->id) }}"><img src="{{asset('img/comicsImages/'.$cover->image_name) }}" alt="man" /></a></td>
                                                 <td class="product-name">{{ $comicOrderDetail->name}}</td>
-                                                <td class="product-seller">{{ $comicOrderDetail->vendor }}</td>
+                                                {{--<td class="product-seller">{{ $comicOrderDetail->vendor }}</td>--}}
                                                 <td class="product-seller">{{ $comicOrderDetail->state }}</td>
                                                 <td class="product-price"><span class="amount">€ {{ $comicOrderDetail->price }}</span></td>
                                                 <td class="product-price">{{ $comicOrderDetail->quantity }}</td>
                                                 <td class="product-subtotal">€ {{ $comicOrderDetail->price * $comicOrderDetail->quantity }}</td>
+                                                @if ($comicOrderDetail->state == 'ordinato')
+                                                    <td><a href="{{ url('confirmOrder/'.$comicOrderDetail->id) }}" class="btn btn-sqr">Conferma</a></td>
+                                                @endif
+                                                @if ($comicOrderDetail->state == 'confermato')
+                                                    <td><a href="{{ url('sendOrder/'.$comicOrderDetail->id) }}" class="btn btn-sqr">Spedisci</a></td>
+                                                @endif
+                                                @if ($comicOrderDetail->state == 'spedito')
+                                                    <td><p><b>Hai già spedito questo articolo,</b></p><p><b>non devi fare più niente.</b></p></td>
+                                                @endif
                                             </tr>
+
                                         @endif
                                     @else
                                         @if($comicOrderDetail->vendor == $vendor->username)
                                             <tr>
                                                 <td class="product-thumbnail"><img src="{{asset('img/immaginiNostre/noImageDisclaimer.jpg') }}" alt="man" /></td>
                                                 <td class="product-name">{{ $comicOrderDetail->name }}</td>
-                                                <td class="product-seller">{{ $comicOrderDetail->vendor }}</td>
+                                                {{--<td class="product-seller">{{ $comicOrderDetail->vendor }}</td>--}}
                                                 <td class="product-seller">{{ $comicOrderDetail->state }}</td>
                                                 <td class="product-price"><span class="amount">€ {{ $comicOrderDetail->price }}</span></td>
                                                 <td class="product-price">{{ $comicOrderDetail->quantity }}</td>

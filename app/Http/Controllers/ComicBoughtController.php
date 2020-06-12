@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ComicBoughtController extends Controller
@@ -113,5 +115,47 @@ class ComicBoughtController extends Controller
 
     public static function getComicBoughtDetailById($id){
         return DB::table("comic_boughts")->where("id", "=", $id)->first();
+    }
+
+    public static function orderUpdateConfirm($id){
+        $data=array(
+            'state'=> 'confermato',
+        );
+        DB::table('comic_boughts')->where("id", "=", $id)->update($data);
+        $user = Auth::user();
+        $order = DB::table('comic_boughts')->join('comic_bought_order', 'comic_boughts.id', '=', 'comic_bought_order.comic_bought_id')->join('orders', 'comic_bought_order.order_id', '=', 'orders.id')->where('comic_boughts.id', '=', $id)->first();
+        $user2 = UserController::getUserId($order->user_id);
+
+        $data2= array(
+            'user_id' => $user2->id,
+            'notification_text' => 'Ehy, un tuo fumetto è stato confermato',
+            'state' => 0,
+            'notification' => 'orderDetail',
+            'idLink' => $order->id
+        );
+        DB::table('notifications')->insert($data2);
+
+        return redirect()->back()->with(compact('user'));
+    }
+
+    public static function orderUpdateSend($id){
+        $data=array(
+            'state'=> 'spedito',
+        );
+        DB::table('comic_boughts')->where("id", "=", $id)->update($data);
+        $user = Auth::user();
+        $order = DB::table('comic_boughts')->join('comic_bought_order', 'comic_boughts.id', '=', 'comic_bought_order.comic_bought_id')->join('orders', 'comic_bought_order.order_id', '=', 'orders.id')->where('comic_boughts.id', '=', $id)->first();
+        $user2 = UserController::getUserId($order->user_id);
+
+        $data2= array(
+            'user_id' => $user2->id,
+            'notification_text' => 'Ehy, un tuo fumetto è stato spedito',
+            'state' => 0,
+            'notification' => 'orderDetail',
+            'idLink' => $order->id
+        );
+        DB::table('notifications')->insert($data2);
+
+        return redirect()->back()->with(compact('user'));
     }
 }

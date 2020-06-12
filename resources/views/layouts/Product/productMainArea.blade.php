@@ -112,9 +112,11 @@
                             </div>
                             <div class="product-social-links">
                                 <div class="product-addto-links">
-                                    <a href="#"><i class="fa fa-heart"></i></a>
-                                    <a href="#"><i class="fa fa-pie-chart"></i></a>
-                                    <a href="#"><i class="fa fa-envelope-o"></i></a>
+                                    <div class="row">
+                                        <div class="ml-3"></div>
+                                        <a href="{{url('add-to-list/'.$comic->id) }}"><i class="fa fa-heart"></i></a>
+                                        <h5 style="font-size: 17px; margin-top: 2%;">aggiungilo nella tua personale lista dei desideri!</h5>
+                                    </div>
                                 </div>
                                 <div class="product-addto-links-text">
                                     <p>{{ $comic->description }}</p>

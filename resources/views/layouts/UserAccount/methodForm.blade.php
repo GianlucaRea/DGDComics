@@ -41,7 +41,7 @@
         <div class="mt-2"></div>
         <div class="row">
 
-            <div class="col-lg-6">
+            <div class="col-lg-8">
                 <div class="single-input-item">
                     <label for="cardNumber" class="required">Numero carta</label>
                     <input type="text" id="cardNumber" class="form-control @error('cardNumber') is-invalid @enderror" name="cardNumber"  placeholder="Es.: 1234123412341234" >
@@ -55,33 +55,44 @@
             </div>
 
             <div class="col-lg-4">
-                <div class="single-input-item">
-                    <label for="data_scadenza" class="required">data scadenza</label>
-                    <input type="date" id="data_scadenza" class="form-control @error('data_scadenza') is-invalid @enderror" name="data_scadenza">
+                <div class="row">
+                <div class="single-input-item" style="width: 85px">
+                    <label for="data_scadenza" class="required">mese</label>
+                    <input type="number" id="month" class="form-control @error('month') is-invalid @enderror" name="month"  placeholder="12" >
 
-                    @error('data_scadenza')
+                    @error('month')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
                 </div>
-            </div>
+                    <div class="ml-3"></div>
+                <div class="single-input-item" style="width: 115px">
+                    <label for="data_scadenza" class="required">anno</label>
+                    <input type="year" id="year" class="form-control @error('year') is-invalid @enderror" name="year"  placeholder="2021" >
 
-            <div class="col-lg-2">
-                <div class="single-input-item">
-                    <label for="CVV" class="required">CVV</label>
-                    <input type="text" id="CVV" class="form-control @error('CVV') is-invalid @enderror" name="CVV"  placeholder="123" >
-
-                    @error('CVV')
+                    @error('year')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
-                </div>
-            </div>
 
+                </div>
+                    <div class="ml-3"></div>
+                    <div class="single-input-item" style="width: 85px">
+                        <label for="CVV" class="required">CVV</label>
+                        <input type="text" id="CVV" class="form-control @error('CVV') is-invalid @enderror" name="CVV"  placeholder="123" >
+
+                        @error('CVV')
+                        <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                        @enderror
+                    </div>
+                </div>
+
+            </div>
         </div>
-
     </fieldset>
     <div class="mt-3"></div>
 
