@@ -167,7 +167,38 @@ class CommentController extends Controller
             'parent_comment' => $comment->parent_comment,
         );
 
-        DB::table('comments')->insert($data);
+        $comment_id = Comment::create($data);
+
+        $parent = CommentController::getParent($comment_id->parent_comment);
+        $answers = CommentController::answers($parent->id);
+
+        foreach ($answers as $answer){
+            if($answer->user_id != $comment->user_id) {
+
+                $data2 = array(
+                    'user_id' => $answer->user_id,
+                    'notification_text' => 'Un tuo commento ha ricevuto una risposta',
+                    'state' => '0',
+                    'notification' => 'blogDetail',
+                    'idLink' => $comment->article_id,
+                );
+
+                DB::table('notifications')->insert($data2);
+            }
+        }
+        if($parent->user_id != $comment->user_id) {
+
+            $data2 = array(
+                'user_id' => $parent->user_id,
+                'notification_text' => 'Un tuo commento ha ricevuto una risposta',
+                'state' => '0',
+                'notification' => 'blogDetail',
+                'idLink' => $comment->article_id,
+            );
+
+            DB::table('notifications')->insert($data2);
+        }
+
 
 
         return redirect()->back();
@@ -190,5 +221,11 @@ class CommentController extends Controller
     public static function destroyAnswer($id){
         DB::table("comments")->where("id", "=", $id)->delete();
         return redirect()->back();
+    }
+
+    public static function getParent($id){
+        if($id != 0) {
+            return DB::table('comments')->where('id', '=', $id)->first();
+        }
     }
 }

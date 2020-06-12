@@ -106,11 +106,11 @@
                                                                     @if(strlen($notification->notification_text) > 33 )
                                                                         @php($subnotification = substr($notification->notification_text, 0, 33))
                                                                         <div class="cart-info">
-                                                                            <h5><a href="{{ url('/accountArea') }}">{{ $subnotification}}...</a></h5>
+                                                                            <h5><a href="{{ route('notificaLetta', ['id' => $notification->id]) }}">{{ $subnotification}}...</a></h5>
                                                                         </div>
                                                                     @else
                                                                         <div class="cart-info">
-                                                                            <h5><a href="{{ url('/accountArea') }}">{{ $notification->notification_text}}</a></h5>
+                                                                            <h5><a href="{{ route('notificaLetta', ['id' => $notification->id]) }}">{{ $notification->notification_text}}</a></h5>
                                                                         </div>
                                                                     @endif
                                                                 </div>
