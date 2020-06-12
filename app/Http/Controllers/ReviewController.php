@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comic;
+use App\Notification;
 use App\PaymentMethod;
 use App\User;
 use App\Review;
@@ -47,10 +48,22 @@ class ReviewController extends Controller
     public function destroy($id)
     {
         $Review = Review::find($id);
+        $notification = new Notification;
+        $notification->user_id = $Review->user_id;
+        $notification->state = false;
+        $notification->notification_text = 'La sua Recensione non era in accordo con le policy di DGDComics';
+
+        $data = array(
+            'user_id' => $notification->user_id,
+            'state' =>  $notification->state,
+            'notification_text' => $notification->notification_text,
+        );
+
         if(is_null($Review)){
             return redirect()->route("AdminAccount")->with('message','Alredy Deleted');
         }
         $Review -> delete();
+        DB::table('notifications')->insert($data);
         return redirect()->route("AdminAccount")->with('message','Success');
     }
     public function destroylocal($id)
@@ -59,11 +72,22 @@ class ReviewController extends Controller
         $Review = Review::find($id);
         $comic_id = Review::find($id)->comic_id;
         $comic = Comic::where('id','=', $comic_id)->get();
+        $notification = new Notification;
+        $notification->user_id = $Review->user_id;
+        $notification->state = false;
+        $notification->notification_text = 'La sua Recensione non era in accordo con le policy di DGDComics';
+
+        $data = array(
+            'user_id' => $notification->user_id,
+            'state' =>  $notification->state,
+            'notification_text' => $notification->notification_text,
+        );
+
         if(is_null($Review)){
             return redirect()->back()->with('message','Alredy Deleted');
         }
         $Review -> delete();
-
+        DB::table('notifications')->insert($data);
 
         return redirect()->back()->with('message','Success');
     }
