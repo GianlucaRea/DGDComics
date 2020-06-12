@@ -123,7 +123,7 @@ class ArticleController extends Controller
         ]);
 
         if(GroupController::isAdmin($id)){
-            $article = new Article(); //per evitare problemi con campi che non appartengono effettivamente a paymentMethod.
+            $article = new Article();
             $article->user_id = $id;
             $article->title = $request->title;
             $article->article_text = $request->article_text;
