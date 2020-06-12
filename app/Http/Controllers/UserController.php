@@ -6,6 +6,7 @@ use App\User;
 use App\Comic;
 use App\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -126,22 +127,6 @@ class UserController extends Controller
     {
         return User::where('id','=',$id)->first();
 
-    }
-
-    public function changeEmail(Request $request){
-
-        $request->validate([
-
-            'email' => 'required',
-            'newEmail' => 'required',
-
-        ]);
-
-        User::find(auth()->user()->id)->update(['email'=> ($request->newEmail)]);
-
-        $user = \Illuminate\Support\Facades\Auth::user();
-        return view('/accountArea')
-            ->with(compact('user'));
     }
 
     public static function addPartitaIva(Request $request){
