@@ -49,7 +49,7 @@ public function order(){
 }
 
 public function wishlist(){
-    return $this->hasOne('App\Whishlist');
+    return $this->hasOne('App\Wishlist');
 }
 
 public function article(){

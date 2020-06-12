@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Notification;
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class NotificationController extends Controller
 {
@@ -114,7 +116,7 @@ class NotificationController extends Controller
     }
 
     public static function getNotification($id){
-        return Notification::where('user_id', '=', $id)->get();
+        return Notification::where('user_id', '=', $id)->orderBy('date', 'desc')->get();
     }
 
     public static function getNotificationToRead($id){
@@ -127,8 +129,8 @@ class NotificationController extends Controller
 
     public static function notificationRead($id){
         Notification::where('id', '=', $id)->update(array('state' => '1'));
+        $notification = DB::table('notifications')->where('id', '=', $id)->first();
         $user = \Illuminate\Support\Facades\Auth::user();
-        return view('/accountArea')
-            ->with(compact('user'));
+        return Redirect::route($notification->notification, ['id' =>$notification->idLink ]);
     }
 }

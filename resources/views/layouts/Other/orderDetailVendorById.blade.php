@@ -42,7 +42,6 @@
                                     <th class="azione">azione</th>
                                 </tr>
                                 </thead>
-                                <form method="POST" action="{{ route('confirmOrder', $comicOrderDetail->id) }}">
                                 <tbody>
                                 @php($boughtComicCollection = \App\Http\Controllers\ComicBoughtController::getComicsIdByOrderId($orderDetail->id))
                                 @foreach($boughtComicCollection as $boughtComic)
@@ -61,7 +60,13 @@
                                                 <td class="product-price">{{ $comicOrderDetail->quantity }}</td>
                                                 <td class="product-subtotal">€ {{ $comicOrderDetail->price * $comicOrderDetail->quantity }}</td>
                                                 @if ($comicOrderDetail->state == 'ordinato')
-                                                    <td><a href="{{ route('confirmOrder', $comicOrderDetail->id) }}" class="btn btn-sqr">Conferma</a></td>
+                                                    <td><a href="{{ url('confirmOrder/'.$comicOrderDetail->id) }}" class="btn btn-sqr">Conferma</a></td>
+                                                @endif
+                                                @if ($comicOrderDetail->state == 'confermato')
+                                                    <td><a href="{{ url('sendOrder/'.$comicOrderDetail->id) }}" class="btn btn-sqr">Spedisci</a></td>
+                                                @endif
+                                                @if ($comicOrderDetail->state == 'spedito')
+                                                    <td><p><b>Hai già spedito questo articolo,</b></p><p><b>non devi fare più niente.</b></p></td>
                                                 @endif
                                             </tr>
 
@@ -81,7 +86,6 @@
                                     @endif
                                 @endforeach
                                 </tbody>
-                                </form>
                             </table>
                         </div>
                     </div>

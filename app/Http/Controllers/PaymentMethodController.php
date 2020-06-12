@@ -160,21 +160,22 @@ class PaymentMethodController extends Controller
     }
 
     public function add(Request $request){
-        $now = Carbon::now();
         $request->validate([
             'payment_type' => 'required',
-            'data_scadenza' => ['required', 'after:now'],
+            'month' => ['required', 'int', 'min:1', 'max:12'],
+            'year' => ['required', 'int', 'min:2000', 'max:2100'],
             'cardNumber' => ['required', 'unique:payment_methods', 'regex:/^[0-9]{16}$/'],
             'intestatario' => ['required', 'regex:/^[a-z ,.-]+$/i'],
             'CVV' => ['required', 'unique:payment_methods', 'regex:/^[0-9]{3}$/'],
         ]);
         $user = \Illuminate\Support\Facades\Auth::user();
+        $data_scadenza = Carbon::create($request->year, $request->month, '28', '0','0','0');
 
         $paymentMethod = new PaymentMethod; //per evitare problemi con campi che non appartengono effettivamente a paymentMethod.
         $paymentMethod->user_id = \Illuminate\Support\Facades\Auth::user()->id;
         $paymentMethod->payment_type = $request->payment_type;
         $paymentMethod->favourite = 0;
-        $paymentMethod->data_scadenza = $request->data_scadenza;
+        $paymentMethod->data_scadenza = $data_scadenza;
         $paymentMethod->cardNumber = $request->cardNumber;
         $paymentMethod->intestatario = $request->intestatario;
         $paymentMethod->CVV = $request->CVV;

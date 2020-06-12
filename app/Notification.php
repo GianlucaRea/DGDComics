@@ -10,7 +10,7 @@ class Notification extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'user_id','notification_text','state','date',
+        'user_id','notification_text','state','date', 'notification','idLink'
     ];
 
     public function user(){

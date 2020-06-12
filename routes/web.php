@@ -48,9 +48,6 @@ Route::get('/shoplist/search/','ComicController@shoplistSearch')->name('searchro
 Auth::routes();
 
 //da qui sono da riordinare bene con i controller come ha fatto Gianluca sopra, per ora lasciamo così che funziona bene
-
-Route::post('change.email', 'UserController@changeEmail')->name('change.email');
-
 Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
 Route::get('remove-method/{method}', 'PaymentMethodController@remove')->name('remove.method');
 Route::get('remove-address/{address}', 'ShippingAddressController@remove')->name('remove.address');
@@ -67,10 +64,8 @@ Route::post('submitVendorAddAddress', function(Request $request){
         ->with(compact('user'));
 } )->name('submitAddVendorAddress');
 
-Route::post('confirmOrder', function(Request $id){
-    \App\Http\Controllers\ComicBoughtController::orderUpdateConfirm($id);
-    return view('/accountArea/orderDetailVendor/1');
-})->name('confirmOrder');
+Route::get('confirmOrder/{id}', 'ComicBoughtController@orderUpdateConfirm')->name('confirmOrder');
+Route::get('sendOrder/{id}', 'ComicBoughtController@orderUpdateSend')->name('sendOrder');
 
 
 Route::get('/logout', function () {
@@ -144,3 +139,6 @@ Route::post('submitArticle/{user_id}', 'ArticleController@addArticle')->name('su
 Route::get('comment-deletelocal/{id}','CommentController@destroyComment')->name('comment-delete-local');
 Route::get('answer-deletelocal/{id}','CommentController@destroyAnswer')->name('answer-delete-local');
 Route::get('article-deletelocal/{id}','ArticleController@destroyArticle')->name('article-delete-local');
+Route::get('add-to-list/{id}', 'WishlistController@addToList');
+Route::get('remove-from-list/{id}', 'WishlistController@removeToList');
+

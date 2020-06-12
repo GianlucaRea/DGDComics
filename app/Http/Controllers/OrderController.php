@@ -167,7 +167,13 @@ class OrderController extends Controller
                         'user_id' => ComicController::getSeller($comic_Bought_id->comic_id)->id,
                         'notification_text' => 'un utente ha acquistato un tuo fumetto!',
                         'state' => '0',
+                        'notification' => 'orderDetailVendor',
+                        'idLink' => $order_id->id,
                     );
+                    if(WishlistController::alreadyToList($details["comic_id"], $user->id)) {
+                        WishlistController::removeToList($details["comic_id"]);
+                    }
+
                     DB::table('notifications')->insert($data4);
                 }
             }
@@ -197,7 +203,7 @@ class OrderController extends Controller
     }
 
     public static function getAllOrdersOfVendor($id){
-        return DB::table('orders')->join('comic_bought_order', 'orders.id', '=', 'comic_bought_order.order_id')->join('comic_boughts', 'comic_bought_order.comic_bought_id', '=', 'comic_boughts.comic_id')->join('comics', 'comic_boughts.comic_id', '=', 'comics.id')->where('comics.user_id', '=', $id)->get();
+        return DB::table('orders')->join('comic_bought_order', 'orders.id', '=', 'comic_bought_order.order_id')->join('comic_boughts', 'comic_bought_order.comic_bought_id', '=', 'comic_boughts.id')->join('comics', 'comic_boughts.comic_id', '=', 'comics.id')->where('comics.user_id', '=', $id)->get();
     }
 
 }
