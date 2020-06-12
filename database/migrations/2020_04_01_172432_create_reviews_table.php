@@ -19,7 +19,7 @@ class CreateReviewsTable extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->text('review_title');
             $table->text('review_text');
-            $table->float('stars');
+            $table->float('stars')->default('1');
             $table->timestamp('review_date');
         });
 
