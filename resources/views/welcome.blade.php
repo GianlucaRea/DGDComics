@@ -3,7 +3,7 @@
     <head>
         @include('layouts.Header.head')
     </head>
-    <body class="home-2" style="background-image: url({{asset('img/immaginiNostre/prova.png')}}); background-repeat: no-repeat; background-color: #ffffe6;">
+    <body class="home-2" style="background-image: url({{asset('img/immaginiNostre/prova.png')}}); background-size: cover; background-repeat: no-repeat; background-color: #ffffe6;">
     <header>
         @include('layouts.Header.header')
     </header>
