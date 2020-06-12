@@ -35,7 +35,8 @@
                                     @endphp
 
                                     @if($isVendor)
-                                        <a href="#venditore-info" data-toggle="tab"><i class="fa fa-dollar"></i> dettagli account venditore</a>
+                                        <a href="#venditore-info" data-toggle="tab"><i class="fa fa-dollar"></i> gestisci ordini</a>
+                                        <a href="#venditore-add-products" data-toggle="tab"><i class="fa fa-book"></i> vendi un prodotto</a>
                                     @endif
 
 
@@ -58,7 +59,7 @@
                                             <p class="mb-0">E-mail:   <strong>{{ $user->email }} </strong></p>
                                             <p class="mb-0">Telefono: <strong>{{ $user->phone_number }} </strong></p>
                                             @if(!$isVendor)
-                                            <p class="mb-0">Vuoi diventare venditore?  <a href="{{ url('/vendor') }}" > Clicca qui</a></p>
+                                                <p class="mb-0">Vuoi diventare venditore?  <a href="{{ url('/vendor') }}" > Clicca qui</a></p>
                                             @endif
                                         </div>
                                         <div class="myaccount-content">
@@ -170,39 +171,39 @@
                                             </div>
                                         @else
                                             <div class="table-cart table-responsive mb-15">
-                                            <table>
-                                                <thead>
-                                                <tr>
-                                                    <th class="product-thumbnail">immagine</th>
-                                                    <th class="product-name">nome fumetto</th>
-                                                    <th class="product-seller">venditore</th>
-                                                    <th class="product-price">prezzo</th>
-                                                    <th class="product-price">quantità disponibile</th>
-                                                    <th class="product-remove">Rimuovi</th>
-                                                    <th class="product-seller"></th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach($list as $item)
-                                                    @php($comic = \App\Http\Controllers\WishlistController::getComicWishlistTuple($item->id))
-                                                    @php($cover = \App\Http\Controllers\ImageController::getCover($comic->id))
-                                                    @php($seller = \App\Http\Controllers\ComicController::getSeller($comic->user_id))
-                                                <tr>
-                                                    <td class="product-thumbnail"><a href="{{ url('/comic_detail/'.$comic->id) }}"><img src="{{asset('img/comicsImages/' . $cover->image_name) }}" alt="man" /></a></td>
-                                                    <td class="product-name">{{ $comic->comic_name }}</td>
-                                                    <td class="product-seller">{{ $seller->username }}</td>
-                                                    <td class="product-price"><span class="amount">{{ $comic->price }}</span></td>
-                                                    <td class="product-price"><span class="amount">{{ $comic->quantity }}</span></td>
-                                                    <td class="product-remove"><a href="{{url('remove-from-list/'.$comic->id) }}"><i class="fa fa-times"></i></a></td>
-                                                    @if(\App\Http\Controllers\ComicController::getrelated($comic->id)->count()<1)
-                                                        <td class="product-seller"><p style="font-size: 13px;"><b>Purtroppo nel negozio non ci sono prodotti simili</b></p></td>
-                                                    @else
-                                                        <td class="product-seller"><p style="font-size: 13px;"><b>Ehy! a quanto pare nel negozio ci sono prodotti simili!</b></p></td>
-                                                    @endif
-                                                </tr>
-                                                @endforeach
-                                                </tbody>
-                                            </table>
+                                                <table>
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="product-thumbnail">immagine</th>
+                                                        <th class="product-name">nome fumetto</th>
+                                                        <th class="product-seller">venditore</th>
+                                                        <th class="product-price">prezzo</th>
+                                                        <th class="product-price">quantità disponibile</th>
+                                                        <th class="product-remove">Rimuovi</th>
+                                                        <th class="product-seller"></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($list as $item)
+                                                        @php($comic = \App\Http\Controllers\WishlistController::getComicWishlistTuple($item->id))
+                                                        @php($cover = \App\Http\Controllers\ImageController::getCover($comic->id))
+                                                        @php($seller = \App\Http\Controllers\ComicController::getSeller($comic->user_id))
+                                                        <tr>
+                                                            <td class="product-thumbnail"><a href="{{ url('/comic_detail/'.$comic->id) }}"><img src="{{asset('img/comicsImages/' . $cover->image_name) }}" alt="man" /></a></td>
+                                                            <td class="product-name">{{ $comic->comic_name }}</td>
+                                                            <td class="product-seller">{{ $seller->username }}</td>
+                                                            <td class="product-price"><span class="amount">{{ $comic->price }}</span></td>
+                                                            <td class="product-price"><span class="amount">{{ $comic->quantity }}</span></td>
+                                                            <td class="product-remove"><a href="{{url('remove-from-list/'.$comic->id) }}"><i class="fa fa-times"></i></a></td>
+                                                            @if(\App\Http\Controllers\ComicController::getrelated($comic->id)->count()<1)
+                                                                <td class="product-seller"><p style="font-size: 13px;"><b>Purtroppo nel negozio non ci sono prodotti simili</b></p></td>
+                                                            @else
+                                                                <td class="product-seller"><p style="font-size: 13px;"><b>Ehy! a quanto pare nel negozio ci sono prodotti simili!</b></p></td>
+                                                            @endif
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         @endif
                                     </div>
@@ -419,7 +420,7 @@
                                         </div>
                                     </div>
                                     <!-- Single Tab Content End -->
-                                @if($isVendor)
+                                    @if($isVendor)
                                     <!-- Single Tab Content Start -->
                                         <div class="tab-pane fade" id="venditore-info" role="tabpanel">
                                             @if(\App\Http\Controllers\OrderController::getAllOrdersOfVendor($user->id)->count() < 1)
@@ -454,6 +455,66 @@
                                                     </div>
                                                 </div>
                                             @endif
+                                        </div>
+                                        <!-- Single Tab Content End -->
+
+                                        <!-- Single Tab Content Start -->
+                                        <div class="tab-pane fade" id="venditore-add-products" role="tabpanel">
+                                            <fieldset>
+                                                <legend>
+                                                    Aggiungi il tuo fumetto
+                                                </legend>
+                                                <div class="offset-lg-2 col-lg-8 col-md-12 col-12">
+                                                    <div class="billing-fields">
+                                                         {{--fare form e aggiungere route--}}
+                                                            @csrf
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="single-input-item">
+                                                                        <label for="Titolo" class="required">Titolo Fumetto<span>*</span></label>
+                                                                        <input id="titolo" type="text" class="form-control @error('titolo') is-invalid @enderror" name="titolo" placeholder="Titolo">
+                                                                        @error('titolo')
+                                                                        <span class="invalid-feedback" role="alert">
+                                                                            <strong>
+                                                                                {{ $message }}
+                                                                            </strong>
+                                                                        </span>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="single-input-item">
+                                                                        <label for="tuaIva" class="required">Tipo fumetto<span>*</span></label>
+                                                                        <input id="tipo" type="text" class="form-control @error('tipo') is-invalid @enderror" name="tipo" placeholder="tipo">
+                                                                        @error('tipo')
+                                                                        <span class="invalid-feedback" role="alert">
+                                                                            <strong>
+                                                                                {{ $message }}
+                                                                            </strong>
+                                                                        </span>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="mt-2"></div>
+
+                                                            <div class="mt-3"></div>
+
+                                                            <div class="single-input-item">
+                                                                <button type="submit" class="btn btn-sqr">PUBBLICA ORA!</button>
+                                                            </div>
+
+
+
+                                                    </div>
+                                                </div>
+                                            </fieldset>
                                         </div>
                                         <!-- Single Tab Content End -->
                                     @endif
