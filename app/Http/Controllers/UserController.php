@@ -131,13 +131,10 @@ class UserController extends Controller
     public function changeEmail(Request $request){
 
         $request->validate([
-
             'email' => 'required',
-            'newEmail' => 'required',
-
         ]);
 
-        User::find(auth()->user()->id)->update(['email'=> ($request->newEmail)]);
+        User::find(auth()->user()->id)->update(['email'=> ($request->email)]);
 
         $user = \Illuminate\Support\Facades\Auth::user();
         return view('/accountArea')

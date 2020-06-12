@@ -114,4 +114,16 @@ class ComicBoughtController extends Controller
     public static function getComicBoughtDetailById($id){
         return DB::table("comic_boughts")->where("id", "=", $id)->first();
     }
+
+    public static function orderUpdateConfirm($id){
+        $data=array(
+            'states'=> 'confermato',
+            'id' => $id->id,
+        );
+        DB::table('comic_boughts')->where("id", "=", $id->id)->update($data);
+
+        $user = \Illuminate\Support\Facades\Auth::user();
+        return view('/accountArea')
+            ->with(compact('user'));
+    }
 }

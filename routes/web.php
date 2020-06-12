@@ -67,6 +67,12 @@ Route::post('submitVendorAddAddress', function(Request $request){
         ->with(compact('user'));
 } )->name('submitAddVendorAddress');
 
+Route::post('confirmOrder', function(Request $id){
+    \App\Http\Controllers\ComicBoughtController::orderUpdateConfirm($id);
+    return view('/accountArea/orderDetailVendor/1');
+})->name('confirmOrder');
+
+
 Route::get('/logout', function () {
     return \App\Http\Controllers\Auth\LoginController::logout();
 });
