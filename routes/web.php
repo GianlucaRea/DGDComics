@@ -27,7 +27,7 @@ Route::get('/contact', function(){
 });
 
 Route::get('/comic_detail/{id}','ComicController@comicDetail')->name('comicdetail');
-Route::post('/comic_detail/{id}','ReviewController@add')->name('submitReview');
+Route::post('/submitReview/{id}','ReviewController@add')->name('submitReview');
 
 Route::get('/vendor_detail/{id}' , 'RankingController@vendorRanking')->name('vendorpublic');
 

@@ -10,7 +10,7 @@ class Review extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'user_id','comic_id','review_title','review_text','stars'
+        'user_id','comic_id','review_title','review_text','stars',
     ];
 
     public function comic(){

@@ -17,12 +17,12 @@ class ReviewController extends Controller
     {
         $now = Carbon::now();
         $request->validate([
-            'review_title' => ['required', 'max:20', 'min:3'],
-            'review_text' => ['required', 'max:255', 'min:40'],
-            'stars' => ['required', 'max:5', 'min:1'],
+            'review_title' => ['required', 'max:50', 'min:3'],
+            'review_text' => ['required', 'max:255', 'min:10'],
+            'stars' => ['required'],
         ]);
         $user = \Illuminate\Support\Facades\Auth::user();
-        $review = new Review; //per evitare problemi con campi che non appartengono effettivamente a paymentMethod.
+        $review = new Review;
         $review->user_id = \Illuminate\Support\Facades\Auth::user()->id;
         $review->comic_id = $id;
         $review->review_title = $request->review_title;
@@ -31,6 +31,7 @@ class ReviewController extends Controller
 
         $data = array(
             'user_id' => $review->user_id,
+            'comic_id' => $id,
             'review_title' => $review->review_title,
             'review_text' => $review->review_text,
             'stars' => $review->stars,
@@ -39,8 +40,7 @@ class ReviewController extends Controller
         DB::table('reviews')->insert($data);
 
 
-        return redirect('comic_detail/$id')
-            ->with(compact('comics'));
+        return redirect()->back()->with('message','Success');
     }
 
 
