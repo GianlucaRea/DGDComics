@@ -36,7 +36,8 @@
 
                                     @if($isVendor)
                                         <a href="#venditore-info" data-toggle="tab"><i class="fa fa-dollar"></i> gestisci ordini</a>
-                                        <a href="#venditore-add-products" data-toggle="tab"><i class="fa fa-book"></i> vendi un prodotto</a>
+                                        <a href="#venditore-menagement-products" data-toggle="tab"><i class="fa fa-bookmark"></i> gestisci fumetti</a>
+                                        <a href="#venditore-add-products" data-toggle="tab"><i class="fa fa-book"></i> vendi un fumetto</a>
                                     @endif
 
 
@@ -549,6 +550,51 @@
                                         <!-- Single Tab Content End -->
 
                                         <!-- Single Tab Content Start -->
+                                        <div class="tab-pane fade" id="venditore-menagement-products" role="tabpanel">
+                                            @if(\App\Http\Controllers\ComicController::getComicOfVendor($user->id)->count() < 1)
+                                                <div class="myaccount-content">
+                                                    <h5>Oh, sembra che ancora non hai fumetti in vendita</h5>
+                                                </div>
+                                            @else
+                                                    <div class="table-cart table-responsive mb-15">
+                                                        <table>
+                                                            <thead>
+                                                            <tr>
+                                                                <th>immagine</th>
+                                                                <th>nome</th>
+                                                                <th>copie vendute</th>
+                                                                <th>recensioni</th>
+                                                                <th>prezzo</th>
+                                                                <th>Azione</th>
+                                                            </tr>
+                                                            </thead>
+                                                            @php($comics_of_vendor = \App\Http\Controllers\ComicController::getComicOfVendor($user->id))
+                                                            <tbody>
+                                                            @foreach($comics_of_vendor as $comic_of_vendor)
+                                                                <tr>
+                                                                    @php($cover_of_comic_of_vendor = \App\Http\Controllers\ImageController::getCover($comic_of_vendor->id))
+                                                                    <td class="product-thumbnail"><a href="{{ url('/comic_detail/'.$comic_of_vendor->id) }}"><img src="{{asset('img/comicsImages/' . $cover_of_comic_of_vendor->image_name) }}" alt="man" /></a></td>
+                                                                    <td>{{ $comic_of_vendor->comic_name }}</td>
+                                                                    @php($soldQuantity = \App\Http\Controllers\ComicBoughtController::getSoldQuantity($comic_of_vendor->id))
+                                                                    <td>{{ $soldQuantity }}</td>
+                                                                    @php($reviewQuantity = \App\Http\Controllers\ReviewController::getReviewQuantity($comic_of_vendor->id))
+                                                                    <td>{{ $reviewQuantity }}</td>
+                                                                    <td>{{ $comic_of_vendor->price }}</td>
+                                                                    <td>
+                                                                        <a class="btn btn-danger" href="#"><i class="fa fa-pencil"></i></a>
+                                                                        <a class="btn btn-danger" onclick="return deleteComic();"  href="{{route('comic-delete-vendor', $comic_of_vendor->id)}}"><i class="fa fa-trash"></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <!-- Single Tab Content End -->
+
+                                        <!-- Single Tab Content Start -->
                                         <div class="tab-pane fade" id="venditore-add-products" role="tabpanel">
                                             <fieldset>
                                                 <legend>
@@ -616,5 +662,11 @@
             </div>
         </div>
     </div>
+<script>
+    function deleteComic() {
+        if(!confirm("Sei sicuro di voler eliminare questo fumetto?"))
+            event.preventDefault();
+    }
+</script>
 </div>
 <!-- my account wrapper end -->

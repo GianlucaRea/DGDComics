@@ -130,13 +130,7 @@
                                                         @else
                                                             <td>Venditore</td>
                                                         @endif
-                                                        <td><a class="btn btn-danger" onclick="return myFunction();"  href="{{route('user-delete', $user->id)}}"><i class="fa fa-trash"></i></a></td>
-                                                        <script>
-                                                            function myFunction() {
-                                                                if(!confirm("Sei sicuro di voler eliminare questo utente?"))
-                                                                    event.preventDefault();
-                                                            }
-                                                        </script>
+                                                        <td><a class="btn btn-danger" onclick="return deleteUser();"  href="{{route('user-delete', $user->id)}}"><i class="fa fa-trash"></i></a></td>
                                                     </tr>
                                                     @endforeach
                                                     {{ $users->links() }}
@@ -175,13 +169,7 @@
                                                             <td>{{$comic->ISBN}}</td>
                                                             <td>{{$comic->quantity}}</td>
                                                             <td>{{$userNeed->username}}</td>
-                                                            <td><a class="btn btn-danger" onclick="return myFunction();"  href="{{route('comic-delete', $comic->id)}}"><i class="fa fa-trash"></i></a></td>
-                                                            <script>
-                                                                function myFunction() {
-                                                                    if(!confirm("Sei sicuro di voler eliminare questo fumetto?"))
-                                                                        event.preventDefault();
-                                                                }
-                                                            </script>
+                                                            <td><a class="btn btn-danger" onclick="return deleteComic();"  href="{{route('comic-delete', $comic->id)}}"><i class="fa fa-trash"></i></a></td>
                                                         </tr>
                                                     @endforeach
                                                     {{ $comics->links() }}
@@ -216,13 +204,7 @@
                                                             <td>{{$review->review_title}}</td>
                                                             <td>{{$comicReview->comic_name}}</td>
                                                             <td>{{$userReview->username}}</td>
-                                                            <td><a class="btn btn-danger" onclick="return myFunction();"  href="{{route('review-delete-local', $review->id)}}"><i class="fa fa-trash"></i></a></td>
-                                                            <script>
-                                                                function myFunction() {
-                                                                    if(!confirm("Sei sicuro di voler eliminare questa recensione?"))
-                                                                        event.preventDefault();
-                                                                }
-                                                            </script>
+                                                            <td><a class="btn btn-danger" onclick="return deleteReview();"  href="{{route('review-delete-local', $review->id)}}"><i class="fa fa-trash"></i></a></td>
                                                         </tr>
                                                     @endforeach
                                                     {{ $reviews->links() }}
@@ -241,3 +223,18 @@
         </div>
     </div>
 </div>
+
+<script>
+    function deleteUser() {
+        if(!confirm("Sei sicuro di voler eliminare questo utente?"))
+            event.preventDefault();
+    }
+    function deleteReview() {
+        if(!confirm("Sei sicuro di voler eliminare questa recensione?"))
+            event.preventDefault();
+    }
+    function deleteComic() {
+        if(!confirm("Sei sicuro di voler eliminare questo fumetto?"))
+            event.preventDefault();
+    }
+</script>

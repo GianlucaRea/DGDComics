@@ -94,4 +94,15 @@ class ReviewController extends Controller
         return redirect()->back()->with('message','Success');
     }
 
+    public static function getReviewQuantity($id){
+        $quantity = 0;
+        $reviews = DB::table('reviews')->get();
+        foreach ($reviews as $review){
+            if($review->comic_id == $id){
+                $quantity++;
+            }
+        }
+        return $quantity;
+    }
+
 }

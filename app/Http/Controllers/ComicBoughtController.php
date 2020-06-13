@@ -158,4 +158,15 @@ class ComicBoughtController extends Controller
 
         return redirect()->back()->with(compact('user'));
     }
+
+    public static function getSoldQuantity($id){
+        $quantity = 0;
+        $comicBoughts = DB::table('comic_boughts')->get();
+        foreach ($comicBoughts as $comicBought){
+            if($comicBought->comic_id == $id){
+                $quantity++;
+            }
+        }
+        return $quantity;
+    }
 }
