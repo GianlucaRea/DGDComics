@@ -8,7 +8,7 @@
     @include('layouts.Header.header')
 </header>
 <div style="height: 75px"></div>
-<div class="shop-main-area mb-70">
+<div class="shop-main-area">
     <div class="container">
         <div class="row">
             @include('layouts.shopList.shoplistLeftMenu')

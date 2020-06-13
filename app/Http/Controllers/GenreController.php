@@ -118,4 +118,8 @@ class GenreController extends Controller
 
     }
 
+    public static function getAllGenres(){
+        return Genre::all();
+    }
+
 }
