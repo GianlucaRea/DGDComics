@@ -7,6 +7,7 @@ use App\ComicBought;
 use App\Genre;
 use App\Http\Controllers\Controller;
 use App\Image;
+use App\Notification;
 use App\Review;
 use App\User;
 use Illuminate\Http\Request;
@@ -122,11 +123,23 @@ class ComicController extends Controller
     public function destroy($id)
     {
         $Comic = Comic::find($id);
+        $notification = new Notification;
+        $notification->user_id = $Comic->user_id;
+        $notification->state = false;
+        $notification->notification_text = 'Il tuo fumetto non era in accordo con le policy di DGDComics';
+
+        $data = array(
+            'user_id' => $notification->user_id,
+            'state' =>  $notification->state,
+            'notification_text' => $notification->notification_text,
+        );
         if(is_null($Comic)){
             return redirect()->back()->with('message','Alredy Deleted');
         }
         $this->removeForAdmin($id);
         $Comic -> delete();
+        DB::table('notifications')->insert($data);
+
         return redirect()->back()->with('message','Success');
     }
 

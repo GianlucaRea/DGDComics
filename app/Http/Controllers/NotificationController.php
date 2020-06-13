@@ -40,9 +40,8 @@ class NotificationController extends Controller
     {
         $rules = [
             'user_id'=>'required',
-            'Notification_text'=>'required',
+            'notification_text'=>'required',
             'state'=>'required',
-            'date'=>'required',
         ];
         $validator = Validator::make($request->all(),$rules);
         if($validator->fails()){
