@@ -28,12 +28,15 @@
         width: 1.1em;
         cursor: pointer;
         color: #000;
+        font-size: 16px;
+        margin-top: 6px;
     }
 
     .rating > label:hover,
     .rating > label:hover ~ label,
     .rating > input.radio-btn:checked ~ label {
         color: transparent;
+        font-size: 16px;
     }
 
     .rating > label:hover:before,
@@ -44,6 +47,7 @@
         position: absolute;
         left: 0;
         color: #FFD700;
+        font-size: 16px;
     }
 
 </style>
@@ -69,20 +73,20 @@
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
-                    <div style="margin-left:1.5%;"></div>
+                    <div style="margin-left:0.8%;"></div>
                     <div class="txt-center">
 
                         <div class="rating">
                             <input id="stars5" name="stars" type="radio" value="5" class="radio-btn hide" />
-                            <label for="stars5" ><i class="fa fa-star" style="font-size: 20px; margin-top: 10px;"></i></label>
+                            <label for="stars5" ><i class="fa fa-star"></i></label>
                             <input id="star4" name="stars" type="radio" value="4" class="radio-btn hide" />
-                            <label for="star4" ><i class="fa fa-star" style="font-size: 20px; margin-right:5px; margin-top: 10px;"></i></label>
+                            <label for="star4" ><i class="fa fa-star" ></i></label>
                             <input id="star3" name="stars" type="radio" value="3" class="radio-btn hide" />
-                            <label for="star3" ><i class="fa fa-star" style="font-size: 20px; margin-right:10px; margin-top: 10px;"></i></label>
+                            <label for="star3" ><i class="fa fa-star"></i></label>
                             <input id="star2" name="stars" type="radio" value="2" class="radio-btn hide" />
-                            <label for="star2" ><i class="fa fa-star" style="font-size: 20px; margin-right:15px; margin-top: 10px;"></i></label>
+                            <label for="star2" ><i class="fa fa-star"></i></label>
                             <input id="star1" name="stars" type="radio" value="1" class="radio-btn hide"/>
-                            <label for="star1" ><i class="fa fa-star" style="font-size: 20px; margin-right:20px; margin-top: 10px;"></i></label>
+                            <label for="star1" ><i class="fa fa-star"></i></label>
                             <div class="clear"></div>
                         </div>
 
@@ -119,6 +123,7 @@
                     <div style="margin-left:7.6%"></div>
 
                         <label>i campi segnati con <sup>*</sup> sono obbligatori</label>
+            </form>
         </div>
     </div>
 </div>

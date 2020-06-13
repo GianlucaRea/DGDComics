@@ -130,6 +130,11 @@ class NotificationController extends Controller
         Notification::where('id', '=', $id)->update(array('state' => '1'));
         $notification = DB::table('notifications')->where('id', '=', $id)->first();
         $user = \Illuminate\Support\Facades\Auth::user();
-        return Redirect::route($notification->notification, ['id' =>$notification->idLink ]);
+        if($notification->idLink == 0){
+            return Redirect::route($notification->notification);
+        }
+        else {
+            return Redirect::route($notification->notification, ['id' => $notification->idLink]);
+        }
     }
 }

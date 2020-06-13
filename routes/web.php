@@ -24,7 +24,7 @@ Route::get('/', 'HomeController@index');
 
 Route::get('/contact', function(){
     return view('contact');
-});
+})->name('contact');
 
 Route::get('/comic_detail/{id}','ComicController@comicDetail')->name('comicdetail');
 Route::post('/submitReview/{id}','ReviewController@add')->name('submitReview');

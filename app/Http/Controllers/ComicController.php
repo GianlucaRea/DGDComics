@@ -132,6 +132,8 @@ class ComicController extends Controller
             'user_id' => $notification->user_id,
             'state' =>  $notification->state,
             'notification_text' => $notification->notification_text,
+            'notification' => 'contact',
+            'idLink' => 0
         );
         if(is_null($Comic)){
             return redirect()->back()->with('message','Alredy Deleted');
@@ -740,29 +742,31 @@ class ComicController extends Controller
     {
         if($id) {
 
-            $cart = session()->get('cart');
-            foreach (session('cart') as $id2 => $details) {
-                if($cart[$id2]["comic_id"] == $id) {
-                    $idSession = DB::table('sessions')->where("sessionId", "=", $id2)->first()->sessionId;
-                    $quantityInCart = $cart[$idSession]["quantity"];
+            if(session('cart')) {
+                $cart = session()->get('cart');
+                foreach (session('cart') as $id2 => $details) {
+                    if ($cart[$id2]["comic_id"] == $id) {
+                        $idSession = DB::table('sessions')->where("sessionId", "=", $id2)->first()->sessionId;
+                        $quantityInCart = $cart[$idSession]["quantity"];
 
-                    if(isset($cart[$idSession])) {
+                        if (isset($cart[$idSession])) {
 
-                        DB::table('sessions')->where("sessionId", "=", $idSession)->delete();
+                            DB::table('sessions')->where("sessionId", "=", $idSession)->delete();
 
-                        unset($cart[$idSession]);
+                            unset($cart[$idSession]);
 
-                        session()->put('cart', $cart);
+                            session()->put('cart', $cart);
+                        }
+
+                        session()->flash('success', 'Product removed successfully');
+
+                        $comic = Comic::find($id);
+                        $newQuantity = $comic->quantity + $quantityInCart;
+                        DB::table('comics')->where('id', $comic->id)->update(['quantity' => $newQuantity]);
                     }
-
-                    session()->flash('success', 'Product removed successfully');
-
-                    $comic = Comic::find($id);
-                    $newQuantity = $comic->quantity + $quantityInCart;
-                    DB::table('comics')->where('id', $comic->id)->update(['quantity' => $newQuantity]);
                 }
+                return redirect()->back();
             }
-            return redirect()->back();
         }
     }
 

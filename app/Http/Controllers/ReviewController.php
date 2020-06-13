@@ -81,6 +81,8 @@ class ReviewController extends Controller
             'user_id' => $notification->user_id,
             'state' =>  $notification->state,
             'notification_text' => $notification->notification_text,
+            'notification' => 'comic_detail',
+            'idLink' => $comic_id
         );
 
         if(is_null($Review)){

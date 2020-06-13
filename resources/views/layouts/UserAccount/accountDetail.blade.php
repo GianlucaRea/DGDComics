@@ -99,12 +99,21 @@
                                                                     @endif
                                                                 </td>
                                                                 @if($notification->state == 1)
+                                                                    @if($notification->id == 0)
+                                                                        <td>
+                                                                            Letto
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="{{ route($notification->notification)}}" class="btn btn-sqr">Dettagli</a>
+                                                                        </td>
+                                                                    @else
                                                                     <td>
                                                                         Letto
                                                                     </td>
                                                                     <td>
-                                                                        <a href="{{ url($notification->notification) }}" class="btn btn-sqr">Dettagli</a>
+                                                                        <a href="{{ route($notification->notification, ['id' => $notification->id])}}" class="btn btn-sqr">Dettagli</a>
                                                                     </td>
+                                                                    @endif
                                                                 @else
                                                                     <td>
                                                                         Non letto
