@@ -24,7 +24,7 @@ Route::get('/', 'HomeController@index');
 
 Route::get('/contact', function(){
     return view('contact');
-});
+})->name('contact');
 
 Route::get('/comic_detail/{id}','ComicController@comicDetail')->name('comicdetail');
 Route::post('/submitReview/{id}','ReviewController@add')->name('submitReview');
@@ -127,13 +127,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('user-delete/{id}','UserController@destroy')->name('user-delete');
 Route::get('comic-delete/{id}','ComicController@destroy')->name('comic-delete');
+Route::get('comic-delete-vendor/{id}','ComicController@destroyForVendor')->name('comic-delete-vendor');
 Route::get('review-delete/{id}','ReviewController@destroy')->name('review-delete');
 Route::get('review-deletelocal/{id}','ReviewController@destroylocal')->name('review-delete-local');
 
 Route::get('blog', 'ArticleController@getArticles');
 Route::get('/blogDetail/{id}', 'ArticleController@getArticleById')->name('blogDetail');
 Route::post('submitComment/{article}', 'CommentController@addToArticle')->name('submitComment');
-Route::post('submitAnswer/{comment}', 'CommentController@addToComment')->name('submitAnswer');
+Route::post('submitphpAnswer/{comment}', 'CommentController@addToComment')->name('submitAnswer');
 Route::get('/writeArticle', 'AdminController@checkForWriteArticle')->name('writeArticle');
 Route::post('submitArticle/{user_id}', 'ArticleController@addArticle')->name('submitArticle');
 Route::get('comment-deletelocal/{id}','CommentController@destroyComment')->name('comment-delete-local');

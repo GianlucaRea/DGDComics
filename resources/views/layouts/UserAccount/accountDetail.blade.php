@@ -36,7 +36,8 @@
 
                                     @if($isVendor)
                                         <a href="#venditore-info" data-toggle="tab"><i class="fa fa-dollar"></i> gestisci ordini</a>
-                                        <a href="#venditore-add-products" data-toggle="tab"><i class="fa fa-book"></i> vendi un prodotto</a>
+                                        <a href="#venditore-menagement-products" data-toggle="tab"><i class="fa fa-bookmark"></i> gestisci fumetti</a>
+                                        <a href="#venditore-add-products" data-toggle="tab"><i class="fa fa-book"></i> vendi un fumetto</a>
                                     @endif
 
 
@@ -99,12 +100,21 @@
                                                                     @endif
                                                                 </td>
                                                                 @if($notification->state == 1)
+                                                                    @if($notification->id == 0)
+                                                                        <td>
+                                                                            Letto
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="{{ route($notification->notification)}}" class="btn btn-sqr">Dettagli</a>
+                                                                        </td>
+                                                                    @else
                                                                     <td>
                                                                         Letto
                                                                     </td>
                                                                     <td>
-                                                                        <a href="{{ url($notification->notification) }}" class="btn btn-sqr">Dettagli</a>
+                                                                        <a href="{{ route($notification->notification, ['id' => $notification->id])}}" class="btn btn-sqr">Dettagli</a>
                                                                     </td>
+                                                                    @endif
                                                                 @else
                                                                     <td>
                                                                         Non letto
@@ -184,23 +194,104 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
+                                                    @php($collect = collect())
                                                     @foreach($list as $item)
                                                         @php($comic = \App\Http\Controllers\WishlistController::getComicWishlistTuple($item->id))
-                                                        @php($cover = \App\Http\Controllers\ImageController::getCover($comic->id))
-                                                        @php($seller = \App\Http\Controllers\ComicController::getSeller($comic->user_id))
-                                                        <tr>
-                                                            <td class="product-thumbnail"><a href="{{ url('/comic_detail/'.$comic->id) }}"><img src="{{asset('img/comicsImages/' . $cover->image_name) }}" alt="man" /></a></td>
-                                                            <td class="product-name">{{ $comic->comic_name }}</td>
-                                                            <td class="product-seller">{{ $seller->username }}</td>
-                                                            <td class="product-price"><span class="amount">{{ $comic->price }}</span></td>
-                                                            <td class="product-price"><span class="amount">{{ $comic->quantity }}</span></td>
-                                                            <td class="product-remove"><a href="{{url('remove-from-list/'.$comic->id) }}"><i class="fa fa-times"></i></a></td>
-                                                            @if(\App\Http\Controllers\ComicController::getrelated($comic->id)->count()<1)
-                                                                <td class="product-seller"><p style="font-size: 13px;"><b>Purtroppo nel negozio non ci sono prodotti simili</b></p></td>
-                                                            @else
-                                                                <td class="product-seller"><p style="font-size: 13px;"><b>Ehy! a quanto pare nel negozio ci sono prodotti simili!</b></p></td>
+                                                        @if($collect->isEmpty())
+                                                            @php($cover = \App\Http\Controllers\ImageController::getCover($comic->id))
+                                                            @php($seller = \App\Http\Controllers\ComicController::getSeller($comic->user_id))
+                                                            @if(session('cart'))
+                                                                @php($cart = session()->get('cart'))
+                                                                @php($sessions = \Illuminate\Support\Facades\DB::table('sessions')->get())
+                                                                @foreach($sessions as $session)
+                                                                    @php($user = \Illuminate\Support\Facades\Auth::user())
+                                                                    @if($cart[$session->sessionId]['user'] == $user->id)
+                                                                        @php($comic2 = \App\Http\Controllers\ComicController::getByID($cart[$session->sessionId]["comic_id"]))
+                                                                        @if($comic->id == $cart[$session->sessionId]['comic_id'])
+                                                                            @php($realQty = $comic->quantity + $cart[$session->sessionId]['quantity'])
+                                                                            @php($collect->push($comic->id))
+                                                                            <tr>
+                                                                                <td class="product-thumbnail"><a href="{{ url('/comic_detail/'.$comic->id) }}"><img src="{{asset('img/comicsImages/' . $cover->image_name) }}" alt="man" /></a></td>
+                                                                                <td class="product-name">{{ $comic->comic_name }}</td>
+                                                                                <td class="product-seller">{{ $seller->username }}</td>
+                                                                                <td class="product-price"><span class="amount">{{ $comic->price }}</span></td>
+                                                                                <td class="product-price"><span class="amount">{{ $realQty }}</span></td>
+                                                                                <td class="product-remove"><a href="{{url('remove-from-list/'.$comic->id) }}"><i class="fa fa-times"></i></a></td>
+                                                                                @if(\App\Http\Controllers\ComicController::getrelated($comic->id)->count()<1)
+                                                                                    <td class="product-seller"><p style="font-size: 13px;"><b>Purtroppo nel negozio non ci sono prodotti simili</b></p></td>
+                                                                                @else
+                                                                                    <td class="product-seller"><p style="font-size: 13px;"><b>Ehy! a quanto pare nel negozio ci sono prodotti simili!</b></p></td>
+                                                                                @endif
+                                                                            </tr>
+                                                                        @endif
+                                                                    @endif
+                                                                @endforeach
                                                             @endif
-                                                        </tr>
+                                                            @if($collect->isEmpty())
+                                                                @php($collect->push($comic->id))
+                                                                <tr>
+                                                                    <td class="product-thumbnail"><a href="{{ url('/comic_detail/'.$comic->id) }}"><img src="{{asset('img/comicsImages/' . $cover->image_name) }}" alt="man" /></a></td>
+                                                                    <td class="product-name">{{ $comic->comic_name }}</td>
+                                                                    <td class="product-seller">{{ $seller->username }}</td>
+                                                                    <td class="product-price"><span class="amount">{{ $comic->price }}</span></td>
+                                                                    <td class="product-price"><span class="amount">{{ $comic->quantity }}</span></td>
+                                                                    <td class="product-remove"><a href="{{url('remove-from-list/'.$comic->id) }}"><i class="fa fa-times"></i></a></td>
+                                                                    @if(\App\Http\Controllers\ComicController::getrelated($comic->id)->count()<1)
+                                                                        <td class="product-seller"><p style="font-size: 13px;"><b>Purtroppo nel negozio non ci sono prodotti simili</b></p></td>
+                                                                    @else
+                                                                        <td class="product-seller"><p style="font-size: 13px;"><b>Ehy! a quanto pare nel negozio ci sono prodotti simili!</b></p></td>
+                                                                    @endif
+                                                                </tr>
+                                                            @endif
+                                                        @else
+                                                            @if(!($collect->contains($comic->id)))
+                                                                @php($cover = \App\Http\Controllers\ImageController::getCover($comic->id))
+                                                                @php($seller = \App\Http\Controllers\ComicController::getSeller($comic->user_id))
+                                                                @if(session('cart'))
+                                                                    @php($cart = session()->get('cart'))
+                                                                    @php($sessions = \Illuminate\Support\Facades\DB::table('sessions')->get())
+                                                                    @foreach($sessions as $session)
+                                                                        @php($user = \Illuminate\Support\Facades\Auth::user())
+                                                                        @if($cart[$session->sessionId]['user'] == $user->id)
+                                                                            @php($comic2 = \App\Http\Controllers\ComicController::getByID($cart[$session->sessionId]["comic_id"]))
+                                                                            @if($comic->id == $cart[$session->sessionId]['comic_id'])
+                                                                                @php($realQty = $comic->quantity + $cart[$session->sessionId]['quantity'])
+                                                                                @php($collect->push($comic->id))
+                                                                                <tr>
+                                                                                    <td class="product-thumbnail"><a href="{{ url('/comic_detail/'.$comic->id) }}"><img src="{{asset('img/comicsImages/' . $cover->image_name) }}" alt="man" /></a></td>
+                                                                                    <td class="product-name">{{ $comic->comic_name }}</td>
+                                                                                    <td class="product-seller">{{ $seller->username }}</td>
+                                                                                    <td class="product-price"><span class="amount">{{ $comic->price }}</span></td>
+                                                                                    <td class="product-price"><span class="amount">{{ $realQty }}</span></td>
+                                                                                    <td class="product-remove"><a href="{{url('remove-from-list/'.$comic->id) }}"><i class="fa fa-times"></i></a></td>
+                                                                                    @if(\App\Http\Controllers\ComicController::getrelated($comic->id)->count()<1)
+                                                                                        <td class="product-seller"><p style="font-size: 13px;"><b>Purtroppo nel negozio non ci sono prodotti simili</b></p></td>
+                                                                                    @else
+                                                                                        <td class="product-seller"><p style="font-size: 13px;"><b>Ehy! a quanto pare nel negozio ci sono prodotti simili!</b></p></td>
+                                                                                    @endif
+                                                                                </tr>
+                                                                            @endif
+                                                                        @endif
+                                                                    @endforeach
+                                                                @endif
+                                                                @if(!($collect->contains($comic->id)))
+                                                                    @php($collect->push($comic->id))
+                                                                    <tr>
+                                                                        <td class="product-thumbnail"><a href="{{ url('/comic_detail/'.$comic->id) }}"><img src="{{asset('img/comicsImages/' . $cover->image_name) }}" alt="man" /></a></td>
+                                                                        <td class="product-name">{{ $comic->comic_name }}</td>
+                                                                        <td class="product-seller">{{ $seller->username }}</td>
+                                                                        <td class="product-price"><span class="amount">{{ $comic->price }}</span></td>
+                                                                        <td class="product-price"><span class="amount">{{ $comic->quantity }}</span></td>
+                                                                        <td class="product-remove"><a href="{{url('remove-from-list/'.$comic->id) }}"><i class="fa fa-times"></i></a></td>
+                                                                        @if(\App\Http\Controllers\ComicController::getrelated($comic->id)->count()<1)
+                                                                            <td class="product-seller"><p style="font-size: 13px;"><b>Purtroppo nel negozio non ci sono prodotti simili</b></p></td>
+                                                                        @else
+                                                                            <td class="product-seller"><p style="font-size: 13px;"><b>Ehy! a quanto pare nel negozio ci sono prodotti simili!</b></p></td>
+                                                                        @endif
+                                                                    </tr>
+                                                                @endif
+                                                            @endif
+                                                        @endif
                                                     @endforeach
                                                     </tbody>
                                                 </table>
@@ -459,6 +550,51 @@
                                         <!-- Single Tab Content End -->
 
                                         <!-- Single Tab Content Start -->
+                                        <div class="tab-pane fade" id="venditore-menagement-products" role="tabpanel">
+                                            @if(\App\Http\Controllers\ComicController::getComicOfVendor($user->id)->count() < 1)
+                                                <div class="myaccount-content">
+                                                    <h5>Oh, sembra che ancora non hai fumetti in vendita</h5>
+                                                </div>
+                                            @else
+                                                    <div class="table-cart table-responsive mb-15">
+                                                        <table>
+                                                            <thead>
+                                                            <tr>
+                                                                <th>immagine</th>
+                                                                <th>nome</th>
+                                                                <th>copie vendute</th>
+                                                                <th>recensioni</th>
+                                                                <th>prezzo</th>
+                                                                <th>Azione</th>
+                                                            </tr>
+                                                            </thead>
+                                                            @php($comics_of_vendor = \App\Http\Controllers\ComicController::getComicOfVendor($user->id))
+                                                            <tbody>
+                                                            @foreach($comics_of_vendor as $comic_of_vendor)
+                                                                <tr>
+                                                                    @php($cover_of_comic_of_vendor = \App\Http\Controllers\ImageController::getCover($comic_of_vendor->id))
+                                                                    <td class="product-thumbnail"><a href="{{ url('/comic_detail/'.$comic_of_vendor->id) }}"><img src="{{asset('img/comicsImages/' . $cover_of_comic_of_vendor->image_name) }}" alt="man" /></a></td>
+                                                                    <td>{{ $comic_of_vendor->comic_name }}</td>
+                                                                    @php($soldQuantity = \App\Http\Controllers\ComicBoughtController::getSoldQuantity($comic_of_vendor->id))
+                                                                    <td>{{ $soldQuantity }}</td>
+                                                                    @php($reviewQuantity = \App\Http\Controllers\ReviewController::getReviewQuantity($comic_of_vendor->id))
+                                                                    <td>{{ $reviewQuantity }}</td>
+                                                                    <td>{{ $comic_of_vendor->price }}</td>
+                                                                    <td>
+                                                                        <a class="btn btn-danger" href="#"><i class="fa fa-pencil"></i></a>
+                                                                        <a class="btn btn-danger" onclick="return deleteComic();"  href="{{route('comic-delete-vendor', $comic_of_vendor->id)}}"><i class="fa fa-trash"></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <!-- Single Tab Content End -->
+
+                                        <!-- Single Tab Content Start -->
                                         <div class="tab-pane fade" id="venditore-add-products" role="tabpanel">
                                             <fieldset>
                                                 <legend>
@@ -701,5 +837,11 @@
             </div>
         </div>
     </div>
+<script>
+    function deleteComic() {
+        if(!confirm("Sei sicuro di voler eliminare questo fumetto?"))
+            event.preventDefault();
+    }
+</script>
 </div>
 <!-- my account wrapper end -->
