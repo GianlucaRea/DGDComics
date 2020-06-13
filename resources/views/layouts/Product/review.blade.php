@@ -1,3 +1,53 @@
+<style>
+    .txt-center {
+        text-align: center;
+    }
+    .hide {
+        display: none;
+    }
+
+    .clear {
+        float: none;
+        clear: both;
+    }
+
+    .rating {
+        width: 90px;
+        unicode-bidi: bidi-override;
+        direction: rtl;
+        text-align: center;
+        position: relative;
+    }
+
+    .rating > label {
+        float: right;
+        display: inline;
+        padding: 0;
+        margin: 0;
+        position: relative;
+        width: 1.1em;
+        cursor: pointer;
+        color: #000;
+    }
+
+    .rating > label:hover,
+    .rating > label:hover ~ label,
+    .rating > input.radio-btn:checked ~ label {
+        color: transparent;
+    }
+
+    .rating > label:hover:before,
+    .rating > label:hover ~ label:before,
+    .rating > input.radio-btn:checked ~ label:before,
+    .rating > input.radio-btn:checked ~ label:before {
+        content: "\2605";
+        position: absolute;
+        left: 0;
+        color: #FFD700;
+    }
+
+</style>
+
 <div class="product-info-area">
     <div class="tab-content border-0" style="background-color: #ffffe6 ">
         <div class="mt-30"></div>
@@ -5,99 +55,50 @@
             <form method="POST" action="{{ Route('submitReview', ['id' => $comic->id])}}">
                 @csrf
             <h4>Lascia una recensione su: {{$comic->comic_name}}</h4>
-            <div class="mb-5"></div>
+            <div class="mb-3"></div>
 
-                <span>La tua opinione <sup>*</sup></span>
-
-                        <span>Stars</span>
-                <style>
-                    .txt-center {
-                        text-align: center;
-                    }
-                    .hide {
-                        display: none;
-                    }
-
-                    .clear {
-                        float: none;
-                        clear: both;
-                    }
-
-                    .rating {
-                        width: 90px;
-                        unicode-bidi: bidi-override;
-                        direction: rtl;
-                        text-align: center;
-                        position: relative;
-                    }
-
-                    .rating > label {
-                        float: right;
-                        display: inline;
-                        padding: 0;
-                        margin: 0;
-                        position: relative;
-                        width: 1.1em;
-                        cursor: pointer;
-                        color: #000;
-                    }
-
-                    .rating > label:hover,
-                    .rating > label:hover ~ label,
-                    .rating > input.radio-btn:checked ~ label {
-                        color: transparent;
-                    }
-
-                    .rating > label:hover:before,
-                    .rating > label:hover ~ label:before,
-                    .rating > input.radio-btn:checked ~ label:before,
-                    .rating > input.radio-btn:checked ~ label:before {
-                        content: "\2605";
-                        position: absolute;
-                        left: 0;
-                        color: #FFD700;
-                    }
-                </style>
-
-                <div class="txt-center">
+                <div class="row">
+                    <div style="margin-left:0.8%"></div>
+                    <label>Titolo <sup>*</sup></label>
+                </div>
+                <div class="row">
+                    <div style="margin-left:0.8%"></div>
+                <textarea name="review_title" id="review_title" class="form-control @error('review_title') is-invalid @enderror" cols="30" rows="10" placeholder="Scrivi qui il titolo della Recensione" style="resize: none; height: 40px; width: 500px"></textarea>
+                @error('review_title')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+                    <div style="margin-left:1.5%;"></div>
+                    <div class="txt-center">
 
                         <div class="rating">
                             <input id="stars5" name="stars" type="radio" value="5" class="radio-btn hide" />
-                            <label for="stars5" ><i class="fa fa-star"></i></label>
+                            <label for="stars5" ><i class="fa fa-star" style="font-size: 20px; margin-top: 10px;"></i></label>
                             <input id="star4" name="stars" type="radio" value="4" class="radio-btn hide" />
-                            <label for="star4" ><i class="fa fa-star"></i></label>
+                            <label for="star4" ><i class="fa fa-star" style="font-size: 20px; margin-right:5px; margin-top: 10px;"></i></label>
                             <input id="star3" name="stars" type="radio" value="3" class="radio-btn hide" />
-                            <label for="star3" ><i class="fa fa-star"></i></label>
+                            <label for="star3" ><i class="fa fa-star" style="font-size: 20px; margin-right:10px; margin-top: 10px;"></i></label>
                             <input id="star2" name="stars" type="radio" value="2" class="radio-btn hide" />
-                            <label for="star2" ><i class="fa fa-star"></i></label>
-                            <input id="star1" name="stars" type="radio" value="1" class="radio-btn hide" />
-                            <label for="star1" ><i class="fa fa-star"></i></label>
+                            <label for="star2" ><i class="fa fa-star" style="font-size: 20px; margin-right:15px; margin-top: 10px;"></i></label>
+                            <input id="star1" name="stars" type="radio" value="1" class="radio-btn hide"/>
+                            <label for="star1" ><i class="fa fa-star" style="font-size: 20px; margin-right:20px; margin-top: 10px;"></i></label>
                             <div class="clear"></div>
                         </div>
 
+                    </div>
                 </div>
+                <div class="mt-3"></div>
 
-
-
-
-                <label>Titolo <sup>*</sup></label>
-                <textarea name="review_title" id="review_title" class="form-control @error('review_title') is-invalid @enderror" cols="30" rows="10" placeholder="Scrivi qui il titolo della Recensione" style="resize: none; height: 70px;"></textarea>
-                @error('title')
+                <label>testo <sup>*</sup> (almeno 10 caratteri)</label>
+                <textarea name="review_text" id="review_text" class="form-control @error('review_text') is-invalid @enderror" cols="30" rows="10" placeholder="Scrivi qui la tua recensione" style="resize: none; height: 200px; width: 800px "></textarea>
+                @error('review_text')
                 <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
 
-                <label>testo</label>
-                <textarea name="review_text" id="review_text" class="form-control @error('review_text') is-invalid @enderror" cols="30" rows="10" placeholder="Scrivi qui la tua recensione" style="resize: none; height: 500px;"></textarea>
-                @error('article_text')
-                <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-
-
-
+                <div class="mt-3"></div>
 
                 @if(\Illuminate\Support\Facades\Auth::user() != null)
                     <div style="margin-left:11%"></div>

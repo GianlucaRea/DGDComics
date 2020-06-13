@@ -133,7 +133,7 @@ Route::get('review-deletelocal/{id}','ReviewController@destroylocal')->name('rev
 Route::get('blog', 'ArticleController@getArticles');
 Route::get('/blogDetail/{id}', 'ArticleController@getArticleById')->name('blogDetail');
 Route::post('submitComment/{article}', 'CommentController@addToArticle')->name('submitComment');
-Route::post('submitAnswer/{comment}', 'CommentController@addToComment')->name('submitAnswer');
+Route::post('submitphpAnswer/{comment}', 'CommentController@addToComment')->name('submitAnswer');
 Route::get('/writeArticle', 'AdminController@checkForWriteArticle')->name('writeArticle');
 Route::post('submitArticle/{user_id}', 'ArticleController@addArticle')->name('submitArticle');
 Route::get('comment-deletelocal/{id}','CommentController@destroyComment')->name('comment-delete-local');
