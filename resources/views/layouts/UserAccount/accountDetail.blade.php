@@ -39,9 +39,6 @@
                                         <a href="{{route('venditoremenagementproducts')}}" class="{{ (Route::currentRouteName() == 'venditoremenagementproducts') ? 'active' : '' }}"><i class="fa fa-bookmark"></i> gestisci fumetti</a>
                                         <a href="{{route('venditoreaddproducts')}}" class="{{ (Route::currentRouteName() == 'venditoreaddproducts') ? 'active' : '' }}"><i class="fa fa-book"></i> vendi un fumetto</a>
                                     @endif
-
-
-
                                 </div>
                             </div>
                             <!-- My Account Tab Menu End -->
@@ -107,12 +104,12 @@
                                                                             <a href="{{ route($notification->notification)}}" class="btn btn-sqr">Dettagli</a>
                                                                         </td>
                                                                     @else
-                                                                    <td>
-                                                                        Letto
-                                                                    </td>
-                                                                    <td>
-                                                                        <a href="{{ route($notification->notification, ['id' => $notification->id])}}" class="btn btn-sqr">Dettagli</a>
-                                                                    </td>
+                                                                        <td>
+                                                                            Letto
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="{{ route($notification->notification, ['id' => $notification->id])}}" class="btn btn-sqr">Dettagli</a>
+                                                                        </td>
                                                                     @endif
                                                                 @else
                                                                     <td>
@@ -177,7 +174,7 @@
 
                                     <div class="tab-pane fade show {{ (Route::currentRouteName() == 'userwishlist') ? 'active' : '' }}" id="wishlist" role="tabpanel">
 
-                                    @if($list->count()<1)
+                                        @if($list->count()<1)
                                             <div class="myaccount-content">
                                                 <h5>Non sono presenti fumetti nella lista dei desideri</h5>
                                             </div>
@@ -308,74 +305,75 @@
                                                     @endforeach
                                                     </tbody>
 
-                                              </table>
-                                          </div>
-                                      @endif
-                                  </div>
-                                  <!-- Single Tab Content End -->
+                                                </table>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <!-- Single Tab Content End -->
 
-                                  <!-- Single Tab Content Start -->
-                                  <div class="tab-pane fade show {{ (Route::currentRouteName() == 'paymentmethods') ? 'active' : '' }}" id="payment-method" role="tabpanel">
+                                    <!-- Single Tab Content Start -->
+                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'paymentmethods') ? 'active' : '' }}" id="payment-method" role="tabpanel">
 
-                                      @php($oggi = \App\Http\Controllers\PaymentMethodController::getTime())
-                                      {{$paymentMethods->links()}}
-                                      @if($paymentMethods->count() < 1)
-                                          <div class="myaccount-content">
-                                              <h5>Non sono ancora stati inseriti metodi di pagamento dall'utente</h5>
-                                          </div>
-                                      @endif
+                                        @php($oggi = \App\Http\Controllers\PaymentMethodController::getTime())
+                                        {{$paymentMethods->links()}}
+                                        @if($paymentMethods->count() < 1)
+                                            <div class="myaccount-content">
+                                                <h5>Non sono ancora stati inseriti metodi di pagamento dall'utente</h5>
+                                            </div>
+                                        @else
 
-                                      <div class="myaccount-content">
-                                      @foreach($paymentMethods as $paymentMethod)
-                                          @if($paymentMethod->favourite != 0)
-                                              @php($dataScadenza = $paymentMethod->data_scadenza) <!--Raga so che andava bene anche con php ed end php, ma a caso ha cominciato a dare errore ovunque, vallo a capi-->
-                                                  @php($scadenza = strtotime($dataScadenza))
-                                                  <h5>I TUOI METODI DI PAGAMENTO</h5>
-                                                  <address>
-                                                      <h6>PREDEFINITO</h6>
-                                                      <p><strong>{{ $paymentMethod->payment_type }}</strong></p>
-                                                        <p><strong>Intestatario: </strong>{{ $paymentMethod->intestatario }}</p>
-                                                        @php($last_four_digits = substr($paymentMethod->cardNumber, 12, 16))
-                                                        <p><strong>Numero carta: </strong>****-****-****-{{ $last_four_digits }}</p>
-                                                        <p><strong>Data scadenza: </strong>{{ substr($paymentMethod->data_scadenza, 0,7) }}</p>
-                                                        @if($scadenza - $oggi < 0)
-                                                            <h5>LA TUA CARTA È SCADUTA</h5>
-                                                        @else
-                                                            @if($scadenza - $oggi < 2592000)
-                                                                <h5>LA TUA CARTA STA PER SCADERE</h5>
+                                            <div class="myaccount-content">
+                                            @foreach($paymentMethods as $paymentMethod)
+                                                @if($paymentMethod->favourite != 0)
+                                                    @php($dataScadenza = $paymentMethod->data_scadenza) <!--Raga so che andava bene anche con php ed end php, ma a caso ha cominciato a dare errore ovunque, vallo a capi-->
+                                                        @php($scadenza = strtotime($dataScadenza))
+                                                        <h5>I TUOI METODI DI PAGAMENTO</h5>
+                                                        <address>
+                                                            <h6>PREDEFINITO</h6>
+                                                            <p><strong>{{ $paymentMethod->payment_type }}</strong></p>
+                                                            <p><strong>Intestatario: </strong>{{ $paymentMethod->intestatario }}</p>
+                                                            @php($last_four_digits = substr($paymentMethod->cardNumber, 12, 16))
+                                                            <p><strong>Numero carta: </strong>****-****-****-{{ $last_four_digits }}</p>
+                                                            <p><strong>Data scadenza: </strong>{{ substr($paymentMethod->data_scadenza, 0,7) }}</p>
+                                                            @if($scadenza - $oggi < 0)
+                                                                <h5>LA TUA CARTA È SCADUTA</h5>
+                                                            @else
+                                                                @if($scadenza - $oggi < 2592000)
+                                                                    <h5>LA TUA CARTA STA PER SCADERE</h5>
+                                                                @endif
                                                             @endif
-                                                        @endif
-                                                    </address>
-                                                    <a href="{{ Route('remove.method', ['method' => $paymentMethod->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
-                                                        Rimuovi metodo di pagamento</a>
+                                                        </address>
+                                                        <a href="{{ Route('remove.method', ['method' => $paymentMethod->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
+                                                            Rimuovi metodo di pagamento</a>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+
+                                            @foreach($paymentMethods as $paymentMethod)
+                                                @if($paymentMethod->favourite != 1)
+                                                    @php($dataScadenza = $paymentMethod->data_scadenza)
+                                                    @php($scadenza = strtotime($dataScadenza))
+                                                    <div class="myaccount-content">
+                                                        <address>
+                                                            <p><strong>{{ $paymentMethod->payment_type }}</strong></p>
+                                                            <p><strong>Intestatario: </strong>{{ $paymentMethod->intestatario }}</p>
+                                                            @php($last_four_digits = substr($paymentMethod->cardNumber, 12, 16))
+                                                            <p><strong>Numero carta: </strong>****-****-****-{{ $last_four_digits }}</p>
+                                                            <p><strong>Data scadenza: </strong>{{ substr($paymentMethod->data_scadenza, 0,7) }}</p>
+                                                            @if($scadenza - $oggi < 0)
+                                                                <h5>LA TUA CARTA È SCADUTA</h5>
+                                                            @else
+                                                                @if($scadenza - $oggi < 2592000)
+                                                                    <h5>LA TUA CARTA STA PER SCADERE</h5>
+                                                                @endif
+                                                            @endif
+                                                        </address>
+                                                        <a href="{{ Route('remove.method', ['method' => $paymentMethod->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
+                                                            Rimuovi metodo di pagamento</a>
+                                                    </div>
                                                 @endif
                                             @endforeach
-                                        </div>
-
-                                        @foreach($paymentMethods as $paymentMethod)
-                                            @if($paymentMethod->favourite != 1)
-                                                @php($dataScadenza = $paymentMethod->data_scadenza)
-                                                @php($scadenza = strtotime($dataScadenza))
-                                                <div class="myaccount-content">
-                                                    <address>
-                                                        <p><strong>{{ $paymentMethod->payment_type }}</strong></p>
-                                                        <p><strong>Intestatario: </strong>{{ $paymentMethod->intestatario }}</p>
-                                                        @php($last_four_digits = substr($paymentMethod->cardNumber, 12, 16))
-                                                        <p><strong>Numero carta: </strong>****-****-****-{{ $last_four_digits }}</p>
-                                                        <p><strong>Data scadenza: </strong>{{ substr($paymentMethod->data_scadenza, 0,7) }}</p>
-                                                        @if($scadenza - $oggi < 0)
-                                                            <h5>LA TUA CARTA È SCADUTA</h5>
-                                                        @else
-                                                            @if($scadenza - $oggi < 2592000)
-                                                                <h5>LA TUA CARTA STA PER SCADERE</h5>
-                                                            @endif
-                                                        @endif
-                                                    </address>
-                                                    <a href="{{ Route('remove.method', ['method' => $paymentMethod->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
-                                                        Rimuovi metodo di pagamento</a>
-                                                </div>
-                                            @endif
-                                        @endforeach
+                                        @endif
                                         <div class="row mt-20">
                                             <div class="col-md-6"></div>
                                             <div class="col-md-6" style="text-align: right;">
@@ -393,37 +391,38 @@
                                             <div class="myaccount-content">
                                                 <h5>Non sono ancora stati inseriti indirizzi di spedizione dall'utente</h5>
                                             </div>
-                                        @endif
-                                        {{$shippingAddresses->links()}}
-                                        <div class="myaccount-content">
-                                            <h5>I TUOI INDIRIZZI</h5>
+                                        @else
+                                            {{$shippingAddresses->links()}}
+                                            <div class="myaccount-content">
+                                                @foreach($shippingAddresses as $shippingAddress)
+                                                    @if($shippingAddress->favourite != 0)
+                                                        <h5>I TUOI INDIRIZZI</h5>
+                                                        <address>
+                                                            <h6>PREDEFINITO</h6>
+                                                            <p><strong>{{ $shippingAddress->città }} </strong> <strong>{{ $shippingAddress->post_code }}</strong></p>
+                                                            <p><strong>{{ $shippingAddress->via }}</strong> <strong>{{ $shippingAddress->civico }}</strong></p>
+                                                            <p><strong>{{ $shippingAddress->other_info }} </strong></p>
+                                                        </address>
+                                                        <a href="{{ Route('remove.address', ['address' => $shippingAddress->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
+                                                            Rimuovi indirizzo di spedizione</a>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+
                                             @foreach($shippingAddresses as $shippingAddress)
-                                                @if($shippingAddress->favourite != 0)
-                                                    <address>
-                                                        <h6>PREDEFINITO</h6>
-                                                        <p><strong>{{ $shippingAddress->città }} </strong> <strong>{{ $shippingAddress->post_code }}</strong></p>
-                                                        <p><strong>{{ $shippingAddress->via }}</strong> <strong>{{ $shippingAddress->civico }}</strong></p>
-                                                        <p><strong>{{ $shippingAddress->other_info }} </strong></p>
-                                                    </address>
-                                                    <a href="{{ Route('remove.address', ['address' => $shippingAddress->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
-                                                        Rimuovi indirizzo di spedizione</a>
+                                                @if($shippingAddress->favourite != 1)
+                                                    <div class="myaccount-content">
+                                                        <address>
+                                                            <p><strong>{{ $shippingAddress->città }} </strong> <strong>{{ $shippingAddress->post_code }}</strong></p>
+                                                            <p><strong>{{ $shippingAddress->via }}</strong> <strong>{{ $shippingAddress->civico }}</strong></p>
+                                                            <p><strong>{{ $shippingAddress->other_info }} </strong></p>
+                                                        </address>
+                                                        <a href="{{ Route('remove.address', ['address' => $shippingAddress->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
+                                                            Rimuovi indirizzo di spedizione</a>
+                                                    </div>
                                                 @endif
                                             @endforeach
-                                        </div>
-
-                                        @foreach($shippingAddresses as $shippingAddress)
-                                            @if($shippingAddress->favourite != 1)
-                                                <div class="myaccount-content">
-                                                    <address>
-                                                        <p><strong>{{ $shippingAddress->città }} </strong> <strong>{{ $shippingAddress->post_code }}</strong></p>
-                                                        <p><strong>{{ $shippingAddress->via }}</strong> <strong>{{ $shippingAddress->civico }}</strong></p>
-                                                        <p><strong>{{ $shippingAddress->other_info }} </strong></p>
-                                                    </address>
-                                                    <a href="{{ Route('remove.address', ['address' => $shippingAddress->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
-                                                        Rimuovi indirizzo di spedizione</a>
-                                                </div>
-                                            @endif
-                                        @endforeach
+                                        @endif
 
                                         <div class="row mt-20">
                                             <div class="col-md-6"></div>
@@ -525,7 +524,7 @@
                                         </div>
                                     </div>
                                     <!-- Single Tab Content End -->
-                                    @if($isVendor)
+                                @if($isVendor)
                                     <!-- Single Tab Content Start -->
                                         <div class="tab-pane fade show {{ (Route::currentRouteName() == 'venditoreinfo') ? 'active' : '' }}" id="venditore-info" role="tabpanel">
                                             @if($orders_of_vendor->count() < 1)
@@ -572,41 +571,39 @@
                                                     <h5>Oh, sembra che ancora non hai fumetti in vendita</h5>
                                                 </div>
                                             @else
-                                                    <div class="table-cart table-responsive mb-15">
-                                                        <table>
-                                                            <thead>
+                                                <div class="table-cart table-responsive mb-15">
+                                                    <table>
+                                                        <thead>
+                                                        <tr>
+                                                            <th>immagine</th>
+                                                            <th>nome</th>
+                                                            <th>copie vendute</th>
+                                                            <th>recensioni</th>
+                                                            <th>prezzo</th>
+                                                            <th>Azione</th>
+                                                        </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                        {{$comics_of_vendor->links()}}
+                                                        @foreach($comics_of_vendor as $comic_of_vendor)
                                                             <tr>
-                                                                <th>immagine</th>
-                                                                <th>nome</th>
-                                                                <th>copie vendute</th>
-                                                                <th>recensioni</th>
-                                                                <th>prezzo</th>
-                                                                <th>Azione</th>
+                                                                @php($cover_of_comic_of_vendor = \App\Http\Controllers\ImageController::getCover($comic_of_vendor->id))
+                                                                <td class="product-thumbnail"><a href="{{ url('/comic_detail/'.$comic_of_vendor->id) }}"><img src="{{asset('img/comicsImages/' . $cover_of_comic_of_vendor->image_name) }}" alt="man" /></a></td>
+                                                                <td>{{ $comic_of_vendor->comic_name }}</td>
+                                                                @php($soldQuantity = \App\Http\Controllers\ComicBoughtController::getSoldQuantity($comic_of_vendor->id))
+                                                                <td>{{ $soldQuantity }}</td>
+                                                                @php($reviewQuantity = \App\Http\Controllers\ReviewController::getReviewQuantity($comic_of_vendor->id))
+                                                                <td>{{ $reviewQuantity }}</td>
+                                                                <td>{{ $comic_of_vendor->price }}</td>
+                                                                <td>
+                                                                    <a class="btn btn-danger" href="#"><i class="fa fa-pencil"></i></a>
+                                                                    <a class="btn btn-danger" onclick="return deleteComic();"  href="{{route('comic-delete-vendor', $comic_of_vendor->id)}}"><i class="fa fa-trash"></i></a>
+                                                                </td>
                                                             </tr>
-                                                            </thead>
-
-                                                            <tbody>
-                                                            {{$comics_of_vendor->links()}}
-                                                            @foreach($comics_of_vendor as $comic_of_vendor)
-                                                                <tr>
-                                                                    @php($cover_of_comic_of_vendor = \App\Http\Controllers\ImageController::getCover($comic_of_vendor->id))
-                                                                    <td class="product-thumbnail"><a href="{{ url('/comic_detail/'.$comic_of_vendor->id) }}"><img src="{{asset('img/comicsImages/' . $cover_of_comic_of_vendor->image_name) }}" alt="man" /></a></td>
-                                                                    <td>{{ $comic_of_vendor->comic_name }}</td>
-                                                                    @php($soldQuantity = \App\Http\Controllers\ComicBoughtController::getSoldQuantity($comic_of_vendor->id))
-                                                                    <td>{{ $soldQuantity }}</td>
-                                                                    @php($reviewQuantity = \App\Http\Controllers\ReviewController::getReviewQuantity($comic_of_vendor->id))
-                                                                    <td>{{ $reviewQuantity }}</td>
-                                                                    <td>{{ $comic_of_vendor->price }}</td>
-                                                                    <td>
-                                                                        <a class="btn btn-danger" href="#"><i class="fa fa-pencil"></i></a>
-                                                                        <a class="btn btn-danger" onclick="return deleteComic();"  href="{{route('comic-delete-vendor', $comic_of_vendor->id)}}"><i class="fa fa-trash"></i></a>
-                                                                    </td>
-                                                                </tr>
-                                                            @endforeach
-                                                            </tbody>
-                                                        </table>
-
-                                                    </div>
+                                                        @endforeach
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             @endif
                                         </div>
@@ -618,7 +615,7 @@
                                                 <legend>
                                                     Aggiungi un fumetto
                                                 </legend>
-                                                <div class="offset-lg-2 col-lg-8 col-md-12 col-12">
+                                                <div class="col-lg-12 col-md-12 col-12">
                                                     <div class="billing-fields">
                                                         <form method="POST" action="">
                                                             @csrf
@@ -640,6 +637,24 @@
 
                                                             <div class="mt-2"></div>
 
+
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="single-input-item">
+                                                                        <label for="description" class="required">Descrizione<span>*</span></label>
+                                                                        <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" placeholder="Descrizione" style="resize: none; height: 100px; background-color: white"></textarea>
+                                                                        @error('description')
+                                                                        <span class="invalid-feedback" role="alert">
+                                                                             <strong>
+                                                                                {{ $message }}
+                                                                            </strong>
+                                                                        </span>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
                                                             <div class="row">
                                                                 <div class="col-lg-6">
                                                                     <div class="single-input-item">
@@ -659,7 +674,7 @@
                                                                     <div class="single-input-item">
                                                                         <label for="publisher" class="required">Casa Editrice<span>*</span></label>
                                                                         <input id="publisher" type="text" class="form-control @error('publisher') is-invalid @enderror" name="publisher" placeholder="casa editice">
-                                                                        @error('casa editice')
+                                                                        @error('publisher')
                                                                         <span class="invalid-feedback" role="alert">
                                                                                 <strong>
                                                                                     {{ $message }}
@@ -670,192 +685,254 @@
                                                                 </div>
                                                             </div>
 
-                                                        <div class="mt-2"></div>
+                                                            <div class="mt-2"></div>
 
-                                                        <div class="row">
-                                                            <div class="col-lg-6">
-                                                                <div class="single-input-item">
-                                                                    <label for="author_name" class="required">Autore<span>*</span></label>
-                                                                    <input id="author_name" type="text" class="form-control @error('author_name') is-invalid @enderror" name="author_name" placeholder="Nome e Cognome">
-                                                                    @error('name_genre')
-                                                                    <span class="invalid-feedback" role="alert">
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="single-input-item">
+                                                                        <label for="author_name" class="required">Autore<span>*</span></label>
+                                                                        <input id="author_name" type="text" class="form-control @error('author_name') is-invalid @enderror" name="author_name" placeholder="Nome e Cognome">
+                                                                        @error('author_name')
+                                                                        <span class="invalid-feedback" role="alert">
                                                                                 <strong>
                                                                                     {{ $message }}
                                                                                 </strong>
                                                                             </span>
-                                                                    @enderror
+                                                                        @enderror
+                                                                    </div>
                                                                 </div>
-                                                            </div>
 
-                                                            <div class="col-lg-6">
-                                                                <div class="single-input-item">
-                                                                    <label for="author_name" class="required">Lingua<span>*</span></label>
-                                                                    <input id="language" type="text" class="form-control @error('language') is-invalid @enderror" name="language" placeholder="Es: Italiano, giapponese...">
-                                                                    @error('language')
-                                                                    <span class="invalid-feedback" role="alert">
+                                                                <div class="col-lg-6">
+                                                                    <div class="single-input-item">
+                                                                        <label for="language" class="required">Lingua<span>*</span></label>
+                                                                        <input id="language" type="text" class="form-control @error('language') is-invalid @enderror" name="language" placeholder="Es: Italiano, giapponese...">
+                                                                        @error('language')
+                                                                        <span class="invalid-feedback" role="alert">
                                                                                 <strong>
                                                                                     {{ $message }}
                                                                                 </strong>
                                                                             </span>
-                                                                    @enderror
+                                                                        @enderror
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
 
-                                                        <div class="mt-2"></div>
+                                                            <div class="mt-2"></div>
 
-                                                        <div class="row">
-                                                            <div class="col-lg-6">
-                                                                <div class="single-input-item">
-                                                                    <label for="type" class="required">Tipo<span>*</span></label>
-                                                                    <br/>
-                                                                    <select name="type" id="payment_type" class="form-control @error('type') is-invalid @enderror">
-                                                                        <option value="manga"> shonen </option>
-                                                                        <option value="fumetto Italiano"> seinen </option>
-                                                                        <option value="fumetto Americano"> shojo </option>
-                                                                        <option value="manga"> josei </option>
-                                                                        <option value="fumetto Italiano"> dc </option>
-                                                                        <option value="fumetto Americano"> marvel </option>
-                                                                        <option value="manga"> italiano </option>
-                                                                        <option value="fumetto Italiano"> other </option>
-                                                                    </select>
-                                                                    @error('type')
-                                                                    <span class="invalid-feedback" role="alert">
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="single-input-item">
+                                                                        <label for="type" class="required">Tipo<span>*</span></label>
+                                                                        <br/>
+                                                                        <select name="type" id="type" class="form-control @error('type') is-invalid @enderror">
+                                                                            <option value="shonen"> shonen </option>
+                                                                            <option value="seinen"> seinen </option>
+                                                                            <option value="shojo"> shojo </option>
+                                                                            <option value="josei"> josei </option>
+                                                                            <option value="dc"> dc </option>
+                                                                            <option value="marvel"> marvel </option>
+                                                                            <option value="italiano"> italiano </option>
+                                                                            <option value="other"> other </option>
+                                                                        </select>
+                                                                        @error('type')
+                                                                        <span class="invalid-feedback" role="alert">
                                                                                 <strong>
                                                                                     {{ $message }}
                                                                                 </strong>
                                                                         </span>
-                                                                    @enderror
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="single-input-item"></div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-lg-6">
-                                                                <div class="single-input-item">
+                                                            <div class="mt-2"></div>
+
+                                                            <label for="genre_name" class="required">Generi<span>*</span></label>
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="single-input-item">
+                                                                        <input type="checkbox" id="Avventura" name="Avventura" value="Avventura">  Avventura
+                                                                        <div class="mt-1"></div>
+                                                                        <input type="checkbox" id="check[]" name="check[]" value="Fantascienza">  Fantascienza
+                                                                        <div class="mt-1"></div>
+                                                                        <input type="checkbox" id="check[]" name="check[]" value="Fantasy">  Fantasy
+                                                                        <div class="mt-1"></div>
+                                                                        <input type="checkbox" id="check[]" name="check[]" value="Azione">  Azione
+                                                                        <div class="mt-1"></div>
+                                                                        <input type="checkbox" id="check[]" name="check[]" value="Umoristico">  Umoristico
+                                                                        <div class="mt-1"></div>
+                                                                        <input type="checkbox" id="check[]" name="check[]" value="Western">  Western
+                                                                        <div class="mt-1"></div>
+                                                                        <input type="checkbox" id="check[]" name="check[]" value="Alternativo">  Alternativo
+                                                                        <div class="mt-1"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="single-input-item">
+                                                                        <input type="checkbox" id="check[]" name="check[]" value="Supereroi">  Supereroi
+                                                                        <div class="mt-1"></div>
+                                                                        <input type="checkbox" id="check[]" name="check[]" value="Horror">  Horror
+                                                                        <div class="mt-1"></div>
+                                                                        <input type="checkbox" id="check[]" name="check[]" value="Thriller">  Thriller
+                                                                        <div class="mt-1"></div>
+                                                                        <input type="checkbox" id="check[]" name="check[]" value="Giallo">  Giallo
+                                                                        <div class="mt-1"></div>
+                                                                        <input type="checkbox" id="check[]" name="check[]" value="Disney">  Disney
+                                                                        <div class="mt-1"></div>
+                                                                        <input type="checkbox" id="check[]" name="check[]" value="Post Apocalittico">  Post Apocalittico
+                                                                        <div class="mt-1"></div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+
+                                                            <div class="mt-2"></div>
+
+                                                            <div class="row">
+                                                                <div class="col-lg-4">
+                                                                    <label for="price"> Prezzo (no virgola)<span>*</span></label>
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <label for="price"> Quantità<span>*</span></label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-lg-4">
+                                                                    <div class="single-input-item">
+                                                                        <input id="price" type="text" class="form-control @error('price') is-invalid @enderror" name="price" placeholder="4.99">
+                                                                        @error('price')
+                                                                        <span class="invalid-feedback" role="alert">
+                                                                                <strong>
+                                                                                    {{ $message }}
+                                                                                </strong>
+                                                                            </span>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-4">
+                                                                    <div class="single-input-item">
+                                                                        <input id="quantity" type="number" class="form-control @error('quantity') is-invalid @enderror" name="quantity" placeholder="1" min="1">
+                                                                        @error('quantity')
+                                                                        <span class="invalid-feedback" role="alert">
+                                                                                <strong>
+                                                                                    {{ $message }}
+                                                                                </strong>
+                                                                            </span>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="mt-2"></div>
+
+                                                            <div class="row">
+                                                                <div class="col-lg-9">
+                                                                    <label for="dimenction"> Dimensioni</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-lg-3">
+                                                                    <div class="single-input-item">
+                                                                        <input id="height" type="number" class="form-control @error('height') is-invalid @enderror" name="height" placeholder="Altezza" min="1">
+                                                                        @error('height')
+                                                                        <span class="invalid-feedback" role="alert">
+                                                                                <strong>
+                                                                                    {{ $message }}
+                                                                                </strong>
+                                                                            </span>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                                x
+                                                                <div class="col-lg-4">
+                                                                    <div class="single-input-item">
+                                                                        <input id="length" type="number" class="form-control @error('length') is-invalid @enderror" name="length" placeholder="Lunghezza" min="1">
+                                                                        @error('length')
+                                                                        <span class="invalid-feedback" role="alert">
+                                                                                <strong>
+                                                                                    {{ $message }}
+                                                                                </strong>
+                                                                            </span>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                                x
+                                                                <div class="col-lg-4">
+                                                                    <div class="single-input-item">
+                                                                        <input id="width" type="number" class="form-control @error('width') is-invalid @enderror" name="width" placeholder="Profondità" min="1">
+                                                                        @error('width')
+                                                                        <span class="invalid-feedback" role="alert">
+                                                                                <strong>
+                                                                                    {{ $message }}
+                                                                                </strong>
+                                                                            </span>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                                cm
+                                                                <div class="mt-2"></div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="single-input-item">
+                                                                        <label for="file" class="required">Immagine di copertina:<span>*</span></label>
+                                                                        <br/>
+                                                                        <input type="file" id="cover" name="cover" class="form-controll @error('cover') is-invalid @enderror">
+                                                                        @error('cover')
+                                                                        <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </form>
                                                         <div class="mt-2"></div>
-
-                                                        <label for="genre_name" class="required">Generi<span>*</span></label>
                                                         <div class="row">
-                                                            <div class="col-lg-6">
-                                                                <div class="single-input-item">
-                                                                    <input type="checkbox" id="checkAvventura" name="checkAvventura" value="Avventura">
-                                                                    <label for="checkAvventura"> Avventura</label><br>
-                                                                    <input type="checkbox" id="checkFantascienza" name="checkFantascienza" value="Fantascienza">
-                                                                    <label for="checkFantascienza"> Fantascienza</label><br>
-                                                                    <input type="checkbox" id="checkFantasy" name="checkFantasy" value="Fantasy">
-                                                                    <label for="checkFantasy"> Fantasy</label><br>
-                                                                    <input type="checkbox" id="checkAzione" name="checkAzione" value="Azione">
-                                                                    <label for="checkAzione"> Azione</label><br>
-                                                                    <input type="checkbox" id="checkUmoristico" name="checkUmoristico" value="Umoristico">
-                                                                    <label for="checkUmoristico"> Umoristico</label><br>
-                                                                    <input type="checkbox" id="checkAvventura" name="checkAvventura" value="Avventura">
-                                                                    <label for="checkAvventura"> Avventura</label><br>
-                                                                    <input type="checkbox" id="checkWestern" name="checkWestern" value="Western">
-                                                                    <label for="checkWestern"> Western</label><br>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6">
-                                                                <div class="single-input-item">
-                                                                    <input type="checkbox" id="checkAlternativo" name="checkAlternativo" value="Alternativo">
-                                                                    <label for="checkAlternativo"> Alternativo</label><br>
-                                                                    <input type="checkbox" id="checkSupereroi" name="checkSupereroi" value="Supereroi">
-                                                                    <label for="checkSupereroi"> Supereroi</label><br>
-                                                                    <input type="checkbox" id="checkHorror" name="checkHorror" value="Horror">
-                                                                    <label for="checkHorror"> Horror</label><br>
-                                                                    <input type="checkbox" id="checkThriller" name="checkThriller" value="Thriller">
-                                                                    <label for="checkThriller"> Thriller</label><br>
-                                                                    <input type="checkbox" id="checkGiallo" name="checkGiallo" value="Giallo">
-                                                                    <label for="checkGiallo"> Giallo</label><br>
-                                                                    <input type="checkbox" id="checkDisney" name="checkDisney" value="Disney">
-                                                                    <label for="checkDisney"> Disney</label><br>
-                                                                    <input type="checkbox" id="checkPostApocalittico" name="checkPostApocalittico" value="Post Apocalittico">
-                                                                    <label for="checkPostApocalittico"> Post Apocalittico</label>
-                                                                </div>
+                                                            <div class="col-lg-12">
+                                                                <label for="file" class="required">Altre immagini:</label>
                                                             </div>
                                                         </div>
+                                                        <form  method="POST" id="postComicPart2" class="form-horizontal" enctype="multipart/form-data" action="#">
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <input type="file" id="image2" name="image2">
+                                                                    <div class="mt-2"></div>
+                                                                    <input type="file" id="image3" name="image3">
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <input type="file" id="image4" name="image4">
+                                                                    <div class="mt-2"></div>
+                                                                    <input type="file" id="image5" name="image5">
+                                                                </div>
+                                                            </div>
+                                                        </form>
 
-                                                        <div class="mt-2"></div>
-
-                                                        <div class="row">
-                                                            <div class="col-lg-3">
-                                                                <label for="price"> Prezzo</label>
-                                                            </div>
-                                                            <div class="col-lg-9">
-                                                                <label for="dimenction"> Dimensioni</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-3">
-                                                                <div class="single-input-item">
-                                                                    <input id="price" type="text" class="form-control @error('price') is-invalid @enderror" name="price" placeholder="4,99">
-                                                                    @error('price')
-                                                                    <span class="invalid-feedback" role="alert">
-                                                                                <strong>
-                                                                                    {{ $message }}
-                                                                                </strong>
-                                                                            </span>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="single-input-item">
-                                                                    <input id="height" type="text" class="form-control @error('height') is-invalid @enderror" name="height" placeholder="Altezza">
-                                                                    @error('height')
-                                                                    <span class="invalid-feedback" role="alert">
-                                                                                <strong>
-                                                                                    {{ $message }}
-                                                                                </strong>
-                                                                            </span>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="single-input-item">
-                                                                    <input id="width" type="text" class="form-control @error('width') is-invalid @enderror" name="width" placeholder="Profondità">
-                                                                    @error('width')
-                                                                    <span class="invalid-feedback" role="alert">
-                                                                                <strong>
-                                                                                    {{ $message }}
-                                                                                </strong>
-                                                                            </span>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="single-input-item">
-                                                                    <input id="length" type="text" class="form-control @error('length') is-invalid @enderror" name="length" placeholder="Lunghezza">
-                                                                    @error('length')
-                                                                    <span class="invalid-feedback" role="alert">
-                                                                                <strong>
-                                                                                    {{ $message }}
-                                                                                </strong>
-                                                                            </span>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-                                                        </div>
                                                         <div class="mt-3"></div>
 
                                                         <div class="single-input-item">
-                                                            <button type="submit" class="btn btn-sqr">PUBBLICA ORA!</button>
+                                                            <input type="button" class="btn btn-sqr" onclick="submitForms()" value="PUBBLICA ORA!"/>
                                                         </div>
-                                                        </form>
                                                     </div>
                                                 </div>
                                             </fieldset>
                                         </div>
-                                    </div>
                                         <!-- Single Tab Content End -->
                                     @endif
                                 </div>
-                            </div> <!-- My Account Tab Content End -->
-                        </div>
-                    </div> <!-- My Account Page End -->
-                </div>
+                            </div>
+                        </div> <!-- My Account Tab Content End -->
+                    </div>
+                </div> <!-- My Account Page End -->
             </div>
         </div>
     </div>
+</div>
+<!-- prof se vedi questa porcheria la verità è che prima del 15/06 era andato tutto bene, poi c'è stato un merge con git tra due membri e il codice si è "rotto"... dopo ore nel cercare di risolvere, questo è stato l'unico modo-->
 <script>
     function deleteComic() {
         if(!confirm("Sei sicuro di voler eliminare questo fumetto?"))

@@ -1,6 +1,11 @@
 <?php
 
+use App\Order;
+use App\PaymentMethod;
+use App\ShippingAddress;
+use App\Wishlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Comic;
 use App\Genre;
@@ -60,8 +65,23 @@ Route::post('submitVendorAddAddress', function(Request $request){
     \App\Http\Controllers\UserController::addPartitaIva($request);
     \App\Http\Controllers\GroupController::vendorUpdate();
     $user = \Illuminate\Support\Facades\Auth::user();
-    return view('/accountArea')
-        ->with(compact('user'));
+    $notifications = Notification::where('user_id', '=', $user->id)->paginate(6);
+    $orders = Order::where('user_id', '=', $user->id)->paginate(6);
+    $list = Wishlist::where('user_id', '=', $user->id)->paginate(6);
+    $paymentMethods = PaymentMethod::where('user_id','=',$user->id)->paginate(6);
+    $shippingAddresses =  ShippingAddress ::where('user_id','=',$user->id)->paginate(6);
+    $orders_of_vendor = DB::table('orders')->join('comic_bought_order', 'orders.id', '=', 'comic_bought_order.order_id')->join('comic_boughts', 'comic_bought_order.comic_bought_id', '=', 'comic_boughts.id')->join('comics', 'comic_boughts.comic_id', '=', 'comics.id')->where('comics.user_id', '=', $user->id)->paginate(6);
+    $comics_of_vendor = Comic::where('user_id', '=', $user->id)->paginate(6);
+
+    return redirect('accountArea')
+        ->with(compact('user'))
+        ->with(compact('notifications'))
+        ->with(compact('orders'))
+        ->with(compact('list'))
+        ->with(compact('paymentMethods'))
+        ->with(compact('shippingAddresses'))
+        ->with(compact('orders_of_vendor'))
+        ->with(compact('comics_of_vendor'));
 } )->name('submitAddVendorAddress');
 
 Route::get('confirmOrder/{id}', 'ComicBoughtController@orderUpdateConfirm')->name('confirmOrder');
@@ -153,4 +173,6 @@ Route::get('article-deletelocal/{id}','ArticleController@destroyArticle')->name(
 Route::get('add-to-list/{id}', 'WishlistController@addToList');
 Route::get('remove-from-list/{id}', 'WishlistController@removeToList');
 Route::get('remove-from-list-case-lost/{id}', 'WishlistController@removeToListCaseLost');
+Route::redirect('/accountArea', '/accountArea/dashboard');
+Route::post('addComic', 'ComicController@addComic')->name('addComic');
 
