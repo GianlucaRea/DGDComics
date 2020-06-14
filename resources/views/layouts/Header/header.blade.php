@@ -88,7 +88,7 @@
                             <li>
                                 @if (Route::has('login'))
                                     @auth
-                                        <a class="notification" href="{{url('/accountArea')}}">
+                                        <a class="notification" href="{{url('/accountArea/dashboard')}}">
                                             <img src="{{ asset('img/immaginiNostre/notifica.png') }}" width="30%", height="30%">
                                             @php($user = \Illuminate\Support\Facades\Auth::user())
                                             @php($number = \App\Http\Controllers\NotificationController::getNumber($user->id))
@@ -196,7 +196,7 @@
                             <div class="menu-area">
                                 <ul>
                                     <li>
-                                        <a href="{{ url('/accountArea') }}">Account</a>
+                                        <a href="{{ url('/accountArea/dashboard') }}">Account</a>
                                     </li>
                                 </ul>
                             </div>

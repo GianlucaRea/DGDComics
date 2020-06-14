@@ -81,11 +81,21 @@ Route::get('/accountArea', function () {
 Route::get('/aboutUs',function(){
     return view('aboutus');
 });
+Route::get('/accountArea/dashboard','UserController@dashboard')->name('userdashboard');
+Route::get('/accountArea/orders','UserController@dashboard')->name('userorders');
+Route::get('/accountArea/wishlist','UserController@dashboard')->name('userwishlist');
+Route::get('/accountArea/paymentmethods','UserController@dashboard')->name('paymentmethods');
+Route::get('/accountArea/addressedit','UserController@dashboard')->name('addressedit');
+Route::get('/accountArea/account','UserController@dashboard')->name('accountinfo');
+Route::get('/accountArea/venditore','UserController@dashboard')->name('venditoreinfo');
+Route::get('/accountArea/venditoreaddproducts','UserController@dashboard')->name('venditoreaddproducts');
+Route::get('/accountArea/menagementproducts','UserController@dashboard')->name('venditoremenagementproducts');
+
 
 Route::get('/adminArea/dashboard', 'AdminController@dashboard')->name('admindashboard');
-Route::get('/adminArea/users', 'AdminController@adminUsers')->name('adminusers');
-Route::get('/adminArea/comics', 'AdminController@adminComics')->name('admincomics');
-Route::get('/adminArea/reviews', 'AdminController@adminReviews')->name('adminreviews');
+Route::get('/adminArea/users', 'AdminController@dashboard')->name('adminusers');
+Route::get('/adminArea/comics', 'AdminController@dashboard')->name('admincomics');
+Route::get('/adminArea/reviews', 'AdminController@dashboard')->name('adminreviews');
 
 
 Route::get('/vendor', function () {

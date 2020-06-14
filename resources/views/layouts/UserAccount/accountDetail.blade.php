@@ -23,21 +23,21 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-4">
                                 <div class="myaccount-tab-menu nav" role="tablist">
-                                    <a href="#dashboad" class="active" data-toggle="tab"><i class="fa fa-dashboard"></i>Dashboard</a>
-                                    <a href="#orders" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i>Ordini</a>
-                                    <a href="#wishlist" data-toggle="tab"><i class="fa fa-shopping-bag"></i>Lista dei desideri</a>
-                                    <a href="#payment-method" data-toggle="tab"><i class="fa fa-credit-card"></i>Metodi di pagamento</a>
-                                    <a href="#address-edit" data-toggle="tab"><i class="fa fa-map-marker"></i>indirizzi di spedizione</a>
-                                    <a href="#account-info" data-toggle="tab"><i class="fa fa-user"></i> dettagli account</a>
+                                    <a href="{{route('userdashboard')}}" class="{{ (Route::currentRouteName() == 'userdashboard') ? 'active' : '' }}"  ><i class="fa fa-dashboard"></i>Dashboard</a>
+                                    <a href="{{route('userorders')}}" class="{{ (Route::currentRouteName() == 'userorders') ? 'active' : '' }}"  ><i class="fa fa-cart-arrow-down"></i>Ordini</a>
+                                    <a href="{{route('userwishlist')}}" class="{{ (Route::currentRouteName() == 'userwishlist') ? 'active' : '' }}"  ><i class="fa fa-shopping-bag"></i>Lista dei desideri</a>
+                                    <a href="{{route('paymentmethods')}}" class="{{ (Route::currentRouteName() == 'paymentmethods') ? 'active' : '' }}"  ><i class="fa fa-credit-card"></i>Metodi di pagamento</a>
+                                    <a href="{{route('addressedit')}}" class="{{ (Route::currentRouteName() == 'addressedit') ? 'active' : '' }}"  ><i class="fa fa-map-marker"></i>indirizzi di spedizione</a>
+                                    <a href="{{route('accountinfo')}}" class="{{ (Route::currentRouteName() == 'accountinfo') ? 'active' : '' }}" ><i class="fa fa-user"></i> dettagli account</a>
 
                                     @php
                                         $isVendor = \App\Http\Controllers\GroupController::isVendor($user->id);
                                     @endphp
 
                                     @if($isVendor)
-                                        <a href="#venditore-info" data-toggle="tab"><i class="fa fa-dollar"></i> gestisci ordini</a>
-                                        <a href="#venditore-menagement-products" data-toggle="tab"><i class="fa fa-bookmark"></i> gestisci fumetti</a>
-                                        <a href="#venditore-add-products" data-toggle="tab"><i class="fa fa-book"></i> vendi un fumetto</a>
+                                        <a href="{{route('venditoreinfo')}}" class="{{ (Route::currentRouteName() == 'venditoreinfo') ? 'active' : '' }}"><i class="fa fa-dollar"></i> gestisci ordini</a>
+                                        <a href="{{route('venditoremenagementproducts')}}" class="{{ (Route::currentRouteName() == 'venditoremenagementproducts') ? 'active' : '' }}"><i class="fa fa-bookmark"></i> gestisci fumetti</a>
+                                        <a href="{{route('venditoreaddproducts')}}" class="{{ (Route::currentRouteName() == 'venditoreaddproducts') ? 'active' : '' }}"><i class="fa fa-book"></i> vendi un fumetto</a>
                                     @endif
 
 
@@ -50,7 +50,7 @@
                             <div class="col-lg-9 col-md-8">
                                 <div class="tab-content" id="myaccountContent">
                                     <!-- Single Tab Content Start -->
-                                    <div class="tab-pane fade show active" id="dashboad" role="tabpanel">
+                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'userdashboard') ? 'active' : '' }}" id="dashboad" role="tabpanel">
                                         <div class="myaccount-content">
                                             <h5>Dashboard</h5>
                                             <div class="welcome">
@@ -64,9 +64,7 @@
                                             @endif
                                         </div>
                                         <div class="myaccount-content">
-                                            @php
-                                                $notifications = \App\Http\Controllers\NotificationController::getNotification($user->id);
-                                            @endphp
+
 
                                             <div class="mb-30"></div>
                                             <h5>Notifiche</h5>
@@ -86,6 +84,7 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody>
+                                                        {{$notifications->links()}}
                                                         @foreach($notifications as $notification)
                                                             <tr>
                                                                 <td>{{ substr($notification->date, 0, 16) }}</td>
@@ -125,6 +124,7 @@
                                                                 @endif
                                                             </tr>
                                                         @endforeach
+
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -135,8 +135,8 @@
 
                                     <!-- Single Tab Content Start -->
 
-                                    <div class="tab-pane fade" id="orders" role="tabpanel">
-                                        @php($orders = \App\Http\Controllers\OrderController::getAllOrderByUser($user->id))
+                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'userorders') ? 'active' : '' }}" id="orders" role="tabpanel">
+
                                         @if($orders->count()<1)
                                             <div class="myaccount-content">
                                                 <h5>Non sono ancora stati effettuati degli ordini</h5>
@@ -155,6 +155,7 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody>
+                                                        {{$orders->links()}}
                                                         @foreach($orders as $order)
                                                             <tr>
                                                                 <td>{{ $order->id }}</td>
@@ -164,6 +165,7 @@
                                                             </tr>
                                                         @endforeach
                                                         </tbody>
+
                                                     </table>
                                                 </div>
                                             </div>
@@ -173,9 +175,9 @@
 
                                     <!-- Single Tab Content Start -->
 
-                                    <div class="tab-pane fade" id="wishlist" role="tabpanel">
-                                        @php($list = \App\Http\Controllers\WishlistController::getAllListByUser($user->id))
-                                        @if($list->count()<1)
+                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'userwishlist') ? 'active' : '' }}" id="wishlist" role="tabpanel">
+
+                                    @if($list->count()<1)
                                             <div class="myaccount-content">
                                                 <h5>Non sono presenti fumetti nella lista dei desideri</h5>
                                             </div>
@@ -194,6 +196,7 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
+                                                    {{$list->links()}}
                                                     @php($collect = collect())
                                                     @foreach($list as $item)
                                                         @if(\App\Http\Controllers\WishlistController::control($item->id))
@@ -304,32 +307,33 @@
                                                         @endif
                                                     @endforeach
                                                     </tbody>
-                                                </table>
-                                            </div>
-                                        @endif
-                                    </div>
-                                    <!-- Single Tab Content End -->
 
-                                    <!-- Single Tab Content Start -->
-                                    <div class="tab-pane fade" id="payment-method" role="tabpanel">
-                                        @php($paymentMethods = \App\Http\Controllers\PaymentMethodController::getPaymentMethodByUserId($user->id))
-                                        @php($oggi = \App\Http\Controllers\PaymentMethodController::getTime())
+                                              </table>
+                                          </div>
+                                      @endif
+                                  </div>
+                                  <!-- Single Tab Content End -->
 
-                                        @if($paymentMethods->count() < 1)
-                                            <div class="myaccount-content">
-                                                <h5>Non sono ancora stati inseriti metodi di pagamento dall'utente</h5>
-                                            </div>
-                                        @endif
+                                  <!-- Single Tab Content Start -->
+                                  <div class="tab-pane fade show {{ (Route::currentRouteName() == 'paymentmethods') ? 'active' : '' }}" id="payment-method" role="tabpanel">
 
-                                        <div class="myaccount-content">
-                                        @foreach($paymentMethods as $paymentMethod)
-                                            @if($paymentMethod->favourite != 0)
-                                                @php($dataScadenza = $paymentMethod->data_scadenza) <!--Raga so che andava bene anche con php ed end php, ma a caso ha cominciato a dare errore ovunque, vallo a capi-->
-                                                    @php($scadenza = strtotime($dataScadenza))
-                                                    <h5>I TUOI METODI DI PAGAMENTO</h5>
-                                                    <address>
-                                                        <h6>PREDEFINITO</h6>
-                                                        <p><strong>{{ $paymentMethod->payment_type }}</strong></p>
+                                      @php($oggi = \App\Http\Controllers\PaymentMethodController::getTime())
+                                      {{$paymentMethods->links()}}
+                                      @if($paymentMethods->count() < 1)
+                                          <div class="myaccount-content">
+                                              <h5>Non sono ancora stati inseriti metodi di pagamento dall'utente</h5>
+                                          </div>
+                                      @endif
+
+                                      <div class="myaccount-content">
+                                      @foreach($paymentMethods as $paymentMethod)
+                                          @if($paymentMethod->favourite != 0)
+                                              @php($dataScadenza = $paymentMethod->data_scadenza) <!--Raga so che andava bene anche con php ed end php, ma a caso ha cominciato a dare errore ovunque, vallo a capi-->
+                                                  @php($scadenza = strtotime($dataScadenza))
+                                                  <h5>I TUOI METODI DI PAGAMENTO</h5>
+                                                  <address>
+                                                      <h6>PREDEFINITO</h6>
+                                                      <p><strong>{{ $paymentMethod->payment_type }}</strong></p>
                                                         <p><strong>Intestatario: </strong>{{ $paymentMethod->intestatario }}</p>
                                                         @php($last_four_digits = substr($paymentMethod->cardNumber, 12, 16))
                                                         <p><strong>Numero carta: </strong>****-****-****-{{ $last_four_digits }}</p>
@@ -383,14 +387,14 @@
                                     <!-- Single Tab Content End -->
 
                                     <!-- Single Tab Content Start -->
-                                    <div class="tab-pane fade" id="address-edit" role="tabpanel">
-                                        @php($shippingAddresses = \App\Http\Controllers\ShippingAddressController::getShippingAddressByUserId($user->id))
+                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'addressedit') ? 'active' : '' }}" id="address-edit" role="tabpanel">
+
                                         @if($shippingAddresses->count() < 1)
                                             <div class="myaccount-content">
                                                 <h5>Non sono ancora stati inseriti indirizzi di spedizione dall'utente</h5>
                                             </div>
                                         @endif
-
+                                        {{$shippingAddresses->links()}}
                                         <div class="myaccount-content">
                                             <h5>I TUOI INDIRIZZI</h5>
                                             @foreach($shippingAddresses as $shippingAddress)
@@ -407,7 +411,6 @@
                                             @endforeach
                                         </div>
 
-
                                         @foreach($shippingAddresses as $shippingAddress)
                                             @if($shippingAddress->favourite != 1)
                                                 <div class="myaccount-content">
@@ -421,6 +424,7 @@
                                                 </div>
                                             @endif
                                         @endforeach
+
                                         <div class="row mt-20">
                                             <div class="col-md-6"></div>
                                             <div class="col-md-6" style="text-align: right;">
@@ -432,7 +436,7 @@
                                     <!-- Single Tab Content End -->
 
                                     <!-- Single Tab Content Start -->
-                                    <div class="tab-pane fade" id="account-info" role="tabpanel">
+                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'accountinfo') ? 'active' : '' }}"  id="account-info" role="tabpanel">
                                         <div class="myaccount-content">
                                             <h5>Dettagli account</h5>
                                             <div class="account-details-form">
@@ -523,8 +527,8 @@
                                     <!-- Single Tab Content End -->
                                     @if($isVendor)
                                     <!-- Single Tab Content Start -->
-                                        <div class="tab-pane fade" id="venditore-info" role="tabpanel">
-                                            @if(\App\Http\Controllers\OrderController::getAllOrdersOfVendor($user->id)->count() < 1)
+                                        <div class="tab-pane fade show {{ (Route::currentRouteName() == 'venditoreinfo') ? 'active' : '' }}" id="venditore-info" role="tabpanel">
+                                            @if($orders_of_vendor->count() < 1)
                                                 <div class="myaccount-content">
                                                     <h5>Oh, sembra che ancora non hai venduto nulla...</h5>
                                                 </div>
@@ -543,6 +547,7 @@
                                                             </thead>
                                                             @php($orders_of_vendor = \App\Http\Controllers\OrderController::getAllOrdersOfVendor($user->id))
                                                             <tbody>
+                                                            {{$orders_of_vendor->links()}}
                                                             @foreach($orders_of_vendor as $order_of_vendor)
                                                                 <tr>
 
@@ -552,6 +557,7 @@
                                                                 </tr>
                                                             @endforeach
                                                             </tbody>
+
                                                         </table>
                                                     </div>
                                                 </div>
@@ -560,8 +566,8 @@
                                         <!-- Single Tab Content End -->
 
                                         <!-- Single Tab Content Start -->
-                                        <div class="tab-pane fade" id="venditore-menagement-products" role="tabpanel">
-                                            @if(\App\Http\Controllers\ComicController::getComicOfVendor($user->id)->count() < 1)
+                                        <div class="tab-pane fade show {{ (Route::currentRouteName() == 'venditoremenagementproducts') ? 'active' : '' }}" id="venditore-menagement-products" role="tabpanel">
+                                            @if($comics_of_vendor->count() < 1)
                                                 <div class="myaccount-content">
                                                     <h5>Oh, sembra che ancora non hai fumetti in vendita</h5>
                                                 </div>
@@ -578,8 +584,9 @@
                                                                 <th>Azione</th>
                                                             </tr>
                                                             </thead>
-                                                            @php($comics_of_vendor = \App\Http\Controllers\ComicController::getComicOfVendor($user->id))
+
                                                             <tbody>
+                                                            {{$comics_of_vendor->links()}}
                                                             @foreach($comics_of_vendor as $comic_of_vendor)
                                                                 <tr>
                                                                     @php($cover_of_comic_of_vendor = \App\Http\Controllers\ImageController::getCover($comic_of_vendor->id))
@@ -598,6 +605,7 @@
                                                             @endforeach
                                                             </tbody>
                                                         </table>
+
                                                     </div>
                                                 </div>
                                             @endif
@@ -605,14 +613,14 @@
                                         <!-- Single Tab Content End -->
 
                                         <!-- Single Tab Content Start -->
-                                        <div class="tab-pane fade" id="venditore-add-products" role="tabpanel">
+                                        <div class="tab-pane fade show {{ (Route::currentRouteName() == 'venditoreaddproducts') ? 'active' : '' }}" id="venditore-add-products" role="tabpanel">
                                             <fieldset>
                                                 <legend>
                                                     Aggiungi un fumetto
                                                 </legend>
                                                 <div class="offset-lg-2 col-lg-8 col-md-12 col-12">
                                                     <div class="billing-fields">
-                                                        <form method="POST" action="#">
+                                                        <form method="POST" action="">
                                                             @csrf
                                                             <div class="row">
                                                                 <div class="col-lg-12">
@@ -837,6 +845,7 @@
                                                 </div>
                                             </fieldset>
                                         </div>
+                                    </div>
                                         <!-- Single Tab Content End -->
                                     @endif
                                 </div>
@@ -853,5 +862,6 @@
             event.preventDefault();
     }
 </script>
-</div>
+
+
 <!-- my account wrapper end -->
