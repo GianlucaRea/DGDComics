@@ -24,10 +24,10 @@ class CreateComicsTable extends Migration
             $table->string('ISBN');
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->float('price');
-            $table->integer('discount');
-            $table->string('height');
-            $table->string('width');
-            $table->string('length');
+            $table->integer('discount')->default(0);
+            $table->string('height')->nullable();
+            $table->string('width')->nullable();;
+            $table->string('length')->nullable();;
             $table->string('language');
             $table->string('publisher');
         });

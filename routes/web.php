@@ -62,7 +62,11 @@ Route::post('submitVendorAddAddress', function(Request $request){
     $user = \Illuminate\Support\Facades\Auth::user();
     return view('/accountArea')
         ->with(compact('user'));
-} )->name('submitAddVendorAddress');
+})->name('submitAddVendorAddress');
+
+Route::post('addComic', 'ComicController@addComic')->name('addComic');
+
+
 
 Route::get('confirmOrder/{id}', 'ComicBoughtController@orderUpdateConfirm')->name('confirmOrder');
 Route::get('sendOrder/{id}', 'ComicBoughtController@orderUpdateSend')->name('sendOrder');

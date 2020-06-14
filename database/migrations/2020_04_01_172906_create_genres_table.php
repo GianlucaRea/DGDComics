@@ -32,7 +32,6 @@ class CreateGenresTable extends Migration
             ['name_genre' => 'Giallo'],
             ['name_genre' => 'Disney'],
             ['name_genre' => 'Post Apocalittico']
-
         ]);
     }
 

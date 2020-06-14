@@ -126,4 +126,30 @@ class ImageController extends Controller
 
         return response()->json($image, 200);
     }
+
+    public static function moveFileCover(Request $request, $id){
+        $request->validate([
+            'cover' => 'required|image|mimes:jpeg|max:16384'
+        ]);
+
+        //get image file
+        $image = $request->file('cover');
+        $name = $image->getClientOriginalName();
+        $image->move(public_path("img/comicsImages"), $name);
+
+        $imageC = new Image();
+        $imageC->comic_id = $id;
+        $imageC->image_name = $name;
+        $imageC->cover = 1;
+
+        $data = array(
+            'comic_id' => $imageC->comic_id,
+            'image_name' => $imageC->image_name,
+            'cover' => $imageC->cover,
+        );
+        DB::table('images')->insert($data);
+
+        return redirect()->back();
+
+    }
 }

@@ -14,7 +14,7 @@ class Author extends Model
      * @var array
      */
     protected $fillable = [
-        'name_author','surname_authore','nationality',
+        'name_author',
       ];
 
     public function comic(){

@@ -108,12 +108,12 @@
                                                                             <a href="{{ route($notification->notification)}}" class="btn btn-sqr">Dettagli</a>
                                                                         </td>
                                                                     @else
-                                                                    <td>
-                                                                        Letto
-                                                                    </td>
-                                                                    <td>
-                                                                        <a href="{{ route($notification->notification, ['id' => $notification->id])}}" class="btn btn-sqr">Dettagli</a>
-                                                                    </td>
+                                                                        <td>
+                                                                            Letto
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="{{ route($notification->notification, ['id' => $notification->id])}}" class="btn btn-sqr">Dettagli</a>
+                                                                        </td>
                                                                     @endif
                                                                 @else
                                                                     <td>
@@ -319,14 +319,14 @@
                                             <div class="myaccount-content">
                                                 <h5>Non sono ancora stati inseriti metodi di pagamento dall'utente</h5>
                                             </div>
-                                        @endif
+                                        @else
 
                                         <div class="myaccount-content">
+                                            <h5>I TUOI METODI DI PAGAMENTO</h5>
                                         @foreach($paymentMethods as $paymentMethod)
                                             @if($paymentMethod->favourite != 0)
                                                 @php($dataScadenza = $paymentMethod->data_scadenza) <!--Raga so che andava bene anche con php ed end php, ma a caso ha cominciato a dare errore ovunque, vallo a capi-->
                                                     @php($scadenza = strtotime($dataScadenza))
-                                                    <h5>I TUOI METODI DI PAGAMENTO</h5>
                                                     <address>
                                                         <h6>PREDEFINITO</h6>
                                                         <p><strong>{{ $paymentMethod->payment_type }}</strong></p>
@@ -347,6 +347,7 @@
                                                 @endif
                                             @endforeach
                                         </div>
+                                        @endif
 
                                         @foreach($paymentMethods as $paymentMethod)
                                             @if($paymentMethod->favourite != 1)
@@ -389,7 +390,7 @@
                                             <div class="myaccount-content">
                                                 <h5>Non sono ancora stati inseriti indirizzi di spedizione dall'utente</h5>
                                             </div>
-                                        @endif
+                                        @else
 
                                         <div class="myaccount-content">
                                             <h5>I TUOI INDIRIZZI</h5>
@@ -406,6 +407,7 @@
                                                 @endif
                                             @endforeach
                                         </div>
+                                        @endif
 
 
                                         @foreach($shippingAddresses as $shippingAddress)
@@ -521,7 +523,7 @@
                                         </div>
                                     </div>
                                     <!-- Single Tab Content End -->
-                                    @if($isVendor)
+                                @if($isVendor)
                                     <!-- Single Tab Content Start -->
                                         <div class="tab-pane fade" id="venditore-info" role="tabpanel">
                                             @if(\App\Http\Controllers\OrderController::getAllOrdersOfVendor($user->id)->count() < 1)
@@ -566,292 +568,375 @@
                                                     <h5>Oh, sembra che ancora non hai fumetti in vendita</h5>
                                                 </div>
                                             @else
-                                                    <div class="table-cart table-responsive mb-15">
-                                                        <table>
-                                                            <thead>
+                                                <div class="table-cart table-responsive mb-15">
+                                                    <table>
+                                                        <thead>
+                                                        <tr>
+                                                            <th>immagine</th>
+                                                            <th>nome</th>
+                                                            <th>copie vendute</th>
+                                                            <th>recensioni</th>
+                                                            <th>prezzo</th>
+                                                            <th>Azione</th>
+                                                        </tr>
+                                                        </thead>
+                                                        @php($comics_of_vendor = \App\Http\Controllers\ComicController::getComicOfVendor($user->id))
+                                                        <tbody>
+                                                        @foreach($comics_of_vendor as $comic_of_vendor)
                                                             <tr>
-                                                                <th>immagine</th>
-                                                                <th>nome</th>
-                                                                <th>copie vendute</th>
-                                                                <th>recensioni</th>
-                                                                <th>prezzo</th>
-                                                                <th>Azione</th>
+                                                                @php($cover_of_comic_of_vendor = \App\Http\Controllers\ImageController::getCover($comic_of_vendor->id))
+                                                                <td class="product-thumbnail"><a href="{{ url('/comic_detail/'.$comic_of_vendor->id) }}"><img src="{{asset('img/comicsImages/' . $cover_of_comic_of_vendor->image_name) }}" alt="man" /></a></td>
+                                                                <td>{{ $comic_of_vendor->comic_name }}</td>
+                                                                @php($soldQuantity = \App\Http\Controllers\ComicBoughtController::getSoldQuantity($comic_of_vendor->id))
+                                                                <td>{{ $soldQuantity }}</td>
+                                                                @php($reviewQuantity = \App\Http\Controllers\ReviewController::getReviewQuantity($comic_of_vendor->id))
+                                                                <td>{{ $reviewQuantity }}</td>
+                                                                <td>{{ $comic_of_vendor->price }}</td>
+                                                                <td>
+                                                                    <a class="btn btn-danger" href="#"><i class="fa fa-pencil"></i></a>
+                                                                    <a class="btn btn-danger" onclick="return deleteComic();"  href="{{route('comic-delete-vendor', $comic_of_vendor->id)}}"><i class="fa fa-trash"></i></a>
+                                                                </td>
                                                             </tr>
-                                                            </thead>
-                                                            @php($comics_of_vendor = \App\Http\Controllers\ComicController::getComicOfVendor($user->id))
-                                                            <tbody>
-                                                            @foreach($comics_of_vendor as $comic_of_vendor)
-                                                                <tr>
-                                                                    @php($cover_of_comic_of_vendor = \App\Http\Controllers\ImageController::getCover($comic_of_vendor->id))
-                                                                    <td class="product-thumbnail"><a href="{{ url('/comic_detail/'.$comic_of_vendor->id) }}"><img src="{{asset('img/comicsImages/' . $cover_of_comic_of_vendor->image_name) }}" alt="man" /></a></td>
-                                                                    <td>{{ $comic_of_vendor->comic_name }}</td>
-                                                                    @php($soldQuantity = \App\Http\Controllers\ComicBoughtController::getSoldQuantity($comic_of_vendor->id))
-                                                                    <td>{{ $soldQuantity }}</td>
-                                                                    @php($reviewQuantity = \App\Http\Controllers\ReviewController::getReviewQuantity($comic_of_vendor->id))
-                                                                    <td>{{ $reviewQuantity }}</td>
-                                                                    <td>{{ $comic_of_vendor->price }}</td>
-                                                                    <td>
-                                                                        <a class="btn btn-danger" href="#"><i class="fa fa-pencil"></i></a>
-                                                                        <a class="btn btn-danger" onclick="return deleteComic();"  href="{{route('comic-delete-vendor', $comic_of_vendor->id)}}"><i class="fa fa-trash"></i></a>
-                                                                    </td>
-                                                                </tr>
-                                                            @endforeach
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
+                                                        @endforeach
+                                                        </tbody>
+                                                    </table>
                                                 </div>
-                                            @endif
                                         </div>
-                                        <!-- Single Tab Content End -->
+                                    @endif
+                                <!-- Single Tab Content End -->
 
-                                        <!-- Single Tab Content Start -->
-                                        <div class="tab-pane fade" id="venditore-add-products" role="tabpanel">
-                                            <fieldset>
-                                                <legend>
-                                                    Aggiungi un fumetto
-                                                </legend>
-                                                <div class="offset-lg-2 col-lg-8 col-md-12 col-12">
-                                                    <div class="billing-fields">
-                                                        <form method="POST" action="#">
-                                                            @csrf
-                                                            <div class="row">
-                                                                <div class="col-lg-12">
-                                                                    <div class="single-input-item">
-                                                                        <label for="titolo" class="required">Titolo Fumetto<span>*</span></label>
-                                                                        <input id="titolo" type="text" class="form-control @error('titolo') is-invalid @enderror" name="titolo" placeholder="Titolo">
-                                                                        @error('titolo')
-                                                                        <span class="invalid-feedback" role="alert">
+                                <!-- Single Tab Content Start -->
+                                <div class="tab-pane fade" id="venditore-add-products" role="tabpanel">
+                                    <fieldset>
+                                        <legend>
+                                            Aggiungi un fumetto
+                                        </legend>
+                                        <div class="offset-lg-2 col-lg-8 col-md-12 col-12">
+                                            <div class="billing-fields">
+                                                <form method="POST" id="postComicPart1" action="{{ url('/addComic') }}" enctype="multipart/form-data">
+                                                    @csrf
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="single-input-item">
+                                                                <label for="comic_name" class="required">Titolo Fumetto<span>*</span></label>
+                                                                <input id="comic_name" type="text" class="form-control @error('comic_name') is-invalid @enderror" name="comic_name" placeholder="Titolo">
+                                                                @error('comic_name')
+                                                                <span class="invalid-feedback" role="alert">
                                                                             <strong>
                                                                                 {{ $message }}
                                                                             </strong>
                                                                         </span>
-                                                                        @enderror
-                                                                    </div>
-                                                                </div>
+                                                                @enderror
                                                             </div>
+                                                        </div>
+                                                    </div>
 
-                                                            <div class="mt-2"></div>
+                                                    <div class="mt-2"></div>
 
-                                                            <div class="row">
-                                                                <div class="col-lg-6">
-                                                                    <div class="single-input-item">
-                                                                        <label for="ISBN" class="required">ISBN<span>*</span></label>
-                                                                        <input id="ISBN" type="text" class="form-control @error('ISBN') is-invalid @enderror" name="ISBN" placeholder="ISBN">
-                                                                        @error('ISBN')
-                                                                        <span class="invalid-feedback" role="alert">
-                                                                                <strong>
-                                                                                    {{ $message }}
-                                                                                </strong>
-                                                                            </span>
-                                                                        @enderror
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-lg-6">
-                                                                    <div class="single-input-item">
-                                                                        <label for="publisher" class="required">Casa Editrice<span>*</span></label>
-                                                                        <input id="publisher" type="text" class="form-control @error('publisher') is-invalid @enderror" name="publisher" placeholder="casa editice">
-                                                                        @error('casa editice')
-                                                                        <span class="invalid-feedback" role="alert">
-                                                                                <strong>
-                                                                                    {{ $message }}
-                                                                                </strong>
-                                                                            </span>
-                                                                        @enderror
-                                                                    </div>
-                                                                </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="single-input-item">
+                                                                <label for="description" class="required">Descrizione<span>*</span></label>
+                                                                <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" placeholder="Descrizione" style="resize: none; height: 100px; background-color: white"></textarea>
+                                                                @error('description')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                            <strong>
+                                                                                {{ $message }}
+                                                                            </strong>
+                                                                        </span>
+                                                                @enderror
                                                             </div>
+                                                        </div>
+                                                    </div>
 
-                                                        <div class="mt-2"></div>
+                                                    <div class="mt-2"></div>
 
-                                                        <div class="row">
-                                                            <div class="col-lg-6">
-                                                                <div class="single-input-item">
-                                                                    <label for="author_name" class="required">Autore<span>*</span></label>
-                                                                    <input id="author_name" type="text" class="form-control @error('author_name') is-invalid @enderror" name="author_name" placeholder="Nome e Cognome">
-                                                                    @error('name_genre')
-                                                                    <span class="invalid-feedback" role="alert">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class="single-input-item">
+                                                                <label for="ISBN" class="required">ISBN<span>*</span></label>
+                                                                <input id="ISBN" type="text" class="form-control @error('ISBN') is-invalid @enderror" name="ISBN" placeholder="ISBN">
+                                                                @error('ISBN')
+                                                                <span class="invalid-feedback" role="alert">
                                                                                 <strong>
                                                                                     {{ $message }}
                                                                                 </strong>
                                                                             </span>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-lg-6">
-                                                                <div class="single-input-item">
-                                                                    <label for="author_name" class="required">Lingua<span>*</span></label>
-                                                                    <input id="language" type="text" class="form-control @error('language') is-invalid @enderror" name="language" placeholder="Es: Italiano, giapponese...">
-                                                                    @error('language')
-                                                                    <span class="invalid-feedback" role="alert">
-                                                                                <strong>
-                                                                                    {{ $message }}
-                                                                                </strong>
-                                                                            </span>
-                                                                    @enderror
-                                                                </div>
+                                                                @enderror
                                                             </div>
                                                         </div>
 
-                                                        <div class="mt-2"></div>
+                                                        <div class="col-lg-6">
+                                                            <div class="single-input-item">
+                                                                <label for="publisher" class="required">Casa Editrice<span>*</span></label>
+                                                                <input id="publisher" type="text" class="form-control @error('publisher') is-invalid @enderror" name="publisher" placeholder="casa editice">
+                                                                @error('publisher')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                                <strong>
+                                                                                    {{ $message }}
+                                                                                </strong>
+                                                                            </span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-                                                        <div class="row">
-                                                            <div class="col-lg-6">
-                                                                <div class="single-input-item">
-                                                                    <label for="type" class="required">Tipo<span>*</span></label>
-                                                                    <br/>
-                                                                    <select name="type" id="payment_type" class="form-control @error('type') is-invalid @enderror">
-                                                                        <option value="manga"> shonen </option>
-                                                                        <option value="fumetto Italiano"> seinen </option>
-                                                                        <option value="fumetto Americano"> shojo </option>
-                                                                        <option value="manga"> josei </option>
-                                                                        <option value="fumetto Italiano"> dc </option>
-                                                                        <option value="fumetto Americano"> marvel </option>
-                                                                        <option value="manga"> italiano </option>
-                                                                        <option value="fumetto Italiano"> other </option>
-                                                                    </select>
-                                                                    @error('type')
-                                                                    <span class="invalid-feedback" role="alert">
+                                                    <div class="mt-2"></div>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class="single-input-item">
+                                                                <label for="author_name" class="required">Autore<span>*</span></label>
+                                                                <input id="author_name" type="text" class="form-control @error('author_name') is-invalid @enderror" name="author_name" placeholder="Nome e Cognome">
+                                                                @error('author_name')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                                <strong>
+                                                                                    {{ $message }}
+                                                                                </strong>
+                                                                            </span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-6">
+                                                            <div class="single-input-item">
+                                                                <label for="language" class="required">Lingua<span>*</span></label>
+                                                                <input id="language" type="text" class="form-control @error('language') is-invalid @enderror" name="language" placeholder="Es: Italiano, giapponese...">
+                                                                @error('language')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                                <strong>
+                                                                                    {{ $message }}
+                                                                                </strong>
+                                                                            </span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mt-2"></div>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class="single-input-item">
+                                                                <label for="type" class="required">Tipo<span>*</span></label>
+                                                                <br/>
+                                                                <select name="type" id="type" class="form-control @error('type') is-invalid @enderror">
+                                                                    <option value="shonen"> shonen </option>
+                                                                    <option value="seinen"> seinen </option>
+                                                                    <option value="shojo"> shojo </option>
+                                                                    <option value="josei"> josei </option>
+                                                                    <option value="dc"> dc </option>
+                                                                    <option value="marvel"> marvel </option>
+                                                                    <option value="italiano"> italiano </option>
+                                                                    <option value="other"> other </option>
+                                                                </select>
+                                                                @error('type')
+                                                                <span class="invalid-feedback" role="alert">
                                                                                 <strong>
                                                                                     {{ $message }}
                                                                                 </strong>
                                                                         </span>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6">
-                                                                <div class="single-input-item">
-                                                                </div>
+                                                                @enderror
                                                             </div>
                                                         </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="single-input-item"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mt-2"></div>
+
+                                                    <label for="genre_name" class="required">Generi<span>*</span></label>
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class="single-input-item">
+                                                                <input type="checkbox" id="Avventura" name="Avventura" value="Avventura">  Avventura
+                                                                <div class="mt-1"></div>
+                                                                <input type="checkbox" id="check[]" name="check[]" value="Fantascienza">  Fantascienza
+                                                                <div class="mt-1"></div>
+                                                                <input type="checkbox" id="check[]" name="check[]" value="Fantasy">  Fantasy
+                                                                <div class="mt-1"></div>
+                                                                <input type="checkbox" id="check[]" name="check[]" value="Azione">  Azione
+                                                                <div class="mt-1"></div>
+                                                                <input type="checkbox" id="check[]" name="check[]" value="Umoristico">  Umoristico
+                                                                <div class="mt-1"></div>
+                                                                <input type="checkbox" id="check[]" name="check[]" value="Western">  Western
+                                                                <div class="mt-1"></div>
+                                                                <input type="checkbox" id="check[]" name="check[]" value="Alternativo">  Alternativo
+                                                                <div class="mt-1"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="single-input-item">
+                                                                <input type="checkbox" id="check[]" name="check[]" value="Supereroi">  Supereroi
+                                                                <div class="mt-1"></div>
+                                                                <input type="checkbox" id="check[]" name="check[]" value="Horror">  Horror
+                                                                <div class="mt-1"></div>
+                                                                <input type="checkbox" id="check[]" name="check[]" value="Thriller">  Thriller
+                                                                <div class="mt-1"></div>
+                                                                <input type="checkbox" id="check[]" name="check[]" value="Giallo">  Giallo
+                                                                <div class="mt-1"></div>
+                                                                <input type="checkbox" id="check[]" name="check[]" value="Disney">  Disney
+                                                                <div class="mt-1"></div>
+                                                                <input type="checkbox" id="check[]" name="check[]" value="Post Apocalittico">  Post Apocalittico
+                                                                <div class="mt-1"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mt-2"></div>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-4">
+                                                            <label for="price"> Prezzo (no virgola)<span>*</span></label>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <label for="price"> Quantità<span>*</span></label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-4">
+                                                            <div class="single-input-item">
+                                                                <input id="price" type="text" class="form-control @error('price') is-invalid @enderror" name="price" placeholder="4.99">
+                                                                @error('price')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                                <strong>
+                                                                                    {{ $message }}
+                                                                                </strong>
+                                                                            </span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-4">
+                                                            <div class="single-input-item">
+                                                                <input id="quantity" type="number" class="form-control @error('quantity') is-invalid @enderror" name="quantity" placeholder="1" min="1">
+                                                                @error('quantity')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                                <strong>
+                                                                                    {{ $message }}
+                                                                                </strong>
+                                                                            </span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mt-2"></div>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-9">
+                                                            <label for="dimenction"> Dimensioni</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-3">
+                                                            <div class="single-input-item">
+                                                                <input id="height" type="number" class="form-control @error('height') is-invalid @enderror" name="height" placeholder="Altezza" min="1">
+                                                                @error('height')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                                <strong>
+                                                                                    {{ $message }}
+                                                                                </strong>
+                                                                            </span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                        x
+                                                        <div class="col-lg-4">
+                                                            <div class="single-input-item">
+                                                                <input id="length" type="number" class="form-control @error('length') is-invalid @enderror" name="length" placeholder="Lunghezza" min="1">
+                                                                @error('length')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                                <strong>
+                                                                                    {{ $message }}
+                                                                                </strong>
+                                                                            </span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                        x
+                                                        <div class="col-lg-4">
+                                                            <div class="single-input-item">
+                                                                <input id="width" type="number" class="form-control @error('width') is-invalid @enderror" name="width" placeholder="Profondità" min="1">
+                                                                @error('width')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                                <strong>
+                                                                                    {{ $message }}
+                                                                                </strong>
+                                                                            </span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                        cm
                                                         <div class="mt-2"></div>
-
-                                                        <label for="genre_name" class="required">Generi<span>*</span></label>
-                                                        <div class="row">
-                                                            <div class="col-lg-6">
-                                                                <div class="single-input-item">
-                                                                    <input type="checkbox" id="checkAvventura" name="checkAvventura" value="Avventura">
-                                                                    <label for="checkAvventura"> Avventura</label><br>
-                                                                    <input type="checkbox" id="checkFantascienza" name="checkFantascienza" value="Fantascienza">
-                                                                    <label for="checkFantascienza"> Fantascienza</label><br>
-                                                                    <input type="checkbox" id="checkFantasy" name="checkFantasy" value="Fantasy">
-                                                                    <label for="checkFantasy"> Fantasy</label><br>
-                                                                    <input type="checkbox" id="checkAzione" name="checkAzione" value="Azione">
-                                                                    <label for="checkAzione"> Azione</label><br>
-                                                                    <input type="checkbox" id="checkUmoristico" name="checkUmoristico" value="Umoristico">
-                                                                    <label for="checkUmoristico"> Umoristico</label><br>
-                                                                    <input type="checkbox" id="checkAvventura" name="checkAvventura" value="Avventura">
-                                                                    <label for="checkAvventura"> Avventura</label><br>
-                                                                    <input type="checkbox" id="checkWestern" name="checkWestern" value="Western">
-                                                                    <label for="checkWestern"> Western</label><br>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6">
-                                                                <div class="single-input-item">
-                                                                    <input type="checkbox" id="checkAlternativo" name="checkAlternativo" value="Alternativo">
-                                                                    <label for="checkAlternativo"> Alternativo</label><br>
-                                                                    <input type="checkbox" id="checkSupereroi" name="checkSupereroi" value="Supereroi">
-                                                                    <label for="checkSupereroi"> Supereroi</label><br>
-                                                                    <input type="checkbox" id="checkHorror" name="checkHorror" value="Horror">
-                                                                    <label for="checkHorror"> Horror</label><br>
-                                                                    <input type="checkbox" id="checkThriller" name="checkThriller" value="Thriller">
-                                                                    <label for="checkThriller"> Thriller</label><br>
-                                                                    <input type="checkbox" id="checkGiallo" name="checkGiallo" value="Giallo">
-                                                                    <label for="checkGiallo"> Giallo</label><br>
-                                                                    <input type="checkbox" id="checkDisney" name="checkDisney" value="Disney">
-                                                                    <label for="checkDisney"> Disney</label><br>
-                                                                    <input type="checkbox" id="checkPostApocalittico" name="checkPostApocalittico" value="Post Apocalittico">
-                                                                    <label for="checkPostApocalittico"> Post Apocalittico</label>
-                                                                </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class="single-input-item">
+                                                                <label for="file" class="required">Immagine di copertina:<span>*</span></label>
+                                                                <br/>
+                                                                <input type="file" id="cover" name="cover" @error('cover') is-invalid @enderror">
+                                                                @error('cover')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
                                                             </div>
                                                         </div>
+                                                    </div>
 
-                                                        <div class="mt-2"></div>
 
-                                                        <div class="row">
-                                                            <div class="col-lg-3">
-                                                                <label for="price"> Prezzo</label>
-                                                            </div>
-                                                            <div class="col-lg-9">
-                                                                <label for="dimenction"> Dimensioni</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-3">
-                                                                <div class="single-input-item">
-                                                                    <input id="price" type="text" class="form-control @error('price') is-invalid @enderror" name="price" placeholder="4,99">
-                                                                    @error('price')
-                                                                    <span class="invalid-feedback" role="alert">
-                                                                                <strong>
-                                                                                    {{ $message }}
-                                                                                </strong>
-                                                                            </span>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="single-input-item">
-                                                                    <input id="height" type="text" class="form-control @error('height') is-invalid @enderror" name="height" placeholder="Altezza">
-                                                                    @error('height')
-                                                                    <span class="invalid-feedback" role="alert">
-                                                                                <strong>
-                                                                                    {{ $message }}
-                                                                                </strong>
-                                                                            </span>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="single-input-item">
-                                                                    <input id="width" type="text" class="form-control @error('width') is-invalid @enderror" name="width" placeholder="Profondità">
-                                                                    @error('width')
-                                                                    <span class="invalid-feedback" role="alert">
-                                                                                <strong>
-                                                                                    {{ $message }}
-                                                                                </strong>
-                                                                            </span>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3">
-                                                                <div class="single-input-item">
-                                                                    <input id="length" type="text" class="form-control @error('length') is-invalid @enderror" name="length" placeholder="Lunghezza">
-                                                                    @error('length')
-                                                                    <span class="invalid-feedback" role="alert">
-                                                                                <strong>
-                                                                                    {{ $message }}
-                                                                                </strong>
-                                                                            </span>
-                                                                    @enderror
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="mt-3"></div>
-
-                                                        <div class="single-input-item">
-                                                            <button type="submit" class="btn btn-sqr">PUBBLICA ORA!</button>
-                                                        </div>
-                                                        </form>
+                                                </form>
+                                               <div class="mt-2"></div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <label for="file" class="required">Altre immagini:</label>
                                                     </div>
                                                 </div>
-                                            </fieldset>
+                                                <form  method="POST" id="postComicPart2" class="form-horizontal" enctype="multipart/form-data" action="#">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <input type="file" id="image2" name="image2">
+                                                            <div class="mt-2"></div>
+                                                            <input type="file" id="image3" name="image3">
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <input type="file" id="image4" name="image4">
+                                                            <div class="mt-2"></div>
+                                                            <input type="file" id="image5" name="image5">
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                                <div class="mt-3"></div>
+
+                                               <div class="single-input-item">
+                                                    <input type="button" class="btn btn-sqr" onclick="submitForms()" value="PUBBLICA ORA!"/>
+                                               </div>
+                                            </div>
                                         </div>
-                                        <!-- Single Tab Content End -->
-                                    @endif
+                                    </fieldset>
                                 </div>
-                            </div> <!-- My Account Tab Content End -->
-                        </div>
-                    </div> <!-- My Account Page End -->
-                </div>
+                                <!-- Single Tab Content End -->
+                                @endif
+                            </div>
+                        </div> <!-- My Account Tab Content End -->
+                    </div>
+                </div> <!-- My Account Page End -->
             </div>
         </div>
     </div>
+</div>
+</div>
 <script>
     function deleteComic() {
         if(!confirm("Sei sicuro di voler eliminare questo fumetto?"))
             event.preventDefault();
     }
+
+    submitForms = function(){
+        document.getElementById("postComicPart1").submit();
+        /*document.getElementById("postComicPart2").submit();*/
+    }
 </script>
-</div>
 <!-- my account wrapper end -->

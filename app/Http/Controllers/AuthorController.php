@@ -38,8 +38,6 @@ class AuthorController extends Controller
     {
         $rules = [
             'name_author' => 'required',
-            'surname_author' => 'required',
-            'nationality' => 'required',
         ];
         $validator = Validator::make($request->all(),$rules);
         if($validator->fails()){
