@@ -1,6 +1,11 @@
 <?php
 
+use App\Order;
+use App\PaymentMethod;
+use App\ShippingAddress;
+use App\Wishlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Comic;
 use App\Genre;
@@ -60,13 +65,24 @@ Route::post('submitVendorAddAddress', function(Request $request){
     \App\Http\Controllers\UserController::addPartitaIva($request);
     \App\Http\Controllers\GroupController::vendorUpdate();
     $user = \Illuminate\Support\Facades\Auth::user();
-    return view('/accountArea')
-        ->with(compact('user'));
-})->name('submitAddVendorAddress');
+    $notifications = Notification::where('user_id', '=', $user->id)->paginate(6);
+    $orders = Order::where('user_id', '=', $user->id)->paginate(6);
+    $list = Wishlist::where('user_id', '=', $user->id)->paginate(6);
+    $paymentMethods = PaymentMethod::where('user_id','=',$user->id)->paginate(6);
+    $shippingAddresses =  ShippingAddress ::where('user_id','=',$user->id)->paginate(6);
+    $orders_of_vendor = DB::table('orders')->join('comic_bought_order', 'orders.id', '=', 'comic_bought_order.order_id')->join('comic_boughts', 'comic_bought_order.comic_bought_id', '=', 'comic_boughts.id')->join('comics', 'comic_boughts.comic_id', '=', 'comics.id')->where('comics.user_id', '=', $user->id)->paginate(6);
+    $comics_of_vendor = Comic::where('user_id', '=', $user->id)->paginate(6);
 
-Route::post('addComic', 'ComicController@addComic')->name('addComic');
-
-
+    return redirect('accountArea')
+        ->with(compact('user'))
+        ->with(compact('notifications'))
+        ->with(compact('orders'))
+        ->with(compact('list'))
+        ->with(compact('paymentMethods'))
+        ->with(compact('shippingAddresses'))
+        ->with(compact('orders_of_vendor'))
+        ->with(compact('comics_of_vendor'));
+} )->name('submitAddVendorAddress');
 
 Route::get('confirmOrder/{id}', 'ComicBoughtController@orderUpdateConfirm')->name('confirmOrder');
 Route::get('sendOrder/{id}', 'ComicBoughtController@orderUpdateSend')->name('sendOrder');
@@ -85,11 +101,21 @@ Route::get('/accountArea', function () {
 Route::get('/aboutUs',function(){
     return view('aboutus');
 });
+Route::get('/accountArea/dashboard','UserController@dashboard')->name('userdashboard');
+Route::get('/accountArea/orders','UserController@dashboard')->name('userorders');
+Route::get('/accountArea/wishlist','UserController@dashboard')->name('userwishlist');
+Route::get('/accountArea/paymentmethods','UserController@dashboard')->name('paymentmethods');
+Route::get('/accountArea/addressedit','UserController@dashboard')->name('addressedit');
+Route::get('/accountArea/account','UserController@dashboard')->name('accountinfo');
+Route::get('/accountArea/venditore','UserController@dashboard')->name('venditoreinfo');
+Route::get('/accountArea/venditoreaddproducts','UserController@dashboard')->name('venditoreaddproducts');
+Route::get('/accountArea/menagementproducts','UserController@dashboard')->name('venditoremenagementproducts');
+
 
 Route::get('/adminArea/dashboard', 'AdminController@dashboard')->name('admindashboard');
-Route::get('/adminArea/users', 'AdminController@adminUsers')->name('adminusers');
-Route::get('/adminArea/comics', 'AdminController@adminComics')->name('admincomics');
-Route::get('/adminArea/reviews', 'AdminController@adminReviews')->name('adminreviews');
+Route::get('/adminArea/users', 'AdminController@dashboard')->name('adminusers');
+Route::get('/adminArea/comics', 'AdminController@dashboard')->name('admincomics');
+Route::get('/adminArea/reviews', 'AdminController@dashboard')->name('adminreviews');
 
 
 Route::get('/vendor', function () {
@@ -147,4 +173,6 @@ Route::get('article-deletelocal/{id}','ArticleController@destroyArticle')->name(
 Route::get('add-to-list/{id}', 'WishlistController@addToList');
 Route::get('remove-from-list/{id}', 'WishlistController@removeToList');
 Route::get('remove-from-list-case-lost/{id}', 'WishlistController@removeToListCaseLost');
+Route::redirect('/accountArea', '/accountArea/dashboard');
+Route::post('addComic', 'ComicController@addComic')->name('addComic');
 
