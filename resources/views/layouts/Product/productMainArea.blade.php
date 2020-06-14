@@ -95,12 +95,14 @@
                             </div>
                             <div class="product-add-form">
                                 @if($comic->quantity>0 && \Illuminate\Support\Facades\Auth::user()!=null)
-                                <form action="{{url('add-to-cart/'.$comic->id) }}">
-                                    <div class="quality-button">
-                                            <input name="qty" id="qty" class="qty" type="number" min="1" max="{{$comic->quantity}}" value="1">
-                                    </div>
-                                    <button type="submit" class="quality-button">Aggiungi al carrello</button>
-                                </form>
+                                    @if(!Auth::user()->hasGroup('il gruppo degli admin'))
+                                        <form action="{{url('add-to-cart/'.$comic->id) }}">
+                                            <div class="quality-button">
+                                                <input name="qty" id="qty" class="qty" type="number" min="1" max="{{$comic->quantity}}" value="1">
+                                            </div>
+                                            <button type="submit" class="quality-button">Aggiungi al carrello</button>
+                                        </form>
+                                    @endif
                                 @elseif($comic->quantity>0)
                                     <form action="{{url('/login') }}">
                                         <div class="quality-button">
@@ -111,13 +113,25 @@
                                 @endif
                             </div>
                             <div class="product-social-links">
-                                <div class="product-addto-links">
-                                    <div class="row">
-                                        <div class="ml-3"></div>
-                                        <a href="{{url('add-to-list/'.$comic->id) }}"><i class="fa fa-heart"></i></a>
-                                        <h5 style="font-size: 17px; margin-top: 2%;">aggiungilo nella tua personale lista dei desideri!</h5>
+                                @if(\Illuminate\Support\Facades\Auth::user() != null)
+                                    @if(!Auth::user()->hasGroup('il gruppo degli admin'))
+                                        <div class="product-addto-links">
+                                            <div class="row">
+                                                <div class="ml-3"></div>
+                                                <a href="{{url('add-to-list/'.$comic->id) }}"><i class="fa fa-heart"></i></a>
+                                                <h5 style="font-size: 17px; margin-top: 2%;">aggiungilo nella tua personale lista dei desideri!</h5>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @else
+                                    <div class="product-addto-links">
+                                        <div class="row">
+                                            <div class="ml-3"></div>
+                                            <a href="{{url('/login') }}"><i class="fa fa-heart"></i></a>
+                                            <h5 style="font-size: 17px; margin-top: 2%;">aggiungilo nella tua personale lista dei desideri!</h5>
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
                                 <div class="product-addto-links-text">
                                     <p>{{ $comic->description }}</p>
                                 </div>

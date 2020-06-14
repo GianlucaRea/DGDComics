@@ -212,9 +212,11 @@
                             </div>
                             <div class="product-link">
                                 @if(\Illuminate\Support\Facades\Auth::user() != null)
-                                    <div class="product-button">
-                                        <a href="{{url('add-to-cart-case-1/'.$comic->id) }}" title="Add to cart"><i class="fa fa-shopping-cart"></i>Aggiungi al carrello</a>
-                                    </div>
+                                    @if(!Auth::user()->hasGroup('il gruppo degli admin'))
+                                        <div class="product-button">
+                                            <a href="{{url('add-to-cart-case-1/'.$comic->id) }}" title="Add to cart"><i class="fa fa-shopping-cart"></i>Aggiungi al carrello</a>
+                                        </div>
+                                    @endif
                                 @else
                                     <div class="product-button">
                                         <a href="{{url('/login') }}" title="Add to cart"><i class="fa fa-shopping-cart"></i>Aggiungi al carrello</a>

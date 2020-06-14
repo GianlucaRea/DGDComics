@@ -116,6 +116,14 @@ class WishlistController extends Controller
         return DB::table('wishlists')->where('user_id', '=', $id)->get();
     }
 
+    public static function control($id){
+        $user = Auth::user();
+        if(DB::table('comic_wishlist')->where('wishlist_id', '=', $id)->count() > 0){
+            return true;}
+        else{
+            return false;}
+    }
+
     public static function addToList($id){
         if(Auth::user()) {
             $user = Auth::user();
@@ -167,5 +175,15 @@ class WishlistController extends Controller
         return ComicController::getByID(DB::table('comic_wishlist')->where('wishlist_id', '=', $id)->first()->comic_id);
     }
 
+    public static function removeToListCaseLost($id){
+        if(Auth::user()) {
+            $user = Auth::user();
+            $toRemove = DB::table('wishlists')->where('wishlists.id', '=', $id)->delete();
+            return redirect()->back();
+        }
+        else{
+            return redirect('/login');
+        }
+    }
 
 }
