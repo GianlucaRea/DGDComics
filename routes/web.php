@@ -173,6 +173,7 @@ Route::get('article-deletelocal/{id}','ArticleController@destroyArticle')->name(
 Route::get('add-to-list/{id}', 'WishlistController@addToList');
 Route::get('remove-from-list/{id}', 'WishlistController@removeToList');
 Route::get('remove-from-list-case-lost/{id}', 'WishlistController@removeToListCaseLost');
-Route::redirect('/accountArea', '/accountArea/dashboard');
 Route::post('addComic', 'ComicController@addComic')->name('addComic');
+Route::post('addImagesToComic', 'ImageController@addImagesToComic')->name('addImagesToComic');
+Route::redirect('/accountArea', '/accountArea/dashboard');
 

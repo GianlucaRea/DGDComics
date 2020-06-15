@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Image;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Validator;
 
 class ImageController extends Controller
@@ -128,13 +130,11 @@ class ImageController extends Controller
     }
 
     public static function moveFileCover(Request $request, $id){
-        $request->validate([
-            'cover' => 'required|image|mimes:jpeg|max:16384'
-        ]);
 
         //get image file
         $image = $request->file('cover');
-        $name = $image->getClientOriginalName();
+        $name = Str::random(16);
+
         $image->move(public_path("img/comicsImages"), $name);
 
         $imageC = new Image();
@@ -150,6 +150,84 @@ class ImageController extends Controller
         DB::table('images')->insert($data);
 
         return redirect()->back();
+
+    }
+
+    public static function addImagesToComic(Request $request, $id){
+
+        if($request->has('image2')){
+            $imageA = $request->file('image2');
+            $nameA = Str::random(16);
+            $imageA->move(public_path("img/comicsImages"), $nameA);
+
+            $image1 = new Image();
+            $image1->comic_id = $id;
+            $image1->image_name = $nameA;
+            $image1->cover = 0;
+
+            $data1 = array(
+                'comic_id' => $image1->comic_id,
+                'image_name' => $image1->image_name,
+                'cover' => $image1->cover,
+            );
+            DB::table('images')->insert($data1);
+        }
+
+        if($request->has('image3')){
+            $imageB = $request->file('image3');
+            $nameB = Str::random(16);
+            $imageB->move(public_path("img/comicsImages"), $nameB);
+
+            $image2 = new Image();
+            $image2->comic_id = $id;
+            $image2->image_name = $nameB;
+            $image2->cover = 0;
+
+            $data2 = array(
+                'comic_id' => $image2->comic_id,
+                'image_name' => $image2->image_name,
+                'cover' => $image2->cover,
+            );
+            DB::table('images')->insert($data2);
+        }
+
+        if($request->has('image4')){
+            $imageC = $request->file('image4');
+            $nameC = Str::random(16);
+            $imageC->move(public_path("img/comicsImages"), $nameC);
+
+            $image3 = new Image();
+            $image3->comic_id = $id;
+            $image3->image_name = $nameC;
+            $image3->cover = 0;
+
+            $data3 = array(
+                'comic_id' => $image3->comic_id,
+                'image_name' => $image3->image_name,
+                'cover' => $image3->cover,
+            );
+            DB::table('images')->insert($data3);
+        }
+
+        if($request->has('image5')){
+            $imageD = $request->file('image5');
+            $nameD = Str::random(16);
+            $imageD->move(public_path("img/comicsImages"), $nameD);
+
+            $image4 = new Image();
+            $image4->comic_id = $id;
+            $image4->image_name = $nameD;
+            $image4->cover = 0;
+
+            $data4 = array(
+                'comic_id' => $image4->comic_id,
+                'image_name' => $image4->image_name,
+                'cover' => $image4->cover,
+            );
+            DB::table('images')->insert($data4);
+        }
+
+
 
     }
 }

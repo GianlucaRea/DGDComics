@@ -609,6 +609,8 @@
                                         </div>
                                         <!-- Single Tab Content End -->
 
+
+
                                         <!-- Single Tab Content Start -->
                                         <div class="tab-pane fade show {{ (Route::currentRouteName() == 'venditoreaddproducts') ? 'active' : '' }}" id="venditore-add-products" role="tabpanel">
                                             <fieldset>
@@ -617,14 +619,14 @@
                                                 </legend>
                                                 <div class="col-lg-12 col-md-12 col-12">
                                                     <div class="billing-fields">
-                                                        <form method="POST" action="">
+                                                        <form method="POST" id="postComicPart" action="{{ url('/addComic') }}" enctype="multipart/form-data">
                                                             @csrf
                                                             <div class="row">
                                                                 <div class="col-lg-12">
                                                                     <div class="single-input-item">
-                                                                        <label for="titolo" class="required">Titolo Fumetto<span>*</span></label>
-                                                                        <input id="titolo" type="text" class="form-control @error('titolo') is-invalid @enderror" name="titolo" placeholder="Titolo">
-                                                                        @error('titolo')
+                                                                        <label for="comic_name" class="required">Titolo Fumetto<span>*</span></label>
+                                                                        <input id="comic_name" type="text" class="form-control @error('comic_name') is-invalid @enderror" name="comic_name" placeholder="Titolo">
+                                                                        @error('comic_name')
                                                                         <span class="invalid-feedback" role="alert">
                                                                             <strong>
                                                                                 {{ $message }}
@@ -637,7 +639,6 @@
 
                                                             <div class="mt-2"></div>
 
-
                                                             <div class="row">
                                                                 <div class="col-lg-12">
                                                                     <div class="single-input-item">
@@ -645,7 +646,7 @@
                                                                         <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" placeholder="Descrizione" style="resize: none; height: 100px; background-color: white"></textarea>
                                                                         @error('description')
                                                                         <span class="invalid-feedback" role="alert">
-                                                                             <strong>
+                                                                            <strong>
                                                                                 {{ $message }}
                                                                             </strong>
                                                                         </span>
@@ -654,6 +655,7 @@
                                                                 </div>
                                                             </div>
 
+                                                            <div class="mt-2"></div>
 
                                                             <div class="row">
                                                                 <div class="col-lg-6">
@@ -753,35 +755,35 @@
                                                             <div class="row">
                                                                 <div class="col-lg-6">
                                                                     <div class="single-input-item">
+                                                                        <input type="checkbox" id="Alternativo" name="Alternativo" value="Alternativo">  Alternativo
+                                                                        <div class="mt-1"></div>
                                                                         <input type="checkbox" id="Avventura" name="Avventura" value="Avventura">  Avventura
                                                                         <div class="mt-1"></div>
-                                                                        <input type="checkbox" id="check[]" name="check[]" value="Fantascienza">  Fantascienza
+                                                                        <input type="checkbox" id="Fantascienza" name="Fantascienza" value="Fantascienza">  Fantascienza
                                                                         <div class="mt-1"></div>
-                                                                        <input type="checkbox" id="check[]" name="check[]" value="Fantasy">  Fantasy
+                                                                        <input type="checkbox" id="Fantasy" name="Fantasy" value="Fantasy">  Fantasy
                                                                         <div class="mt-1"></div>
-                                                                        <input type="checkbox" id="check[]" name="check[]" value="Azione">  Azione
+                                                                        <input type="checkbox" id="Azione" name="Azione" value="Azione">  Azione
                                                                         <div class="mt-1"></div>
-                                                                        <input type="checkbox" id="check[]" name="check[]" value="Umoristico">  Umoristico
+                                                                        <input type="checkbox" id="Umoristico" name="Umoristico" value="Umoristico">  Umoristico
                                                                         <div class="mt-1"></div>
-                                                                        <input type="checkbox" id="check[]" name="check[]" value="Western">  Western
-                                                                        <div class="mt-1"></div>
-                                                                        <input type="checkbox" id="check[]" name="check[]" value="Alternativo">  Alternativo
+                                                                        <input type="checkbox" id="Western" name="Western" value="Western">  Western
                                                                         <div class="mt-1"></div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6">
                                                                     <div class="single-input-item">
-                                                                        <input type="checkbox" id="check[]" name="check[]" value="Supereroi">  Supereroi
+                                                                        <input type="checkbox" id="Supereroi" name="Supereroi" value="Supereroi">  Supereroi
                                                                         <div class="mt-1"></div>
-                                                                        <input type="checkbox" id="check[]" name="check[]" value="Horror">  Horror
+                                                                        <input type="checkbox" id="Horror" name="Horror" value="Horror">  Horror
                                                                         <div class="mt-1"></div>
-                                                                        <input type="checkbox" id="check[]" name="check[]" value="Thriller">  Thriller
+                                                                        <input type="checkbox" id="Thriller" name="Thriller" value="Thriller">  Thriller
                                                                         <div class="mt-1"></div>
-                                                                        <input type="checkbox" id="check[]" name="check[]" value="Giallo">  Giallo
+                                                                        <input type="checkbox" id="Giallo" name="Giallo" value="Giallo">  Giallo
                                                                         <div class="mt-1"></div>
-                                                                        <input type="checkbox" id="check[]" name="check[]" value="Disney">  Disney
+                                                                        <input type="checkbox" id="Disney" name="Disney" value="Disney">  Disney
                                                                         <div class="mt-1"></div>
-                                                                        <input type="checkbox" id="check[]" name="check[]" value="Post Apocalittico">  Post Apocalittico
+                                                                        <input type="checkbox" id="Post Apocalittico" name="Post Apocalittico" value="Post Apocalittico">  Post Apocalittico
                                                                         <div class="mt-1"></div>
                                                                     </div>
                                                                 </div>
@@ -879,7 +881,7 @@
                                                                     <div class="single-input-item">
                                                                         <label for="file" class="required">Immagine di copertina:<span>*</span></label>
                                                                         <br/>
-                                                                        <input type="file" id="cover" name="cover" class="form-controll @error('cover') is-invalid @enderror">
+                                                                        <input type="file" id="cover" name="cover" class="form-control @error('cover') is-invalid @enderror">
                                                                         @error('cover')
                                                                         <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
@@ -889,34 +891,55 @@
                                                                 </div>
                                                             </div>
 
-
-                                                        </form>
                                                         <div class="mt-2"></div>
                                                         <div class="row">
                                                             <div class="col-lg-12">
                                                                 <label for="file" class="required">Altre immagini:</label>
                                                             </div>
                                                         </div>
-                                                        <form  method="POST" id="postComicPart2" class="form-horizontal" enctype="multipart/form-data" action="#">
                                                             <div class="row">
                                                                 <div class="col-lg-6">
-                                                                    <input type="file" id="image2" name="image2">
+                                                                    immagine 1
+                                                                    <input type="file" id="image2" name="image2" class="form-control @error('image2') is-invalid @enderror">
+                                                                    @error('image2')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                    @enderror
                                                                     <div class="mt-2"></div>
-                                                                    <input type="file" id="image3" name="image3">
+                                                                    immagine 2
+                                                                    <input type="file" id="image3" name="image3" class="form-control @error('image3') is-invalid @enderror">
+                                                                    @error('image3')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                    @enderror
                                                                 </div>
                                                                 <div class="col-lg-6">
-                                                                    <input type="file" id="image4" name="image4">
+                                                                    immagine 3
+                                                                    <input type="file" id="image4" name="image4" class="form-control @error('image4') is-invalid @enderror">
+                                                                    @error('image4')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                    @enderror
                                                                     <div class="mt-2"></div>
-                                                                    <input type="file" id="image5" name="image5">
+                                                                    immagine 4
+                                                                    <input type="file" id="image5" name="image5" class="form-control @error('image5') is-invalid @enderror">
+                                                                    @error('image5')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                    @enderror
                                                                 </div>
                                                             </div>
-                                                        </form>
 
                                                         <div class="mt-3"></div>
 
                                                         <div class="single-input-item">
-                                                            <input type="button" class="btn btn-sqr" onclick="submitForms()" value="PUBBLICA ORA!"/>
+                                                            <button type="submit" class="btn btn-sqr">PUBBLICA ORA!</button>
                                                         </div>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </fieldset>
@@ -932,7 +955,7 @@
         </div>
     </div>
 </div>
-<!-- prof se vedi questa porcheria la verità è che prima del 15/06 era andato tutto bene, poi c'è stato un merge con git tra due membri e il codice si è "rotto"... dopo ore nel cercare di risolvere, questo è stato l'unico modo-->
+
 <script>
     function deleteComic() {
         if(!confirm("Sei sicuro di voler eliminare questo fumetto?"))

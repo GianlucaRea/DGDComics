@@ -880,6 +880,11 @@ class ComicController extends Controller
             'type' => 'required',
             'price' => ['required', 'regex:/^[0-9]{1,2}([.][0-9]{1,2})?$/'],
             'quantity' => 'required',
+            'cover' => 'required|image|mimes:jpeg|max:16384',
+            'image2' => 'image|mimes:jpeg|max:16384',
+            'image3' => 'image|mimes:jpeg|max:16384',
+            'image4' => 'image|mimes:jpeg|max:16384',
+            'image5' => 'image|mimes:jpeg|max:16384',
         ]);
 
         if($request->height != null || $request->width != null || $request->length != null){
@@ -967,7 +972,155 @@ class ComicController extends Controller
             DB::table('comic_genre')->insert($genreData);
 
         }
+
+        if($request->has('Alternativo')){
+            $genre_id = DB::table('genres')->where('name_genre', '=', 'Alternativo')->first();
+            $genreA = new Genre();
+            $genreA->comic_id = $comic_id->id;
+            $genreA->genre_id = $genre_id->id;
+            $genreData = array(
+                'genre_id' => $genreA->genre_id,
+                'comic_id' => $genreA->comic_id,
+            );
+            DB::table('comic_genre')->insert($genreData);
+
+        }
+        if($request->has('Azione')){
+            $genre_id = DB::table('genres')->where('name_genre', '=', 'Azione')->first();
+            $genreA = new Genre();
+            $genreA->comic_id = $comic_id->id;
+            $genreA->genre_id = $genre_id->id;
+            $genreData = array(
+                'genre_id' => $genreA->genre_id,
+                'comic_id' => $genreA->comic_id,
+            );
+            DB::table('comic_genre')->insert($genreData);
+
+        }
+        if($request->has('Disney')){
+            $genre_id = DB::table('genres')->where('name_genre', '=', 'Disney')->first();
+            $genreA = new Genre();
+            $genreA->comic_id = $comic_id->id;
+            $genreA->genre_id = $genre_id->id;
+            $genreData = array(
+                'genre_id' => $genreA->genre_id,
+                'comic_id' => $genreA->comic_id,
+            );
+            DB::table('comic_genre')->insert($genreData);
+
+        }
+        if($request->has('Fantascienza')){
+            $genre_id = DB::table('genres')->where('name_genre', '=', 'Fantascienza')->first();
+            $genreA = new Genre();
+            $genreA->comic_id = $comic_id->id;
+            $genreA->genre_id = $genre_id->id;
+            $genreData = array(
+                'genre_id' => $genreA->genre_id,
+                'comic_id' => $genreA->comic_id,
+            );
+            DB::table('comic_genre')->insert($genreData);
+
+        }
+        if($request->has('Fantasy')){
+            $genre_id = DB::table('genres')->where('name_genre', '=', 'Fantasy')->first();
+            $genreA = new Genre();
+            $genreA->comic_id = $comic_id->id;
+            $genreA->genre_id = $genre_id->id;
+            $genreData = array(
+                'genre_id' => $genreA->genre_id,
+                'comic_id' => $genreA->comic_id,
+            );
+            DB::table('comic_genre')->insert($genreData);
+
+        }
+        if($request->has('Giallo')){
+            $genre_id = DB::table('genres')->where('name_genre', '=', 'Giallo')->first();
+            $genreA = new Genre();
+            $genreA->comic_id = $comic_id->id;
+            $genreA->genre_id = $genre_id->id;
+            $genreData = array(
+                'genre_id' => $genreA->genre_id,
+                'comic_id' => $genreA->comic_id,
+            );
+            DB::table('comic_genre')->insert($genreData);
+
+        }
+        if($request->has('Horror')){
+            $genre_id = DB::table('genres')->where('name_genre', '=', 'Horror')->first();
+            $genreA = new Genre();
+            $genreA->comic_id = $comic_id->id;
+            $genreA->genre_id = $genre_id->id;
+            $genreData = array(
+                'genre_id' => $genreA->genre_id,
+                'comic_id' => $genreA->comic_id,
+            );
+            DB::table('comic_genre')->insert($genreData);
+
+        }
+        if($request->has('Post Apocalittico')){
+            $genre_id = DB::table('genres')->where('name_genre', '=', 'Post Apocalittico')->first();
+            $genreA = new Genre();
+            $genreA->comic_id = $comic_id->id;
+            $genreA->genre_id = $genre_id->id;
+            $genreData = array(
+                'genre_id' => $genreA->genre_id,
+                'comic_id' => $genreA->comic_id,
+            );
+            DB::table('comic_genre')->insert($genreData);
+
+        }
+        if($request->has('Supereroi')){
+            $genre_id = DB::table('genres')->where('name_genre', '=', 'Supereroi')->first();
+            $genreA = new Genre();
+            $genreA->comic_id = $comic_id->id;
+            $genreA->genre_id = $genre_id->id;
+            $genreData = array(
+                'genre_id' => $genreA->genre_id,
+                'comic_id' => $genreA->comic_id,
+            );
+            DB::table('comic_genre')->insert($genreData);
+
+        }
+        if($request->has('Thriller')){
+            $genre_id = DB::table('genres')->where('name_genre', '=', 'Thriller')->first();
+            $genreA = new Genre();
+            $genreA->comic_id = $comic_id->id;
+            $genreA->genre_id = $genre_id->id;
+            $genreData = array(
+                'genre_id' => $genreA->genre_id,
+                'comic_id' => $genreA->comic_id,
+            );
+            DB::table('comic_genre')->insert($genreData);
+
+        }
+        if($request->has('Umoristico')){
+            $genre_id = DB::table('genres')->where('name_genre', '=', 'Umoristico')->first();
+            $genreA = new Genre();
+            $genreA->comic_id = $comic_id->id;
+            $genreA->genre_id = $genre_id->id;
+            $genreData = array(
+                'genre_id' => $genreA->genre_id,
+                'comic_id' => $genreA->comic_id,
+            );
+            DB::table('comic_genre')->insert($genreData);
+
+        }
+        if($request->has('Western')){
+            $genre_id = DB::table('genres')->where('name_genre', '=', 'Western')->first();
+            $genreA = new Genre();
+            $genreA->comic_id = $comic_id->id;
+            $genreA->genre_id = $genre_id->id;
+            $genreData = array(
+                'genre_id' => $genreA->genre_id,
+                'comic_id' => $genreA->comic_id,
+            );
+            DB::table('comic_genre')->insert($genreData);
+
+        }
+
         ImageController::moveFileCover($request, $comic_id->id);
+
+        ImageController::addImagesToComic($request, $comic_id->id);
 
         return redirect()->back();
     }
