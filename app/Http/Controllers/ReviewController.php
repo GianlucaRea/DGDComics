@@ -16,32 +16,37 @@ class ReviewController extends Controller
 {
     public function add(Request $request,$id)
     {
-        $now = Carbon::now();
-        $request->validate([
-            'review_title' => ['required', 'max:50', 'min:3'],
-            'review_text' => ['required', 'max:255', 'min:10'],
-            'stars' => ['required'],
-        ]);
-        $user = \Illuminate\Support\Facades\Auth::user();
-        $review = new Review;
-        $review->user_id = \Illuminate\Support\Facades\Auth::user()->id;
-        $review->comic_id = $id;
-        $review->review_title = $request->review_title;
-        $review->review_text = $request->review_text;
-        $review->stars = $request->stars;
+        if(Auth::user()) {
+            $now = Carbon::now();
+            $request->validate([
+                'review_title' => ['required', 'max:50', 'min:3'],
+                'review_text' => ['required', 'max:255', 'min:10'],
+                'stars' => ['required'],
+            ]);
+            $user = \Illuminate\Support\Facades\Auth::user();
+            $review = new Review;
+            $review->user_id = \Illuminate\Support\Facades\Auth::user()->id;
+            $review->comic_id = $id;
+            $review->review_title = $request->review_title;
+            $review->review_text = $request->review_text;
+            $review->stars = $request->stars;
 
-        $data = array(
-            'user_id' => $review->user_id,
-            'comic_id' => $id,
-            'review_title' => $review->review_title,
-            'review_text' => $review->review_text,
-            'stars' => $review->stars,
-        );
+            $data = array(
+                'user_id' => $review->user_id,
+                'comic_id' => $id,
+                'review_title' => $review->review_title,
+                'review_text' => $review->review_text,
+                'stars' => $review->stars,
+            );
 
-        DB::table('reviews')->insert($data);
+            DB::table('reviews')->insert($data);
 
 
-        return redirect()->back()->with('message','Success');
+            return redirect()->back()->with('message', 'Success');
+        }
+        else{
+            return redirect('/login');
+        }
     }
 
 

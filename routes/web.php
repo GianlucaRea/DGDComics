@@ -23,8 +23,6 @@ use App\Review;
 |
 */
 
-// RAGA NA ROBA IMPORTANTE... NOI DA BRAVI IGNORANTI STIAMO A FA TUTTE GET, PRIMA DI CONSEGNARE DOVREMMO AGGIUSTARE UN MINIMO CON POST, PATCH, PUT ETC IN BASE ALLA NECESSITA
-
 Route::get('/', 'HomeController@index');
 
 Route::get('/contact', function(){

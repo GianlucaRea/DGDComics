@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Rules\MatchOldPassword;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 
@@ -26,16 +27,21 @@ class ChangePasswordController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'password' => ['required', 'min:8', new MatchOldPassword],
-            'newPassword' => ['required', 'min:8', 'different:password'],
-            'confirmPassword' => ['same:newPassword'],
-        ]);
+        if(Auth::user()) {
+            $request->validate([
+                'password' => ['required', 'min:8', new MatchOldPassword],
+                'newPassword' => ['required', 'min:8', 'different:password'],
+                'confirmPassword' => ['same:newPassword'],
+            ]);
 
-        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->newPassword)]);
+            User::find(auth()->user()->id)->update(['password' => Hash::make($request->newPassword)]);
 
-        $user = \Illuminate\Support\Facades\Auth::user();
-        return redirect('/accountArea')
-            ->with(compact('user'));
+            $user = \Illuminate\Support\Facades\Auth::user();
+            return redirect('/accountArea/account')
+                ->with(compact('user'));
+        }
+        else{
+            return redirect('/login');
+        }
     }
 }
