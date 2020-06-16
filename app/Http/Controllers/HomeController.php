@@ -30,4 +30,8 @@ class HomeController extends Controller
             ->with(compact('italian'))
             ->with(compact('articles'));
     }
+
+    public static function onwork(){
+            return view('onwork');
+}
 }

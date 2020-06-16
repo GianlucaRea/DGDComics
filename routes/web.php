@@ -126,6 +126,13 @@ Route::get('/vendor', function () {
 
 Route::get('/accountArea/notificaLetta/{id}', 'NotificationController@notificationRead')->name('notificaLetta'); //per farlo andare per adesso, poi dovremo fare in modo che ad ogni notifica corrisponda un link di reindirizzamento (in base alla notifica). Sta roba effettivamente potrebbe non essere semplice.
 
+Route::get('/shops','HomeController@onwork')->name('shops');
+Route::get('/privacypolicy','HomeController@onwork')->name('privacypolicy');
+Route::get('/info','HomeController@onwork')->name('info');
+Route::get('/sellyourcomics','HomeController@onwork')->name('sellerinfo');
+Route::get('/regulation','HomeController@onwork')->name('regulation');
+Route::get('/contract_terms','HomeController@onwork')->name('contract_terms');
+
 
 Route::get('cart', function(){
     return view('/cart');
