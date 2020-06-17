@@ -6,6 +6,7 @@ use App\Comic;
 use App\Notification;
 use App\PaymentMethod;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use App\Review;
 use Carbon\Carbon;
 use Illuminate\Http\Request;

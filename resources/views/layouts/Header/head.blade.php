@@ -34,7 +34,7 @@
 
 
 @if(\Illuminate\Support\Facades\Auth::user() != null)
-    @if(!(\Illuminate\Support\Facades\Auth::viaRemember()))
+    @if(\App\Http\Controllers\UserController::tokenNotSetted())
         @if(\App\Http\Controllers\UserController::isNotRemembered())
             @php
             \Illuminate\Support\Facades\Auth::logout();

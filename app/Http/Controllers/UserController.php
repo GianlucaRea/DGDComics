@@ -157,6 +157,23 @@ class UserController extends Controller
                 return false;
             }
         }
+        else{
+            return false;
+        }
+    }
+
+    public static function tokenNotSetted(){
+        if(Auth::user()) {
+            $user = DB::table('users')->where('id', '=', Auth::user()->id)->first();
+            if ($user->remember_token == null) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
     }
 
     public static function getUserId($id)

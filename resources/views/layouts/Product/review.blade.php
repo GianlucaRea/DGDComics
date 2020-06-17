@@ -76,18 +76,21 @@
                     <div style="margin-left:0.8%;"></div>
                     <div class="txt-center">
 
-                        <div class="rating">
-                            <input id="stars5" name="stars" type="radio" value="5" class="radio-btn hide" />
-                            <label for="stars5" ><i class="fa fa-star"></i></label>
-                            <input id="star4" name="stars" type="radio" value="4" class="radio-btn hide" />
-                            <label for="star4" ><i class="fa fa-star" ></i></label>
-                            <input id="star3" name="stars" type="radio" value="3" class="radio-btn hide" />
-                            <label for="star3" ><i class="fa fa-star"></i></label>
-                            <input id="star2" name="stars" type="radio" value="2" class="radio-btn hide" />
-                            <label for="star2" ><i class="fa fa-star"></i></label>
-                            <input id="star1" name="stars" type="radio" value="1" class="radio-btn hide"/>
-                            <label for="star1" ><i class="fa fa-star"></i></label>
-                            <div class="clear"></div>
+                        <div class="row">
+                            <div class="rating">
+                                <input id="stars5" name="stars" type="radio" value="5" class="radio-btn hide" />
+                                <label for="stars5" ><i class="fa fa-star"></i></label>
+                                <input id="star4" name="stars" type="radio" value="4" class="radio-btn hide" />
+                                <label for="star4" ><i class="fa fa-star" ></i></label>
+                                <input id="star3" name="stars" type="radio" value="3" class="radio-btn hide" />
+                                <label for="star3" ><i class="fa fa-star"></i></label>
+                                <input id="star2" name="stars" type="radio" value="2" class="radio-btn hide" />
+                                <label for="star2" ><i class="fa fa-star"></i></label>
+                                <input id="star1" name="stars" type="radio" value="1" class="radio-btn hide"/>
+                                <label for="star1" ><i class="fa fa-star"></i></label>
+                                <div class="clear"></div>
+                            </div>
+                            *
                         </div>
 
                     </div>
