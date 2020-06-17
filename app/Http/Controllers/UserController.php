@@ -7,12 +7,15 @@ use App\Comic;
 use App\Review;
 use App\Order;
 use App\Notification;
+use Carbon\Carbon;
+use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Wishlist;
 use App\PaymentMethod;
 use App\ShippingAddress;
+use Ramsey\Uuid\Type\Time;
 
 class UserController extends Controller
 {
@@ -126,6 +129,34 @@ class UserController extends Controller
         }
         $User->delete();
         return redirect()->route("AdminAccount")->with('message', 'Success');
+    }
+
+    public static function updateDate()
+    {
+        if(Auth::user()) {
+            $user = Auth::user();
+            $newDate = array(
+                'date' => DB::raw('now()')
+            );
+            DB::table('users')->where('id', '=', $user->id)->update($newDate);
+            return redirect('/accountArea');
+        }
+        else{
+            redirect('/login');
+        }
+    }
+
+    public static function isNotRemembered()
+    {
+        if(Auth::user()) {
+            $user = DB::table('users')->where('id', '=', Auth::user()->id)->whereRaw('date >= now() - interval 1 minute')->first();
+            if($user == null){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
     }
 
     public static function getUserId($id)

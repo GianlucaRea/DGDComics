@@ -42,7 +42,7 @@
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember_token') !== null ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
                                         {{ __('ricordami') }}
@@ -57,12 +57,6 @@
                                     <button type="submit" class="btn btn-sqr">
                                         {{ __('Login') }}
                                     </button>
-
-                                    @if (Route::has('password.request'))
-                                        <a href="{{ route('password.request') }}">
-                                            <p style="color: #f07c29;">Password dimenticata?</p>
-                                        </a>
-                                    @endif
                                 </div>
                             </div>
                         </div>
