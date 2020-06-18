@@ -7,12 +7,15 @@ use App\Comic;
 use App\Review;
 use App\Order;
 use App\Notification;
+use Carbon\Carbon;
+use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Wishlist;
 use App\PaymentMethod;
 use App\ShippingAddress;
+use Ramsey\Uuid\Type\Time;
 
 class UserController extends Controller
 {
@@ -128,6 +131,51 @@ class UserController extends Controller
         return redirect()->route("AdminAccount")->with('message', 'Success');
     }
 
+    public static function updateDate()
+    {
+        if(Auth::user()) {
+            $user = Auth::user();
+            $newDate = array(
+                'date' => DB::raw('now()')
+            );
+            DB::table('users')->where('id', '=', $user->id)->update($newDate);
+            return redirect('/accountArea');
+        }
+        else{
+            redirect('/login');
+        }
+    }
+
+    public static function isNotRemembered()
+    {
+        if(Auth::user()) {
+            $user = DB::table('users')->where('id', '=', Auth::user()->id)->whereRaw('date >= now() - interval 1 minute')->first();
+            if($user == null){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+    }
+
+    public static function tokenNotSetted(){
+        if(Auth::user()) {
+            $user = DB::table('users')->where('id', '=', Auth::user()->id)->first();
+            if ($user->remember_token == null) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+    }
+
     public static function getUserId($id)
     {
         return User::where('id', '=', $id)->first();
@@ -149,24 +197,30 @@ class UserController extends Controller
 
     public static function dashboard()
     {
-        $user = \Illuminate\Support\Facades\Auth::user();
-        $notifications = Notification::where('user_id', '=', $user->id)->paginate(6);
-        $orders = Order::where('user_id', '=', $user->id)->paginate(6);
-        $list = Wishlist::where('user_id', '=', $user->id)->paginate(6);
-        $paymentMethods = PaymentMethod::where('user_id','=',$user->id)->paginate(6);
-        $shippingAddresses =  ShippingAddress ::where('user_id','=',$user->id)->paginate(6);
-        $orders_of_vendor = DB::table('orders')->join('comic_bought_order', 'orders.id', '=', 'comic_bought_order.order_id')->join('comic_boughts', 'comic_bought_order.comic_bought_id', '=', 'comic_boughts.id')->join('comics', 'comic_boughts.comic_id', '=', 'comics.id')->where('comics.user_id', '=', $user->id)->paginate(6);
-        $comics_of_vendor = Comic::where('user_id', '=', $user->id)->paginate(6);
+        if(Auth::user()) {
+            $user = \Illuminate\Support\Facades\Auth::user();
+            $notifications = Notification::where('user_id', '=', $user->id)->paginate(6);
+            $orders = Order::where('user_id', '=', $user->id)->paginate(6);
+            $list = Wishlist::where('user_id', '=', $user->id)->paginate(6);
+            $paymentMethods = PaymentMethod::where('user_id', '=', $user->id)->paginate(6);
+            $shippingAddresses = ShippingAddress::where('user_id', '=', $user->id)->paginate(6);
+            $orders_of_vendor = DB::table('orders')->join('comic_bought_order', 'orders.id', '=', 'comic_bought_order.order_id')->join('comic_boughts', 'comic_bought_order.comic_bought_id', '=', 'comic_boughts.id')->join('comics', 'comic_boughts.comic_id', '=', 'comics.id')->where('comics.user_id', '=', $user->id)->paginate(6);
+            $comics_of_vendor = Comic::where('user_id', '=', $user->id)->paginate(6);
 
-        return view('accountArea')
-            ->with(compact('user'))
-            ->with(compact('notifications'))
-            ->with(compact('orders'))
-            ->with(compact('list'))
-            ->with(compact('paymentMethods'))
-            ->with(compact('shippingAddresses'))
-            ->with(compact('orders_of_vendor'))
-            ->with(compact('comics_of_vendor'));
+            return view('accountArea')
+                ->with(compact('user'))
+                ->with(compact('notifications'))
+                ->with(compact('orders'))
+                ->with(compact('list'))
+                ->with(compact('paymentMethods'))
+                ->with(compact('shippingAddresses'))
+                ->with(compact('orders_of_vendor'))
+                ->with(compact('comics_of_vendor'));
+        }
+        else
+        {
+            return redirect('/login');
+        }
     }
 
 

@@ -439,7 +439,6 @@
                                         <div class="myaccount-content">
                                             <h5>Dettagli account</h5>
                                             <div class="account-details-form">
-                                                <form action="#">
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <div class="single-input-item-not-editable">
@@ -519,7 +518,6 @@
                                                             <button type="submit" class="btn btn-sqr">Salva</button>
                                                         </div>
                                                     </form>
-                                                </form>
                                             </div>
                                         </div>
                                     </div>

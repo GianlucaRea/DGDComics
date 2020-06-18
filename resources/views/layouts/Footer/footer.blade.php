@@ -8,7 +8,7 @@
                         <nav>
                             <ul>
                                 <li><a href="{{ url('/') }}">Home</li>
-                                <li><a href="#">Privacy e policy</a></li>
+                                <li><a href="{{url('/privacypolicy')}}">Privacy e policy</a></li>
                                 <li><a href="{{ url('/contact') }}">Contattaci</a></li>
                                 <li><a href="{{ url('blog') }}">Blog</a></li>
                             </ul>
@@ -47,7 +47,7 @@
                                 <div class="footer-mid-menu">
                                     <ul>
                                         <li><a href="{{ url('/contact') }}">Contattaci</a></li>
-                                        <li><a href="#">Stores</a></li>
+                                        <li><a href="{{url('/shops') }}">Stores</a></li>
                                         @if (Route::has('login'))
                                             @auth
                                                 <li><a href="{{ url('/accountArea') }}">Account</a></li>
@@ -70,10 +70,10 @@
                                 </div>
                                 <div class="footer-mid-menu">
                                     <ul>
-                                        <li><a href="contact.html">Come funziona</a></li>
-                                        <li><a href="#">Diventa un venditore su DGDcomics</a></li>
-                                        <li><a href="#">Regolamento</a></li>
-                                        <li><a href="#">Termini di contratto</a></li>
+                                        <li><a href="{{url('/info')}}">Come funziona</a></li>
+                                        <li><a href="{{url('/sellyourcomics')}}">Diventa un venditore su DGDcomics</a></li>
+                                        <li><a href="{{url('/regulation')}}">Regolamento</a></li>
+                                        <li><a href="{{url('/contract_terms')}}">Termini di contratto</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -105,7 +105,7 @@
             <div class="row bt-2">
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="copy-right-area">
-                        <p>Copyright ©<a href="#">DGDcomics</a>. Tutti i diritti riservati.</p>
+                        <p>Copyright ©DGDcomics . Tutti i diritti riservati.</p>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">

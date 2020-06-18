@@ -31,3 +31,14 @@
 <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
 <!-- modernizr css -->
 <script src="{{ asset('js/vendor/modernizr-2.8.3.min.js') }}"></script>
+
+
+@if(\Illuminate\Support\Facades\Auth::user() != null)
+    @if(\App\Http\Controllers\UserController::tokenNotSetted())
+        @if(\App\Http\Controllers\UserController::isNotRemembered())
+            @php
+            \Illuminate\Support\Facades\Auth::logout();
+            @endphp
+        @endif
+    @endif
+@endif
