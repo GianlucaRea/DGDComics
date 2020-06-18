@@ -61,27 +61,32 @@ Route::post('submitAddMethod', 'PaymentMethodController@add')->name('submitAddMe
 Route::get('addAddress', function (){return view('addAddress');})->name('addAddress');
 Route::post('submitAddAddress', 'ShippingAddressController@add')->name('submitAddAddress');
 Route::post('submitVendorAddAddress', function(Request $request){
-    \App\Http\Controllers\ShippingAddressController::addVendorShippingAdress($request);
-    \App\Http\Controllers\UserController::addPartitaIva($request);
-    \App\Http\Controllers\GroupController::vendorUpdate();
-    $user = \Illuminate\Support\Facades\Auth::user();
-    $notifications = Notification::where('user_id', '=', $user->id)->paginate(6);
-    $orders = Order::where('user_id', '=', $user->id)->paginate(6);
-    $list = Wishlist::where('user_id', '=', $user->id)->paginate(6);
-    $paymentMethods = PaymentMethod::where('user_id','=',$user->id)->paginate(6);
-    $shippingAddresses =  ShippingAddress ::where('user_id','=',$user->id)->paginate(6);
-    $orders_of_vendor = DB::table('orders')->join('comic_bought_order', 'orders.id', '=', 'comic_bought_order.order_id')->join('comic_boughts', 'comic_bought_order.comic_bought_id', '=', 'comic_boughts.id')->join('comics', 'comic_boughts.comic_id', '=', 'comics.id')->where('comics.user_id', '=', $user->id)->paginate(6);
-    $comics_of_vendor = Comic::where('user_id', '=', $user->id)->paginate(6);
+    if(\Illuminate\Support\Facades\Auth::user()) {
+        \App\Http\Controllers\ShippingAddressController::addVendorShippingAdress($request);
+        \App\Http\Controllers\UserController::addPartitaIva($request);
+        \App\Http\Controllers\GroupController::vendorUpdate();
+        $user = \Illuminate\Support\Facades\Auth::user();
+        $notifications = Notification::where('user_id', '=', $user->id)->paginate(6);
+        $orders = Order::where('user_id', '=', $user->id)->paginate(6);
+        $list = Wishlist::where('user_id', '=', $user->id)->paginate(6);
+        $paymentMethods = PaymentMethod::where('user_id', '=', $user->id)->paginate(6);
+        $shippingAddresses = ShippingAddress::where('user_id', '=', $user->id)->paginate(6);
+        $orders_of_vendor = DB::table('orders')->join('comic_bought_order', 'orders.id', '=', 'comic_bought_order.order_id')->join('comic_boughts', 'comic_bought_order.comic_bought_id', '=', 'comic_boughts.id')->join('comics', 'comic_boughts.comic_id', '=', 'comics.id')->where('comics.user_id', '=', $user->id)->paginate(6);
+        $comics_of_vendor = Comic::where('user_id', '=', $user->id)->paginate(6);
 
-    return redirect('accountArea')
-        ->with(compact('user'))
-        ->with(compact('notifications'))
-        ->with(compact('orders'))
-        ->with(compact('list'))
-        ->with(compact('paymentMethods'))
-        ->with(compact('shippingAddresses'))
-        ->with(compact('orders_of_vendor'))
-        ->with(compact('comics_of_vendor'));
+        return redirect('accountArea')
+            ->with(compact('user'))
+            ->with(compact('notifications'))
+            ->with(compact('orders'))
+            ->with(compact('list'))
+            ->with(compact('paymentMethods'))
+            ->with(compact('shippingAddresses'))
+            ->with(compact('orders_of_vendor'))
+            ->with(compact('comics_of_vendor'));
+    }
+    else{
+        return redirect('/login');
+    }
 } )->name('submitAddVendorAddress');
 
 Route::get('confirmOrder/{id}', 'ComicBoughtController@orderUpdateConfirm')->name('confirmOrder');

@@ -128,7 +128,7 @@ class UserController extends Controller
             return redirect()->route("AdminAccount")->with('message', 'Alredy Deleted');
         }
         $User->delete();
-        return redirect()->route("AdminAccount")->with('message', 'Success');
+        return redirect('/adminArea/users');
     }
 
     public static function updateDate()
@@ -139,7 +139,14 @@ class UserController extends Controller
                 'date' => DB::raw('now()')
             );
             DB::table('users')->where('id', '=', $user->id)->update($newDate);
-            return redirect('/accountArea');
+            $isAdmin = \App\Http\Controllers\GroupController::isAdmin($user->id);
+            if($isAdmin){
+                return redirect('/adminArea/dashboard');
+            }
+            else{
+                return redirect('/accountArea');
+            }
+
         }
         else{
             redirect('/login');
