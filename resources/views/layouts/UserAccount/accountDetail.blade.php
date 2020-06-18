@@ -324,6 +324,7 @@
 
                                             <div class="myaccount-content">
                                             @foreach($paymentMethods as $paymentMethod)
+                                                @php(\App\Http\Controllers\PaymentMethodController::checkIfNotScaduta($paymentMethod->id))
                                                 @if($paymentMethod->favourite != 0)
                                                     @php($dataScadenza = $paymentMethod->data_scadenza) <!--Raga so che andava bene anche con php ed end php, ma a caso ha cominciato a dare errore ovunque, vallo a capi-->
                                                         @php($scadenza = strtotime($dataScadenza))
@@ -370,6 +371,10 @@
                                                         </address>
                                                         <a href="{{ Route('remove.method', ['method' => $paymentMethod->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
                                                             Rimuovi metodo di pagamento</a>
+                                                        @if($scadenza - $oggi > 0)
+                                                        <a href="{{ Route('predefinite.method', ['method' => $paymentMethod->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
+                                                            Rendi predefinito</a>
+                                                        @endif
                                                     </div>
                                                 @endif
                                             @endforeach
@@ -419,6 +424,8 @@
                                                         </address>
                                                         <a href="{{ Route('remove.address', ['address' => $shippingAddress->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
                                                             Rimuovi indirizzo di spedizione</a>
+                                                        <a href="{{ Route('predefinite.address', ['address' => $shippingAddress->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
+                                                            Rendi predefinito</a>
                                                     </div>
                                                 @endif
                                             @endforeach

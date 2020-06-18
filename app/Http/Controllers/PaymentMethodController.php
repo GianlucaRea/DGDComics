@@ -133,12 +133,6 @@ class PaymentMethodController extends Controller
         return strtotime("now");
     }
 
-    public static function getScadenza(){
-
-    }
-
-
-
     public function getPaymentMethod($id)
     {
         $paymentMethod = PaymentMethod::find($id)->get();
@@ -151,54 +145,160 @@ class PaymentMethodController extends Controller
         if(is_null($paymentMethod)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        $paymentMethod -> delete();
-
         $user = \Illuminate\Support\Facades\Auth::user();
-        return redirect('/accountArea')
-            ->with(compact('user'));
-
+        if(DB::table('payment_methods')->where('user_id', '=', $user->id)->get()->count()>1){
+            $paymentMethod -> delete();
+            $newFavourite = array(
+                'favourite' => 1
+            );
+            $payment_Methods = DB::table('payment_methods')->where('user_id', '=', $user->id)->get();
+            foreach ($payment_Methods as $payment_Method) {
+                $oggi = self::getTime();
+                $scadenza = $payment_Method->data_scadenza;
+                if(strtotime($scadenza) - $oggi > 0) {
+                    DB::table('payment_methods')->where('user_id', '=', $user->id)->where('id', '=', $payment_Method->id)->update($newFavourite);
+                    return redirect('/accountArea/paymentmethods')
+                        ->with(compact('user'));
+                }
+            }
+            return redirect('/accountArea/paymentmethods')
+                ->with(compact('user'));
+        }
+        else{
+            $paymentMethod -> delete();
+            return redirect('/accountArea/paymentmethods')
+                ->with(compact('user'));
+        }
     }
 
     public function add(Request $request){
-        $request->validate([
-            'payment_type' => 'required',
-            'month' => ['required', 'int', 'min:1', 'max:12'],
-            'year' => ['required', 'int', 'min:2000', 'max:2100'],
-            'cardNumber' => ['required', 'unique:payment_methods', 'regex:/^[0-9]{16}$/'],
-            'intestatario' => ['required', 'regex:/^[a-z ,.-]+$/i'],
-            'CVV' => ['required', 'unique:payment_methods', 'regex:/^[0-9]{3}$/'],
-        ]);
-        $user = \Illuminate\Support\Facades\Auth::user();
-        $data_scadenza = Carbon::create($request->year, $request->month, '28', '0','0','0');
+        if(Auth::user()) {
+            $request->validate([
+                'payment_type' => 'required',
+                'month' => ['required', 'int', 'min:1', 'max:12'],
+                'year' => ['required', 'int', 'min:2000', 'max:2100'],
+                'cardNumber' => ['required', 'unique:payment_methods', 'regex:/^[0-9]{16}$/'],
+                'intestatario' => ['required', 'regex:/^[a-z ,.-]+$/i'],
+                'CVV' => ['required', 'unique:payment_methods', 'regex:/^[0-9]{3}$/'],
+            ]);
+            $user = \Illuminate\Support\Facades\Auth::user();
+            $data_scadenza = Carbon::create($request->year, $request->month, '28', '0', '0', '0');
+            if(DB::table('payment_methods')->where('user_id', '=', $user->id)->where('favourite', '=', 1)->get()->count() == 0) {
+                $oggi = self::getTime();
+                $paymentMethod = new PaymentMethod; //per evitare problemi con campi che non appartengono effettivamente a paymentMethod.
+                $paymentMethod->user_id = \Illuminate\Support\Facades\Auth::user()->id;
+                $paymentMethod->payment_type = $request->payment_type;
+                $paymentMethod->data_scadenza = $data_scadenza;
+                if(strtotime($paymentMethod->data_scadenza) - $oggi > 0){
+                    $paymentMethod->favourite = 1;
+                }
+                else{
+                    $paymentMethod->favourite = 0;
+                }
+                $paymentMethod->cardNumber = $request->cardNumber;
+                $paymentMethod->intestatario = $request->intestatario;
+                $paymentMethod->CVV = $request->CVV;
 
-        $paymentMethod = new PaymentMethod; //per evitare problemi con campi che non appartengono effettivamente a paymentMethod.
-        $paymentMethod->user_id = \Illuminate\Support\Facades\Auth::user()->id;
-        $paymentMethod->payment_type = $request->payment_type;
-        $paymentMethod->favourite = 0;
-        $paymentMethod->data_scadenza = $data_scadenza;
-        $paymentMethod->cardNumber = $request->cardNumber;
-        $paymentMethod->intestatario = $request->intestatario;
-        $paymentMethod->CVV = $request->CVV;
+                $data = array(
+                    'user_id' => $paymentMethod->user_id,
+                    'payment_type' => $paymentMethod->payment_type,
+                    'favourite' => $paymentMethod->favourite,
+                    'data_scadenza' => $paymentMethod->data_scadenza,
+                    'cardNumber' => $paymentMethod->cardNumber,
+                    'intestatario' => $paymentMethod->intestatario,
+                    'CVV' => Hash::make($paymentMethod->CVV),
+                );
 
-        $data=array(
-            'user_id'=> $paymentMethod->user_id,
-            'payment_type'=> $paymentMethod->payment_type,
-            'favourite'=> $paymentMethod->favourite,
-            'data_scadenza'=>$paymentMethod->data_scadenza,
-            'cardNumber'=>$paymentMethod->cardNumber,
-            'intestatario'=>$paymentMethod->intestatario,
-            'CVV'=>Hash::make($paymentMethod->CVV),
-        );
-
-        DB::table('payment_methods')->insert($data);
+                DB::table('payment_methods')->insert($data);
 
 
-        return redirect('/accountArea')
-            ->with(compact('user'));
+                return redirect('/accountArea/paymentmethods')
+                    ->with(compact('user'));
+            }
+            else{
+                $paymentMethod = new PaymentMethod; //per evitare problemi con campi che non appartengono effettivamente a paymentMethod.
+                $paymentMethod->user_id = \Illuminate\Support\Facades\Auth::user()->id;
+                $paymentMethod->payment_type = $request->payment_type;
+                $paymentMethod->favourite = 0;
+                $paymentMethod->data_scadenza = $data_scadenza;
+                $paymentMethod->cardNumber = $request->cardNumber;
+                $paymentMethod->intestatario = $request->intestatario;
+                $paymentMethod->CVV = $request->CVV;
+
+                $data = array(
+                    'user_id' => $paymentMethod->user_id,
+                    'payment_type' => $paymentMethod->payment_type,
+                    'favourite' => $paymentMethod->favourite,
+                    'data_scadenza' => $paymentMethod->data_scadenza,
+                    'cardNumber' => $paymentMethod->cardNumber,
+                    'intestatario' => $paymentMethod->intestatario,
+                    'CVV' => Hash::make($paymentMethod->CVV),
+                );
+
+                DB::table('payment_methods')->insert($data);
+
+
+                return redirect('/accountArea/paymentmethods')
+                    ->with(compact('user'));
+            }
+        }
+        else{
+            return redirect('/login');
+        }
     }
 
     public static function getPaymentMethodByOrderId($id){
         return DB::table("payment_methods")->where("id", "=", $id)->first();
+    }
+
+    public static function checkIfNotScaduta($id){
+        if(Auth::user()){
+            $user = Auth::user();
+            $oggi = self::getTime();
+            $scadenza = DB::table('payment_methods')->where('id', '=', $id)->where('user_id', '=', $user->id)->first()->data_scadenza;
+            if(strtotime($scadenza) - $oggi < 0){
+                if(DB::table('payment_methods')->where('id', '=', $id)->where('user_id', '=', $user->id)->where('favourite', '=', 1)->first() != null) {
+                    $oldFavourite = array(
+                        'favourite' => 0
+                    );
+                    DB::table('payment_methods')->where('id', '=', $id)->where('user_id', '=', $user->id)->where('favourite', '=', 1)->update($oldFavourite);
+                }
+            }
+        }
+        else{
+            return redirect('/login');
+        }
+    }
+
+    public static function predefinite($id){
+        if (Auth::user()){
+            $user = Auth::user();
+            $oggi = self::getTime();
+            $scadenza = DB::table('payment_methods')->where('id', '=', $id)->where('user_id', '=', $user->id)->first()->data_scadenza;
+            if( strtotime($scadenza) - $oggi < 0){
+                return redirect()->back()->with('ERRORE', 'si sta provando a settare come predefinita una carta scaduta');
+            }
+            if(DB::table('payment_methods')->where('user_id', '=', $user->id)->where('favourite', '=', 1)->first() == null){
+                $data = array(
+                    'favourite' => 1
+                );
+                DB::table('payment_methods')->where('id', '=', $id)->where('user_id', '=', $user->id)->update($data);
+            }
+            else {
+                $oldFavourite = array(
+                    'favourite' => 0
+                );
+                DB::table('payment_methods')->where('user_id', '=', $user->id)->where('favourite', '=', 1)->update($oldFavourite);
+                $newFavourite = array(
+                    'favourite' => 1
+                );
+                DB::table('payment_methods')->where('id', '=', $id)->where('user_id', '=', $user->id)->update($newFavourite);
+            }
+            return redirect()->back();
+        }
+        else{
+            redirect('/login');
+        }
     }
 
 }

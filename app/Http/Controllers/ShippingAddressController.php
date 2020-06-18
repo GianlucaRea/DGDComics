@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\ShippingAddress;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use validator;
 use Illuminate\Support\Facades\DB;
 
@@ -140,48 +141,93 @@ class ShippingAddressController extends Controller
         if(is_null($address)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        $address -> delete();
-
         $user = \Illuminate\Support\Facades\Auth::user();
-        return redirect('/accountArea')
-            ->with(compact('user'));
-
+        if(DB::table('shipping_addresses')->where('user_id', '=', $user->id)->get()->count()>1){
+            $address -> delete();
+            $newFavourite = array(
+                'favourite' => 1
+            );
+            $shipping_addresses = DB::table('shipping_addresses')->where('user_id', '=', $user->id)->get();
+            foreach ($shipping_addresses as $shipping_address) {
+                DB::table('shipping_addresses')->where('user_id', '=', $user->id)->where('id', '=', $shipping_address->id)->update($newFavourite);
+                return redirect('/accountArea/addressedit')
+                    ->with(compact('user'));
+            }
+        }
+        else{
+            $address -> delete();
+            return redirect('/accountArea/addressedit')
+                ->with(compact('user'));
+        }
     }
 
     public function add(Request $request){
-        $request->validate([
-            'via' => ['required'],
-            'civico' => ['required', 'regex:/^[0-9]*$/'],
-            'città' => ['required'],
-            'post_code' => ['required', 'regex:/^[0-9]{5}$/'],
-            'other_info' => 'nullable'
-        ]);
-        $user = \Illuminate\Support\Facades\Auth::user();
+        if(Auth::user()) {
+            $request->validate([
+                'via' => ['required'],
+                'civico' => ['required', 'regex:/^[0-9]*$/'],
+                'città' => ['required'],
+                'post_code' => ['required', 'regex:/^[0-9]{5}$/'],
+                'other_info' => 'nullable'
+            ]);
+            $user = \Illuminate\Support\Facades\Auth::user();
 
-        $address = new ShippingAddress; //per evitare problemi con campi che non appartengono effettivamente a paymentMethod.
-        $address->user_id = \Illuminate\Support\Facades\Auth::user()->id;
-        $address->via = $request->via;
-        $address->civico = $request->civico;
-        $address->città = $request->città;
-        $address->post_code = $request->post_code;
-        $address->other_info = $request->other_info;
-        $address->favourite = 0;
+            if(DB::table('shipping_addresses')->where('user_id', '=', $user->id)->where('favourite', '=', 1)->get()->count() == 0) {
+                $address = new ShippingAddress; //per evitare problemi con campi che non appartengono effettivamente a paymentMethod.
+                $address->user_id = \Illuminate\Support\Facades\Auth::user()->id;
+                $address->via = $request->via;
+                $address->civico = $request->civico;
+                $address->città = $request->città;
+                $address->post_code = $request->post_code;
+                $address->other_info = $request->other_info;
+                $address->favourite = 1;
 
-        $data=array(
-            'user_id'=> $address->user_id,
-            'via'=> $address->via,
-            'civico'=> $address->civico,
-            'città'=>$address->città,
-            'post_code'=>$address->post_code,
-            'other_info'=>$address->other_info,
-            'favourite'=>$address->favourite,
-        );
+                $data = array(
+                    'user_id' => $address->user_id,
+                    'via' => $address->via,
+                    'civico' => $address->civico,
+                    'città' => $address->città,
+                    'post_code' => $address->post_code,
+                    'other_info' => $address->other_info,
+                    'favourite' => $address->favourite,
+                );
 
-        DB::table('shipping_addresses')->insert($data);
+                DB::table('shipping_addresses')->insert($data);
 
 
-        return redirect('/accountArea')
-            ->with(compact('user'));
+                return redirect('/accountArea/addressedit')
+                    ->with(compact('user'));
+            }
+            else{
+                $address = new ShippingAddress; //per evitare problemi con campi che non appartengono effettivamente a paymentMethod.
+                $address->user_id = \Illuminate\Support\Facades\Auth::user()->id;
+                $address->via = $request->via;
+                $address->civico = $request->civico;
+                $address->città = $request->città;
+                $address->post_code = $request->post_code;
+                $address->other_info = $request->other_info;
+                $address->favourite = 0;
+
+                $data = array(
+                    'user_id' => $address->user_id,
+                    'via' => $address->via,
+                    'civico' => $address->civico,
+                    'città' => $address->città,
+                    'post_code' => $address->post_code,
+                    'other_info' => $address->other_info,
+                    'favourite' => $address->favourite,
+                );
+
+                DB::table('shipping_addresses')->insert($data);
+
+
+                return redirect('/accountArea/addressedit')
+                    ->with(compact('user'));
+            }
+        }
+        else{
+            return redirect('/login');
+        }
     }
 
     public static function addVendorShippingAdress(Request $request){
@@ -217,6 +263,32 @@ class ShippingAddressController extends Controller
         );
 
         DB::table('shipping_addresses')->insert($data);
+    }
+
+    public static function predefinite($id){
+        if(Auth::user()){
+            $user = Auth::user();
+            if(DB::table('shipping_addresses')->where('user_id', '=', $user->id)->where('favourite', '=', 1)->first() == null){
+                $data = array(
+                    'favourite' => 1
+                );
+                DB::table('shipping_addresses')->where('id', '=', $id)->where('user_id', '=', $user->id)->update($data);
+            }
+            else{
+                $oldFavourite = array(
+                    'favourite' => 0
+                );
+                DB::table('shipping_addresses')->where('user_id', '=', $user->id)->where('favourite', '=', 1)->update($oldFavourite);
+                $newFavourite = array(
+                    'favourite' => 1
+                );
+                DB::table('shipping_addresses')->where('id', '=', $id)->where('user_id', '=', $user->id)->update($newFavourite);
+            }
+            return redirect()->back();
+        }
+        else{
+            redirect('/login');
+        }
     }
 
     public static function getShippingAddressByOrderId($id){
