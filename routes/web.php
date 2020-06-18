@@ -53,7 +53,9 @@ Auth::routes();
 //da qui sono da riordinare bene con i controller come ha fatto Gianluca sopra, per ora lasciamo così che funziona bene
 Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
 Route::get('remove-method/{method}', 'PaymentMethodController@remove')->name('remove.method');
+Route::get('predefinite-method/{method}', 'PaymentMethodController@predefinite')->name('predefinite.method');
 Route::get('remove-address/{address}', 'ShippingAddressController@remove')->name('remove.address');
+Route::get('predefinite-address/{address}', 'ShippingAddressController@predefinite')->name('predefinite.address');
 Route::get('addMethod', function (){return view('AddMethod');})->name('addMethod');
 Route::post('submitAddMethod', 'PaymentMethodController@add')->name('submitAddMethod');
 Route::get('addAddress', function (){return view('addAddress');})->name('addAddress');
