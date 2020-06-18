@@ -9,11 +9,11 @@
     </header>
             @include('layouts.Homepage.featuredArea')
             @include('layouts.Homepage.slider')
+            @include('layouts.Homepage.productArea')
             @include('layouts.Homepage.newArrival')
             <div style="height: 75px"></div>
             @include('layouts.Homepage.bestsellerArea')
             @include('layouts.Homepage.dgdrandom')
-            @include('layouts.Homepage.productArea')
             @include('layouts.Homepage.recentPostArea')
             @include('layouts.Footer.banner2')
             @include('layouts.Footer.social')

@@ -1,6 +1,6 @@
 <!-- QUEST'AREA NON L'HO COMPLETATA A DIFFERENZA DI BESTSELLER PERCHE' MENTRE LI METTIAMO COMICS RANDOM, QUNDI AVEVA UN SENSO, QUI NE METTIAMO SPECIFICI, E NON ESSENDO LE QUERY ANCORA IMPLEMENTATE SAREBBE SOLO LAVORO INUTILE ORA COME ORA -->
 <!-- product-area-start -->
-<div class="product-area pb-50">
+<div class="product-area">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
