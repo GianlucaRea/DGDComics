@@ -230,5 +230,15 @@ class UserController extends Controller
         }
     }
 
+    public static function getLogout(){
+        $user=Auth::user();
+        $data = array(
+            'remember_token' => null
+        );
+        Auth::logout();
+        DB::table('users')->where('id', '=', $user->id)->update($data);
+        return redirect('/');
+    }
+
 
 }

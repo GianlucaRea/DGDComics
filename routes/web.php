@@ -189,4 +189,5 @@ Route::post('addComic', 'ComicController@addComic')->name('addComic');
 Route::post('addImagesToComic', 'ImageController@addImagesToComic')->name('addImagesToComic');
 Route::redirect('/accountArea', '/accountArea/dashboard');
 Route::get('/updateDate', 'UserController@updateDate');
+Route::get('/getLogout', 'UserController@getLogout');
 

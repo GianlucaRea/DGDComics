@@ -207,7 +207,7 @@
                         <div class="menu-area">
                             <ul>
                                 <li>
-                                    <a href="{{ url('/logout') }}">logout</a>
+                                    <a href="{{ url('/getLogout') }}">logout</a>
                                 </li>
                             </ul>
                         </div>
