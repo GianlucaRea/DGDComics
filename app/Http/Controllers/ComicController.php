@@ -583,7 +583,7 @@ class ComicController extends Controller
                     'sessionId'=> 1,
                 );
                 DB::table('sessions')->insert($data);
-                return redirect()->back()->with('success', 'comic added to cart successfully!');
+                return redirect('comic_detail/'.$comic->id)->with('success', 'comic added to cart successfully!');
             } else {
                 $idSession = DB::table('sessions')->latest()->first()->sessionId; //2
                 // if cart not empty then check if this comic exist then increment quantity
@@ -596,7 +596,7 @@ class ComicController extends Controller
 
                             $newQuantity = $comic->quantity - $request->qty;
                             DB::table('comics')->where('id', $comic->id)->update(['quantity' => $newQuantity]);
-                            return redirect()->back()->with('success', 'comic added to cart successfully!');
+                            return redirect('comic_detail/'.$comic->id)->with('success', 'comic added to cart successfully!');
                         }
                     }
                 }
@@ -618,10 +618,10 @@ class ComicController extends Controller
                     'sessionId'=> $idSession+1,
                 );
                 DB::table('sessions')->insert($data);
-                return redirect()->back()->with('success', 'comic added to cart successfully!');
+                return redirect('comic_detail/'.$comic->id)->with('success', 'comic added to cart successfully!');
             }
         }
-        return redirect()->back()->with('error', 'seems something went wrong!');
+        return redirect('comic_detail/'.$comic->id)->with('error', 'seems something went wrong!');
     }
 
     public function addToCart1($id)
