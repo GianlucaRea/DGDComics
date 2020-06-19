@@ -30,6 +30,7 @@ Route::get('/contact', function(){
 })->name('contact');
 
 Route::get('/comic_detail/{id}','ComicController@comicDetail')->name('comicdetail');
+Route::get('/comic_detail_review_error/{id}','ComicController@comicDetailError')->name('comicDetailError');
 Route::post('/submitReview/{id}','ReviewController@add')->name('submitReview');
 
 Route::get('/vendor_detail/{id}' , 'RankingController@vendorRanking')->name('vendorpublic');

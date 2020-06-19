@@ -52,6 +52,16 @@
 
 </style>
 
+@if($isNotPassed)
+    <script>
+        function alert() {
+            if(!confirm("Ehy, sembra che ci sia stato un errore, sicuro di aver riempito tutti i campi? stelle comprese? se l'errore persiste sentiti libero di contattarci!"))
+                event.preventDefault();
+        }
+        alert();
+    </script>
+@endif
+
 <div class="product-info-area">
     <div class="tab-content border-0" style="background-color: #ffffe6 ">
         <div class="mt-30"></div>

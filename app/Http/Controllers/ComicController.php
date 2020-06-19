@@ -310,6 +310,7 @@ class ComicController extends Controller
       else return view ('shoplist')->with(compact('genres'))->with(compact('comics'))->withMessage('No Details found. Try to search again !');
     }
     public function comicDetail($id){
+        $isNotPassed = false;
         $comic = Comic::find($id);
         $related = \App\Http\Controllers\ComicController::getrelated($id);
         $reviews = Review::where('comic_id','=',$id)->get();
@@ -319,7 +320,23 @@ class ComicController extends Controller
             ->with(compact('comic'))
             ->with(compact('related'))
             ->with(compact('reviews'))
-            ->with(compact('reviews4'));
+            ->with(compact('reviews4'))
+            ->with(compact('isNotPassed'));
+    }
+
+    public static function comicDetailError($id){
+        $isNotPassed = true;
+        $comic = Comic::find($id);
+        $related = \App\Http\Controllers\ComicController::getrelated($id);
+        $reviews = Review::where('comic_id','=',$id)->get();
+        $reviews4 = Review::where('comic_id','=',$id)->orderBy('review_date', 'desc')->get();
+        $avgstar = Review::where('comic_id','=',$id)->avg('stars');
+        return view('comic_detail')
+            ->with(compact('comic'))
+            ->with(compact('related'))
+            ->with(compact('reviews'))
+            ->with(compact('reviews4'))
+            ->with(compact('isNotPassed'));
     }
 
     public function shoplistPrice0(Request $request){

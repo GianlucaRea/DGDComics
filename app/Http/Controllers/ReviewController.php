@@ -12,18 +12,29 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class ReviewController extends Controller
 {
     public function add(Request $request,$id)
     {
         if(Auth::user()) {
+            $isNotPassed = false;
+            $data = array(
+              'review_title' => $request->review_title,
+              'review_text' => $request->review_text,
+              'stars' => $request->stars,
+            );
             $now = Carbon::now();
-            $request->validate([
+            $validator = Validator::make($data, [
                 'review_title' => ['required', 'max:50', 'min:3'],
                 'review_text' => ['required', 'max:255', 'min:10'],
                 'stars' => ['required'],
             ]);
+
+            if($validator->fails()){
+                return redirect('comic_detail_review_error/'.$id);
+            }
             $user = \Illuminate\Support\Facades\Auth::user();
             $review = new Review;
             $review->user_id = \Illuminate\Support\Facades\Auth::user()->id;
@@ -43,7 +54,7 @@ class ReviewController extends Controller
             DB::table('reviews')->insert($data);
 
 
-            return redirect()->back()->with('message', 'Success');
+            return redirect()->back()->with(compact('isNotPassed'));
         }
         else{
             return redirect('/login');
