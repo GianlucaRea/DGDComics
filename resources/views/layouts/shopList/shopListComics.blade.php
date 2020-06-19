@@ -93,7 +93,7 @@
                                     </div>
                                     <div class="product-link">
                                         <div class="product-button">
-                                            <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                            <a href="{{url('add-to-cart-case-1/'.$comic->id) }}" title="Add to cart"><i class="fa fa-shopping-cart"></i>Aggiungi al carrello</a>
                                         </div>
                                         <div class="add-to-link">
                                             <ul>
@@ -159,7 +159,7 @@
                                     </div>
                                     <div class="product-link">
                                         <div class="product-button">
-                                            <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                            <a href="{{url('add-to-cart-case-1/'.$comic->id) }}" title="Add to cart"><i class="fa fa-shopping-cart"></i>Aggiungi al carrello</a>
                                         </div>
                                         <div class="add-to-link">
                                             <ul>
