@@ -7,8 +7,8 @@
                     <div class="shop-tab">
                         <div class="tab-3">
                             <ul class="nav">
-                                <li><a href="#th" data-toggle="tab"><i class="fa fa-th-large"></i>Grid</a></li>
-                                <li><a class="active" href="#list" data-toggle="tab"><i class="fa fa-bars"></i>List</a></li>
+                                <li><a class="active" href="#th" data-toggle="tab"><i class="fa fa-th-large"></i>Grid</a></li>
+                                <li><a  href="#list" data-toggle="tab"><i class="fa fa-bars"></i>List</a></li>
                             </ul>
                         </div>
                         <div class="list-page">
@@ -34,10 +34,10 @@
 
                 <!-- tab-area-start -->
                 <div class="tab-content">
-                    <div class="tab-pane fade" id="th">
+                    <div class="tab-pane fade show active" id="th">
                         <div class="row">
 
-                        @foreach($comics as $comic)
+                        @foreach($comics->sortBy('sorter') as $comic)
                                 @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
                             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                                 <!-- single-product-start -->
@@ -67,12 +67,12 @@
                                                 @foreach(range(1,5) as $i)
                                                     @if($avgstar >0)
                                                         @if($avgstar >0.5)
-                                                            <a href="#void"><i class="fa fa-star"></i></a>
+                                                            <a><i class="fa fa-star fa_custom"></i></a>
                                                         @else
-                                                            <a  href="#void"><i class="fa fa-star-half-o"></i></a>
+                                                            <a><i class="fa fa-star-half-o fa_custom"></i></a>
                                                         @endif
                                                     @else
-                                                        <a href="#void"><i class="fa  fa-star-o"></i></a>
+                                                        <a><i class="fa  fa-star-o fa_custom"></i></a>
                                                     @endif
                                                     <?php $avgstar--; ?>
                                                 @endforeach
@@ -107,7 +107,7 @@
                                 @endforeach
                         </div>
                     </div>
-                <div class="tab-pane fade show active" id="list">
+                <div class="tab-pane fade " id="list">
                     <!-- single-shop-start -->
                     <div class="single-shop mb-30">
                         <div class="row">

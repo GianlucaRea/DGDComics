@@ -175,6 +175,8 @@ Route::get('review-delete/{id}','ReviewController@destroy')->name('review-delete
 Route::get('review-deletelocal/{id}','ReviewController@destroylocal')->name('review-delete-local');
 
 Route::get('blog', 'ArticleController@getArticles');
+Route::get('/blog/tag/{tag_name}','ArticleController@getArticleByTag')->name('taglist');
+Route::get('/blog/search/','ArticleController@articleSearch')->name('searcharticleroute');
 Route::get('/blogDetail/{id}', 'ArticleController@getArticleById')->name('blogDetail');
 Route::post('submitComment/{article}', 'CommentController@addToArticle')->name('submitComment');
 Route::post('submitphpAnswer/{comment}', 'CommentController@addToComment')->name('submitAnswer');

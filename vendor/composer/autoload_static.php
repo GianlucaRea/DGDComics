@@ -524,7 +524,7 @@ class ComposerStaticInit4d6bcfbc3ce423c65849ffa78fc23b8b
         'App\\Service' => __DIR__ . '/../..' . '/app/Service.php',
         'App\\ShippingAddress' => __DIR__ . '/../..' . '/app/ShippingAddress.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
-        'App\\Whishlist' => __DIR__ . '/../..' . '/app/Whishlist.php',
+        'App\\Wishlist' => __DIR__ . '/../..' . '/app/Wishlist.php',
         'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Asm89/Stack/Cors.php',
         'Asm89\\Stack\\CorsService' => __DIR__ . '/..' . '/asm89/stack-cors/src/Asm89/Stack/CorsService.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',

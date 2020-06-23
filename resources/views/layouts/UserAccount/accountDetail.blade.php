@@ -162,8 +162,10 @@
                                                             </tr>
                                                         @endforeach
                                                         </tbody>
-
                                                     </table>
+                                                    @foreach($orders as $order)
+                                                    @endforeach
+                                                    {{$orders->links()}}
                                                 </div>
                                             </div>
                                         @endif
@@ -306,6 +308,9 @@
                                                     </tbody>
 
                                                 </table>
+                                                @foreach($list as $item)
+                                                    @endforeach
+                                                {{$list->links()}}
                                             </div>
                                         @endif
                                     </div>
@@ -561,8 +566,10 @@
                                                                 </tr>
                                                             @endforeach
                                                             </tbody>
-
                                                         </table>
+                                                        @foreach($orders_of_vendor as $order_of_vendor)
+                                                        @endforeach
+                                                        {{$orders_of_vendor->links()}}
                                                     </div>
                                                 </div>
                                             @endif
@@ -608,6 +615,9 @@
                                                         @endforeach
                                                         </tbody>
                                                     </table>
+                                                    @foreach($comics_of_vendor as $comic_of_vendor)
+                                                    @endforeach
+                                                    {{$comics_of_vendor->links()}}
                                                 </div>
                                             @endif
                                         </div>

@@ -1,8 +1,35 @@
 <!-- blog-main-area-start -->
 <div class="blog-main-area mb-70">
     <div class="container">
-
         <div class="row">
+            <div class="col-lg-3 col-md-12 col-12 order-lg-1 order-2 mt-sm-50">
+                <div class="single-blog mb-50">
+                    <div class="blog-left-title">
+                        <h3>Search</h3>
+                    </div>
+                    <div class="side-form">
+                       <form action="{{ route('searcharticleroute') }}">
+                            <input type="text" name="search" placeholder="Cerca un articolo..." />
+                            <a  href="javascript:;" onclick="parentNode.submit();"><i class="fa fa-search"></i></a>
+                        </form>
+                    </div>
+                </div>
+                <div class="single-blog mb-50">
+                    <div class="blog-left-title">
+                        <h3>Tags</h3>
+                    </div>
+                    <div class="blog-side-menu">
+                        <ul>
+                            @foreach($tags as $tag)
+                                @php
+                                    $numOfOcc = App\Http\Controllers\TagController::countArticle($tag->id);
+                                @endphp
+                                <li><a href= "{{route('taglist',['tag_name' => $tag->tag_name])}}">{{$tag->tag_name}}<span>({{$numOfOcc}})</span></a></li> <!-- Da finire -->
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
             @if(\Illuminate\Support\Facades\Auth::user()) <!-- zona admin -->
                 @php($u = \Illuminate\Support\Facades\Auth::user())
                 @if(\App\Http\Controllers\GroupController::isAdmin($u->id))
@@ -95,6 +122,7 @@
                         </div>
                     @endif
                     @if($articles->count() > 0)
+
                         <div class="col-lg-12 col-md-12 col-12 order-lg-2 order-1">
                             @foreach($articles as $article)
                                 @php($articleAuth = \App\Http\Controllers\UserController::getUserId($article->user_id))

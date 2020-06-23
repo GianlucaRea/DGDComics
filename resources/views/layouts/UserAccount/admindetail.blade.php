@@ -135,8 +135,10 @@
                                                     @endforeach
                                                     {{ $users->links() }}
                                                     </tbody>
-
                                                 </table>
+                                                @foreach($users as $user)
+                                                @endforeach
+                                                {{ $users->links() }}
                                             </div>
                                         </div>
                                     </div>
@@ -175,6 +177,9 @@
                                                     {{ $comics->links() }}
                                                     </tbody>
                                                 </table>
+                                                @foreach($comics as $comic)
+                                                @endforeach
+                                               {{ $comics->links() }}
                                             </div>
                                         </div>
                                     </div>
@@ -210,6 +215,13 @@
                                                     {{ $reviews->links() }}
                                                     </tbody>
                                                 </table>
+                                                @foreach($reviews as $review)
+                                                    @php
+                                                        $userReview = App\User::where('id','=',$review->user_id)->first();
+                                                        $comicReview = App\Comic::where('id','=',$review->comic_id)->first();
+                                                    @endphp
+                                                @endforeach
+                                                {{ $reviews->links() }}
                                             </div>
                                         </div>
                                     </div>

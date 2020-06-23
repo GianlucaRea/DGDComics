@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Tag;
 use Illuminate\Http\Request;
 use App\Article;
 use Illuminate\Support\Facades\DB;
@@ -106,13 +107,28 @@ class ArticleController extends Controller
     }
 
     public static function getArticles(){
-        $articles = DB::table("articles")->latest()->paginate(2) ;
-        return view('blogHome')->with(compact('articles'));
+        $articles = DB::table("articles")->latest()->paginate(5) ;
+        $tags = Tag::all();
+        return view('blogHome')->with(compact('articles'))->with(compact('tags'));
+    }
+
+    public function getArticleByTag($tag_name,Request $request){
+        $articles = TAG::where('tag_name','=',$tag_name)->first()->article()->paginate(5);
+        $tags = Tag::all();
+        return view('blogHome')->with(compact('articles'))->with(compact('tags'));
+    }
+
+    public function articleSearch(Request $request){
+        $tags = Tag::all();
+        $search = $request->input('search');
+        $articles = Article::where('title','LIKE','%'.$search.'%')->orWhere('article_text','LIKE','%'.$search.'%')->paginate(5);
+        return view('blogHome')->with(compact('articles'))->with(compact('tags'));
     }
 
 
+
     public static function getArticleById($id){
-        $article = DB::table("articles")->where("id", "=", $id)->first();
+        $article = Article::where("id", "=", $id)->first();
         return view('blogArticleDetail')->with(compact('article'));
     }
 

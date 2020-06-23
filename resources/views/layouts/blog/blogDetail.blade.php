@@ -35,6 +35,17 @@
                         <div class="blog-single-content">
                             <p>{{ $article->article_text }}</p>
                         </div>
+
+
+                        <div class="product-attribute">
+                                <p>
+                                    @foreach($article->tag as $tags)
+                                    <a href="#"> {{$tags->tag_name}} </a>
+                                    @endforeach
+                                </p>
+                        </div>
+
+
                     </div>
                     <div class="comment-title-wrap mt-30">
                         @if($articleComments->count() == 1)
