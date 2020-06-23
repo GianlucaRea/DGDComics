@@ -92,14 +92,15 @@
                                         </div>
                                     </div>
                                     <div class="product-link">
-                                        <div class="product-button">
-                                            <a href="{{url('add-to-cart-case-1/'.$comic->id) }}" title="Add to cart"><i class="fa fa-shopping-cart"></i>Aggiungi al carrello</a>
-                                        </div>
-                                        <div class="add-to-link">
-                                            <ul>
-                                                <li><a href="product-details.html" title="Details"><i class="fa fa-external-link"></i></a></li>
-                                            </ul>
-                                        </div>
+                                        @if(\Illuminate\Support\Facades\Auth::user())
+                                            <div class="product-button">
+                                                <a href="{{url('add-to-cart-case-1/'.$comic->id) }}" title="Add to cart"><i class="fa fa-shopping-cart"></i>Aggiungi al carrello</a>
+                                            </div>
+                                        @else
+                                            <div class="product-button">
+                                                <a href="{{url('/login') }}" title="Add to cart"><i class="fa fa-shopping-cart"></i>Aggiungi al carrello</a>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -158,14 +159,15 @@
                                         <p>{{$comic->description}}</p>
                                     </div>
                                     <div class="product-link">
-                                        <div class="product-button">
-                                            <a href="{{url('add-to-cart-case-1/'.$comic->id) }}" title="Add to cart"><i class="fa fa-shopping-cart"></i>Aggiungi al carrello</a>
-                                        </div>
-                                        <div class="add-to-link">
-                                            <ul>
-                                                <li><a href="product-details.html" title="Details"><i class="fa fa-external-link"></i></a></li>
-                                            </ul>
-                                        </div>
+                                        @if(\Illuminate\Support\Facades\Auth::user())
+                                            <div class="product-button">
+                                                <a href="{{url('add-to-cart-case-1/'.$comic->id) }}" title="Add to cart"><i class="fa fa-shopping-cart"></i>Aggiungi al carrello</a>
+                                            </div>
+                                        @else
+                                            <div class="product-button">
+                                                <a href="{{url('/login') }}" title="Add to cart"><i class="fa fa-shopping-cart"></i>Aggiungi al carrello</a>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
