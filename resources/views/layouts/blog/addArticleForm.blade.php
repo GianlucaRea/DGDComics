@@ -7,7 +7,7 @@
         <div class="comment-input mt-40">
             <div class="comment-input-textarea mb-30">
                 @php($user = \Illuminate\Support\Facades\Auth::user())
-                <form method="POST" action="{{ Route('submitArticle', ['user_id' => $user->id])}}">
+                <form method="POST" action="{{ Route('submitArticle', ['user_id' => $user->id])}}" enctype="multipart/form-data">
                     @csrf
                     <label>titolo</label>
                     <textarea name="title" id="title" class="form-control @error('title') is-invalid @enderror" cols="30" rows="10" placeholder="Scrivi qui il tuo articolo" style="resize: none; height: 70px;"></textarea>
@@ -24,6 +24,47 @@
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
+                    <div class="mt-2"></div>
+
+                    <label for="tag_name" class="required">Tag<span>*</span></label>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="single-input-item">
+                                <input type="checkbox" id="Animation" name="Animation" value="Animation">  Animation
+                                <div class="mt-1"></div>
+                                <input type="checkbox" id="Comiccon" name="Comiccon" value="Comiccon">  Comiccon
+                                <div class="mt-1"></div>
+                                <input type="checkbox" id="Cosplay" name="Cosplay" value="Cosplay">  Cosplay
+                                <div class="mt-1"></div>
+                                <input type="checkbox" id="DC" name="DC" value="DC">  DC
+                                <div class="mt-1"></div>
+                                <input type="checkbox" id="Design" name="Design" value="Design">  Design
+                                <div class="mt-1"></div>
+                                <input type="checkbox" id="Digital Art" name="Digital Art" value="Digital Art">  Digital Art
+                                <div class="mt-1"></div>
+                                <input type="checkbox" id="Fan Art" name="Fan Art" value="Fan Art">  Fan Art
+                                <div class="mt-1"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="single-input-item">
+                                <input type="checkbox" id="Humor" name="Humor" value="Humor">  Humor
+                                <div class="mt-1"></div>
+                                <input type="checkbox" id="Illustrazioni" name="Illustrazioni" value="Illustrazioni">  Illustrazioni
+                                <div class="mt-1"></div>
+                                <input type="checkbox" id="Italiano" name="Italiano" value="Italiano">  Italiano
+                                <div class="mt-1"></div>
+                                <input type="checkbox" id="Manga" name="Manga" value="Manga">  Manga
+                                <div class="mt-1"></div>
+                                <input type="checkbox" id="Marvel" name="Marvel" value="Marvel">  Marvel
+                                <div class="mt-1"></div>
+                                <input type="checkbox" id="Novità" name="Novità" value="Novità">  Novità
+                                <div class="mt-1"></div>
+                                <input type="checkbox" id="Original Character" name="Original Character" value="Original Character">  Original Character
+                                <div class="mt-1"></div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="mb-3"></div>
                     <div class="single-post-button">
                         <button type="submit" class="btn btn-sqr">Pubblica</button>

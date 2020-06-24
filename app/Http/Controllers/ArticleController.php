@@ -151,8 +151,189 @@ class ArticleController extends Controller
                 'article_text' => $article->article_text,
             );
 
-            DB::table('articles')->insert($data);
+            $article_id = Article::create($data);
 
+            if($request->has('Animation')){
+                $tag_id = DB::table('tags')->where('tag_name', '=', 'Animation')->first();
+                $tagA = new Tag();
+                $tagA->article_id = $article_id->id;
+                $tagA->tag_id = $tag_id->id;
+                $tagData = array(
+                    'tag_id' => $tagA->tag_id,
+                    'article_id' => $tagA->article_id,
+                );
+                DB::table('article_tag')->insert($tagData);
+
+            }
+
+            if($request->has('Comiccon')){
+                $tag_id = DB::table('tags')->where('tag_name', '=', 'Comiccon')->first();
+                $tagA = new Tag();
+                $tagA->article_id = $article_id->id;
+                $tagA->tag_id = $tag_id->id;
+                $tagData = array(
+                    'tag_id' => $tagA->tag_id,
+                    'article_id' => $tagA->article_id,
+                );
+                DB::table('article_tag')->insert($tagData);
+
+            }
+
+            if($request->has('Cosplay')){
+                $tag_id = DB::table('tags')->where('tag_name', '=', 'Cosplay')->first();
+                $tagA = new Tag();
+                $tagA->article_id = $article_id->id;
+                $tagA->tag_id = $tag_id->id;
+                $tagData = array(
+                    'tag_id' => $tagA->tag_id,
+                    'article_id' => $tagA->article_id,
+                );
+                DB::table('article_tag')->insert($tagData);
+
+            }
+
+            if($request->has('DC')){
+                $tag_id = DB::table('tags')->where('tag_name', '=', 'DC')->first();
+                $tagA = new Tag();
+                $tagA->article_id = $article_id->id;
+                $tagA->tag_id = $tag_id->id;
+                $tagData = array(
+                    'tag_id' => $tagA->tag_id,
+                    'article_id' => $tagA->article_id,
+                );
+                DB::table('article_tag')->insert($tagData);
+
+            }
+
+            if($request->has('Design')){
+                $tag_id = DB::table('tags')->where('tag_name', '=', 'Design')->first();
+                $tagA = new Tag();
+                $tagA->article_id = $article_id->id;
+                $tagA->tag_id = $tag_id->id;
+                $tagData = array(
+                    'tag_id' => $tagA->tag_id,
+                    'article_id' => $tagA->article_id,
+                );
+                DB::table('article_tag')->insert($tagData);
+
+            }
+
+            if($request->has('Digital Art')){
+                $tag_id = DB::table('tags')->where('tag_name', '=', 'Digital Art')->first();
+                $tagA = new Tag();
+                $tagA->article_id = $article_id->id;
+                $tagA->tag_id = $tag_id->id;
+                $tagData = array(
+                    'tag_id' => $tagA->tag_id,
+                    'article_id' => $tagA->article_id,
+                );
+                DB::table('article_tag')->insert($tagData);
+
+            }
+
+            if($request->has('Fan Art')){
+                $tag_id = DB::table('tags')->where('tag_name', '=', 'Fan Art')->first();
+                $tagA = new Tag();
+                $tagA->article_id = $article_id->id;
+                $tagA->tag_id = $tag_id->id;
+                $tagData = array(
+                    'tag_id' => $tagA->tag_id,
+                    'article_id' => $tagA->article_id,
+                );
+                DB::table('article_tag')->insert($tagData);
+
+            }
+
+            if($request->has('Humor')){
+                $tag_id = DB::table('tags')->where('tag_name', '=', 'Humor')->first();
+                $tagA = new Tag();
+                $tagA->article_id = $article_id->id;
+                $tagA->tag_id = $tag_id->id;
+                $tagData = array(
+                    'tag_id' => $tagA->tag_id,
+                    'article_id' => $tagA->article_id,
+                );
+                DB::table('article_tag')->insert($tagData);
+
+            }
+
+            if($request->has('Illustrazioni')){
+                $tag_id = DB::table('tags')->where('tag_name', '=', 'Illustrazioni')->first();
+                $tagA = new Tag();
+                $tagA->article_id = $article_id->id;
+                $tagA->tag_id = $tag_id->id;
+                $tagData = array(
+                    'tag_id' => $tagA->tag_id,
+                    'article_id' => $tagA->article_id,
+                );
+                DB::table('article_tag')->insert($tagData);
+
+            }
+
+            if($request->has('Italiano')){
+                $tag_id = DB::table('tags')->where('tag_name', '=', 'Italiano')->first();
+                $tagA = new Tag();
+                $tagA->article_id = $article_id->id;
+                $tagA->tag_id = $tag_id->id;
+                $tagData = array(
+                    'tag_id' => $tagA->tag_id,
+                    'article_id' => $tagA->article_id,
+                );
+                DB::table('article_tag')->insert($tagData);
+
+            }
+
+            if($request->has('Manga')){
+                $tag_id = DB::table('tags')->where('tag_name', '=', 'Manga')->first();
+                $tagA = new Tag();
+                $tagA->article_id = $article_id->id;
+                $tagA->tag_id = $tag_id->id;
+                $tagData = array(
+                    'tag_id' => $tagA->tag_id,
+                    'article_id' => $tagA->article_id,
+                );
+                DB::table('article_tag')->insert($tagData);
+
+            }
+
+            if($request->has('Marvel')){
+                $tag_id = DB::table('tags')->where('tag_name', '=', 'Marvel')->first();
+                $tagA = new Tag();
+                $tagA->article_id = $article_id->id;
+                $tagA->tag_id = $tag_id->id;
+                $tagData = array(
+                    'tag_id' => $tagA->tag_id,
+                    'article_id' => $tagA->article_id,
+                );
+                DB::table('article_tag')->insert($tagData);
+
+            }
+
+            if($request->has('Novità')){
+                $tag_id = DB::table('tags')->where('tag_name', '=', 'Novità')->first();
+                $tagA = new Tag();
+                $tagA->article_id = $article_id->id;
+                $tagA->tag_id = $tag_id->id;
+                $tagData = array(
+                    'tag_id' => $tagA->tag_id,
+                    'article_id' => $tagA->article_id,
+                );
+                DB::table('article_tag')->insert($tagData);
+
+            }
+
+            if($request->has('Original Character')){
+                $tag_id = DB::table('tags')->where('tag_name', '=', 'Original Character')->first();
+                $tagA = new Tag();
+                $tagA->article_id = $article_id->id;
+                $tagA->tag_id = $tag_id->id;
+                $tagData = array(
+                    'tag_id' => $tagA->tag_id,
+                    'article_id' => $tagA->article_id,
+                );
+                DB::table('article_tag')->insert($tagData);
+
+            }
 
             return redirect('/blog');
         }

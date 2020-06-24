@@ -40,7 +40,7 @@
                         <div class="product-attribute">
                                 <p>
                                     @foreach($article->tag as $tags)
-                                    <a href="#"> {{$tags->tag_name}} </a>
+                                    <a href="{{route('taglist',['tag_name' => $tags->tag_name])}}"> {{$tags->tag_name}} </a>
                                     @endforeach
                                 </p>
                         </div>

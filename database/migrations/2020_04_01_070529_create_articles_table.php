@@ -19,6 +19,7 @@ class CreateArticlesTable extends Migration
             $table->string('title');
             $table->text('article_text');
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('date')->default(\DB::raw('CURRENT_TIMESTAMP'));
         });
         DB::table('articles')->insert([
