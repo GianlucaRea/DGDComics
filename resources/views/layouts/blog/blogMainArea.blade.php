@@ -35,7 +35,7 @@
                 @if(\App\Http\Controllers\GroupController::isAdmin($u->id))
 
                         @if($articles->count() < 1)
-                            <div class="col-lg-12 col-md-12 col-12 order-lg-2 order-1">
+                            <div class="col-lg-9 col-md-12 col-12 order-lg-2 order-1">
                                 <h4>non ci sono articoli nel blog :(</h4>
                                 <div class="row">
                                     <div class="col-lg-8"></div>
@@ -48,7 +48,7 @@
                             </div>
                         @endif
                         @if($articles->count() > 0)
-                            <div class="col-lg-12 col-md-12 col-12 order-lg-2 order-1">
+                            <div class="col-lg-9 col-md-12 col-12 order-lg-2 order-1">
                                 @foreach($articles as $article)
                                     @php($articleAuth = \App\Http\Controllers\UserController::getUserId($article->user_id))
                                     @php($articleComments = \App\Http\Controllers\CommentController::getcommentsByArticleId($article->id))
@@ -117,13 +117,13 @@
                 @else <!-- zona non admin -->
 
                     @if($articles->count() < 1)
-                        <div class="col-lg-12 col-md-12 col-12 order-lg-2 order-1">
+                        <div class="col-lg-9 col-md-12 col-12 order-lg-2 order-1">
                             <h4>non ci sono articoli nel blog :(</h4>
                         </div>
                     @endif
                     @if($articles->count() > 0)
 
-                        <div class="col-lg-12 col-md-12 col-12 order-lg-2 order-1">
+                        <div class="col-lg-9 col-md-12 col-12 order-lg-2 order-1">
                             @foreach($articles as $article)
                                 @php($articleAuth = \App\Http\Controllers\UserController::getUserId($article->user_id))
                                 @php($articleComments = \App\Http\Controllers\CommentController::getcommentsByArticleId($article->id))
@@ -175,12 +175,12 @@
             @else <!-- zona user non loggato -->
 
                 @if($articles->count() < 1)
-                    <div class="col-lg-12 col-md-12 col-12 order-lg-2 order-1">
+                    <div class="col-lg-9 col-md-12 col-12 order-lg-2 order-1">
                         <h4>non ci sono articoli nel blog :(</h4>
                     </div>
                 @endif
                 @if($articles->count() > 0)
-                    <div class="col-lg-12 col-md-12 col-12 order-lg-2 order-1">
+                    <div class="col-lg-9 col-md-12 col-12 order-lg-2 order-1">
                         @foreach($articles as $article)
                             @php($articleAuth = \App\Http\Controllers\UserController::getUserId($article->user_id))
                             @php($articleComments = \App\Http\Controllers\CommentController::getcommentsByArticleId($article->id))
