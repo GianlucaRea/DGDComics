@@ -31,6 +31,8 @@ Route::get('/contact', function(){
 
 Route::get('/comic_detail/{id}','ComicController@comicDetail')->name('comicdetail');
 Route::get('/comic_detail_review_error/{id}','ComicController@comicDetailError')->name('comicDetailError');
+Route::get('/comic_detail/{comic_id}/editreview/{review_id}', 'ReviewController@getReview')->name('editreviewuser');
+Route::post('/comic_detail/{comic_id}/editreview/update/{review_id}', 'ReviewController@updateReview')->name('updatereviewuser');
 Route::post('/submitReview/{id}','ReviewController@add')->name('submitReview');
 
 Route::get('/vendor_detail/{id}' , 'RankingController@vendorRanking')->name('vendorpublic');

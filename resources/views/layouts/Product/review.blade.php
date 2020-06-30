@@ -201,6 +201,23 @@
                                         </div>
                                     @endif
                                 @endif
+                                @if(Auth::user())
+                                    @if(Auth::user()->id = $review->user_id)
+                                        <div style="font-size: 24px;">
+                                            <a class="btn btn-danger" onclick="return myFunction();"  href="{{route('editreviewuser',[$comic_id=$comic->id, $review_id=$review->id])}}"><i class="fa fa-pencil" ></i></a>
+                                            <script>
+                                                function myFunction() {
+                                                    if(!confirm("Sei sicuro di voler modificare questa recensione"))
+                                                        event.preventDefault();
+                                                    else{
+
+                                                    }
+
+                                                }
+                                            </script>
+                                        </div>
+                                    @endif
+                                @endif
                             </div>
                         </div>
                     </div>
