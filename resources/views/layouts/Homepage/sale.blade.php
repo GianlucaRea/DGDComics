@@ -1,16 +1,17 @@
+<!-- bestseller-area-start -->
 <!-- featured-area-start -->
 <div class="new-book-area pb-25 pt-25">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title section-title-res text-center mb-30">
-                    <h2>DGDRandom</h2>
-                    <h6>Scelti a caso per voi</h6>
+                    <h2>Sconti</h2>
                 </div>
             </div>
         </div>
         <div class="tab-active owl-carousel">
-            @foreach($comics->shuffle()->take(10) as $comic)
+            @php($salecomics = \App\Http\Controllers\ComicController::getComicByDiscount())
+            @foreach($salecomics as $comic)
                 @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
                 <div class="tab-total">
                     <!-- single-product-start -->

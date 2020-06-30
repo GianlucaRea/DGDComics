@@ -516,7 +516,7 @@ class ComicController extends Controller
     }
 
     public static function  getComicByDiscount(){
-        return Comic::orderByDesc('discount')->first();
+        return Comic::orderByDesc('discount')->take(10)->get();
     }
 
     public static function getComicByDiscountAndNumber($number){

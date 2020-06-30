@@ -7,13 +7,13 @@
     <header>
         @include('layouts.Header.header')
     </header>
-            @include('layouts.Homepage.featuredArea')
-            @include('layouts.Homepage.slider')
-            @include('layouts.Homepage.productArea')
             @include('layouts.Homepage.newArrival')
+            @include('layouts.Homepage.slider')
+            @include('layouts.Homepage.sale')
             <div style="height: 75px"></div>
-            @include('layouts.Homepage.bestsellerArea')
-            @include('layouts.Homepage.dgdrandom')
+
+            @include('layouts.Homepage.consigliati')
+            @include('layouts.Homepage.productArea')
             @include('layouts.Homepage.recentPostArea')
             @include('layouts.Footer.banner2')
             @include('layouts.Footer.social')
