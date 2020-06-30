@@ -27,6 +27,7 @@
                                     <a href="{{route('adminusers')}}" class="{{ (Route::currentRouteName() == 'adminusers') ? 'active' : '' }}" ><i class="fa fa-user"></i>Gestione Utenti</a>
                                     <a href="{{route('admincomics')}}" class="{{ (Route::currentRouteName() == 'admincomics') ? 'active' : '' }}" code><i class="fa fa-book"></i>Gestione Fumetti</a>
                                     <a href="{{route('adminreviews')}}" class="{{ (Route::currentRouteName() == 'adminreviews') ? 'active' : '' }}"><i class="fa fa-map-marker"></i>Gestione Recensione</a>
+                                    <a href="{{route('adminarticles')}}" class="{{ (Route::currentRouteName() == 'adminarticles') ? 'active' : '' }}"><i class="fa fa-pencil"></i>Gestione Articoli</a>
                                 </div>
                             </div>
                             <!-- My Account Tab Menu End -->
@@ -226,6 +227,34 @@
                                         </div>
                                     </div>
 
+                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'adminarticles') ? 'active' : '' }}" id="articles" role="tabpanel">
+                                        <div class="myaccount-content">
+                                            <h5>Articoli</h5>
+                                            <div class="myaccount-table table-responsive text-center">
+                                                <table class="table table-bordered">
+                                                    <thead class="thead-dark">
+                                                    <tr>
+                                                        <th>Titolo</th>
+                                                        <th>Testo</th>
+                                                        <th>Elimina</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($articles as $article)
+                                                        <tr>
+                                                            <td>{{$article->title}}</td>
+                                                            <td>{{ \Illuminate\Support\Str::limit($article->article_text, 45, $end='...') }}</td>
+                                                            <td><a class="btn btn-danger" onclick="return deleteArticle();"  href="{{route('article-delete', $article->id)}}"><i class="fa fa-trash"></i></a></td>
+                                                        </tr>
+                                                    @endforeach
+                                                    {{ $articles->links() }}
+                                                    </tbody>
+                                                </table>
+                                                {{ $articles->links() }}
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div> <!-- My Account Tab Content End -->
                         </div>
@@ -247,6 +276,10 @@
     }
     function deleteComic() {
         if(!confirm("Sei sicuro di voler eliminare questo fumetto?"))
+            event.preventDefault();
+    }
+    function deleteArticle() {
+        if(!confirm("Sei sicuro di voler eliminare questo articolo dal Blog?"))
             event.preventDefault();
     }
 </script>

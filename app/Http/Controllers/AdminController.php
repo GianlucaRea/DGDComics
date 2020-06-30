@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Article;
 use Illuminate\Http\Request;
 use App\Comic;
 use App\User;
@@ -11,15 +12,17 @@ use Illuminate\Support\Facades\Auth;
 class AdminController extends Controller
 {
 public static function dashboard() {
-    $user = \Illuminate\Support\Facades\Auth::user();
-    $users = \App\User::where('username','!=','admin')->orderBy('username', 'asc')->paginate(12);
+    $user =  Auth::user();
+    $users =  User::where('username','!=','admin')->orderBy('username', 'asc')->paginate(12);
     $comics =Comic::orderBy('comic_name', 'asc')->paginate(12);
-    $reviews = \App\Review::orderBy('review_title', 'asc')->paginate(12);
+    $reviews =  Review::orderBy('review_title', 'asc')->paginate(12);
+    $articles = Article::orderBy('created_at','asc')->paginate(12);
     return view('adminPanel')
         ->with(compact('user'))
         ->with(compact('users'))
         ->with(compact('comics'))
-        ->with(compact('reviews'));
+        ->with(compact('reviews'))
+        ->with(compact('articles'));
 }
 
 

@@ -342,9 +342,13 @@ class ArticleController extends Controller
         }
     }
 
-    public static function destroyArticle($id){
-        DB::table("articles")->where("id", "=", $id)->delete();
+    public static function destroyArticleLocal($id){
+        DB::table('articles')->where('id', '=', $id)->delete();
 
         return redirect('/blog');
+    }
+    public static function destroyArticle($id){
+        DB::table('articles')->where('id','=',$id)->delete();
+        return back();
     }
 }

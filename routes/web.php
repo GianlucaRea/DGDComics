@@ -124,6 +124,7 @@ Route::get('/adminArea/dashboard', 'AdminController@dashboard')->name('admindash
 Route::get('/adminArea/users', 'AdminController@dashboard')->name('adminusers');
 Route::get('/adminArea/comics', 'AdminController@dashboard')->name('admincomics');
 Route::get('/adminArea/reviews', 'AdminController@dashboard')->name('adminreviews');
+Route::get('/adminArea/articles', 'AdminController@dashboard')->name('adminarticles');
 
 
 Route::get('/vendor', function () {
@@ -186,7 +187,8 @@ Route::get('/writeArticle', 'AdminController@checkForWriteArticle')->name('write
 Route::post('submitArticle/{user_id}', 'ArticleController@addArticle')->name('submitArticle');
 Route::get('comment-deletelocal/{id}','CommentController@destroyComment')->name('comment-delete-local');
 Route::get('answer-deletelocal/{id}','CommentController@destroyAnswer')->name('answer-delete-local');
-Route::get('article-deletelocal/{id}','ArticleController@destroyArticle')->name('article-delete-local');
+Route::get('article-deletelocal/{id}','ArticleController@destroyArticleLocal')->name('article-delete-local');
+Route::get('article-delete/{id}','ArticleController@destroyArticle')->name('article-delete');
 Route::get('add-to-list/{id}', 'WishlistController@addToList');
 Route::get('remove-from-list/{id}', 'WishlistController@removeToList');
 Route::get('remove-from-list-case-lost/{id}', 'WishlistController@removeToListCaseLost');
