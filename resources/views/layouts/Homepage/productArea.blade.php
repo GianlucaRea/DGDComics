@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="section-title bt text-center pt-50 mb-50">
+                <div class="section-title text-center pt-50 mb-50">
                     <h2>esplora il mondo dei fumetti</h2>
                     <p>Cerca nella nostra collezione i prodotti più variegati. <br /> Troverai sicuramente ciò che cerchi!.</p>
                 </div>

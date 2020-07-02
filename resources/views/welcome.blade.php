@@ -3,14 +3,13 @@
     <head>
         @include('layouts.Header.head')
     </head>
-    <body class="home-2" style="background-image: url({{asset('img/immaginiNostre/prova.png')}}); background-size: cover; background-repeat: no-repeat; background-color: #ffffe6;">
+    <body class="home-2">
     <header>
         @include('layouts.Header.header')
     </header>
+            @include('layouts.Homepage.slider2')
             @include('layouts.Homepage.newArrival')
-            @include('layouts.Homepage.slider')
             @include('layouts.Homepage.sale')
-            <div style="height: 75px"></div>
 
             @include('layouts.Homepage.consigliati')
             @include('layouts.Homepage.productArea')

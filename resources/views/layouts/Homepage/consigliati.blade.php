@@ -1,5 +1,5 @@
 <!-- featured-area-start -->
-<div class="new-book-area pb-25 pt-25">
+<div class="new-book-area mt-5 mb-2">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">

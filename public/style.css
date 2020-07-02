@@ -687,7 +687,7 @@ body {
 }
 
 .header-mid-area .my-cart ul>li>a {
-    color: #ffffff;
+    color: #000000;
     display: inline-block;
     font-size: 20px;
     font-weight: 700;
@@ -879,7 +879,8 @@ body {
 /*----------------------------------------*/
 
 .main-menu-area {
-    background: #000000 none repeat scroll 0 0;
+    background: #ffffff none repeat scroll 0 0;
+    border-bottom: 2px solid #000000;
 }
 
 .main-menu-area.sticky {
@@ -904,7 +905,7 @@ body {
 .menu-area ul li>a,
 .safe-area a {
     background: transparent none repeat scroll 0 0;
-    color: #fff;
+    color: #000000;
     display: block;
     font-size: 16px;
     font-weight: 700;

@@ -63,7 +63,7 @@
 @endif
 
 <div class="product-info-area">
-    <div class="tab-content border-0" style="background-color: #ffffe6 ">
+    <div class="tab-content border-0">
         <div class="mt-30"></div>
         <div class="tab-pane fade show active" id="addreview">
             <form method="POST" action="{{ Route('submitReview', ['id' => $comic->id])}}">
@@ -143,7 +143,7 @@
 
 
 <div class="product-info-area">
-    <div class="tab-pane fade show active" style="background-color: #fff0e6 " id="review">
+    <div class="tab-pane fade show active"  id="review">
         <div class="valu">
             <div class="row">
                 <div class="ml-3"></div>
