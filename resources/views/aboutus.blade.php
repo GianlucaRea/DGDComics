@@ -7,8 +7,11 @@
 <header>
     @include('layouts.Header.header')
 </header>
-<div style="height: 75px"></div>
+@php($page = [
+    'name' =>'Riguardo a noi']
+    )
 
+@include('layouts.Header.breadcrumbsArea', $page)
 @include('layouts.Other.aboutusText')
 
 <footer>

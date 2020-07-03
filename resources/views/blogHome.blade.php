@@ -8,7 +8,7 @@
     @include('layouts.Header.header')
 </header>
 @php($page = [
-    'name' =>'blog']
+    'name' =>'Blog']
     )
 @include('layouts.Header.breadcrumbsArea', $page)
 @include('layouts.blog.blogMainArea')

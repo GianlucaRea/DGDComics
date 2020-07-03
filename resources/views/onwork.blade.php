@@ -8,7 +8,7 @@
     @include('layouts.Header.header')
 </header>
 @php($page = [
-    'name' =>'Under Construction']
+    'name' =>'In lavorazione']
     )
 
 <div class="col-lg-12">

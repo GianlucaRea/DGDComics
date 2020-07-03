@@ -14,7 +14,7 @@
         @include('layouts.Header.header')
     </header>
     @php($page = [
-    'name' =>'Area Personale']
+    'name' =>'Area personale']
     )
     @include('layouts.Header.breadcrumbsArea', $page)
     <div id="app">

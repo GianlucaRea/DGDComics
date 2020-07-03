@@ -8,7 +8,7 @@
     @include('layouts.Header.header')
 </header>
 @php($page = [
-    'name' =>'Il tuo account']
+    'name' =>'Aggiungi metodo di pagamento']
     )
 @include('layouts.Header.breadcrumbsArea', $page)
 @include('layouts.UserAccount.methodForm')

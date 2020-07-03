@@ -5,17 +5,17 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title text-center pt-50 mb-50">
-                    <h2>esplora il mondo dei fumetti</h2>
-                    <p>Cerca nella nostra collezione i prodotti più variegati, <br /> Troverai sicuramente ciò che cerchi!</p>
+                    <h2>Collane storiche</h2>
+                    <p>Recupera i volumi delle più grandi storie del mondo del fumetto, <br/>e rivivi le loro storiche avventure  </p>
                 </div>
             </div>
             <div class="col-lg-12">
                 <!-- tab-menu-start -->
                 <div class="tab-menu mb-40 text-center">
                     <ul class="nav justify-content-center">
-                        <li><a class="active" href="#manga" data-toggle="tab">Manga</a></li>
-                        <li><a href="#SuperHero" data-toggle="tab">SuperEroi</a></li>
-                        <li><a href="#italian" data-toggle="tab">Italiani</a></li>
+                        <li><a class="active" href="#onepiece" data-toggle="tab">One Piece</a></li>
+                        <li><a href="#twd" data-toggle="tab">The walking dead</a></li>
+                        <li><a href="#topolino" data-toggle="tab">Topolino</a></li>
                     </ul>
                 </div>
                 <!-- tab-menu-end -->
@@ -23,77 +23,11 @@
         </div>
         <!-- tab-area-start -->
         <div class="tab-content">
-            <div class="tab-pane fade show active" id="manga">
+            <div class="tab-pane fade show active" id="onepiece">
                 <div class="tab-active owl-carousel">
                     <!-- single-product-start -->
                     <!-- con questa linea php funziona senza no-->
-                    @foreach($manga as $comic)
-                        @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
-
-                            <!-- single-product-start -->
-                            <div class="product-wrapper">
-                                <div class="product-img">
-                                    <a href="{{ url('/comic_detail/'.$comic->id) }}">
-                                        <img src="{{asset('img/comicsImages/' . $image->image_name) }}" alt="book" class="primary" />
-                                    </a>
-                                    <div class="quick-view">
-                                        <a class="action-view" href="{{ url('/comic_detail/'.$comic->id) }}">
-                                            <i class="fa fa-search-plus"></i>
-                                        </a>
-                                    </div>
-                                    <div class="product-flag">
-                                        <ul>
-                                            <!-- <li><span class="sale">new</span> <br></li>  ESSENDOCI UNA PARTE NEW ARRIVAL MI SEMBRA INUTILE METTERE L'ETICHETTA NEW...-->
-                                            @if( $comic->discount != 0 )
-                                                <li><span class="discount-percentage">-{{ $comic->discount }}%</span></li>
-                                            @endif
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-details text-center">
-                                    <div class="product-rating">
-                                        @php($id = $comic->id)
-                                        @php($avgstar = \App\Review::where('comic_id','=',$id)->avg('stars'))
-                                        @foreach(range(1,5) as $i)
-                                            @if($avgstar >0)
-                                                @if($avgstar >0.5)
-                                                    <a><i class="fa fa-star fa_custom"></i></a>
-                                                @else
-                                                    <a><i class="fa fa-star-half-o fa_custom"></i></a>
-                                                @endif
-                                            @else
-                                                <a><i class="fa  fa-star-o fa_custom"></i></a>
-                                            @endif
-                                            <?php $avgstar--; ?>
-                                        @endforeach
-                                    </div>
-                                        <h4>{{ $comic->comic_name }}</h4>
-                                    <div class="product-price">
-                                        <ul> <!-- commento a caso per problema push con git-->
-                                            @if( $comic->discount != 0 )
-                                                @php($newPrice = \App\Http\Controllers\ComicController::priceCalculator($comic->id))
-                                                <li>€ {{ $newPrice}}</li>
-                                            @else
-                                                <li>€ {{ $comic->price }}</li>
-                                            @endif
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-link">
-                                    <div class="product-button">
-                                        <a href="{{url('add-to-cart-case-1/'.$comic->id) }}" title="Add to cart"><i class="fa fa-shopping-cart"></i>Aggiungi al carrello</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- single-product-end -->
-                @endforeach
-                    <!-- single-product-end -->
-                 </div>
-            </div>
-            <div class="tab-pane fade" id="SuperHero">
-                <div class="tab-active owl-carousel">
-                    <!-- single-product-start -->
-                @foreach($america as $comic)
+                @foreach($onePiece as $comic)
                     @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
 
                     <!-- single-product-start -->
@@ -133,9 +67,9 @@
                                         <?php $avgstar--; ?>
                                     @endforeach
                                 </div>
-                                    <h4>{{ $comic->comic_name }}</h4>
+                                <h4>{{ $comic->comic_name }}</h4>
                                 <div class="product-price">
-                                    <ul>
+                                    <ul> <!-- commento a caso per problema push con git-->
                                         @if( $comic->discount != 0 )
                                             @php($newPrice = \App\Http\Controllers\ComicController::priceCalculator($comic->id))
                                             <li>€ {{ $newPrice}}</li>
@@ -153,15 +87,16 @@
                         </div>
                         <!-- single-product-end -->
                 @endforeach
+                <!-- single-product-end -->
                 </div>
             </div>
-            <div class="tab-pane fade" id="italian">
+            <div class="tab-pane fade" id="twd">
                 <div class="tab-active owl-carousel">
                     <!-- single-product-start -->
-                                   @foreach($italian as $comic)
-                                       @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
+                @foreach($twd as $comic)
+                    @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
 
-                                       <!-- single-product-start -->
+                    <!-- single-product-start -->
                         <div class="product-wrapper">
                             <div class="product-img">
                                 <a href="{{ url('/comic_detail/'.$comic->id) }}">
@@ -198,7 +133,72 @@
                                         <?php $avgstar--; ?>
                                     @endforeach
                                 </div>
-                                    <h4>{{ $comic->comic_name }} </h4>
+                                <h4>{{ $comic->comic_name }}</h4>
+                                <div class="product-price">
+                                    <ul>
+                                        @if( $comic->discount != 0 )
+                                            @php($newPrice = \App\Http\Controllers\ComicController::priceCalculator($comic->id))
+                                            <li>€ {{ $newPrice}}</li>
+                                        @else
+                                            <li>€ {{ $comic->price }}</li>
+                                        @endif
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product-link">
+                                <div class="product-button">
+                                    <a href="{{url('add-to-cart-case-1/'.$comic->id) }}" title="Add to cart"><i class="fa fa-shopping-cart"></i>Aggiungi al carrello</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- single-product-end -->
+                    @endforeach
+                </div>
+            </div>
+            <div class="tab-pane fade" id="topolino">
+                <div class="tab-active owl-carousel">
+                    <!-- single-product-start -->
+                @foreach($topolino as $comic)
+                    @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
+
+                    <!-- single-product-start -->
+                        <div class="product-wrapper">
+                            <div class="product-img">
+                                <a href="{{ url('/comic_detail/'.$comic->id) }}">
+                                    <img src="{{asset('img/comicsImages/' . $image->image_name) }}" alt="book" class="primary" />
+                                </a>
+                                <div class="quick-view">
+                                    <a class="action-view" href="{{ url('/comic_detail/'.$comic->id) }}">
+                                        <i class="fa fa-search-plus"></i>
+                                    </a>
+                                </div>
+                                <div class="product-flag">
+                                    <ul>
+                                        <!-- <li><span class="sale">new</span> <br></li>  ESSENDOCI UNA PARTE NEW ARRIVAL MI SEMBRA INUTILE METTERE L'ETICHETTA NEW...-->
+                                        @if( $comic->discount != 0 )
+                                            <li><span class="discount-percentage">-{{ $comic->discount }}%</span></li>
+                                        @endif
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product-details text-center">
+                                <div class="product-rating">
+                                    @php($id = $comic->id)
+                                    @php($avgstar = \App\Review::where('comic_id','=',$id)->avg('stars'))
+                                    @foreach(range(1,5) as $i)
+                                        @if($avgstar >0)
+                                            @if($avgstar >0.5)
+                                                <a><i class="fa fa-star fa_custom"></i></a>
+                                            @else
+                                                <a><i class="fa fa-star-half-o fa_custom"></i></a>
+                                            @endif
+                                        @else
+                                            <a><i class="fa  fa-star-o fa_custom"></i></a>
+                                        @endif
+                                        <?php $avgstar--; ?>
+                                    @endforeach
+                                </div>
+                                <h4>{{ $comic->comic_name }} </h4>
                                 <div class="product-price">
                                     <ul> <!-- commento a caso per problema push con git-->
                                         @if( $comic->discount != 0 )
@@ -225,7 +225,7 @@
                             </div>
                         </div>
                         <!-- single-product-end -->
-                @endforeach
+                    @endforeach
 
                 </div>
             </div>

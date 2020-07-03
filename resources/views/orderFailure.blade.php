@@ -8,7 +8,7 @@
     @include('layouts.Header.header')
 </header>
 @php($page = [
-    'name' =>'ordine effettuato']
+    'name' =>'ordine non effettuato']
     )
 @include('layouts.Header.breadcrumbsArea', $page)
 @include('layouts.Other.failure')

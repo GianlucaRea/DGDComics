@@ -8,7 +8,7 @@
     @include('layouts.Header.header')
 </header>
 @php($page = [
-    'name' =>'contatti']
+    'name' =>'Contatti']
     )
 @include('layouts.Header.breadcrumbsArea', $page)
 @include('layouts.Other.contactForm')

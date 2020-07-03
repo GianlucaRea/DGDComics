@@ -8,15 +8,42 @@
                     <a href="{{ url('/') }}"><img src="{{ asset('img/logo/iconaDGD.png') }}" width="250px" height="250px" alt="logo" /></a>
                 </div>
             </div>
-            <div class="col-lg-2 col-md-3 col-12"> <!-- la parte del carrello è ancora da fare, quindi non la tocco per ora-->
+            <div class="col-lg-4"></div>
+            <div class="col-lg-0-5">
                 <div class="row">
-                    <div class="my-cart">
+                    <div class="my-cart" style="alignment: right; margin-top: 11px">
+                        <ul>
+                            <li>
+                                <a href="#"><i class="fa fa-shopping-bag" style="padding: 0px"></i></a>
+                                <span>2</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="ml-4"></div>
+            <div class="col-lg-0-5">
+                <div class="row">
+                    <div class="my-cart" style="alignment: right; margin-top: 11px">
+                        <ul>
+                            <li>
+                                <a href="#"><i class="fa fa-user" style="padding: 0px"></i></a>
+                                <span>2</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="ml-3"></div>
+            <div class="col-lg-0-5"> <!-- la parte del carrello è ancora da fare, quindi non la tocco per ora-->
+                <div class="row">
+                    <div class="my-cart" style="alignment: right; margin-top: 11px">
                         <ul>
                             @if(\Illuminate\Support\Facades\Auth::user()!=null)
                                 @if(Auth::user()->hasGroup('il gruppo degli admin'))
 
                                 @else
-                                <li><a href="{{url('/cart')}}"><i class="fa fa-shopping-cart"></i>Carrello</a>
+                                <li><a href="{{url('/cart')}}"><i class="fa fa-shopping-cart" style="padding: 0px"></i></a>
                                     @php($quantityCart = 0)
                                     @if(session('cart'))
                                         @php($cart = session()->get('cart'))
@@ -73,14 +100,15 @@
                                 @endif
                             @endif
                             @else
-                                <li><a href="{{url('/login')}}"><i class="fa fa-shopping-cart"></i>Carrello</a>
+                                <li><a href="{{url('/login')}}"><i class="fa fa-shopping-cart" style="padding: 0px"></i></a>
+                                    <span>2</span>
                                     @endif
                                 </li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2 col-md-3 col-12">
+            {{--<div class="col-lg-2 col-md-3 col-12">
                 <div class="row">
                     <div class="my-cart"> <!--uso la stessa classe perché non ho voglia di rifa, semplicemente dovrei rifare una cosa uguale con nome diverso-->
                         <ul>
@@ -132,7 +160,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div>--}}
         </div>
     </div>
 </div>
@@ -142,7 +170,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-1">
-                <div class="menu-area">
+                <div class="menu-area" style="margin-top:5px">
                     <ul>
                         <li>
                             <a href="{{ url('/') }}">Home</a>
@@ -151,16 +179,44 @@
                 </div>
             </div>
             <div class="col-lg-1">
-                <div class="menu-area">
+                <div class="menu-area" style="margin-top:5px">
                     <ul>
                         <li>
-                            <a href="{{ url('/aboutUs') }}">About</a>
+                            <a href="{{ url('/shoplist/manga') }}">Manga</a>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="col-lg-1">
-                <div class="menu-area">
+                <div class="menu-area" style="margin-top:5px">
+                    <ul>
+                        <li>
+                            <a href="{{ url('/shoplist/supereroi') }}">Supereroi</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="ml-4"></div>
+            <div class="col-lg-1">
+                <div class="menu-area" style="margin-top:5px">
+                    <ul>
+                        <li>
+                            <a href="{{ url('/shoplist/italiani') }}">Italiani</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-1">
+                <div class="menu-area" style="margin-top:5px">
+                    <ul>
+                        <li>
+                            <a href="{{route('sconto')}}">Outlet</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-1">
+                <div class="menu-area" style="margin-top:5px">
                     <ul>
                         <li>
                             <a href="{{ url('blog') }}">Blog</a>
@@ -168,20 +224,11 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-1">
-                <div class="menu-area">
-                    <ul>
-                        <li>
-                            <a href="{{route('sconto')}}">Sconti</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            @if (Route::has('login'))
+            {{--@if (Route::has('login'))
                 @auth
                    @if(Auth::user()->hasGroup('il gruppo degli admin'))
                     <div class="col-lg-1">
-                        <div class="menu-area">
+                        <div class="menu-area" style="margin-top:5px">
                             <ul>
                                 <li>
                                     <a href="{{ url('/adminArea/dashboard') }}">Admin</a>
@@ -191,7 +238,7 @@
                     </div>
                     @else
                         <div class="col-lg-1">
-                            <div class="menu-area">
+                            <div class="menu-area" style="margin-top:5px">
                                 <ul>
                                     <li>
                                         <a href="{{ url('/accountArea/dashboard') }}">Account</a>
@@ -202,7 +249,7 @@
                     @endif
                     <div class="pl-10"></div>
                     <div class="col-lg-1">
-                        <div class="menu-area">
+                        <div class="menu-area" style="margin-top:5px">
                             <ul>
                                 <li>
                                     <a href="{{ url('/getLogout') }}">logout</a>
@@ -213,7 +260,7 @@
                     <div class="pl-20"></div>
                 @else
                     <div class="col-lg-1">
-                        <div class="menu-area">
+                        <div class="menu-area" style="margin-top:5px">
                             <ul>
                                 <li>
                                     <a href="{{ route('login') }}">Accesso</a>
@@ -223,7 +270,7 @@
                     </div>
                     @if (Route::has('register'))
                         <div class="col-lg-1">
-                            <div class="menu-area">
+                            <div class="menu-area" style="margin-top:5px">
                                 <ul>
                                     <li>
                                         <a href="{{ route('register') }}">Registrazione</a>
@@ -235,12 +282,12 @@
                         <div class="pl-40"></div>
                     @endif
                 @endauth
-            @endif
+            @endif--}}
             <div class="col-lg-5">
                 <div id="search" class="header-search">
                     <ul>
                         <li>
-                            <form action="{{ route('searchroute') }}">
+                            <form action="{{ route('searchroute') }}" >
                                 <input type="text" name="search" placeholder="Cerca nello store..." />
                                 <a  href="javascript:;" onclick="parentNode.submit();"><i class="fa fa-search"></i></a>
                             </form>

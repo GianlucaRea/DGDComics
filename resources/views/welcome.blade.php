@@ -13,6 +13,7 @@
 
             @include('layouts.Homepage.consigliati')
             @include('layouts.Homepage.productArea')
+            @include('layouts.Homepage.productArea2')
             @include('layouts.Homepage.recentPostArea')
             @include('layouts.Footer.banner2')
             @include('layouts.Footer.social')

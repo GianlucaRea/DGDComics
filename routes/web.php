@@ -48,6 +48,9 @@ Route::get('/shoplist/price2','ComicController@shoplistPrice2')->name('prezzo2')
 Route::get('/shoplist/price3','ComicController@shoplistPrice3')->name('prezzo3');
 Route::get('/shoplist/price4','ComicController@shoplistPrice4')->name('prezzo4');
 Route::get('/shoplist/sconto','ComicController@shoplistSale')->name('sconto');
+Route::get('/shoplist/manga','ComicController@shoplistManga')->name('manga');
+Route::get('/shoplist/supereroi','ComicController@shoplistSupereroi')->name('supereroi');
+Route::get('/shoplist/italiani','ComicController@shoplistItaliani')->name('italiani');
 Route::get('/shoplist/search/','ComicController@shoplistSearch')->name('searchroute');
 
 

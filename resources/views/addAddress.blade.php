@@ -8,7 +8,7 @@
     @include('layouts.Header.header')
 </header>
 @php($page = [
-    'name' =>'Il tuo account']
+    'name' =>'Aggiungi indirizzo di spedizione']
     )
 @include('layouts.Header.breadcrumbsArea', $page)
 @include('layouts.UserAccount.addressForm')

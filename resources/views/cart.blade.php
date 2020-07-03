@@ -8,7 +8,7 @@
     @include('layouts.Header.header')
 </header>
 @php($page = [
-    'name' =>'carrello']
+    'name' =>'Carrello']
     )
 @include('layouts.Header.breadcrumbsArea', $page)
 @if(\Illuminate\Support\Facades\Auth::user()!=null)

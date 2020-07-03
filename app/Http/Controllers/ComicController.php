@@ -309,6 +309,31 @@ class ComicController extends Controller
       return view('shoplist')->with(compact('genres'))->with(compact('comics'));
       else return view ('shoplist')->with(compact('genres'))->with(compact('comics'))->withMessage('No Details found. Try to search again !');
     }
+
+    public function shoplistManga(){
+        $genres = Genre::all();
+        $comics = Comic::where('comic_name','LIKE','%manga%')->orWhere('type','LIKE','%manga%')->orWhere('publisher','LIKE','%manga%')->paginate(8);
+        if(count($comics) > 0)
+            return view('shoplist')->with(compact('genres'))->with(compact('comics'));
+        else return view ('shoplist')->with(compact('genres'))->with(compact('comics'))->withMessage('No Details found. Try to search again !');
+    }
+
+    public function shoplistSupereroi(){
+        $genres = Genre::all();
+        $comics = Comic::where('type','LIKE','%marvel%')->orWhere('type','LIKE','%dc%')->paginate(8);
+        if(count($comics) > 0)
+            return view('shoplist')->with(compact('genres'))->with(compact('comics'));
+        else return view ('shoplist')->with(compact('genres'))->with(compact('comics'))->withMessage('No Details found. Try to search again !');
+    }
+
+    public function shoplistItaliani(){
+        $genres = Genre::all();
+        $comics = Comic::where('type','LIKE','%italiano%')->paginate(8);
+        if(count($comics) > 0)
+            return view('shoplist')->with(compact('genres'))->with(compact('comics'));
+        else return view ('shoplist')->with(compact('genres'))->with(compact('comics'))->withMessage('No Details found. Try to search again !');
+    }
+
     public function comicDetail($id){
         $isNotPassed = false;
         $comic = Comic::find($id);

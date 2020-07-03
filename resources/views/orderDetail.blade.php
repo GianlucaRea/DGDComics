@@ -8,7 +8,7 @@
     @include('layouts.Header.header')
 </header>
 @php($page = [
-    'name' =>'orderDetail']
+    'name' =>'Dettagli ordine']
     )
 @include('layouts.Header.breadcrumbsArea', $page)
 @include('layouts.Other.orderDetailByID')

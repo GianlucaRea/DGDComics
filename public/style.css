@@ -450,6 +450,18 @@ body {
 #mobile-menu-active {
     display: none;
 }
+.col-lg-0-5 { width: 4.1667%; }
+.col-lg-1-5 { width: 12.5%; }
+.col-lg-2-5 { width: 20.83333%; }
+.col-lg-3-5 { width: 29.16667%; }
+.col-lg-4-5 { width: 37.5%; }
+.col-lg-5-5 { width: 45.83333%; }
+.col-lg-6-5 { width: 54.16667%; }
+.col-lg-7-5 { width: 62.5%; }
+.col-lg-8-5 { width: 70.83333%; }
+.col-lg-9-5 { width: 79.16667%; }
+.col-lg-10-5 { width: 87.5%; }
+.col-lg-11-5 { width: 95.8333%; }
 
 /*-------------------
   2. Header-area
@@ -692,7 +704,6 @@ body {
     font-size: 20px;
     font-weight: 700;
     line-height: 30px;
-    padding: 10px 0;
     text-transform: uppercase;
     text-decoration: none;
     transition: .3s;
@@ -704,7 +715,6 @@ body {
 
 .header-mid-area .my-cart ul li>a>i {
     font-size: 40px;
-    padding-right: 30px;
 }
 
 .header-mid-area .my-cart ul li>span {
@@ -884,11 +894,19 @@ body {
 }
 
 .main-menu-area.sticky {
-    background: rgba(0, 0, 0, 0.48) none repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0.9) none repeat scroll 0 0;
+}
+
+.main-menu-area.sticky ul li>a{
+    color:white;
 }
 
 .main-menu-area.sticky-header-1.sticky:hover {
     background: rgba(0, 0, 0, 1) none repeat scroll 0 0;
+}
+
+.main-menu-area.sticky-header-1.sticky:hover ul li>a{
+    color: white;
 }
 
 .menu-area{
@@ -963,11 +981,7 @@ body {
     border: 4px solid transparent;
     content: "";
     position: absolute;
-    right: -8px;
-    top: -8px;
     transition: .5s;
-    border-bottom-color: #a74600;
-    border-left-color: #a74600;
     opacity: 0;
 }
 
@@ -1611,14 +1625,13 @@ body {
     color: #f07c29;
     font-size: 20px;
     font-weight: 600;
-    font-family: 'Rufina', serif;
-    font-style: italic;
+    font-family: 'Open Sans', serif;
 }
 
 .product-price ul li span {
     color: #666;
     padding-right: 5px;
-    font-family: 'Rufina', serif;
+    font-family: 'Open Sans', serif;
     font-weight: 400;
     font-size: 16px;
 }

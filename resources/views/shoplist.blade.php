@@ -7,7 +7,10 @@
 <header>
     @include('layouts.Header.header')
 </header>
-<div style="height: 75px"></div>
+@php($page = [
+    'name' =>'risultati di ricerca']
+    )
+@include('layouts.Header.breadcrumbsArea', $page)
 <div class="shop-main-area">
     <div class="container">
         <div class="row">

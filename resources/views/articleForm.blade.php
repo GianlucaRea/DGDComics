@@ -8,7 +8,7 @@
     @include('layouts.Header.header')
 </header>
 @php($page = [
-    'name' =>'scrittura Articolo']
+    'name' =>'Scrittura articolo']
     )
 @include('layouts.Header.breadcrumbsArea', $page)
 @include('layouts.blog.addArticleForm')

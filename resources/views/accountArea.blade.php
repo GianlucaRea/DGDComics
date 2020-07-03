@@ -8,7 +8,7 @@
     @include('layouts.Header.header')
 </header>
 @php($page = [
-    'name' =>'Il tuo account']
+    'name' =>'Area personale di '. \Illuminate\Support\Facades\Auth::user()->username]
     )
 @include('layouts.Header.breadcrumbsArea', $page)
 @include('layouts.UserAccount.accountDetail')
