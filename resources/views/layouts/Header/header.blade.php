@@ -12,11 +12,17 @@
             <div class="col-lg-0-5">
                 <div class="row">
                     <div class="my-cart" style="alignment: right; margin-top: 11px">
-                        <ul>
-                            <li>
-                                <a href="#"><i class="fa fa-shopping-bag" style="padding: 0px"></i></a>
-                            </li>
-                        </ul>
+                            <ul>
+                                @if(\Illuminate\Support\Facades\Auth::user()!=null)
+                                    @if(Auth::user()->hasGroup('il gruppo degli admin'))
+                                    @else
+                                        <li><a href="{{url('/accountArea/wishlist')}}"><i class="fa fa-shopping-bag" style="padding: 0px"></i></a>
+                                    @endif
+                                @else
+                                    <li><a href="{{url('/login')}}"><i class="fa fa-shopping-bag" style="padding: 0px"></i></a>
+                                        @endif
+                                    </li>
+                            </ul>
                     </div>
                 </div>
             </div>
@@ -161,7 +167,7 @@
                                                                 </div>
                                                                 <div class="cart-info">
                                                                     <h5><a href="{{ url('/comic_detail/'.$comic->id) }}">{{ $cart[$session->sessionId]['name']}}</a></h5>
-                                                                    <p>{{ $cart[$session->sessionId]['quantity'] }} x {{ $cart[$session->sessionId]['price'] }}</p>
+                                                                    <p>{{ $cart[$session->sessionId]['quantity'] }} x €{{ $cart[$session->sessionId]['price'] }}</p>
                                                                 </div>
                                                                 <div class="cart-icon">
                                                                     <a href="{{url('remove-from-cart/'.$cart[$session->sessionId]['comic_id']) }}"><i class="fa fa-remove"></i></a>

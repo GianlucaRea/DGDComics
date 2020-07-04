@@ -22,8 +22,8 @@
                                 <div class="post-img">
                                     <a href="{{ url('/blogDetail/'.$article->id) }}"><img src="{{asset('img/comicsImages/' . $articleImage->image_name) }}" alt="post" style=" background-repeat: no-repeat; background-size: contain; width: 360px; height: 212px;"/></a>
                                     <div class="blog-date-time">
-                                        <span class="day-time">06</span>
-                                        <span class="moth-time">Dec</span>
+                                        <span class="day-time">{{\Carbon\Carbon::parse($article->created_at)->format('d')}}</span>
+                                        <span class="moth-time">{{\Carbon\Carbon::parse($article->created_at)->format('M')}}</span>
                                     </div>
                                 </div>
                                 <div class="post-content">
