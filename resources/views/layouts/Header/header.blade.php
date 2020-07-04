@@ -15,7 +15,6 @@
                         <ul>
                             <li>
                                 <a href="#"><i class="fa fa-shopping-bag" style="padding: 0px"></i></a>
-                                <span>2</span>
                             </li>
                         </ul>
                     </div>
@@ -26,10 +25,97 @@
                 <div class="row">
                     <div class="my-cart" style="alignment: right; margin-top: 11px">
                         <ul>
-                            <li>
-                                <a href="#"><i class="fa fa-user" style="padding: 0px"></i></a>
-                                <span>2</span>
-                            </li>
+                            @if(\Illuminate\Support\Facades\Auth::user()!=null)
+                                @if(Auth::user()->hasGroup('il gruppo degli admin'))
+                                    <li> <a href="{{url('/adminArea/dashboard')}}"><i class="fa fa-user" style="padding: 0px"></i></a>
+                                        <div class="mini-cart-sub">
+                                            <div class="cart-product">
+                                                <div class="single-cart">
+                                                    <div class="cart-info">
+                                                        <h5><a href="{{url('/adminArea/dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="single-cart">
+                                                    <div class="cart-info">
+                                                        <h5><a href="{{url('/adminArea/users')}}"><i class="fa fa-user"> Gestione Utenti</i> </a></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="single-cart">
+                                                    <div class="cart-info">
+                                                        <h5><a href="{{url('/adminArea/comics')}}"><i class="fa fa-book"> Gestione Fumetti</i></a></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="single-cart">
+                                                    <div class="cart-info">
+                                                        <h5><a href="{{url('/adminArea/reviews')}}"><i class="fa fa-map-marker"></i> Gestione Recensione</a></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="single-cart">
+                                                    <div class="cart-info">
+                                                        <h5><a href="{{url('/adminArea/articles')}}"><i class="fa fa-pencil"></i> Gestione Articoli</a></h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @else
+                                    <li> <a href="{{url('/accountArea/dashboard')}}"><i class="fa fa-user" style="padding: 0px"></i></a>
+                                        @php
+                                            $user = Auth::user();
+                                            $isVendor = \App\Http\Controllers\GroupController::isVendor($user->id);
+                                        @endphp
+                                        <div class="mini-cart-sub">
+                                            <div class="cart-product">
+                                                <div class="single-cart">
+                                                    <div class="cart-info">
+                                                        <h5><a href="{{url('/accountArea/dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="single-cart">
+                                                    <div class="cart-info">
+                                                        <h5><a href="{{url('/accountArea/orders')}}"><i class="fa fa-cart-arrow-down"></i> I miei ordini</a></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="single-cart">
+                                                    <div class="cart-info">
+                                                        <h5><a href="{{url('/accountArea/paymentmethods')}}"><i class="fa fa-credit-card"></i> Metodi Di pagamento</a></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="single-cart">
+                                                    <div class="cart-info">
+                                                        <h5><a href="{{url('/accountArea/addressedit')}}"><i class="fa fa-map-marker"></i> Gestisci Indirizzo</a></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="single-cart">
+                                                    <div class="cart-info">
+                                                        <h5><a href="{{url('/accountArea/account')}}"><i class="fa fa-user"></i> Account</a></h5>
+                                                    </div>
+                                                </div>
+                                                @if($isVendor)
+                                                    <div class="single-cart">
+                                                        <div class="cart-info">
+                                                            <h5><a href="{{url('/accountArea/venditore')}}"><i class="fa fa-dollar"></i> Gestione Ordini</a></h5>
+                                                        </div>
+                                                    </div>
+                                                    <div class="single-cart">
+                                                        <div class="cart-info">
+                                                            <h5><a href="{{url('/accountArea/menagementproducts')}}"><i class="fa fa-bookmark"></i> Gestione Fumetti</a></h5>
+                                                        </div>
+                                                    </div>
+                                                    <div class="single-cart">
+                                                        <div class="cart-info">
+                                                            <h5><a href="{{url('/accountArea/venditoreaddproducts')}}"><i class="fa fa-book"></i> Vendi un Fumetto</a></h5>
+                                                        </div>
+                                                    </div>
+                                                  @endif
+                                            </div>
+                                        </div>
+                                    </li>
+                            @endif
+                            @else
+                                <li><a href="{{url('/login')}}"><i class="fa fa-user" style="padding: 0px"></i></a>
+                                    @endif
+                                </li>
                         </ul>
                     </div>
                 </div>
@@ -101,7 +187,6 @@
                             @endif
                             @else
                                 <li><a href="{{url('/login')}}"><i class="fa fa-shopping-cart" style="padding: 0px"></i></a>
-                                    <span>2</span>
                                     @endif
                                 </li>
                         </ul>
