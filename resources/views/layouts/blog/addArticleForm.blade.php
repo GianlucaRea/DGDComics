@@ -66,6 +66,21 @@
                         </div>
                     </div>
                     <div class="mb-3"></div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="single-input-item">
+                                <label for="file" class="required">Immagine di copertina:<span>*</span></label>
+                                <br/>
+                                <input type="file" id="articleImage" name="articleImage" class="form-control @error('articleImage') is-invalid @enderror">
+                                @error('articleImage')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3"></div>
                     <div class="single-post-button">
                         <button type="submit" class="btn btn-sqr">Pubblica</button>
                     </div>

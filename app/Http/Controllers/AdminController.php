@@ -12,29 +12,34 @@ use Illuminate\Support\Facades\Auth;
 class AdminController extends Controller
 {
 public static function dashboard() {
-    $user =  Auth::user();
-    $users =  User::where('username','!=','admin')->orderBy('username', 'asc')->paginate(12);
-    $comics =Comic::orderBy('comic_name', 'asc')->paginate(12);
-    $reviews =  Review::orderBy('review_title', 'asc')->paginate(12);
-    $articles = Article::orderBy('created_at','asc')->paginate(12);
-    return view('adminPanel')
-        ->with(compact('user'))
-        ->with(compact('users'))
-        ->with(compact('comics'))
-        ->with(compact('reviews'))
-        ->with(compact('articles'));
+    if(Auth::user()) {
+        $user = Auth::user();
+        $users = User::where('username', '!=', 'admin')->orderBy('username', 'asc')->paginate(12);
+        $comics = Comic::orderBy('comic_name', 'asc')->paginate(12);
+        $reviews = Review::orderBy('review_title', 'asc')->paginate(12);
+        $articles = Article::orderBy('created_at', 'asc')->paginate(12);
+        return view('adminPanel')
+            ->with(compact('user'))
+            ->with(compact('users'))
+            ->with(compact('comics'))
+            ->with(compact('reviews'))
+            ->with(compact('articles'));
+    }
+    else return redirect('/login');
 }
 
 
 
 public static function checkForWriteArticle(){
-    $user = Auth::user();
-    if(GroupController::isAdmin($user->id)){
-        return view("articleForm");
+    if (Auth::user()) {
+        $user = Auth::user();
+        if (GroupController::isAdmin($user->id)) {
+            return view("articleForm");
+        } else {
+            return view("errorCase");
+        }
     }
-    else{
-        return view("errorCase");
-    }
+    else return redirect('/login');
 }
 
 }

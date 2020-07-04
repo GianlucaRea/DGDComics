@@ -52,6 +52,7 @@
                                 @foreach($articles as $article)
                                     @php($articleAuth = \App\Http\Controllers\UserController::getUserId($article->user_id))
                                     @php($articleComments = \App\Http\Controllers\CommentController::getcommentsByArticleId($article->id))
+                                    @php($articleImage = \App\Http\Controllers\ArticleImageController::getImageByArticleId($article->id))
                                     <div class="blog-main-wrapper">
                                         <div class="single-blog-post">
                                             <div class="author-destils mb-30">
@@ -73,9 +74,9 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            {{--<div class="blog-img mb-30">
-                                                <a href="#"><img src="img/blog/1.jpg" alt="blog" /></a>
-                                            </div>--}}
+                                            <div class="blog-img mb-30">
+                                                <a href="{{ url('/blogDetail/'.$article->id) }}"><img src="{{asset('img/comicsImages/' . $articleImage->image_name) }}" alt="blog" style=" background-repeat: no-repeat; background-size: contain; width: 878px; height: 345px;"/></a>
+                                            </div>
                                             <div class="single-blog-content">
                                                 <div class="single-blog-title">
                                                     <h3><a href="{{ url('/blogDetail/'.$article->id) }}">{{ $article->title }}</a></h3>
@@ -127,6 +128,7 @@
                             @foreach($articles as $article)
                                 @php($articleAuth = \App\Http\Controllers\UserController::getUserId($article->user_id))
                                 @php($articleComments = \App\Http\Controllers\CommentController::getcommentsByArticleId($article->id))
+                                @php($articleImage = \App\Http\Controllers\ArticleImageController::getImageByArticleId($article->id))
                                 <div class="blog-main-wrapper">
                                     <div class="single-blog-post">
                                         <div class="author-destils mb-30">
@@ -139,9 +141,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {{--<div class="blog-img mb-30">
-                                            <a href="#"><img src="img/blog/1.jpg" alt="blog" /></a>
-                                        </div>--}}
+                                        <div class="blog-img mb-30">
+                                            <a href="{{ url('/blogDetail/'.$article->id) }}"><img src="{{asset('img/comicsImages/' . $articleImage->image_name) }}" alt="blog" style=" background-repeat: no-repeat; background-size: contain; width: 878px; height: 345px;"/></a>
+                                        </div>
                                         <div class="single-blog-content">
                                             <div class="single-blog-title">
                                                 <h3><a href="{{ url('/blogDetail/'.$article->id) }}">{{ $article->title }}</a></h3>
@@ -184,6 +186,7 @@
                         @foreach($articles as $article)
                             @php($articleAuth = \App\Http\Controllers\UserController::getUserId($article->user_id))
                             @php($articleComments = \App\Http\Controllers\CommentController::getcommentsByArticleId($article->id))
+                            @php($articleImage = \App\Http\Controllers\ArticleImageController::getImageByArticleId($article->id))
                             <div class="blog-main-wrapper">
                                 <div class="single-blog-post">
                                     <div class="author-destils mb-30">
@@ -196,9 +199,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{--<div class="blog-img mb-30">
-                                        <a href="#"><img src="img/blog/1.jpg" alt="blog" /></a>
-                                    </div>--}}
+                                    <div class="blog-img mb-30">
+                                        <a href="{{ url('/blogDetail/'.$article->id) }}"><img src="{{asset('img/comicsImages/' . $articleImage->image_name) }}" alt="blog" style=" background-repeat: no-repeat; background-size: contain; width: 878px; height: 345px;"/></a>
+                                    </div>
                                     <div class="single-blog-content">
                                         <div class="single-blog-title">
                                             <h3><a href="{{ url('/blogDetail/'.$article->id) }}">{{ $article->title }}</a></h3>

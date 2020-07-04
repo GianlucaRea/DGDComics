@@ -1,6 +1,7 @@
 <!-- blog-main-area-start -->
 @php($articleAuth = \App\Http\Controllers\UserController::getUserId($article->user_id))
 @php($articleComments = \App\Http\Controllers\CommentController::getcommentsByArticleId($article->id))
+@php($articleImage = \App\Http\Controllers\ArticleImageController::getImageByArticleId($article->id))
 <div class="blog-main-area mb-70">
     <div class="container">
         <div class="row">
@@ -20,14 +21,16 @@
                                 @if(\App\Http\Controllers\GroupController::isAdmin(\Illuminate\Support\Facades\Auth::user()->id))
                                     <div class ="row">
                                         <a class="btn btn-danger" onclick="return deleteArticle();"  href="{{route('article-delete-local', $article->id)}}"><i class="fa fa-trash"></i></a>
+                                        <div class="ml-2"></div>
+                                        <a class="btn btn-light" href="{{route('article-modify', $article->id)}}"><i class="fa fa-pencil"></i></a>
                                     </div>
                                 @endif
                             @endif
                         </div>
                     </div>
-                    {{--<div class="blog-img mb-30">
-                        <img src="{{ asset('img/blog/1.jpg') }}" alt="blog" />
-                    </div>--}}
+                    <div class="blog-img mb-30">
+                        <a href="{{ url('/blogDetail/'.$article->id) }}"><img src="{{asset('img/comicsImages/' . $articleImage->image_name) }}" alt="blog" style=" background-repeat: no-repeat; background-size: contain; width: 878px; height: 345px;"/></a>
+                    </div>
                     <div class="single-blog-content">
                         <div class="single-blog-title">
                             <h3>{{ $article->title }}</h3>

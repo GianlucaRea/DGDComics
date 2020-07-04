@@ -466,6 +466,7 @@ class ComposerStaticInit4d6bcfbc3ce423c65849ffa78fc23b8b
 
     public static $classMap = array (
         'App\\Article' => __DIR__ . '/../..' . '/app/Article.php',
+        'App\\ArticleImage' => __DIR__ . '/../..' . '/app/ArticleImage.php',
         'App\\Author' => __DIR__ . '/../..' . '/app/Author.php',
         'App\\Comic' => __DIR__ . '/../..' . '/app/Comic.php',
         'App\\ComicBought' => __DIR__ . '/../..' . '/app/ComicBought.php',
@@ -499,6 +500,7 @@ class ComposerStaticInit4d6bcfbc3ce423c65849ffa78fc23b8b
         'App\\Http\\Controllers\\ReviewController' => __DIR__ . '/../..' . '/app/Http/Controllers/ReviewController.php',
         'App\\Http\\Controllers\\ServiceController' => __DIR__ . '/../..' . '/app/Http/Controllers/ServiceController.php',
         'App\\Http\\Controllers\\ShippingAddressController' => __DIR__ . '/../..' . '/app/Http/Controllers/ShippingAddressController.php',
+        'App\\Http\\Controllers\\TagController' => __DIR__ . '/../..' . '/app/Http/Controllers/TagController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Controllers\\WishlistController' => __DIR__ . '/../..' . '/app/Http/Controllers/WishlistController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
@@ -523,6 +525,7 @@ class ComposerStaticInit4d6bcfbc3ce423c65849ffa78fc23b8b
         'App\\Rules\\MatchOldPassword' => __DIR__ . '/../..' . '/app/Rules/MatchOldPassword.php',
         'App\\Service' => __DIR__ . '/../..' . '/app/Service.php',
         'App\\ShippingAddress' => __DIR__ . '/../..' . '/app/ShippingAddress.php',
+        'App\\Tag' => __DIR__ . '/../..' . '/app/Tag.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'App\\Wishlist' => __DIR__ . '/../..' . '/app/Wishlist.php',
         'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Asm89/Stack/Cors.php',

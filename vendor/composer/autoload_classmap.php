@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Article' => $baseDir . '/app/Article.php',
+    'App\\ArticleImage' => $baseDir . '/app/ArticleImage.php',
     'App\\Author' => $baseDir . '/app/Author.php',
     'App\\Comic' => $baseDir . '/app/Comic.php',
     'App\\ComicBought' => $baseDir . '/app/ComicBought.php',
@@ -40,6 +41,7 @@ return array(
     'App\\Http\\Controllers\\ReviewController' => $baseDir . '/app/Http/Controllers/ReviewController.php',
     'App\\Http\\Controllers\\ServiceController' => $baseDir . '/app/Http/Controllers/ServiceController.php',
     'App\\Http\\Controllers\\ShippingAddressController' => $baseDir . '/app/Http/Controllers/ShippingAddressController.php',
+    'App\\Http\\Controllers\\TagController' => $baseDir . '/app/Http/Controllers/TagController.php',
     'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
     'App\\Http\\Controllers\\WishlistController' => $baseDir . '/app/Http/Controllers/WishlistController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
@@ -64,6 +66,7 @@ return array(
     'App\\Rules\\MatchOldPassword' => $baseDir . '/app/Rules/MatchOldPassword.php',
     'App\\Service' => $baseDir . '/app/Service.php',
     'App\\ShippingAddress' => $baseDir . '/app/ShippingAddress.php',
+    'App\\Tag' => $baseDir . '/app/Tag.php',
     'App\\User' => $baseDir . '/app/User.php',
     'App\\Wishlist' => $baseDir . '/app/Wishlist.php',
     'Asm89\\Stack\\Cors' => $vendorDir . '/asm89/stack-cors/src/Asm89/Stack/Cors.php',

@@ -2359,12 +2359,13 @@ body {
 
 .single-post .post-img a img {
     width: 100%;
-    transform: scale(1);
+    transform: scale(0.97);
     transition: .5s;
 }
 
 .single-post:hover a img {
-    transform: scale(1.1);
+    transform: scale(1.055);
+
 }
 
 .post-content h3 {
