@@ -1,6 +1,8 @@
 <!-- header-area-start -->
 <!-- header-mid-area-start -->
-
+@php
+    $user = Auth::user();
+@endphp
 <div class="header-mid-area mb-3 mt-3">
     <div class="container">
         <div class="row">
@@ -19,7 +21,7 @@
 
                                     @else
                                         @php
-                                            $user = Auth::user();
+
                                             $wishlist = \App\Http\Controllers\WishlistController::getWishByUser($user->id);
                                             $comicsW = \App\Http\Controllers\WishlistController::getComicsWishlist($wishlist->id);
                                             $numberOfWishlist = \App\Http\Controllers\WishlistController::wishlistCountByUserId($user->id)
