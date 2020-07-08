@@ -17,7 +17,15 @@ class CreateWishlistsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
         });
+
+        DB::table('wishlists')->insert([
+            ['user_id' => '1'],
+            ['user_id' => '2'],
+            ['user_id' => '3'],
+            ['user_id' => '4'],
+        ]);
     }
+
 
     /**
      * Reverse the migrations.

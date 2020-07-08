@@ -16,7 +16,38 @@
                                 @if(\Illuminate\Support\Facades\Auth::user()!=null)
                                     @if(Auth::user()->hasGroup('il gruppo degli admin'))
                                     @else
+                                        @php
+                                                $userId = Auth::id();
+                                                $wishlist = \App\Http\Controllers\WishlistController::getWishByUser($userId);
+                                                $comicsW = \App\Http\Controllers\WishlistController::getComicsWishlist($wishlist->id);
+                                        @endphp
                                         <li><a href="{{url('/accountArea/wishlist')}}"><i class="fa fa-shopping-bag" style="padding: 0px"></i></a>
+                                                <div class="mini-cart-sub">
+                                                    <div class="cart-product">
+                                                        @if($comicsW->count() > 0)
+                                                        @foreach($comicsW as $comicW)
+                                                            @php
+                                                                $imageW = \App\Http\Controllers\ImageController::getCover($comicW->id);
+                                                            @endphp
+                                                        <div class="single-cart">
+                                                            <div class="cart-img">
+                                                                <a href="{{ url('/comic_detail/'.$comicW->id) }}"><img src="{{asset('img/comicsImages/' . $imageW->image_name) }}"  alt="book" /></a>
+                                                            </div>
+                                                            <div class="cart-info">
+                                                                <h5><a href="{{ url('/comic_detail/'.$comicW->id) }}">{{$comicW->comic_name}}</a></h5>
+                                                            </div>
+                                                            <div class="cart-icon">
+                                                                <a href="#"><i class="fa fa-remove"></i></a>
+                                                            </div>
+                                                        </div>
+                                                        @endforeach
+                                                        @else
+                                                        @endif
+                                                    </div>
+                                                    <div class="cart-bottom">
+                                                        <a class="view-cart" href="{{url('/accountArea/wishlist')}}"> Wishlist</a>
+                                                    </div>
+                                                </div>
                                     @endif
                                 @else
                                     <li><a href="{{url('/login')}}"><i class="fa fa-shopping-bag" style="padding: 0px"></i></a>
@@ -59,6 +90,11 @@
                                                 <div class="single-cart">
                                                     <div class="cart-info">
                                                         <h5><a href="{{url('/adminArea/articles')}}"><i class="fa fa-pencil"></i> Gestione Articoli</a></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="single-cart">
+                                                    <div class="cart-info">
+                                                        <h5><a href="{{ url('/logout') }}" class="logout"><i class="fa fa-sign-out"></i> Logout</a></h5>
                                                     </div>
                                                 </div>
                                             </div>
@@ -114,6 +150,11 @@
                                                         </div>
                                                     </div>
                                                   @endif
+                                                    <div class="single-cart">
+                                                    <div class="cart-info">
+                                                        <h5><a href="{{ url('/logout') }}" class="logout"><i class="fa fa-sign-out"></i> Logout</a></h5>
+                                                    </div>
+                                                     </div>
                                             </div>
                                         </div>
                                     </li>
