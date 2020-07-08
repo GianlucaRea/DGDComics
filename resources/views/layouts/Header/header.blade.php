@@ -1,5 +1,6 @@
 <!-- header-area-start -->
 <!-- header-mid-area-start -->
+@php($user = Auth::user())
 <div class="header-mid-area mb-3 mt-3">
     <div class="container">
         <div class="row">
@@ -12,17 +13,21 @@
             <div class="col-lg-0-5">
                 <div class="row">
                     <div class="my-cart" style="alignment: right; margin-top: 11px">
-                            <ul>
-                                @if(\Illuminate\Support\Facades\Auth::user()!=null)
-                                    @if(Auth::user()->hasGroup('il gruppo degli admin'))
-                                    @else
-                                        <li><a href="{{url('/accountArea/wishlist')}}"><i class="fa fa-shopping-bag" style="padding: 0px"></i></a>
-                                    @endif
+                        <ul>
+                            @if(\Illuminate\Support\Facades\Auth::user()!=null)
+                                @if(Auth::user()->hasGroup('il gruppo degli admin'))
                                 @else
-                                    <li><a href="{{url('/login')}}"><i class="fa fa-shopping-bag" style="padding: 0px"></i></a>
+                                    <li><a href="{{url('/accountArea/wishlist')}}"><i class="fa fa-shopping-bag" style="padding: 0px"></i></a>
+                                        @php($numberOfWishlist = \App\Http\Controllers\WishlistController::wishlistCountByUserId($user->id))
+                                        @if($numberOfWishlist > 0)
+                                            <span>{{$numberOfWishlist}}</span>
                                         @endif
                                     </li>
-                            </ul>
+                                @endif
+                            @else
+                                <li><a href="{{url('/login')}}"><i class="fa fa-shopping-bag" style="padding: 0px"></i></a></li>
+                            @endif
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -33,6 +38,10 @@
                         <ul>
                             @if(\Illuminate\Support\Facades\Auth::user()!=null)
                                 @if(Auth::user()->hasGroup('il gruppo degli admin'))
+                                    @php($notificationNumber = \App\Http\Controllers\NotificationController::getNumber($user->id))
+                                    @if($notificationNumber > 0)
+                                        <span>{{$notificationNumber}}</span>
+                                    @endif
                                     <li> <a href="{{url('/adminArea/dashboard')}}"><i class="fa fa-user" style="padding: 0px"></i></a>
                                         <div class="mini-cart-sub">
                                             <div class="cart-product">
@@ -61,15 +70,21 @@
                                                         <h5><a href="{{url('/adminArea/articles')}}"><i class="fa fa-pencil"></i> Gestione Articoli</a></h5>
                                                     </div>
                                                 </div>
+                                                <div class="single-cart">
+                                                    <div class="cart-info">
+                                                        <h5><a href="{{url('/logout')}}"><i class="fa fa-sign-out"></i> logout</a></h5>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </li>
                                 @else
                                     <li> <a href="{{url('/accountArea/dashboard')}}"><i class="fa fa-user" style="padding: 0px"></i></a>
-                                        @php
-                                            $user = Auth::user();
-                                            $isVendor = \App\Http\Controllers\GroupController::isVendor($user->id);
-                                        @endphp
+                                        @php($notificationNumber = \App\Http\Controllers\NotificationController::getNumber($user->id))
+                                        @if($notificationNumber > 0)
+                                            <span>{{$notificationNumber}}</span>
+                                        @endif
+                                        @php($isVendor = \App\Http\Controllers\GroupController::isVendor($user->id))
                                         <div class="mini-cart-sub">
                                             <div class="cart-product">
                                                 <div class="single-cart">
@@ -113,15 +128,34 @@
                                                             <h5><a href="{{url('/accountArea/venditoreaddproducts')}}"><i class="fa fa-book"></i> Vendi un Fumetto</a></h5>
                                                         </div>
                                                     </div>
-                                                  @endif
+                                                @endif
+                                                <div class="single-cart">
+                                                    <div class="cart-info">
+                                                        <h5><a href="{{url('/logout')}}"><i class="fa fa-sign-out"></i> logout</a></h5>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </li>
-                            @endif
+                                @endif
                             @else
                                 <li><a href="{{url('/login')}}"><i class="fa fa-user" style="padding: 0px"></i></a>
-                                    @endif
+                                    <div class="mini-cart-sub">
+                                        <div class="cart-product">
+                                            <div class="single-cart">
+                                                <div class="cart-info">
+                                                    <h5><a href="{{url('/login')}}"><i class="fa fa-users"></i> Sei già un utente? login</a></h5>
+                                                </div>
+                                            </div>
+                                            <div class="single-cart">
+                                                <div class="cart-info">
+                                                    <h5><a href="{{url('/register')}}"><i class="fa fa-user-plus"></i> non lo sei? Registrati</a></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </li>
+                            @endif
                         </ul>
                     </div>
                 </div>
