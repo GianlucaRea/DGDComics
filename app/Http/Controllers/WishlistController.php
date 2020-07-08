@@ -196,6 +196,14 @@ class WishlistController extends Controller
         }
     }
 
+    public static function wishlistCountByUserId($id){
+        if(DB::table('wishlists')->where('user_id', '=', $id)->count()>0){
+            return DB::table('wishlists')->where('user_id', '=', $id)->count();
+        }
+        else{
+            return 0;
+        }
+    }
 
 
 }
