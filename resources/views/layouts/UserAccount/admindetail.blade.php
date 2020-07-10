@@ -237,6 +237,7 @@
                                                         <th>Titolo</th>
                                                         <th>Testo</th>
                                                         <th>Elimina</th>
+                                                        <th>Modifica</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -244,7 +245,12 @@
                                                         <tr>
                                                             <td>{{$article->title}}</td>
                                                             <td>{{ \Illuminate\Support\Str::limit($article->article_text, 45, $end='...') }}</td>
-                                                            <td><a class="btn btn-danger" onclick="return deleteArticle();"  href="{{route('article-delete', $article->id)}}"><i class="fa fa-trash"></i></a></td>
+                                                            <td>
+                                                                <a class="btn btn-danger" onclick="return deleteArticle();"  href="{{route('article-delete', $article->id)}}"><i class="fa fa-trash"></i></a>
+                                                            </td>
+                                                            <td>
+                                                            <a class="btn btn-light" href="{{route('article-modify', $article->id)}}"><i class="fa fa-pencil"></i></a>
+                                                            </td>
                                                         </tr>
                                                     @endforeach
                                                     {{ $articles->links() }}

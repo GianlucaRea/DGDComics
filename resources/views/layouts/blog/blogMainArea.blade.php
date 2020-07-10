@@ -69,6 +69,8 @@
                                                         @if(\App\Http\Controllers\GroupController::isAdmin(\Illuminate\Support\Facades\Auth::user()->id))
                                                             <div class ="row">
                                                                 <a class="btn btn-danger" onclick="return deleteArticle();"  href="{{route('article-delete-local', $article->id)}}"><i class="fa fa-trash"></i></a>
+                                                                <div class="ml-2"></div>
+                                                                <a class="btn btn-light" href="{{route('article-modify', $article->id)}}"><i class="fa fa-pencil"></i></a>
                                                             </div>
                                                         @endif
                                                     @endif
