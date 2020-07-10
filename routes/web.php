@@ -170,6 +170,10 @@ Route::get('/accountArea/orderDetail/{id}', 'OrderController@orderDetail')->name
 
 Route::get('/accountArea/orderDetailVendor/{id}', 'OrderController@orderDetailVendor')->name('orderDetailVendor');
 
+
+
+Route::get('comicModify/{id}', 'ComicController@modifyComicPage')->name('comicModify');
+
 Auth::routes(); //ehm... perché è stato scritto due volte? nel caso mi leggete rispondetemi su WA DF
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -189,6 +193,9 @@ Route::post('submitphpAnswer/{comment}', 'CommentController@addToComment')->name
 Route::get('/writeArticle', 'AdminController@checkForWriteArticle')->name('writeArticle');
 Route::post('submitArticle/{user_id}', 'ArticleController@addArticle')->name('submitArticle');
 Route::patch('modifyArticle/{article_id}', 'ArticleController@modifyArticle')->name('modifyArticle');
+
+Route::patch('modifyComic/{comic_id}', 'ComicController@modifyComic')->name('modifyComic');
+
 Route::get('comment-deletelocal/{id}','CommentController@destroyComment')->name('comment-delete-local');
 Route::get('answer-deletelocal/{id}','CommentController@destroyAnswer')->name('answer-delete-local');
 Route::get('article-deletelocal/{id}','ArticleController@destroyArticleLocal')->name('article-delete-local');

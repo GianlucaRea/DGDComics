@@ -10,7 +10,7 @@
                             <div class="flexslider">
 
                                 @php($cover = \App\Http\Controllers\ImageController::getCover($comic->id))
-                                @php($images = \App\Http\Controllers\ImageController::getOtherImages($comic->id))
+                                @php($images = \App\Http\Controllers\ImageController::getOtherImagesOrdered($comic->id))
 
                                 <ul class="slides">
                                     <li data-thumb="{{asset('img/comicsImages/' . $cover->image_name) }}">

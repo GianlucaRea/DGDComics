@@ -609,6 +609,7 @@
                                                                 <td>{{ $reviewQuantity }}</td>
                                                                 <td>{{ $comic_of_vendor->price }}</td>
                                                                 <td>
+                                                                    <a class="btn btn-light" href="{{url('/comicModify/'. $comic_of_vendor->id)}}"><i class="fa fa-pencil"></i></a>
                                                                     <a class="btn btn-danger" onclick="return deleteComic();"  href="{{route('comic-delete-vendor', $comic_of_vendor->id)}}"><i class="fa fa-trash"></i></a>
                                                                 </td>
                                                             </tr>
@@ -639,7 +640,7 @@
                                                                 <div class="col-lg-12">
                                                                     <div class="single-input-item">
                                                                         <label for="comic_name" class="required">Titolo Fumetto<span>*</span></label>
-                                                                        <input id="comic_name" type="text" class="form-control @error('comic_name') is-invalid @enderror" name="comic_name" placeholder="Titolo">
+                                                                        <input id="comic_name" type="text" class="form-control @error('comic_name') is-invalid @enderror" name="comic_name" placeholder="">
                                                                         @error('comic_name')
                                                                         <span class="invalid-feedback" role="alert">
                                                                             <strong>
@@ -657,7 +658,7 @@
                                                                 <div class="col-lg-12">
                                                                     <div class="single-input-item">
                                                                         <label for="description" class="required">Descrizione<span>*</span></label>
-                                                                        <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" placeholder="Descrizione" style="resize: none; height: 100px; background-color: white"></textarea>
+                                                                        <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" placeholder="" style="resize: none; height: 100px; background-color: white"></textarea>
                                                                         @error('description')
                                                                         <span class="invalid-feedback" role="alert">
                                                                             <strong>
@@ -675,7 +676,7 @@
                                                                 <div class="col-lg-6">
                                                                     <div class="single-input-item">
                                                                         <label for="ISBN" class="required">ISBN<span>*</span></label>
-                                                                        <input id="ISBN" type="text" class="form-control @error('ISBN') is-invalid @enderror" name="ISBN" placeholder="ISBN">
+                                                                        <input id="ISBN" type="text" class="form-control @error('ISBN') is-invalid @enderror" name="ISBN" placeholder="">
                                                                         @error('ISBN')
                                                                         <span class="invalid-feedback" role="alert">
                                                                                 <strong>
@@ -689,7 +690,7 @@
                                                                 <div class="col-lg-6">
                                                                     <div class="single-input-item">
                                                                         <label for="publisher" class="required">Casa Editrice<span>*</span></label>
-                                                                        <input id="publisher" type="text" class="form-control @error('publisher') is-invalid @enderror" name="publisher" placeholder="casa editice">
+                                                                        <input id="publisher" type="text" class="form-control @error('publisher') is-invalid @enderror" name="publisher" placeholder="">
                                                                         @error('publisher')
                                                                         <span class="invalid-feedback" role="alert">
                                                                                 <strong>
@@ -707,7 +708,7 @@
                                                                 <div class="col-lg-6">
                                                                     <div class="single-input-item">
                                                                         <label for="author_name" class="required">Autore<span>*</span></label>
-                                                                        <input id="author_name" type="text" class="form-control @error('author_name') is-invalid @enderror" name="author_name" placeholder="Nome e Cognome">
+                                                                        <input id="author_name" type="text" class="form-control @error('author_name') is-invalid @enderror" name="author_name" placeholder="">
                                                                         @error('author_name')
                                                                         <span class="invalid-feedback" role="alert">
                                                                                 <strong>
@@ -721,7 +722,7 @@
                                                                 <div class="col-lg-6">
                                                                     <div class="single-input-item">
                                                                         <label for="language" class="required">Lingua<span>*</span></label>
-                                                                        <input id="language" type="text" class="form-control @error('language') is-invalid @enderror" name="language" placeholder="Es: Italiano, giapponese...">
+                                                                        <input id="language" type="text" class="form-control @error('language') is-invalid @enderror" name="language" placeholder="">
                                                                         @error('language')
                                                                         <span class="invalid-feedback" role="alert">
                                                                                 <strong>
@@ -797,7 +798,7 @@
                                                                         <div class="mt-1"></div>
                                                                         <input type="checkbox" id="Disney" name="Disney" value="Disney">  Disney
                                                                         <div class="mt-1"></div>
-                                                                        <input type="checkbox" id="Post Apocalittico" name="Post Apocalittico" value="Post Apocalittico">  Post Apocalittico
+                                                                        <input type="checkbox" id="PostApocalittico" name="PostApocalittico" value="PostApocalittico">  Post Apocalittico
                                                                         <div class="mt-1"></div>
                                                                     </div>
                                                                 </div>
@@ -914,16 +915,16 @@
                                                             <div class="row">
                                                                 <div class="col-lg-6">
                                                                     immagine 1
-                                                                    <input type="file" id="image2" name="image2" class="form-control @error('image2') is-invalid @enderror">
-                                                                    @error('image2')
+                                                                    <input type="file" id="image1" name="image1" class="form-control @error('image1') is-invalid @enderror">
+                                                                    @error('image1')
                                                                     <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                     </span>
                                                                     @enderror
                                                                     <div class="mt-2"></div>
                                                                     immagine 2
-                                                                    <input type="file" id="image3" name="image3" class="form-control @error('image3') is-invalid @enderror">
-                                                                    @error('image3')
+                                                                    <input type="file" id="image2" name="image2" class="form-control @error('image2') is-invalid @enderror">
+                                                                    @error('image2')
                                                                     <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                     </span>
@@ -931,16 +932,16 @@
                                                                 </div>
                                                                 <div class="col-lg-6">
                                                                     immagine 3
-                                                                    <input type="file" id="image4" name="image4" class="form-control @error('image4') is-invalid @enderror">
-                                                                    @error('image4')
+                                                                    <input type="file" id="image3" name="image3" class="form-control @error('image3') is-invalid @enderror">
+                                                                    @error('image3')
                                                                     <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                     </span>
                                                                     @enderror
                                                                     <div class="mt-2"></div>
                                                                     immagine 4
-                                                                    <input type="file" id="image5" name="image5" class="form-control @error('image5') is-invalid @enderror">
-                                                                    @error('image5')
+                                                                    <input type="file" id="image4" name="image4" class="form-control @error('image4') is-invalid @enderror">
+                                                                    @error('image4')
                                                                     <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                     </span>
