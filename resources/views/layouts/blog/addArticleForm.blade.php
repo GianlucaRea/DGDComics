@@ -10,7 +10,7 @@
                 <form method="POST" action="{{ Route('submitArticle', ['user_id' => $user->id])}}" enctype="multipart/form-data">
                     @csrf
                     <label>titolo</label>
-                    <textarea name="title" id="title" class="form-control @error('title') is-invalid @enderror" cols="30" rows="10" placeholder="Scrivi qui il tuo articolo" style="resize: none; height: 70px;"></textarea>
+                    <textarea name="title" id="title" class="form-control @error('title') is-invalid @enderror" cols="30" rows="10"  style="resize: none; height: 70px;"></textarea>
                     @error('title')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -18,7 +18,7 @@
                     @enderror
                     <div class="mb-3"></div>
                     <label>testo</label>
-                    <textarea name="article_text" id="article_text" class="form-control @error('article_text') is-invalid @enderror" cols="30" rows="10" placeholder="Scrivi qui il tuo articolo" style="resize: none; height: 500px;"></textarea>
+                    <textarea name="article_text" id="article_text" class="form-control @error('article_text') is-invalid @enderror" cols="30" rows="10"  style="resize: none; height: 500px;"></textarea>
                     @error('article_text')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

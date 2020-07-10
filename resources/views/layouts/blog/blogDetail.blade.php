@@ -160,12 +160,12 @@
                     <div class="comment-title-wrap mt-30">
                         <h3>Lascia un commento!</h3>
                     </div>
-                    <div class="comment-input mt-40">
+                    <div class="comment-input mt-16">
                         <div class="comment-input-textarea mb-30">
                             @php($user = \Illuminate\Support\Facades\Auth::user())
                             <form method="POST" action="{{ Route('submitComment', ['article' => $article->id])}}">
                                 @csrf
-                                <textarea name="comment_text" id="comment_text" class="form-control @error('comment_text') is-invalid @enderror" cols="30" rows="10" placeholder="Scrivi qui il tuo commento" style="resize: none; height: 10em;"></textarea>
+                                <textarea name="comment_text" id="comment_text" class="form-control @error('comment_text') is-invalid @enderror" cols="30" rows="10" style="resize: none; height: 10em;"></textarea>
 
                                 @error('comment_text')
                                 <span class="invalid-feedback" role="alert">

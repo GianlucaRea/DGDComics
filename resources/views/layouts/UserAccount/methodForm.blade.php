@@ -28,7 +28,7 @@
             <div class="col-lg-6">
                 <div class="single-input-item">
                     <label for="intestatario" class="required">Intestatario</label>
-                    <input type="text" id="intestatario" class="form-control @error('intestatario') is-invalid @enderror" name="intestatario"  placeholder="nome e cognome" >
+                    <input type="text" id="intestatario" class="form-control @error('intestatario') is-invalid @enderror" name="intestatario"  >
 
                     @error('intestatario')
                     <span class="invalid-feedback" role="alert">
@@ -44,7 +44,7 @@
             <div class="col-lg-8">
                 <div class="single-input-item">
                     <label for="cardNumber" class="required">Numero carta</label>
-                    <input type="text" id="cardNumber" class="form-control @error('cardNumber') is-invalid @enderror" name="cardNumber"  placeholder="Es.: 1234123412341234" >
+                    <input type="text" id="cardNumber" class="form-control @error('cardNumber') is-invalid @enderror" name="cardNumber"  >
 
                     @error('cardNumber')
                     <span class="invalid-feedback" role="alert">
@@ -58,7 +58,7 @@
                 <div class="row">
                 <div class="single-input-item" style="width: 85px">
                     <label for="data_scadenza" class="required">mese</label>
-                    <input type="number" id="month" class="form-control @error('month') is-invalid @enderror" name="month"  placeholder="12" >
+                    <input type="number" id="month" class="form-control @error('month') is-invalid @enderror" name="month"  >
 
                     @error('month')
                     <span class="invalid-feedback" role="alert">
@@ -69,7 +69,7 @@
                     <div class="ml-3"></div>
                 <div class="single-input-item" style="width: 115px">
                     <label for="data_scadenza" class="required">anno</label>
-                    <input type="year" id="year" class="form-control @error('year') is-invalid @enderror" name="year"  placeholder="2021" >
+                    <input type="year" id="year" class="form-control @error('year') is-invalid @enderror" name="year" >
 
                     @error('year')
                     <span class="invalid-feedback" role="alert">
@@ -81,7 +81,7 @@
                     <div class="ml-3"></div>
                     <div class="single-input-item" style="width: 85px">
                         <label for="CVV" class="required">CVV</label>
-                        <input type="text" id="CVV" class="form-control @error('CVV') is-invalid @enderror" name="CVV"  placeholder="123" >
+                        <input type="text" id="CVV" class="form-control @error('CVV') is-invalid @enderror" name="CVV"  >
 
                         @error('CVV')
                         <span class="invalid-feedback" role="alert">
