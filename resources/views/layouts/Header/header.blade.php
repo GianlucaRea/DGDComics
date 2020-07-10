@@ -15,48 +15,67 @@
             <div class="col-lg-0-5">
                 <div class="row">
                     <div class="my-cart" style="alignment: right; margin-top: 11px">
-                            <ul>
-                                @if(\Illuminate\Support\Facades\Auth::user()!=null)
-                                    @if(Auth::user()->hasGroup('il gruppo degli admin'))
+                        <ul>
+                            @if(\Illuminate\Support\Facades\Auth::user()!=null)
+                                @if(Auth::user()->hasGroup('il gruppo degli admin'))
 
-                                    @else
-                                        @php
-
-                                            $wishlist = \App\Http\Controllers\WishlistController::getWishByUser($user->id);
-                                            $comicsW = \App\Http\Controllers\WishlistController::getComicsWishlist($wishlist->id);
-                                            $numberOfWishlist = \App\Http\Controllers\WishlistController::wishlistCountByUserId($user->id)
-                                        @endphp
-                                        <li><a href="{{url('/accountArea/wishlist')}}"><i class="fa fa-shopping-bag" style="padding: 0px"></i></a>
-                                                <div class="mini-cart-sub">
-                                                    <div class="cart-product">
-                                                        @if($numberOfWishlist > 0)
-                                                            <span>{{$numberOfWishlist}}</span>
-                                                                 @foreach($comicsW as $comicW)
-                                                                    @php
-                                                                        $imageW = \App\Http\Controllers\ImageController::getCover($comicW->id);
-                                                                    @endphp
-                                                                <div class="single-cart">
-                                                                    <div class="cart-img">
-                                                                        <a href="{{ url('/comic_detail/'.$comicW->id) }}"><img src="{{asset('img/comicsImages/' . $imageW->image_name) }}"  alt="book" /></a>
-                                                                    </div>
-                                                                    <div class="cart-info">
-                                                                        <h5><a href="{{ url('/comic_detail/'.$comicW->id) }}">{{$comicW->comic_name}}</a></h5>
-                                                                    </div>
-                                                                    <div class="cart-icon">
-                                                                        <a href="#"><i class="fa fa-remove"></i></a>
-                                                                    </div>
-                                                                </div>
-                                                                @endforeach
-                                                        @else
-
+                                @else
+                                    <li><a href="{{url('/accountArea/wishlist')}}"><i class="fa fa-shopping-bag" style="padding: 0px"></i></a>
+                                        @if(\App\Http\Controllers\WishlistController::userHasList($user->id))
+                                            @php($wishlist = \App\Http\Controllers\WishlistController::getWishByUser($user->id))
+                                            @php($comicsW = \App\Http\Controllers\WishlistController::getComicsWishlist($user->id))
+                                            @php($numberOfWishlist = \App\Http\Controllers\WishlistController::wishlistCountByUserId($user->id))
+                                            <span>{{$numberOfWishlist}}</span> <!-- non serve l'if perchè se userHasList è uguale a true vuol dire che questo numero è positivo -->
+                                            <div class="mini-cart-sub">
+                                                <div class="cart-product">
+                                                    @php($tmp =0)
+                                                    @foreach($comicsW as $comicW)
+                                                        @if ($tmp++ < 5)
+                                                        @php( $imageW = \App\Http\Controllers\ImageController::getCover($comicW->comic_id))
+                                                        @php($actualComic = \App\Http\Controllers\ComicController::getByID($comicW->comic_id))
+                                                        @php($venditore = \App\Http\Controllers\ComicController::getSeller($actualComic->id))
+                                                        <div class="single-cart">
+                                                            <div class="cart-img">
+                                                                <a href="{{ url('/comic_detail/'.$comicW->comic_id) }}"><img src="{{asset('img/comicsImages/' . $imageW->image_name) }}"  alt="book" /></a>
+                                                            </div>
+                                                            <div class="cart-info">
+                                                                <h5><a href="{{ url('/comic_detail/'.$comicW->comic_id) }}">{{$actualComic->comic_name}}</a></h5>
+                                                                @if(strlen($venditore->username)>17)
+                                                                <h5><a href="{{url('vendor_detail/'.$venditore->id) }}">{{ substr($venditore->username, 0, 17) }}...</a></h5>
+                                                                @else
+                                                                    <h5><a href="{{url('vendor_detail/'.$venditore->id) }}">{{$venditore->username}}</a></h5>
+                                                                @endif
+                                                            </div>
+                                                            <div class="cart-icon">
+                                                                <a href="#"><i class="fa fa-remove"></i></a>
+                                                            </div>
+                                                        </div>
                                                         @endif
-                                                    </div>
-                                                    <div class="cart-bottom">
-                                                        <a class="view-cart" href="{{url('/accountArea/wishlist')}}"> Wishlist</a>
+                                                    @endforeach
+                                                    @if($tmp > 5)
+                                                        <div class="mb-2"></div>
+                                                        <div class="text-center font-weight-bold">.<br/>.<br/>.</div>
+                                                        <div class="mb-3"></div>
+                                                    @endif
+                                                </div>
+                                                <div class="cart-bottom">
+                                                    <a class="view-cart" href="{{url('/accountArea/wishlist')}}"> Wishlist</a>
+                                                </div>
+                                            </div>
+                                        @else
+                                            <div class="mini-cart-sub">
+                                                <div class="cart-product">
+                                                    <div class="single-cart">
+                                                        <div class="cart-info">
+                                                            <h5><a class="view-cart" href="{{url('/accountArea/wishlist')}}"> Non ci sono prodotti nella lista dei desideri</a></h5>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            @endif
-                                @else
+                                            </div>
+                                        @endif
+                                    </li>
+                                @endif
+                            @else
                                 <li><a href="{{url('/login')}}"><i class="fa fa-shopping-bag" style="padding: 0px"></i></a></li>
                             @endif
                         </ul>
@@ -176,12 +195,12 @@
                                         <div class="cart-product">
                                             <div class="single-cart">
                                                 <div class="cart-info">
-                                                    <h5><a href="{{url('/login')}}"><i class="fa fa-users"></i>Login</a></h5>
+                                                    <h5><a href="{{url('/login')}}"><i class="fa fa-users"></i> Hai un account? accedi!</a></h5>
                                                 </div>
                                             </div>
                                             <div class="single-cart">
                                                 <div class="cart-info">
-                                                    <h5><a href="{{url('/register')}}"><i class="fa fa-user-plus"></i>Registrati</a></h5>
+                                                    <h5><a href="{{url('/register')}}"><i class="fa fa-user-plus"></i> Sei nuovo? registrati!</a></h5>
                                                 </div>
                                             </div>
                                         </div>
@@ -233,6 +252,12 @@
                                                                 </div>
                                                                 <div class="cart-info">
                                                                     <h5><a href="{{ url('/comic_detail/'.$comic->id) }}">{{ $cart[$session->sessionId]['name']}}</a></h5>
+                                                                    @php($venditoreC = \App\Http\Controllers\ComicController::getSeller($comic->id))
+                                                                    @if(strlen($venditoreC->username)>17)
+                                                                        <h5><a href="{{url('vendor_detail/'.$venditoreC->id) }}">{{ substr($venditoreC->username, 0, 17) }}...</a></h5>
+                                                                    @else
+                                                                        <h5><a href="{{url('vendor_detail/'.$venditoreC->id) }}">{{$venditoreC->username}}</a></h5>
+                                                                    @endif
                                                                     <p>{{ $cart[$session->sessionId]['quantity'] }} x €{{ $cart[$session->sessionId]['price'] }}</p>
                                                                 </div>
                                                                 <div class="cart-icon">

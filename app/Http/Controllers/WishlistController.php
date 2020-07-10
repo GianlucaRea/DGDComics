@@ -117,11 +117,11 @@ class WishlistController extends Controller
     }
 
     public static function getWishByUser($id){
-        return $wishlist = Wishlist::where('user_id','=',$id)->first();
+        return DB::table('wishlists')->where('user_id', '=', $id)->first();
     }
 
     public static function getComicsWishlist($id){
-        return $comics = Wishlist::with('comics')->where('id','=', $id)->get();
+       return DB::table('wishlists')->where('wishlists.user_id', '=', $id)->join('comic_wishlist', 'wishlists.id', '=', 'comic_wishlist.wishlist_id')->get();
     }
 
     public static function control($id){
@@ -202,6 +202,15 @@ class WishlistController extends Controller
         }
         else{
             return 0;
+        }
+    }
+
+    public static function userHasList($id){
+        if(DB::table('wishlists')->where('user_id', '=', $id)->count()>0){
+            return true;
+        }
+        else{
+            return false;
         }
     }
 
