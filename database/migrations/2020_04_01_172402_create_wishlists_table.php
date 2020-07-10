@@ -19,6 +19,7 @@ class CreateWishlistsTable extends Migration
         });
     }
 
+
     /**
      * Reverse the migrations.
      *

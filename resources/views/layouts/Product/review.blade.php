@@ -201,23 +201,16 @@
                                         </div>
                                     @endif
                                 @endif
-                                @if(Auth::user())
-                                    @if(Auth::user()->id = $review->user_id)
+                                    @php($user = Auth::user())
+                                    @php($isAuthor = \App\Http\Controllers\ReviewController::CheckAuthor($review->id,$user->id))
+                                    @if($isAuthor)
                                         <div style="font-size: 24px;">
-                                            <a class="btn btn-danger" onclick="return myFunction();"  href="{{route('editreviewuser',[$comic_id=$comic->id, $review_id=$review->id])}}"><i class="fa fa-pencil" ></i></a>
-                                            <script>
-                                                function myFunction() {
-                                                    if(!confirm("Sei sicuro di voler modificare questa recensione"))
-                                                        event.preventDefault();
-                                                    else{
-
-                                                    }
-
-                                                }
-                                            </script>
+                                            <a class="btn btn-danger" onclick="return myFunction();"  href="{{route('editreviewuser', $review->id)}}"><i class="fa fa-pencil" ></i></a>
                                         </div>
+
+                                    @else
                                     @endif
-                                @endif
+
                             </div>
                         </div>
                     </div>
@@ -227,3 +220,12 @@
         </div>
     </div>
 </div>
+
+<script>
+    function myFunction() {
+        if(!confirm("Sei sicuro di voler modificare questa recensione"))
+            event.preventDefault();
+        else{
+        }
+    }
+</script>

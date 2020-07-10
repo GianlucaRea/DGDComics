@@ -1,27 +1,54 @@
-<div class="product-info-area">
-    <div class="tab-content border-0" style="background-color: #ffffe6 ">
-        <div class="mt-30"></div>
-        <div class="tab-pane fade show active" id="addreview">
-            <form method="POST" action="{{ Route('updatereviewuser', [$idreview = $review->id, $idcomic = $comic->id])}}">
-                @csrf
-                <h4>Modifica la tua recensione su: {{$comic->comic_name}}</h4>
-                <div class="mb-3"></div>
-
-                <div class="row">
-                    <div style="margin-left:0.8%"></div>
-                     
-                    <label for="review_title">Titolo <sup>*</sup></label>
-                    <input type="text" name="review_title" id="review_title" maxlength ="30" class="form-control @error('review_title') is-invalid @enderror" value = "{{ $review->title }}"/>
-                    @error('review_title')
+@php
+    $comic = \App\Http\Controllers\ComicController::getByID($review->comic_id);
+@endphp
+<div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+        <div class="comment-title-wrap mt-30">
+            <h3>Modifica della Recensione Del Fumetto "{{$comic->comic_name}}"</h3>
+        </div>
+        <div class="comment-input mt-40">
+            <div class="comment-input-textarea mb-30">
+                @php($user = \Illuminate\Support\Facades\Auth::user())
+                <form method="POST" action="{{ Route('updatereviewuser', $review->id)}}" enctype="multipart/form-data">
+                    @csrf
+                    @method('PATCH')
+                    <label>Titolo</label>
+                    <textarea name="review_title" id="review_title" class="form-control @error('title') is-invalid @enderror"  cols="30" rows="10"  style="resize: none; height: 70px;">{{$review->review_title}}</textarea>
+                    @error('title')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
-                </div>
-                <div class="row">
-                    <div style="margin-left:0.8%"></div>
-
-
+                    <div class="mb-3"></div>
+                    <label>Testo</label>
+                    <textarea name="review_text" id="review_text" class="form-control @error('review_text') is-invalid @enderror" cols="30" rows="10" style="resize: none; height: 500px;">{{$review->review_text}}</textarea>
+                    @error('article_text')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                    <div class="mt-2"></div>
+                    <div class="rating-result">
+                        @php($stars = $review->stars)
+                        <p>Vecchia Valutazione</p>
+                        @foreach(range(1,5) as $i)
+                            @if($stars >0)
+                                @if($stars >0.5)
+                                    <a><i class="fa fa-star fa_custom"></i></a>
+                                @else
+                                    <a><i class="fa fa-star-half-o fa_custom"></i></a>
+                                @endif
+                            @else
+                                <a><i class="fa  fa-star-o fa_custom"></i></a>
+                            @endif
+                            <?php $stars--; ?>
+                        @endforeach
+                    </div>
+                    <div class="mb-3"></div>
+                        <br>
+                    <p>Nuova Valutazione</p>
+                    <div style="margin-left:0.8%;"></div>
                     <div style="margin-left:0.8%;"></div>
                     <div class="txt-center">
 
@@ -43,39 +70,11 @@
                         </div>
 
                     </div>
-                </div>
-                <div class="mt-3"></div>
-
-                <label>testo <sup>*</sup> (almeno 10 caratteri)</label>
-                <textarea name="review_text" id="review_text" class="form-control @error('review_text') is-invalid @enderror" cols="30" rows="10" value="{{$review->review_text}}" style="resize: none; height: 200px; width: 800px "></textarea>
-                @error('review_text')
-                <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-
-                <div class="mt-3"></div>
-
-                @if(\Illuminate\Support\Facades\Auth::user() != null)
-                    <div style="margin-left:11%"></div>
-                    <div class="wc-proceed-to-checkout">
-                        <button type="submit" class="btn btn-sqr" >Invia recensione </button>
+                    <div class="single-post-button">
+                        <button type="submit" class="btn btn-sqr">Modifica</button>
                     </div>
-                @else
-                    <div style="margin-left:11%"></div>
-                    <div class="wc-proceed-to-checkout">
-                        <a href="{{url('/login') }}" class="btn btn-sqr" >Invia recensione </a>
-                    </div>
-                @endif
-
-
-
-                <div class="mb-2"></div>
-
-                <div style="margin-left:7.6%"></div>
-
-                <label>i campi segnati con <sup>*</sup> sono obbligatori</label>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>

@@ -122,34 +122,35 @@ class ReviewController extends Controller
         return $quantity;
     }
 
-    public static function getReview($comic_id ,$review_id){
+    public static function getReview($review_id){
         $review = Review::find($review_id);
-        $comic = Comic::find($comic_id);
-
-        return view('editreview')->with(compact('review'))->with(compact('comic'));
-
+        return view('editreview')->with(compact('review')) ;
     }
 
-    public function updateReview(Request $request, $review_id, $comic_id)
+    public static function updateReview(Request $request, $review_id)
     {
         $review = Review::find($review_id);
-        $comic = Comic::find($comic_id);
         $rules = [
-            'id_review_by_user'=>'required',
-            'id_document_reviewed'=>'required',
             'stars_number'=> 'required|integer|min:1|max:5'
         ];
         $validator = Validator::make($request->all(),$rules);
-        if($validator->fails()){
-            return view('editreview')->with(compact('review'))->with(compact('comic'));
-        }
 
 
         $review->review_title = $request->get('review_title');
         $review->review_text = $request->get('review_text');
         $review->stars = $request->get('stars');
         $review->save();
-        return redirect()->uri('/comic_detail/{comic_id}')->with(compact('comic'))->with('status', 'Post has been successfully updated!');
+        return redirect()->back();
+    }
+
+    public static function CheckAuthor($review_id,$user_id){
+        $review = Review::find($review_id);
+        $user = User::find($user_id);
+
+        if($user->id = $review->user_id)
+            return true;
+        else
+            return false;
     }
 
 }

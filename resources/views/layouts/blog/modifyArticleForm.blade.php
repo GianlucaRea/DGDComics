@@ -10,7 +10,7 @@
                 <form method="POST" action="{{ Route('modifyArticle', ['article_id' => $article->id])}}" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
-                    <label>titolo</label>
+                    <label>Titolo</label>
                     <textarea name="title" id="title" class="form-control @error('title') is-invalid @enderror"  cols="30" rows="10"  style="resize: none; height: 70px;">{{$article->title}}</textarea>
                     @error('title')
                     <span class="invalid-feedback" role="alert">
@@ -18,7 +18,7 @@
                     </span>
                     @enderror
                     <div class="mb-3"></div>
-                    <label>testo</label>
+                    <label>Testo</label>
                     <textarea name="article_text" id="article_text" class="form-control @error('article_text') is-invalid @enderror" cols="30" rows="10" style="resize: none; height: 500px;">{{$article->article_text}}</textarea>
                     @error('article_text')
                     <span class="invalid-feedback" role="alert">

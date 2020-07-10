@@ -116,6 +116,14 @@ class WishlistController extends Controller
         return DB::table('wishlists')->where('user_id', '=', $id)->get();
     }
 
+    public static function getWishByUser($id){
+        return DB::table('wishlists')->where('user_id', '=', $id)->first();
+    }
+
+    public static function getComicsWishlist($id){
+       return DB::table('wishlists')->where('wishlists.user_id', '=', $id)->join('comic_wishlist', 'wishlists.id', '=', 'comic_wishlist.wishlist_id')->get();
+    }
+
     public static function control($id){
         $user = Auth::user();
         if(DB::table('comic_wishlist')->where('wishlist_id', '=', $id)->count() > 0){
@@ -175,6 +183,8 @@ class WishlistController extends Controller
         return ComicController::getByID(DB::table('comic_wishlist')->where('wishlist_id', '=', $id)->first()->comic_id);
     }
 
+
+
     public static function removeToListCaseLost($id){
         if(Auth::user()) {
             $user = Auth::user();
@@ -185,5 +195,24 @@ class WishlistController extends Controller
             return redirect('/login');
         }
     }
+
+    public static function wishlistCountByUserId($id){
+        if(DB::table('wishlists')->where('user_id', '=', $id)->count()>0){
+            return DB::table('wishlists')->where('user_id', '=', $id)->count();
+        }
+        else{
+            return 0;
+        }
+    }
+
+    public static function userHasList($id){
+        if(DB::table('wishlists')->where('user_id', '=', $id)->count()>0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 
 }

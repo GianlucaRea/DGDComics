@@ -44,7 +44,7 @@
                                     </div>
                                     <div class=" col-sm-10 product-attribute">
                                         @php($seller = \App\Http\Controllers\ComicController::getSeller($comic->id))
-                                        <a href="{{url('vendor_detail/'.$seller->id) }}">{{ $seller->name }} {{ $seller->surname }}</a> <!-- Display seller of the comic -->
+                                        <a href="{{url('vendor_detail/'.$seller->id) }}">{{ $seller->username }}</a> <!-- Display seller of the comic -->
                                     </div>
                                 </div>
                                 <div class="product-attribute">

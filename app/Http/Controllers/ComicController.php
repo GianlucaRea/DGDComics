@@ -586,6 +586,10 @@ class ComicController extends Controller
             $cart = session()->get('cart');
             $image = ImageController::getCover($id);
 
+            if($user->id == self::getSeller($id)){
+                return redirect('comic_detail/'.$comic->id)->with('error', 'seems something went wrong!');
+            }
+
             // if cart is empty then this the first comic
             if (!$cart) {
 
@@ -659,6 +663,10 @@ class ComicController extends Controller
 
                 abort(404);
 
+            }
+
+            if($user->id == self::getSeller($id)->id){
+                return redirect('comic_detail/'.$comic->id)->with('error', 'seems something went wrong!');
             }
 
             $cart = session()->get('cart');

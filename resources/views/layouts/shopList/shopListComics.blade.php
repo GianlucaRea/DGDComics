@@ -47,7 +47,7 @@
                                             <img src="{{asset('img/comicsImages/' . $image->image_name) }}" alt="book" class="primary" />
                                         </a>
                                         <div class="quick-view">
-                                            <a class="action-view" href="{{ url('/comic_detail/'.$comic->id) }}" data-target="#productModal" data-toggle="modal" title="Quick View">
+                                            <a href="{{ url('/comic_detail/'.$comic->id) }}" >
                                                 <i class="fa fa-search-plus"></i>
                                             </a>
                                         </div>

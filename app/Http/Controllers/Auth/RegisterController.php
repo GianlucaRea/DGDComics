@@ -84,7 +84,9 @@ class RegisterController extends Controller
         ]);
 
         $groupUser = ['group_id' => '1', 'user_id' => $user->id];
+        $wishlistUser = ['user_id' => $user->id];
         DB::table('group_user')->insert($groupUser);
+        DB::table('wishlists')->insert($wishlistUser);
         return $user;
     }
 }
