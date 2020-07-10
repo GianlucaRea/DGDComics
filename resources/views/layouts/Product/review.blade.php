@@ -34,7 +34,7 @@
 
     .rating > label:hover,
     .rating > label:hover ~ label,
-    .rating > input.radio-btn:checked ~ label {
+    .rating > input.radio-btn:checked ~ label{
         color: transparent;
         font-size: 16px;
     }
@@ -85,7 +85,6 @@
                 @enderror
                     <div style="margin-left:0.8%;"></div>
                     <div class="txt-center">
-
                         <div class="row">
                             <div class="rating">
                                 <input id="stars5" name="stars" type="radio" value="5" class="radio-btn hide" />
@@ -102,7 +101,6 @@
                             </div>
                             *
                         </div>
-
                     </div>
                 </div>
                 <div class="mt-3"></div>
@@ -205,7 +203,7 @@
                                     @php($isAuthor = \App\Http\Controllers\ReviewController::CheckAuthor($review->id,$user->id))
                                     @if($isAuthor)
                                         <div style="font-size: 24px;">
-                                            <a class="btn btn-danger" onclick="return myFunction();"  href="{{route('editreviewuser', $review->id)}}"><i class="fa fa-pencil" ></i></a>
+                                            <a class="btn btn-light"  href="{{route('editreviewuser', $review->id)}}"><i class="fa fa-pencil" ></i></a>
                                         </div>
 
                                     @else
@@ -220,12 +218,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    function myFunction() {
-        if(!confirm("Sei sicuro di voler modificare questa recensione"))
-            event.preventDefault();
-        else{
-        }
-    }
-</script>

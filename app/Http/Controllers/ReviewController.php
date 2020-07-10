@@ -130,16 +130,25 @@ class ReviewController extends Controller
     public static function updateReview(Request $request, $review_id)
     {
         $review = Review::find($review_id);
-        $rules = [
-            'stars_number'=> 'required|integer|min:1|max:5'
-        ];
-        $validator = Validator::make($request->all(),$rules);
+        $request->validate([
+            'review_title' => ['string', 'max:50', 'min:3'],
+            'review_text' => ['string', 'max:255', 'min:10'],
+            'stars'=> 'integer|min:1|max:5'
+        ]);
 
 
-        $review->review_title = $request->get('review_title');
-        $review->review_text = $request->get('review_text');
-        $review->stars = $request->get('stars');
-        $review->save();
+            $review->review_title = $request->get('review_title');
+            $review->review_text = $request->get('review_text');
+            $review->stars = $request->get('stars');
+
+        $data=array(
+            'review_title' => $review->review_title,
+            'review_text' => $review->review_text,
+            'stars' => $review->stars
+        );
+
+        DB::table('reviews')->where('id', '=', $review_id)->update($data);
+
         return redirect()->back();
     }
 
@@ -147,7 +156,7 @@ class ReviewController extends Controller
         $review = Review::find($review_id);
         $user = User::find($user_id);
 
-        if($user->id = $review->user_id)
+        if($user->id == $review->user_id)
             return true;
         else
             return false;

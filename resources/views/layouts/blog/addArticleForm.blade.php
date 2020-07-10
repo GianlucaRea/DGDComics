@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" style="width: 100%">
     <div class="col-lg-1"></div>
     <div class="col-lg-10">
         <div class="comment-title-wrap mt-30">
