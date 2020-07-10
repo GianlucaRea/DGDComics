@@ -640,7 +640,7 @@
                                                                 <div class="col-lg-12">
                                                                     <div class="single-input-item">
                                                                         <label for="comic_name" class="required">Titolo Fumetto<span>*</span></label>
-                                                                        <input id="comic_name" type="text" class="form-control @error('comic_name') is-invalid @enderror" name="comic_name" placeholder="">
+                                                                        <input id="comic_name" type="text" class="form-control @error('comic_name') is-invalid @enderror" name="comic_name">
                                                                         @error('comic_name')
                                                                         <span class="invalid-feedback" role="alert">
                                                                             <strong>
@@ -658,7 +658,7 @@
                                                                 <div class="col-lg-12">
                                                                     <div class="single-input-item">
                                                                         <label for="description" class="required">Descrizione<span>*</span></label>
-                                                                        <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" placeholder="" style="resize: none; height: 100px; background-color: white"></textarea>
+                                                                        <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" style="resize: none; height: 100px; background-color: white"></textarea>
                                                                         @error('description')
                                                                         <span class="invalid-feedback" role="alert">
                                                                             <strong>
@@ -676,7 +676,7 @@
                                                                 <div class="col-lg-6">
                                                                     <div class="single-input-item">
                                                                         <label for="ISBN" class="required">ISBN<span>*</span></label>
-                                                                        <input id="ISBN" type="text" class="form-control @error('ISBN') is-invalid @enderror" name="ISBN" placeholder="">
+                                                                        <input id="ISBN" type="text" class="form-control @error('ISBN') is-invalid @enderror" name="ISBN" >
                                                                         @error('ISBN')
                                                                         <span class="invalid-feedback" role="alert">
                                                                                 <strong>
@@ -690,7 +690,7 @@
                                                                 <div class="col-lg-6">
                                                                     <div class="single-input-item">
                                                                         <label for="publisher" class="required">Casa Editrice<span>*</span></label>
-                                                                        <input id="publisher" type="text" class="form-control @error('publisher') is-invalid @enderror" name="publisher" placeholder="">
+                                                                        <input id="publisher" type="text" class="form-control @error('publisher') is-invalid @enderror" name="publisher">
                                                                         @error('publisher')
                                                                         <span class="invalid-feedback" role="alert">
                                                                                 <strong>
@@ -708,7 +708,7 @@
                                                                 <div class="col-lg-6">
                                                                     <div class="single-input-item">
                                                                         <label for="author_name" class="required">Autore<span>*</span></label>
-                                                                        <input id="author_name" type="text" class="form-control @error('author_name') is-invalid @enderror" name="author_name" placeholder="">
+                                                                        <input id="author_name" type="text" class="form-control @error('author_name') is-invalid @enderror" name="author_name">
                                                                         @error('author_name')
                                                                         <span class="invalid-feedback" role="alert">
                                                                                 <strong>
@@ -722,7 +722,7 @@
                                                                 <div class="col-lg-6">
                                                                     <div class="single-input-item">
                                                                         <label for="language" class="required">Lingua<span>*</span></label>
-                                                                        <input id="language" type="text" class="form-control @error('language') is-invalid @enderror" name="language" placeholder="">
+                                                                        <input id="language" type="text" class="form-control @error('language') is-invalid @enderror" name="language">
                                                                         @error('language')
                                                                         <span class="invalid-feedback" role="alert">
                                                                                 <strong>
@@ -817,7 +817,7 @@
                                                             <div class="row">
                                                                 <div class="col-lg-4">
                                                                     <div class="single-input-item">
-                                                                        <input id="price" type="text" class="form-control @error('price') is-invalid @enderror" name="price" placeholder="4.99">
+                                                                        <input id="price" type="text" class="form-control @error('price') is-invalid @enderror" name="price" placeholder="Ad esempio 4.99">
                                                                         @error('price')
                                                                         <span class="invalid-feedback" role="alert">
                                                                                 <strong>
@@ -830,7 +830,7 @@
 
                                                                 <div class="col-lg-4">
                                                                     <div class="single-input-item">
-                                                                        <input id="quantity" type="number" class="form-control @error('quantity') is-invalid @enderror" name="quantity" placeholder="1" min="1">
+                                                                        <input id="quantity" type="number" class="form-control @error('quantity') is-invalid @enderror" name="quantity" min="1">
                                                                         @error('quantity')
                                                                         <span class="invalid-feedback" role="alert">
                                                                                 <strong>

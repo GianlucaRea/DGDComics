@@ -148,17 +148,20 @@ class ComicController extends Controller
         return redirect()->back()->with('message','Success');
     }
 
-    public function destroyForVendor($id)
-    {
-        $Comic = Comic::find($id);
+    public function destroyForVendor($id){
+        if(Auth::user()) {
+            $Comic = Comic::find($id);
 
-        if(is_null($Comic)){
-            return redirect()->back()->with('message','Alredy Deleted');
+            if (is_null($Comic)) {
+                return redirect()->back()->with('message', 'Alredy Deleted');
+            }
+            $this->removeForAdmin($id);
+            $Comic->delete();
+
+            return redirect()->back()->with('message', 'Success');
         }
-        $this->removeForAdmin($id);
-        $Comic -> delete();
-
-        return redirect()->back()->with('message','Success');
+        else
+            return redirect('/login');
     }
 
 
