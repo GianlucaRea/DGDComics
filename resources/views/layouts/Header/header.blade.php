@@ -47,7 +47,7 @@
                                                                 @endif
                                                             </div>
                                                             <div class="cart-icon">
-                                                                <a href="#"><i class="fa fa-remove"></i></a>
+                                                                <a href="{{url('remove-from-list/'.$comic->id) }}"><i class="fa fa-remove"></i></a>
                                                             </div>
                                                         </div>
                                                         @endif
