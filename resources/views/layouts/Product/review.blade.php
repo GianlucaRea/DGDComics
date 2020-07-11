@@ -106,7 +106,7 @@
                 <div class="mt-3"></div>
 
                 <label>testo <sup>*</sup> (almeno 10 caratteri)</label>
-                <script src="https://cdn.tiny.cloud/1/9jdvep5qo4jodgljrzr63bxgi2z14pz8rxk2a6g4d50af1xm/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.2/tinymce.min.js" referrerpolicy="origin"></script>
                 <script>
                     tinymce.init({
                         selector: '#review_text',
