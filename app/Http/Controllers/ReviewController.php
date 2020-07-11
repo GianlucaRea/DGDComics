@@ -27,7 +27,7 @@ class ReviewController extends Controller
             );
             $now = Carbon::now();
             $validator = Validator::make($data, [
-                'review_title' => ['required', 'max:50', 'min:3'],
+                'review_title' => ['required', 'string', 'max:50',],
                 'review_text' => ['required', 'max:255', 'min:10'],
                 'stars' => ['required'],
             ]);
@@ -53,8 +53,7 @@ class ReviewController extends Controller
 
             DB::table('reviews')->insert($data);
 
-
-            return redirect()->back()->with(compact('isNotPassed'));
+            return redirect('comic_detail/'.$id)->with(compact('isNotPassed'));
         }
         else{
             return redirect('/login');

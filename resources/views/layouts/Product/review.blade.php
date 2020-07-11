@@ -55,14 +55,13 @@
 @if($isNotPassed)
     <script>
         function alert() {
-            if(!confirm("Ehy, sembra che ci sia stato un errore, sicuro di aver riempito tutti i campi? stelle comprese? se l'errore persiste sentiti libero di contattarci!"))
+            if(!confirm("Ehy, sembra che ci sia stato un errore, sicuro di aver riempito correttamente tutti i campi? stelle comprese? se l'errore persiste sentiti libero di contattarci!"))
                 event.preventDefault();
         }
         alert();
     </script>
 @endif
-
-<div class="product-info-area">
+<div class="product-info-area" style="margin-left: 20%">
     <div class="tab-content border-0">
         <div class="mt-30"></div>
         <div class="tab-pane fade show active" id="addreview">
@@ -83,7 +82,7 @@
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
-                    <div style="margin-left:0.8%;"></div>
+                    <div style="margin-left:1.8%;"></div>
                     <div class="txt-center">
                         <div class="row">
                             <div class="rating">
@@ -113,7 +112,7 @@
                         statusbar: false,
                         menubar: false,
                         height: 200,
-                        width: 650
+                        width: 850
                     });
                 </script>
 
@@ -153,7 +152,7 @@
 </div>
 
 
-<div class="product-info-area">
+<div class="product-info-area" style="margin-left: 20%">
     <div class="tab-pane fade show active"  id="review">
         <div class="valu">
             <div class="row">

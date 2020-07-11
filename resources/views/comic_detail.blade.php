@@ -12,7 +12,6 @@
     )
 @include('layouts.Header.breadcrumbsArea', $page)
 @include('layouts.Product.productMainArea')
-@include('layouts.Product.productInfo')
 @include('layouts.Product.review')
 <br><br>
 @include('layouts.Footer.banner2')

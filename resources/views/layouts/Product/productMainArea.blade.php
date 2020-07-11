@@ -132,16 +132,30 @@
                                         </div>
                                     </div>
                                 @endif
-                                <div class="product-addto-links-text">
-                                    <p>{!! $comic->description !!}</p>
+                            </div>
+                            <div class="product-addto-links-text">
+                                <p>{!! $comic->description !!}</p>
+                            </div>
+                            <div class="tab-content border-0">
+                                <div class="tab-pane fade show active" id="Details">
+                                    <div class="valu">
+                                        <ul>
+                                            <li><i class="fa fa-circle"></i>ISBN: {{ $comic->ISBN }}</li>
+                                            <li><i class="fa fa-circle"></i>Adjustable shoulder strap.</li> <!-- i model e l'ER mi sembra non siano aggiornati, da completare-->
+                                            <li><i class="fa fa-circle"></i>Full-length zipper.</li>
+                                            @if($comic->length != null)
+                                                <li><i class="fa fa-circle"></i>L {{$comic->length}} cm x W {{$comic->width}} cm x H {{$comic->height}} cm.</li>
+                                            @endif
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        @include('layouts.Product.relatedProduct')
-        <!-- product-main-area-end -->
+            @include('layouts.Product.relatedProduct')
         </div>
+    <!-- product-main-area-end -->
     </div>
 </div>
