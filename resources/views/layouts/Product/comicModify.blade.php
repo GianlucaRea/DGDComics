@@ -26,7 +26,7 @@
 
                     <div class="mt-2"></div>
 
-                    <div class="row">
+                    {{--<div class="row">
                         <div class="col-lg-12">
                             <div class="single-input-item">
                                 <label for="description" class="required">Descrizione<span>*</span></label>
@@ -40,6 +40,18 @@
                                 @enderror
                             </div>
                         </div>
+                    </div>--}}
+
+                    <div class="mt-2"></div>
+
+                    <div class="row">
+                        <script src="https://cdn.tiny.cloud/1/9jdvep5qo4jodgljrzr63bxgi2z14pz8rxk2a6g4d50af1xm/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+                        <script>
+                            tinymce.init({
+                                selector: '#description'
+                            });
+                        </script>
+                        <textarea id="description" name="description">Descrizione</textarea>
                     </div>
 
                     <div class="mt-2"></div>
@@ -915,6 +927,8 @@
                     <div class="single-input-item">
                         <button type="submit" class="btn btn-sqr">Modifica</button>
                     </div>
+                    <div class="mt-3"></div>
+
                     <div class="mt-3"></div>
                 </form>
             </div>
