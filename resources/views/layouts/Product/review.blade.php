@@ -199,16 +199,15 @@
                                         </div>
                                     @endif
                                 @endif
+                                @if(\Illuminate\Support\Facades\Auth::user())
                                     @php($user = Auth::user())
                                     @php($isAuthor = \App\Http\Controllers\ReviewController::CheckAuthor($review->id,$user->id))
                                     @if($isAuthor)
                                         <div style="font-size: 24px;">
                                             <a class="btn btn-light"  href="{{route('editreviewuser', $review->id)}}"><i class="fa fa-pencil" ></i></a>
                                         </div>
-
-                                    @else
                                     @endif
-
+                                @endif
                             </div>
                         </div>
                     </div>

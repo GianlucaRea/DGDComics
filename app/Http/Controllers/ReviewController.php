@@ -139,7 +139,12 @@ class ReviewController extends Controller
 
             $review->review_title = $request->get('review_title');
             $review->review_text = $request->get('review_text');
-            $review->stars = $request->get('stars');
+            if($request->has('stars')) {
+                $review->stars = $request->get('stars');
+            }
+            else{
+                $review->stars = DB::table('reviews')->where('id', '=', $review_id)->first()->stars;
+            }
 
         $data=array(
             'review_title' => $review->review_title,
@@ -148,8 +153,8 @@ class ReviewController extends Controller
         );
 
         DB::table('reviews')->where('id', '=', $review_id)->update($data);
-
-        return redirect()->back();
+        $idOfComic = DB::table('reviews')->where('id', '=', $review_id)->first()->comic_id;
+        return redirect('comic_detail/'.$idOfComic);
     }
 
     public static function CheckAuthor($review_id,$user_id){

@@ -951,9 +951,14 @@
 
                                                         <div class="mt-3"></div>
 
-                                                        <div class="single-input-item">
-                                                            <button type="submit" class="btn btn-sqr">PUBBLICA ORA!</button>
-                                                        </div>
+                                                            <div class="row">
+                                                                <div class="col-lg-10"></div>
+                                                                <div class="col-lg-2">
+                                                                <div class="single-input-item">
+                                                                    <button type="submit" class="btn btn-sqr">PUBBLICA</button>
+                                                                </div>
+                                                                </div>
+                                                            </div>
                                                         </form>
                                                     </div>
                                                 </div>

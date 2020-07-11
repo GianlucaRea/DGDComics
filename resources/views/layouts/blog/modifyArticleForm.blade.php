@@ -171,8 +171,16 @@
                         </div>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="single-post-button">
-                        <button type="submit" class="btn btn-sqr">modifica</button>
+                    <div class="row">
+                        <div style="margin-right: 1%"></div>
+
+                            <div class="buttons-back">
+                                <a href="{{url('/blogDetail/'.$article->id)}}">Indietro</a>
+                            </div>
+                            <div class="single-input-item">
+                                <button type="submit" class="btn btn-sqr">modifica</button>
+                            </div>
+
                     </div>
                 </form>
             </div>
