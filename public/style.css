@@ -4829,6 +4829,13 @@ nav.menu .cr-dropdown ul {
     top: -2px;
 }
 
+.product-main-area .valu li i {
+    font-size: 6px;
+    padding-right: 8px;
+    position: relative;
+    top: -2px;
+}
+
 .product-info-area .valu .section-title h2 {
     border-bottom: 1px solid #e5e5e5;
     color: #4c4c4c;
