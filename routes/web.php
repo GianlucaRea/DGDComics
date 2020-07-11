@@ -128,6 +128,7 @@ Route::get('/adminArea/users', 'AdminController@dashboard')->name('adminusers');
 Route::get('/adminArea/comics', 'AdminController@dashboard')->name('admincomics');
 Route::get('/adminArea/reviews', 'AdminController@dashboard')->name('adminreviews');
 Route::get('/adminArea/articles', 'AdminController@dashboard')->name('adminarticles');
+Route::get('/adminArea/articles/search/', 'ArticleController@articleSearchAdmin')->name('searcharticlerouteAdminPanel');
 
 
 Route::get('/vendor', function () {

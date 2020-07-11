@@ -28,6 +28,22 @@ public static function dashboard() {
     else return redirect('/login');
 }
 
+    public static function dashboardArticle( $articles ) {
+        if(Auth::user()) {
+            $user = Auth::user();
+            $users = User::where('username', '!=', 'admin')->orderBy('username', 'asc')->paginate(12);
+            $comics = Comic::orderBy('comic_name', 'asc')->paginate(12);
+            $reviews = Review::orderBy('review_title', 'asc')->paginate(12);
+            return view('adminPanelArticleSearch')
+                ->with(compact('user'))
+                ->with(compact('users'))
+                ->with(compact('comics'))
+                ->with(compact('reviews'))
+                ->with(compact('articles'));
+        }
+        else return redirect('/login');
+    }
+
 
 
 public static function checkForWriteArticle(){

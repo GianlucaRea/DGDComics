@@ -35,7 +35,7 @@
                             <div class="col-lg-9 col-md-8">
                                 <div class="tab-content" id="myaccountContent">
                                     <!-- Single Tab Content Start -->
-                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'admindashboard') ? 'active' : '' }}" id="dashboad" role="tabpanel">
+                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'admindashboard') }}" id="dashboad" role="tabpanel">
                                         <div class="myaccount-content">
                                             <h5>Dashboard</h5>
                                             <div class="welcome">
@@ -105,8 +105,8 @@
                                 @if(session('message'))
                                     {{session('message')}}
                                 @endif
-                                    <!-- Single Tab Content Start -->
-                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'adminusers') ? 'active' : '' }}" id="users" role="tabpanel">
+                                <!-- Single Tab Content Start -->
+                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'adminusers')}}" id="users" role="tabpanel">
                                         <div class="myaccount-content">
                                             <h5>Utenti</h5>
                                             <div class="myaccount-table table-responsive text-center">
@@ -122,17 +122,17 @@
                                                     </thead>
                                                     <tbody>
                                                     @foreach($users as $user)
-                                                    <tr>
-                                                        <td>{{$user->username}}</td>
-                                                        <td>{{$user->phone_number}}</td>
-                                                        <td>{{$user->email}}</td>
-                                                        @if($user->hasGroup('il gruppo degli utenti'))
-                                                        <td>Utente</td>
-                                                        @else
-                                                            <td>Venditore</td>
-                                                        @endif
-                                                        <td><a class="btn btn-danger" onclick="return deleteUser();"  href="{{route('user-delete', $user->id)}}"><i class="fa fa-trash"></i></a></td>
-                                                    </tr>
+                                                        <tr>
+                                                            <td>{{$user->username}}</td>
+                                                            <td>{{$user->phone_number}}</td>
+                                                            <td>{{$user->email}}</td>
+                                                            @if($user->hasGroup('il gruppo degli utenti'))
+                                                                <td>Utente</td>
+                                                            @else
+                                                                <td>Venditore</td>
+                                                            @endif
+                                                            <td><a class="btn btn-danger" onclick="return deleteUser();"  href="{{route('user-delete', $user->id)}}"><i class="fa fa-trash"></i></a></td>
+                                                        </tr>
                                                     @endforeach
                                                     {{ $users->links() }}
                                                     </tbody>
@@ -148,7 +148,7 @@
 
 
                                     <!-- Single Tab Content Start -->
-                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'admincomics') ? 'active' : '' }}" id="comics" role="tabpanel">
+                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'admincomics') }}" id="comics" role="tabpanel">
                                         <div class="myaccount-content">
                                             <h5>Fumetti</h5>
                                             <div class="myaccount-table table-responsive text-center">
@@ -180,14 +180,14 @@
                                                 </table>
                                                 @foreach($comics as $comic)
                                                 @endforeach
-                                               {{ $comics->links() }}
+                                                {{ $comics->links() }}
                                             </div>
                                         </div>
                                     </div>
                                     <!-- Single Tab Content End -->
 
                                     <!-- Single Tab Content Start -->
-                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'adminreviews') ? 'active' : '' }}" id="reviews" role="tabpanel">
+                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'adminreviews') }}" id="reviews" role="tabpanel">
                                         <div class="myaccount-content">
                                             <h5>Recensione</h5>
                                             <div class="myaccount-table table-responsive text-center">
@@ -227,7 +227,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'adminarticles') ? 'active' : '' }}" id="articles" role="tabpanel">
+                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'adminarticles') }} active" id="articles" role="tabpanel">
                                         <div class="myaccount-content">
                                             <h5>Articoli</h5>
                                             <div class="blog-left-title">
@@ -259,7 +259,7 @@
                                                                 <a class="btn btn-danger" onclick="return deleteArticle();"  href="{{route('article-delete', $article->id)}}"><i class="fa fa-trash"></i></a>
                                                             </td>
                                                             <td>
-                                                            <a class="btn btn-light" href="{{route('article-modify', $article->id)}}"><i class="fa fa-pencil"></i></a>
+                                                                <a class="btn btn-light" href="{{route('article-modify', $article->id)}}"><i class="fa fa-pencil"></i></a>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -267,6 +267,16 @@
                                                     </tbody>
                                                 </table>
                                                 {{ $articles->links() }}
+                                            </div>
+                                        </div>
+                                        <div class="mt-3"></div>
+                                        <div class="row">
+                                            <div class="col-lg-10"></div>
+                                            <div style="margin-right: 2.75%"></div>
+                                            <div class="col-lg-1">
+                                        <div class="buttons-back">
+                                            <a href="{{url('/adminArea/articles')}}">Indietro</a>
+                                        </div>
                                             </div>
                                         </div>
                                     </div>

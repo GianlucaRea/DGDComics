@@ -126,6 +126,12 @@ class ArticleController extends Controller
         return view('blogHome')->with(compact('articles'))->with(compact('tags'));
     }
 
+    public function articleSearchAdmin(Request $request){
+        $search = $request->input('search');
+        $articles = Article::where('title','LIKE','%'.$search.'%')->orWhere('article_text','LIKE','%'.$search.'%')->paginate(12);
+        return AdminController::dashboardArticle($articles);
+    }
+
 
 
     public static function getArticleById($id){

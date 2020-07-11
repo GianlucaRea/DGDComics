@@ -14,11 +14,43 @@
                         </form>
                     </div>
                 </div>
-                <div class="single-blog mb-50">
-                    <div class="blog-left-title">
-                        <h3>Tags</h3>
-                    </div>
-                    <div class="blog-side-menu">
+                <div class="section-title-5 mb-30">
+                    <h2>Opzioni</h2>
+                </div>
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <style>
+                    .collapsible {
+                        background-color: transparent;
+                        color: #333;
+                        font-family: 'Open Sans', sans-serif;
+                        cursor: pointer;
+                        padding: 18px;
+                        width: 100%;
+                        text-align: left;
+                        font-size: 15px;
+                        border-bottom: lightgray 1px solid;
+                        border-right: none;
+                        border-left: none;
+                        border-top: none;
+                    }
+
+                    .collapsible:hover {
+                        transition: .3s;
+                        color: #f07c29;
+                    }
+
+                    .content2 {
+                        padding: 0 18px;
+                        max-height: 0;
+                        overflow: hidden;
+                        transition: max-height 0.2s ease-out;
+                        background-color: white;
+                    }
+                </style>
+
+                <button class="collapsible"><i class="fa fa-angle-down"></i> TAG</button>
+                <div class="content2">
+                    <div class="left-menu mb-30">
                         <ul>
                             @foreach($tags as $tag)
                                 @php
@@ -30,7 +62,8 @@
                     </div>
                 </div>
             </div>
-            @if(\Illuminate\Support\Facades\Auth::user()) <!-- zona admin -->
+            <!-- zona admin -->
+            @if(\Illuminate\Support\Facades\Auth::user())
                 @php($u = \Illuminate\Support\Facades\Auth::user())
                 @if(\App\Http\Controllers\GroupController::isAdmin($u->id))
 
@@ -257,4 +290,24 @@
     }
 </script>
 </div>
+
+<script>
+
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+    const event = new Event("click")
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
+        coll[0].dispatchEvent(event)
+    }
+
+</script>
 <!-- blog-main-area-end -->
