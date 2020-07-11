@@ -62,16 +62,16 @@
         <div class="comment-title-wrap mt-30">
             <h3>Modifica della Recensione Del Fumetto "{{$comic->comic_name}}"</h3>
         </div>
-        <div class="comment-input mt-40">
-            <div class="comment-input-textarea mb-30">
-                @php($user = \Illuminate\Support\Facades\Auth::user())
-                <form method="POST" action="{{ Route('updatereviewuser', $review->id)}}" enctype="multipart/form-data">
-                    @csrf
-                    @method('PATCH')
-                    <label>Titolo</label>
-                    <textarea name="review_title" id="review_title" class="form-control @error('review_title') is-invalid @enderror"  cols="30" rows="10"  style="resize: none; height: 70px;">{{$review->review_title}}</textarea>
-                    @error('review_title')
-                    <span class="invalid-feedback" role="alert">
+        <div class="mt-16"></div>
+
+            @php($user = \Illuminate\Support\Facades\Auth::user())
+            <form method="POST" action="{{ Route('updatereviewuser', $review->id)}}" enctype="multipart/form-data">
+                @csrf
+                @method('PATCH')
+                <label>Titolo</label>
+                <textarea name="review_title" id="review_title" class="form-control @error('review_title') is-invalid @enderror"  cols="30" rows="10"  style="resize: none; height: 70px;">{{$review->review_title}}</textarea>
+                @error('review_title')
+                <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
@@ -94,31 +94,31 @@
                             {{ $message }}
                         </strong>
                     </span>
-                    @enderror
-                    <div class="mt-2"></div>
-                    <div class="row">
-                        <div class="col-lg-1-5">
-                            <div class="rating-result">
-                                @php($stars = $review->stars)
-                                <p>Vecchia Valutazione</p>
-                                @foreach(range(1,5) as $i)
-                                    @if($stars >0)
-                                        @if($stars >0.5)
-                                            <a><i class="fa fa-star fa_custom"></i></a>
-                                        @else
-                                            <a><i class="fa fa-star-half-o fa_custom"></i></a>
-                                        @endif
+                @enderror
+                <div class="mt-2"></div>
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="rating-result">
+                            @php($stars = $review->stars)
+                            <p>Vecchia Valutazione</p>
+                            @foreach(range(1,5) as $i)
+                                @if($stars >0)
+                                    @if($stars >0.5)
+                                        <a><i class="fa fa-star fa_custom"></i></a>
                                     @else
-                                        <a><i class="fa  fa-star-o fa_custom"></i></a>
+                                        <a><i class="fa fa-star-half-o fa_custom"></i></a>
                                     @endif
-                                    <?php $stars--; ?>
-                                @endforeach
-                            </div>
+                                @else
+                                    <a><i class="fa  fa-star-o fa_custom"></i></a>
+                                @endif
+                                <?php $stars--; ?>
+                            @endforeach
                         </div>
-                        <div class="col-lg-3">
-                            Nuova Valutazione
-                            <div style="margin-top: 0.8%"></div>
-                            <div class="txt-center">
+                    </div>
+                    <div class="col-lg-3">
+                        Nuova Valutazione
+                        <div style="margin-top: 0.8%"></div>
+                        <div class="txt-center">
                             <div class="row">
                                 <div style="margin-left: 3%"></div>
                                 <div class="rating">
@@ -138,12 +138,20 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-5"></div>
+                    <div class="col-lg-1">
+                        <div class="mt-3"></div>
+                        <div class="buttons-back">
+                            <a href="{{ url('comic_detail/'.$comic->id) }}">Indietro</a>
+                        </div>
                     </div>
-                    <div class="single-post-button">
-                        <button type="submit" class="btn btn-sqr">Modifica</button>
+                    <div class="col-lg-1">
+                        <div class="mt-3"></div>
+                        <div class="single-post-button">
+                            <button type="submit" class="btn btn-sqr">Modifica</button>
+                        </div>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
-    </div>
 </div>

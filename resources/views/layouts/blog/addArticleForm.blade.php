@@ -94,8 +94,16 @@
                         </div>
                     </div>
                     <div class="mb-3"></div>
-                    <div class="single-post-button">
-                        <button type="submit" class="btn btn-sqr">Pubblica</button>
+                    <div class="row">
+                        <div style="margin-right: 1%"></div>
+
+                        <div class="buttons-back">
+                            <a href="{{url('/blog')}}">Indietro</a>
+                        </div>
+                        <div class="single-input-item">
+                            <button type="submit" class="btn btn-sqr">pubblica</button>
+                        </div>
+
                     </div>
                 </form>
             </div>

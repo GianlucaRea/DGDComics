@@ -96,8 +96,21 @@
     </fieldset>
     <div class="mt-3"></div>
 
-    <div class="single-input-item">
-        <button type="submit" class="btn btn-sqr">Salva</button>
+    <div class="row">
+        <div class="col-lg-9-5"></div>
+        <div style="margin-right: 2.3%"></div>
+
+        <div class="col-lg-1">
+            <div class="buttons-back">
+                <a href="{{url('/accountArea/paymentmethods')}}">Indietro</a>
+            </div>
+        </div>
+        <div style="margin-right: 1.3334%"></div>
+        <div class="col-lg-1">
+            <div class="single-input-item">
+                <button type="submit" class="btn btn-sqr">Salva</button>
+            </div>
+        </div>
     </div>
 
 </form>
