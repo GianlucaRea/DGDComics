@@ -10,7 +10,7 @@
 @php($page = [
     'name' =>'Modifica Recensione']
     )
-
+@include('layouts.Header.breadcrumbsArea', $page)
 @include('layouts.Product.reviewedit')
 <br><br>
 @include('layouts.Footer.banner2')
