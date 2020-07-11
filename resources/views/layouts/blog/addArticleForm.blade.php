@@ -18,13 +18,26 @@
                     @enderror
                     <div class="mb-3"></div>
                     <label>testo</label>
-                    <textarea name="article_text" id="article_text" class="form-control @error('article_text') is-invalid @enderror" cols="30" rows="10"  style="resize: none; height: 500px;"></textarea>
+                    <!--TinyMce js-->
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.2/tinymce.min.js" referrerpolicy="origin"></script>
+                    <script>
+                        tinymce.init({
+                            selector: '#article_text',
+                            statusbar: false,
+                            menubar: false,
+                            height: 350,
+                        });
+                    </script>
+
+                    <textarea id="article_text" name="article_text" ></textarea>
                     @error('article_text')
                     <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
+                        <strong>
+                            {{ $message }}
+                        </strong>
                     </span>
                     @enderror
-                    <div class="mt-2"></div>
+                    <div class="mt-3"></div>
 
                     <label for="tag_name" class="required">Tag<span>*</span></label>
                     <div class="row">

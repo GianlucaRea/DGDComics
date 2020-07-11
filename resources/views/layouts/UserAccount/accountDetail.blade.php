@@ -658,7 +658,19 @@
                                                                 <div class="col-lg-12">
                                                                     <div class="single-input-item">
                                                                         <label for="description" class="required">Descrizione<span>*</span></label>
-                                                                        <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" style="resize: none; height: 100px; background-color: white"></textarea>
+                                                                        <!--TinyMce js-->
+                                                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.2/tinymce.min.js" referrerpolicy="origin"></script>
+                                                                        <script>
+                                                                            tinymce.init({
+                                                                                selector: '#description',
+                                                                                height: 200,
+                                                                                statusbar: false,
+                                                                                menubar: false,
+
+                                                                            });
+                                                                        </script>
+
+                                                                        <textarea id="description" name="description" ></textarea>
                                                                         @error('description')
                                                                         <span class="invalid-feedback" role="alert">
                                                                             <strong>

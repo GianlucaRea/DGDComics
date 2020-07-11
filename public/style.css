@@ -5735,7 +5735,7 @@ nav.menu .cr-dropdown ul {
     float: left;
     padding: 15px;
     position: relative;
-    width: 88%;
+    width: 100%;
 }
 
 .comment-reply-wrap ul li .public-comment .public-text::before {
@@ -7945,5 +7945,7 @@ p.lost-password a:hover {
 .compare-table .table tbody tr td.pro-ratting i {
     color: #c29958;
 }
+
+.mce-notification-inner {display:none!important;}
 
 /*------ end Compare Page Wrapper -----*/

@@ -36,7 +36,7 @@
                             <h3>{{ $article->title }}</h3>
                         </div>
                         <div class="blog-single-content">
-                            <p>{{ $article->article_text }}</p>
+                            <p>{!! $article->article_text !!}</p>
                         </div>
 
 
@@ -122,7 +122,7 @@
                                                             </div>
                                                             <p>{{ substr($answer->date, 0,10) }} {{--<a href="#">Rispondi</a></p>--}}
                                                         </div>
-                                                        <p>{{ $answer->answer }}</p>
+                                                        <p>{!! $answer->answer !!}</p>
                                                     </div>
                                                 </div>
                                             </li>
@@ -138,16 +138,40 @@
                                         @csrf
                                         <div class="row">
                                             <div class="col-lg-8">
-                                        <textarea name="{{'answer'}}" id="{{'answer'}}" class="form-control @error('answer') is-invalid @enderror" cols="30" rows="10" placeholder="Scrivi una risposta!" style="resize: none; height: 70px;"></textarea>
+                                                <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.2/tinymce.min.js" referrerpolicy="origin"></script>
+                                                <script>
+                                                    tinymce.init({
+                                                        selector: ".form-control",
+                                                        statusbar: false,
+                                                        menubar: false,
+                                                        height: 150,
+                                                        width: 777
+                                                    });
+                                                </script>
+                                                <textarea id="{{'answer'}}" name="{{'answer'}}" onclick="required(this)" class="form-control @error('answer') is-invalid @enderror"></textarea>
+
+                                                {{--@error('answer')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror--}}
+
+
+                                        {{--<textarea name="{{'answer'}}" id="{{'answer'}}" class="form-control @error('answer') is-invalid @enderror" cols="30" rows="10" placeholder="Scrivi una risposta!" style="resize: none; height: 70px;"></textarea>
 
                                                 @error('answer')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
-                                                @enderror
+                                                @enderror--}}
                                             </div>
-                                        <div class="col-lg-4">
-                                            <button type="submit" class="btn btn-sqr">Pubblica</button>
+                                        </div>
+                                        <div class="mt-3"></div>
+                                        <div class="row">
+                                            <div class="col-lg-8"></div>
+                                            <div style="margin-left: 17.8%"></div>
+                                        <div class="col-lg-1">
+                                            <button type="submit" class="btn btn-sqr" name="{{'btnAnswer'}}" >Pubblica</button>
                                         </div>
                                         </div>
                                     </form>
@@ -165,13 +189,34 @@
                             @php($user = \Illuminate\Support\Facades\Auth::user())
                             <form method="POST" action="{{ Route('submitComment', ['article' => $article->id])}}">
                                 @csrf
-                                <textarea name="comment_text" id="comment_text" class="form-control @error('comment_text') is-invalid @enderror" cols="30" rows="10" style="resize: none; height: 10em;"></textarea>
+
+                                <script>
+                                    tinymce.init({
+                                        selector: '#comment_text',
+                                        statusbar: false,
+                                        menubar: false,
+                                        height: 200,
+                                        width: 700
+                                    });
+                                </script>
+                                <textarea id="comment_text" name="comment_text" class="form-control @error('comment_text') is-invalid @enderror"></textarea>
+
+                                @error('comment_text')
+                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                @enderror
+
+
+
+
+                                {{--<textarea name="comment_text" id="comment_text" class="form-control @error('comment_text') is-invalid @enderror" cols="30" rows="10" style="resize: none; height: 10em;"></textarea>
 
                                 @error('comment_text')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
-                                @enderror
+                                @enderror--}}
 
                                 <div class="mb-3"></div>
                                 <div class="single-post-button">

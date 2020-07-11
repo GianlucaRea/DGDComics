@@ -106,10 +106,23 @@
                 <div class="mt-3"></div>
 
                 <label>testo <sup>*</sup> (almeno 10 caratteri)</label>
-                <textarea name="review_text" id="review_text" class="form-control @error('review_text') is-invalid @enderror" cols="30" rows="10" placeholder="Scrivi qui la tua recensione" style="resize: none; height: 200px; width: 800px "></textarea>
+                <script src="https://cdn.tiny.cloud/1/9jdvep5qo4jodgljrzr63bxgi2z14pz8rxk2a6g4d50af1xm/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+                <script>
+                    tinymce.init({
+                        selector: '#review_text',
+                        statusbar: false,
+                        menubar: false,
+                        height: 200,
+                        width: 650
+                    });
+                </script>
+
+                <textarea id="review_text" name="review_text" ></textarea>
                 @error('review_text')
                 <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
+                        <strong>
+                            {{ $message }}
+                        </strong>
                     </span>
                 @enderror
 
@@ -176,7 +189,7 @@
                             </div>
                             <br>
                             <div class="review-details">
-                                <p> {{$review->review_text}}</p>
+                                <p> {!! $review->review_text !!}</p>
                                 <br>
                                 @php($userR = \App\Http\Controllers\UserController::getUserId($review->user_id))
                                 @php($username = $userR->username)

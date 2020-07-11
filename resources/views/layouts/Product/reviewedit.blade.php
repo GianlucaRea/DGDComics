@@ -77,10 +77,22 @@
                     @enderror
                     <div class="mb-3"></div>
                     <label>Testo</label>
-                    <textarea name="review_text" id="review_text" class="form-control @error('review_text') is-invalid @enderror" cols="30" rows="10" style="resize: none; height: 200px;">{{$review->review_text}}</textarea>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.2/tinymce.min.js" referrerpolicy="origin"></script>
+                    <script>
+                        tinymce.init({
+                            selector: '#review_text',
+                            statusbar: false,
+                            menubar: false,
+                            height: 250,
+                        });
+                    </script>
+
+                    <textarea id="review_text" name="review_text" >{!! $review->review_text !!}</textarea>
                     @error('review_text')
                     <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
+                        <strong>
+                            {{ $message }}
+                        </strong>
                     </span>
                     @enderror
                     <div class="mt-2"></div>

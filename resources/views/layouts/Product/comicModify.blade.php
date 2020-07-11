@@ -45,13 +45,29 @@
                     <div class="mt-2"></div>
 
                     <div class="row">
-                        <script src="https://cdn.tiny.cloud/1/9jdvep5qo4jodgljrzr63bxgi2z14pz8rxk2a6g4d50af1xm/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-                        <script>
-                            tinymce.init({
-                                selector: '#description'
-                            });
-                        </script>
-                        <textarea id="description" name="description">Descrizione</textarea>
+                        <div class="col-lg-12">
+                            <label for="description" class="required">Descrizione<span>*</span></label>
+
+                            <!--TinyMce js-->
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.2/tinymce.min.js" referrerpolicy="origin"></script>
+                            <script>
+                                tinymce.init({
+                                    selector: '#description',
+                                    statusbar: false,
+                                    menubar: false,
+                                    height: 200
+                                });
+                            </script>
+
+                            <textarea id="description" name="description" >{!! $comic->description !!}</textarea>
+                            @error('description')
+                            <span class="invalid-feedback" role="alert">
+                                                                            <strong>
+                                                                                {{ $message }}
+                                                                            </strong>
+                                                                        </span>
+                            @enderror
+                        </div>
                     </div>
 
                     <div class="mt-2"></div>

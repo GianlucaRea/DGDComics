@@ -27,3 +27,5 @@
 <script src="{{ asset('js/plugins.js') }}"></script>
 <!-- main js -->
 <script src="{{ asset('js/main.js') }}"></script>
+
+

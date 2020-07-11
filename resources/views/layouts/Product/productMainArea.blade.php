@@ -133,7 +133,7 @@
                                     </div>
                                 @endif
                                 <div class="product-addto-links-text">
-                                    <p>{{ $comic->description }}</p>
+                                    <p>{!! $comic->description !!}</p>
                                 </div>
                             </div>
                         </div>
