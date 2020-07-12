@@ -11,7 +11,7 @@
             </div>
             <div class="col-lg-12">
                 <!-- tab-menu-start -->
-                <div class="tab-menu mb-40 text-center">
+                <div class="tab-menu mb-10 text-center">
                     <ul class="nav justify-content-center">
                         <li><a class="active" href="#manga" data-toggle="tab">Manga</a></li>
                         <li><a href="#SuperHero" data-toggle="tab">SuperEroi</a></li>
@@ -24,6 +24,15 @@
         <!-- tab-area-start -->
         <div class="tab-content">
             <div class="tab-pane fade show active" id="manga">
+                <div class="tab-menu mt-2 mb-3 text-center">
+                    <ul class="nav justify-content-center">
+                        <li>
+                            <div class="product-button">
+                                <a href="{{ url('/shoplist/manga') }}" style="font-size: 14px;">VEDI ALTRO</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
                 <div class="tab-active owl-carousel">
                     <!-- single-product-start -->
                     <!-- con questa linea php funziona senza no-->
@@ -51,6 +60,14 @@
                                     </div>
                                 </div>
                                 <div class="product-details text-center">
+
+                                    @if(strlen($comic->comic_name) < 17 )
+                                        <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $comic->comic_name }}</b></div>
+                                    @else
+                                        @php($subcomic = substr($comic->comic_name, 0, 17))
+                                        <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $subcomic }}</b></div>
+                                    @endif
+
                                     <div class="product-rating">
                                         @php($id = $comic->id)
                                         @php($avgstar = \App\Review::where('comic_id','=',$id)->avg('stars'))
@@ -67,15 +84,16 @@
                                             <?php $avgstar--; ?>
                                         @endforeach
                                     </div>
-                                        <h4>{{ $comic->comic_name }}</h4>
+
                                     <div class="product-price">
-                                        <ul> <!-- commento a caso per problema push con git-->
+                                        <ul>
                                             @if( $comic->discount != 0 )
                                                 @php($newPrice = \App\Http\Controllers\ComicController::priceCalculator($comic->id))
                                                 <li>€ {{ $newPrice}}</li>
                                             @else
                                                 <li>€ {{ $comic->price }}</li>
                                             @endif
+
                                         </ul>
                                     </div>
                                 </div>
@@ -91,6 +109,15 @@
                  </div>
             </div>
             <div class="tab-pane fade" id="SuperHero">
+                <div class="tab-menu mt-2 mb-3 text-center">
+                    <ul class="nav justify-content-center">
+                        <li>
+                            <div class="product-button">
+                                <a href="{{ url('/shoplist/supereroi') }}" style="font-size: 14px;">VEDI ALTRO</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
                 <div class="tab-active owl-carousel">
                     <!-- single-product-start -->
                 @foreach($america as $comic)
@@ -117,6 +144,14 @@
                                 </div>
                             </div>
                             <div class="product-details text-center">
+
+                                @if(strlen($comic->comic_name) < 17 )
+                                    <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $comic->comic_name }}</b></div>
+                                @else
+                                    @php($subcomic = substr($comic->comic_name, 0, 17))
+                                    <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $subcomic }}</b></div>
+                                @endif
+
                                 <div class="product-rating">
                                     @php($id = $comic->id)
                                     @php($avgstar = \App\Review::where('comic_id','=',$id)->avg('stars'))
@@ -133,7 +168,7 @@
                                         <?php $avgstar--; ?>
                                     @endforeach
                                 </div>
-                                    <h4>{{ $comic->comic_name }}</h4>
+
                                 <div class="product-price">
                                     <ul>
                                         @if( $comic->discount != 0 )
@@ -142,6 +177,7 @@
                                         @else
                                             <li>€ {{ $comic->price }}</li>
                                         @endif
+
                                     </ul>
                                 </div>
                             </div>
@@ -156,6 +192,15 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="italian">
+                <div class="tab-menu mt-2 mb-3 text-center">
+                    <ul class="nav justify-content-center">
+                        <li>
+                            <div class="product-button">
+                                <a href="{{ url('/shoplist/italiani') }}" style="font-size: 14px;">VEDI ALTRO</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
                 <div class="tab-active owl-carousel">
                     <!-- single-product-start -->
                                    @foreach($italian as $comic)
@@ -182,6 +227,14 @@
                                 </div>
                             </div>
                             <div class="product-details text-center">
+
+                                @if(strlen($comic->comic_name) < 17 )
+                                    <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $comic->comic_name }}</b></div>
+                                @else
+                                    @php($subcomic = substr($comic->comic_name, 0, 17))
+                                    <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $subcomic }}</b></div>
+                                @endif
+
                                 <div class="product-rating">
                                     @php($id = $comic->id)
                                     @php($avgstar = \App\Review::where('comic_id','=',$id)->avg('stars'))
@@ -198,15 +251,16 @@
                                         <?php $avgstar--; ?>
                                     @endforeach
                                 </div>
-                                    <h4>{{ $comic->comic_name }} </h4>
+
                                 <div class="product-price">
-                                    <ul> <!-- commento a caso per problema push con git-->
+                                    <ul>
                                         @if( $comic->discount != 0 )
                                             @php($newPrice = \App\Http\Controllers\ComicController::priceCalculator($comic->id))
                                             <li>€ {{ $newPrice}}</li>
                                         @else
                                             <li>€ {{ $comic->price }}</li>
                                         @endif
+
                                     </ul>
                                 </div>
                             </div>

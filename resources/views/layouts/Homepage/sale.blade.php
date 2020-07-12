@@ -4,10 +4,19 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="section-title section-title-res text-center mb-30">
+                <div class="section-title section-title-res text-center mb-10">
                     <h2>Sconti</h2>
                 </div>
             </div>
+        </div>
+        <div class="tab-menu mt-2 mb-3 text-center">
+            <ul class="nav justify-content-center">
+                <li>
+                    <div class="product-button">
+                        <a href="{{route('sconto')}}" style="font-size: 14px; margin-left: 35px;">VEDI ALTRO</a>
+                    </div>
+                </li>
+            </ul>
         </div>
         <div class="tab-active owl-carousel">
             @php($salecomics = \App\Http\Controllers\ComicController::getComicByDiscount())
@@ -35,6 +44,14 @@
                             </div>
                         </div>
                         <div class="product-details text-center">
+
+                            @if(strlen($comic->comic_name) < 17 )
+                                <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $comic->comic_name }}</b></div>
+                            @else
+                                @php($subcomic = substr($comic->comic_name, 0, 17))
+                                <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $subcomic }}</b></div>
+                            @endif
+
                             <div class="product-rating">
                                 @php($id = $comic->id)
                                 @php($avgstar = \App\Review::where('comic_id','=',$id)->avg('stars'))
@@ -51,7 +68,7 @@
                                     <?php $avgstar--; ?>
                                 @endforeach
                             </div>
-                            <h4>{{ $comic->comic_name }}</h4>
+
                             <div class="product-price">
                                 <ul>
                                     @if( $comic->discount != 0 )
