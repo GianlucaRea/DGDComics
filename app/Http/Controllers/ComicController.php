@@ -367,6 +367,12 @@ class ComicController extends Controller
             ->with(compact('isNotPassed'));
     }
 
+    public function comicsSearchAdmin(Request $request){
+        $search = $request->input('search');
+        $comics = DB::table('comics')->join('users', 'comics.user_id', '=', 'users.id')->where('comics.comic_name','LIKE','%'.$search.'%')->orWhere('comics.description','LIKE','%'.$search.'%')->orWhere('comics.type','LIKE','%'.$search.'%')->orWhere('comics.language','LIKE','%'.$search.'%')->orWhere('comics.publisher','LIKE','%'.$search.'%')->orWhere('users.username','LIKE','%'.$search.'%')->orWhere('comics.comic_name','LIKE','%'.$search.'%')->select('comics.*')->paginate(12);
+        return AdminController::dashboardComics($comics);
+    }
+
     public function shoplistPrice0(Request $request){
         $number1 = 0;
         $number2 = 3.99;

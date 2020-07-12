@@ -44,62 +44,6 @@
                                             <p class="mb-0">I tuoi dati:</p>
                                             <p class="mb-0">E-mail:   <strong>{{ $user->email }} </strong></p>
                                         </div>
-                                        <div class="myaccount-content">
-                                            @php
-                                                $notifications = \App\Http\Controllers\NotificationController::getNotification($user->id);
-                                            @endphp
-                                            <h5>Notifiche</h5>
-                                            @if($notifications->count() < 1)
-                                                <div class="myaccount-content">
-                                                    <h5>Non ci sono ancora notifiche</h5>
-                                                </div>
-                                            @else
-                                                <div class="myaccount-table table-responsive text-center">
-                                                    <table class="table table-bordered">
-                                                        <thead class="thead-light">
-                                                        <tr>
-                                                            <th>Data</th>
-                                                            <th>testo</th>
-                                                            <th>stato</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        @foreach($notifications as $notification)
-                                                            <tr>
-                                                                <td>{{ $notification->date }}</td>
-                                                                <td>
-                                                                    @if(strlen($notification->notification_text) > 50 )
-                                                                        @php
-                                                                            $subnotification = substr($notification->notification_text, 0, 50)
-                                                                        @endphp
-                                                                        {{ $subnotification }}...
-                                                                    @else
-                                                                        {{ $notification->notification_text }}
-                                                                    @endif
-                                                                </td>
-                                                                @if($notification->state == 1)
-                                                                    <td>
-                                                                        Letto
-                                                                    </td>
-                                                                    <td>
-                                                                        <a href="{{ url('/accountArea') }}" class="btn btn-sqr">View</a>
-                                                                    </td>
-                                                                @else
-                                                                    <td>
-                                                                        Non letto
-                                                                    </td>
-                                                                    <td>
-                                                                        <a href="{{ route('notificaLetta', ['id' => $notification->id]) }}" class="btn btn-sqr">View</a>
-                                                                    </td>
-                                                                @endif
-                                                            </tr>
-                                                        @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            @endif
-                                        </div>
                                     </div>
                                     <!-- Single Tab Content End -->
                                 @if(session('message'))
@@ -109,8 +53,18 @@
                                     <div class="tab-pane fade show {{ (Route::currentRouteName() == 'adminusers') ? 'active' : '' }}" id="users" role="tabpanel">
                                         <div class="myaccount-content">
                                             <h5>Utenti</h5>
+                                            <div class="blog-left-title">
+                                                <h3>Search</h3>
+                                            </div>
+                                            <div class="side-form">
+                                                <form action="{{ route('searchusersrouteAdminPanel') }}">
+                                                    <input type="text" name="search" placeholder="Cerca un articolo..." />
+                                                    <a  href="javascript:;" onclick="parentNode.submit();"><i class="fa fa-search"></i></a>
+                                                </form>
+                                            </div>
+                                            <div class="mt-3"></div>
                                             <div class="myaccount-table table-responsive text-center">
-                                                <table class="table table-bordered">
+                                                <table class="table table-bordered mt-2">
                                                     <thead class="thead-light">
                                                     <tr>
                                                         <th>Nickname</th>
@@ -122,6 +76,7 @@
                                                     </thead>
                                                     <tbody>
                                                     @foreach($users as $user)
+                                                        @if(!$user->hasGroup('il gruppo degli admin'))
                                                     <tr>
                                                         <td>{{$user->username}}</td>
                                                         <td>{{$user->phone_number}}</td>
@@ -133,6 +88,7 @@
                                                         @endif
                                                         <td><a class="btn btn-danger" onclick="return deleteUser();"  href="{{route('user-delete', $user->id)}}"><i class="fa fa-trash"></i></a></td>
                                                     </tr>
+                                                        @endif
                                                     @endforeach
                                                     {{ $users->links() }}
                                                     </tbody>
@@ -151,14 +107,25 @@
                                     <div class="tab-pane fade show {{ (Route::currentRouteName() == 'admincomics') ? 'active' : '' }}" id="comics" role="tabpanel">
                                         <div class="myaccount-content">
                                             <h5>Fumetti</h5>
+                                            <div class="blog-left-title">
+                                                <h3>Search</h3>
+                                            </div>
+                                            <div class="side-form">
+                                                <form action="{{ route('searchcomicsrouteAdminPanel') }}">
+                                                    <input type="text" name="search" placeholder="Cerca un articolo..." />
+                                                    <a  href="javascript:;" onclick="parentNode.submit();"><i class="fa fa-search"></i></a>
+                                                </form>
+                                            </div>
+                                            <div class="mt-3"></div>
                                             <div class="myaccount-table table-responsive text-center">
-                                                <table class="table table-bordered">
+                                                <table class="table table-bordered mt-2">
                                                     <thead class="thead-dark">
                                                     <tr>
                                                         <th>Titolo</th>
                                                         <th>ISBN</th>
+                                                        <th>Prezzo</th>
                                                         <th>Quantità</th>
-                                                        <th>Utente</th>
+                                                        <th>Venditore</th>
                                                         <th>Elimina</th>
                                                     </tr>
                                                     </thead>
@@ -170,6 +137,7 @@
                                                         <tr>
                                                             <td>{{$comic->comic_name}}</td>
                                                             <td>{{$comic->ISBN}}</td>
+                                                            <td>{{$comic->price}} €</td>
                                                             <td>{{$comic->quantity}}</td>
                                                             <td>{{$userNeed->username}}</td>
                                                             <td><a class="btn btn-danger" onclick="return deleteComic();"  href="{{route('comic-delete', $comic->id)}}"><i class="fa fa-trash"></i></a></td>
@@ -190,8 +158,18 @@
                                     <div class="tab-pane fade show {{ (Route::currentRouteName() == 'adminreviews') ? 'active' : '' }}" id="reviews" role="tabpanel">
                                         <div class="myaccount-content">
                                             <h5>Recensione</h5>
+                                            <div class="blog-left-title">
+                                                <h3>Search</h3>
+                                            </div>
+                                            <div class="side-form">
+                                                <form action="{{ route('searchreviewsrouteAdminPanel') }}">
+                                                    <input type="text" name="search" placeholder="Cerca un articolo..." />
+                                                    <a  href="javascript:;" onclick="parentNode.submit();"><i class="fa fa-search"></i></a>
+                                                </form>
+                                            </div>
+                                            <div class="mt-3"></div>
                                             <div class="myaccount-table table-responsive text-center">
-                                                <table class="table table-bordered">
+                                                <table class="table table-bordered mt-2">
                                                     <thead class="thead-dark">
                                                     <tr>
                                                         <th>Titolo</th>
@@ -241,7 +219,7 @@
                                             </div>
                                             <div class="mt-3"></div>
                                             <div class="myaccount-table table-responsive text-center">
-                                                <table class="table table-bordered">
+                                                <table class="table table-bordered mt-2">
                                                     <thead class="thead-dark">
                                                     <tr>
                                                         <th>Titolo</th>

@@ -187,87 +187,53 @@
                                     <!-- Single Tab Content End -->
 
                                     <!-- Single Tab Content Start -->
-                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'adminreviews') }}" id="reviews" role="tabpanel">
+                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'adminreviews') }} active" id="reviews" role="tabpanel">
                                         <div class="myaccount-content">
                                             <h5>Recensione</h5>
-                                            <div class="myaccount-table table-responsive text-center">
-                                                <table class="table table-bordered">
-                                                    <thead class="thead-dark">
-                                                    <tr>
-                                                        <th>Titolo</th>
-                                                        <th>Fumetto</th>
-                                                        <th>Recensore</th>
-                                                        <th>Elimina</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    @foreach($reviews as $review)
-                                                        @php
-                                                            $userReview = App\User::where('id','=',$review->user_id)->first();
-                                                            $comicReview = App\Comic::where('id','=',$review->comic_id)->first();
-                                                        @endphp
-                                                        <tr>
-                                                            <td>{{$review->review_title}}</td>
-                                                            <td>{{$comicReview->comic_name}}</td>
-                                                            <td>{{$userReview->username}}</td>
-                                                            <td><a class="btn btn-danger" onclick="return deleteReview();"  href="{{route('review-delete-local', $review->id)}}"><i class="fa fa-trash"></i></a></td>
-                                                        </tr>
-                                                    @endforeach
-                                                    {{ $reviews->links() }}
-                                                    </tbody>
-                                                </table>
-                                                @foreach($reviews as $review)
-                                                    @php
-                                                        $userReview = App\User::where('id','=',$review->user_id)->first();
-                                                        $comicReview = App\Comic::where('id','=',$review->comic_id)->first();
-                                                    @endphp
-                                                @endforeach
-                                                {{ $reviews->links() }}
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'adminarticles') }} active" id="articles" role="tabpanel">
-                                        <div class="myaccount-content">
-                                            <h5>Articoli</h5>
                                             <div class="blog-left-title">
                                                 <h3>Search</h3>
                                             </div>
                                             <div class="side-form">
-                                                <form action="{{ route('searcharticlerouteAdminPanel') }}">
+                                                <form action="{{ route('searchreviewsrouteAdminPanel') }}">
                                                     <input type="text" name="search" placeholder="Cerca un articolo..." />
                                                     <a  href="javascript:;" onclick="parentNode.submit();"><i class="fa fa-search"></i></a>
                                                 </form>
                                             </div>
                                             <div class="mt-3"></div>
                                             <div class="myaccount-table table-responsive text-center">
-                                                @if($articles->count()>0)
+                                                @if($reviews->count()>0)
                                                     <table class="table table-bordered">
                                                         <thead class="thead-dark">
                                                         <tr>
                                                             <th>Titolo</th>
-                                                            <th>Testo</th>
+                                                            <th>Fumetto</th>
+                                                            <th>Recensore</th>
                                                             <th>Elimina</th>
-                                                            <th>Modifica</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
-                                                        @foreach($articles as $article)
+                                                        @foreach($reviews as $review)
+                                                            @php
+                                                                $userReview = App\User::where('id','=',$review->user_id)->first();
+                                                                $comicReview = App\Comic::where('id','=',$review->comic_id)->first();
+                                                            @endphp
                                                             <tr>
-                                                                <td>{{$article->title}}</td>
-                                                                <td>{{ \Illuminate\Support\Str::limit($article->article_text, 45, $end='...') }}</td>
-                                                                <td>
-                                                                    <a class="btn btn-danger" onclick="return deleteArticle();"  href="{{route('article-delete', $article->id)}}"><i class="fa fa-trash"></i></a>
-                                                                </td>
-                                                                <td>
-                                                                    <a class="btn btn-light" href="{{route('article-modify', $article->id)}}"><i class="fa fa-pencil"></i></a>
-                                                                </td>
+                                                                <td>{{$review->review_title}}</td>
+                                                                <td>{{$comicReview->comic_name}}</td>
+                                                                <td>{{$userReview->username}}</td>
+                                                                <td><a class="btn btn-danger" onclick="return deleteReview();"  href="{{route('review-delete-local', $review->id)}}"><i class="fa fa-trash"></i></a></td>
                                                             </tr>
                                                         @endforeach
-                                                        {{ $articles->links() }}
+                                                        {{ $reviews->links() }}
                                                         </tbody>
                                                     </table>
-                                                    {{ $articles->links() }}
+                                                    @foreach($reviews as $review)
+                                                        @php
+                                                            $userReview = App\User::where('id','=',$review->user_id)->first();
+                                                            $comicReview = App\Comic::where('id','=',$review->comic_id)->first();
+                                                        @endphp
+                                                    @endforeach
+                                                    {{ $reviews->links() }}
                                             </div>
                                         </div>
                                         @else
@@ -281,8 +247,52 @@
                                     <div style="margin-right: 2.75%"></div>
                                     <div class="col-lg-1">
                                         <div class="buttons-back">
-                                            <a href="{{url('/adminArea/articles')}}">Indietro</a>
+                                            <a href="{{url('/adminArea/reviews')}}">Indietro</a>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade show {{ (Route::currentRouteName() == 'adminarticles') }}" id="articles" role="tabpanel">
+                                <div class="myaccount-content">
+                                    <h5>Articoli</h5>
+                                    <div class="blog-left-title">
+                                        <h3>Search</h3>
+                                    </div>
+                                    <div class="side-form">
+                                        <form action="{{ route('searcharticlerouteAdminPanel') }}">
+                                            <input type="text" name="search" placeholder="Cerca un articolo..." />
+                                            <a  href="javascript:;" onclick="parentNode.submit();"><i class="fa fa-search"></i></a>
+                                        </form>
+                                    </div>
+                                    <div class="mt-3"></div>
+                                    <div class="myaccount-table table-responsive text-center">
+                                        <table class="table table-bordered">
+                                            <thead class="thead-dark">
+                                            <tr>
+                                                <th>Titolo</th>
+                                                <th>Testo</th>
+                                                <th>Elimina</th>
+                                                <th>Modifica</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($articles as $article)
+                                                <tr>
+                                                    <td>{{$article->title}}</td>
+                                                    <td>{{ \Illuminate\Support\Str::limit($article->article_text, 45, $end='...') }}</td>
+                                                    <td>
+                                                        <a class="btn btn-danger" onclick="return deleteArticle();"  href="{{route('article-delete', $article->id)}}"><i class="fa fa-trash"></i></a>
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-light" href="{{route('article-modify', $article->id)}}"><i class="fa fa-pencil"></i></a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            {{ $articles->links() }}
+                                            </tbody>
+                                        </table>
+                                        {{ $articles->links() }}
                                     </div>
                                 </div>
                             </div>

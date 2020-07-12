@@ -127,8 +127,17 @@ class UserController extends Controller
         if (is_null($User)) {
             return redirect()->route("AdminAccount")->with('message', 'Alredy Deleted');
         }
+        if($User->hasGroup('il gruppo degli admin')){
+            return redirect()->route("AdminAccount")->with('message', 'Can not delete an admin');
+        }
         $User->delete();
-        return redirect('/adminArea/users');
+        return back();
+    }
+
+    public function usersSearchAdmin(Request $request){
+        $search = $request->input('search');
+        $users = DB::table('users')->join('group_user', 'users.id', '=', 'group_user.user_id')->join('groups', 'group_user.group_id', '=', 'groups.id')->where('username','LIKE','%'.$search.'%')->orWhere('partitaIva','LIKE','%'.$search.'%')->orWhere('groups.group_description','LIKE','%'.$search.'%')->select('users.*')->paginate(12);
+        return AdminController::dashboardUser($users);
     }
 
     public static function updateDate()
