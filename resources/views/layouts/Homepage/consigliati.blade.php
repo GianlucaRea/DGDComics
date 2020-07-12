@@ -8,6 +8,15 @@
                 </div>
             </div>
         </div>
+        <div class="tab-menu mt-2 mb-3 text-center">
+            <ul class="nav justify-content-center">
+                <li>
+                    <div class="product-button">
+                        <a href="{{route('suggest')}}" style="font-size: 14px; margin-left: 35px;">VEDI ALTRO</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
         <div class="tab-active owl-carousel">
             @foreach($comics->shuffle()->take(10) as $comic)
                 @php($image = \App\Http\Controllers\ImageController::getCover($comic->id))
@@ -33,23 +42,31 @@
                             </div>
                         </div>
                         <div class="product-details text-center">
+
+                            @if(strlen($comic->comic_name) < 17 )
+                                <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $comic->comic_name }}</b></div>
+                            @else
+                                @php($subcomic = substr($comic->comic_name, 0, 17))
+                                <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $subcomic }}</b></div>
+                            @endif
+
                             <div class="product-rating">
                                 @php($id = $comic->id)
                                 @php($avgstar = \App\Review::where('comic_id','=',$id)->avg('stars'))
                                 @foreach(range(1,5) as $i)
                                     @if($avgstar >0)
                                         @if($avgstar >0.5)
-                                            <a><i class="fa fa-star fa_custom"></i></a>
+                                            <a><i class="fa fa-star fa_custom" style="color: #eeb900;"></i></a>
                                         @else
-                                            <a><i class="fa fa-star-half-o fa_custom"></i></a>
+                                            <a><i class="fa fa-star-half-o fa_custom" style="color: #eeb900;"></i></a>
                                         @endif
                                     @else
-                                        <a><i class="fa  fa-star-o fa_custom"></i></a>
+                                        <a><i class="fa  fa-star-o fa_custom" style="color: #eeb900;"></i></a>
                                     @endif
                                     <?php $avgstar--; ?>
                                 @endforeach
                             </div>
-                            <h4>{{ $comic->comic_name }}</h4>
+
                             <div class="product-price">
                                 <ul>
                                     @if( $comic->discount != 0 )

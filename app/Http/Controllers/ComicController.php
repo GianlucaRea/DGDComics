@@ -535,6 +535,46 @@ class ComicController extends Controller
         return view('shoplist')->with(compact('genres'))->with(compact('comics'));
     }
 
+    public function shoplistDate(Request $request){
+        $genres = Genre::all();
+        $comics = Comic::orderBy('created_at','desc')->paginate(8);
+
+        return view('shoplist')->with(compact('genres'))->with(compact('comics'));
+    }
+
+    public function shoplistOnePiece(Request $request){
+        $genres = Genre::all();
+        $comics = Comic::where('comic_name','LIKE','%'.'One Piece'.'%')->orWhere('comic_name','LIKE','%'.'OnePiece'.'%')->paginate(8);
+
+        return view('shoplist')->with(compact('genres'))->with(compact('comics'));
+    }
+
+    public function shoplistTopolino(Request $request){
+        $genres = Genre::all();
+        $comics = Comic::where('comic_name','LIKE','%'.'Topolino'.'%')->paginate(8);
+
+        return view('shoplist')->with(compact('genres'))->with(compact('comics'));
+    }
+
+    public function shoplistTWD(Request $request){
+        $genres = Genre::all();
+        $comics = Comic::where('comic_name','LIKE','%'.'The Walking Dead'.'%')->orWhere('comic_name','LIKE','%'.'TheWalking Dead'.'%')->orWhere('comic_name','LIKE','%'.'The WalkingDead'.'%')->orWhere('comic_name','LIKE','%'.'TheWalkingDead'.'%')->paginate(8);
+
+        return view('shoplist')->with(compact('genres'))->with(compact('comics'));
+    }
+
+    public function shoplistSuggest(Request $request){
+        $genres = Genre::all();
+        $comics = Comic::where('suggest','=','1')->paginate(8);
+
+        return view('shoplist')->with(compact('genres'))->with(compact('comics'));
+    }
+
+
+
+
+
+
 
     public static function countByDiscount(){
         return Comic::where('discount','>','0')->count();
