@@ -116,7 +116,7 @@
                     });
                 </script>
 
-                <textarea id="review_text" name="review_text" ></textarea>
+                <textarea id="review_text" class="form-control @error('review_text') is-invalid @enderror" name="review_text" ></textarea>
                 @error('review_text')
                 <span class="invalid-feedback" role="alert">
                         <strong>
@@ -157,11 +157,11 @@
         <div class="valu">
             <div class="row">
                 <div class="ml-3"></div>
-                <div class="col-lg-2">
+                <div class="col-lg-4">
                     @if($reviews->count() > 0)
                         <h2>Recensioni</h2>
                     @elseif($reviews->count() <= 0)
-                        <center><h2>Non ci sono Recensioni</h2></center>
+                        <h2>Non ci sono Recensioni</h2>
                     @endif
                 </div>
             </div>
@@ -176,12 +176,12 @@
                                 @foreach(range(1,5) as $i)
                                     @if($stars >0)
                                         @if($stars >0.5)
-                                            <a><i class="fa fa-star fa_custom"></i></a>
+                                            <a><i class="fa fa-star fa_custom" style="color: #eeb900;"></i></a>
                                         @else
-                                            <a><i class="fa fa-star-half-o fa_custom"></i></a>
+                                            <a><i class="fa fa-star-half-o fa_custom" style="color: #eeb900;"></i></a>
                                         @endif
                                     @else
-                                        <a><i class="fa  fa-star-o fa_custom"></i></a>
+                                        <a><i class="fa  fa-star-o fa_custom" style="color: #eeb900;"></i></a>
                                     @endif
                                     <?php $stars--; ?>
                                 @endforeach

@@ -20,23 +20,23 @@
                             <a href="{{ url('/comic_detail/'.$comic->id) }}"><img src="{{asset('img/comicsImages/' . $image->image_name) }}" alt="book" /></a>
                         </div>
                         <div class="most-product-content">
+                            <h4><a href="{{ url('/comic_detail/'.$comic->id) }}">{{ $comic->comic_name }}</a></h4>
                             <div class="product-rating">
                                 @php($id = $comic->id)
                                 @php($avgstar = \App\Review::where('comic_id','=',$id)->avg('stars'))
-                                    @foreach(range(1,5) as $i)
-                                        @if($avgstar >0)
-                                            @if($avgstar >0.5)
-                                                <a><i class="fa fa-star fa_custom"></i></a>
-                                            @else
-                                                <a><i class="fa fa-star-half-o fa_custom"></i></a>
-                                            @endif
+                                @foreach(range(1,5) as $i)
+                                    @if($avgstar >0)
+                                        @if($avgstar >0.5)
+                                            <a><i class="fa fa-star fa_custom" style="color: #eeb900;"></i></a>
                                         @else
-                                            <a><i class="fa  fa-star-o fa_custom"></i></a>
+                                            <a><i class="fa fa-star-half-o fa_custom" style="color: #eeb900;"></i></a>
                                         @endif
-                                        <?php $avgstar--; ?>
-                                    @endforeach
+                                    @else
+                                        <a><i class="fa  fa-star-o fa_custom" style="color: #eeb900;"></i></a>
+                                    @endif
+                                    <?php $avgstar--; ?>
+                                @endforeach
                             </div>
-                            <h4><a href="{{ url('/comic_detail/'.$comic->id) }}">{{ $comic->comic_name }}</a></h4>
                             <div class="product-price">
                                 <ul>
                                     @if( $comic->discount != 0 )

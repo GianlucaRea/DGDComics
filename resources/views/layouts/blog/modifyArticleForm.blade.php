@@ -29,7 +29,7 @@
                         });
                     </script>
 
-                    <textarea id="article_text" name="article_text" >{!! $article->article_text !!}</textarea>
+                    <textarea id="article_text" class="form-control @error('article_text') is-invalid @enderror" name="article_text" >{!! $article->article_text !!}</textarea>
                     @error('article_text')
                     <span class="invalid-feedback" role="alert">
                         <strong>

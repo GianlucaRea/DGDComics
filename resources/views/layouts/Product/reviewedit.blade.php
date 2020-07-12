@@ -87,7 +87,7 @@
                         });
                     </script>
 
-                    <textarea id="review_text" name="review_text" >{!! $review->review_text !!}</textarea>
+                    <textarea id="review_text" class="form-control @error('review_text') is-invalid @enderror" name="review_text" >{!! $review->review_text !!}</textarea>
                     @error('review_text')
                     <span class="invalid-feedback" role="alert">
                         <strong>
@@ -104,12 +104,12 @@
                             @foreach(range(1,5) as $i)
                                 @if($stars >0)
                                     @if($stars >0.5)
-                                        <a><i class="fa fa-star fa_custom"></i></a>
+                                        <a><i class="fa fa-star fa_custom" style="color: #eeb900;"></i></a>
                                     @else
-                                        <a><i class="fa fa-star-half-o fa_custom"></i></a>
+                                        <a><i class="fa fa-star-half-o fa_custom" style="color: #eeb900;"></i></a>
                                     @endif
                                 @else
-                                    <a><i class="fa  fa-star-o fa_custom"></i></a>
+                                    <a><i class="fa  fa-star-o fa_custom" style="color: #eeb900;"></i></a>
                                 @endif
                                 <?php $stars--; ?>
                             @endforeach
