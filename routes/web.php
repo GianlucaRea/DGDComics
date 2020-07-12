@@ -121,13 +121,17 @@ Route::get('/aboutUs',function(){
 });
 Route::get('/accountArea/dashboard','UserController@dashboard')->name('userdashboard');
 Route::get('/accountArea/orders','UserController@dashboard')->name('userorders');
+Route::get('/accountArea/orders/search','OrderController@orderSearchUser')->name('searchordersrouteUserPanel');
 Route::get('/accountArea/wishlist','UserController@dashboard')->name('userwishlist');
+Route::get('/accountArea/wishlist/search','WishlistController@wishSearchUser')->name('searchwishrouteUserPanel');
 Route::get('/accountArea/paymentmethods','UserController@dashboard')->name('paymentmethods');
 Route::get('/accountArea/addressedit','UserController@dashboard')->name('addressedit');
 Route::get('/accountArea/account','UserController@dashboard')->name('accountinfo');
 Route::get('/accountArea/venditore','UserController@dashboard')->name('venditoreinfo');
+Route::get('/accountArea/venditore/search','OrderController@orderVendorSearchUser')->name('searchorderVendorrouteUserPanel');
 Route::get('/accountArea/venditoreaddproducts','UserController@dashboard')->name('venditoreaddproducts');
 Route::get('/accountArea/menagementproducts','UserController@dashboard')->name('venditoremenagementproducts');
+Route::get('/accountArea/menagementproducts/search','ComicController@comicVendorSearchUser')->name('searchcomicsVendorrouteUserPanel');
 
 
 Route::get('/adminArea/dashboard', 'AdminController@dashboard')->name('admindashboard');

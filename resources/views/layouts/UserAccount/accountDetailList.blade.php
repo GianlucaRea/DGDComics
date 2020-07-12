@@ -47,7 +47,7 @@
                             <div class="col-lg-9 col-md-8">
                                 <div class="tab-content" id="myaccountContent">
                                     <!-- Single Tab Content Start -->
-                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'userdashboard') ? 'active' : '' }}" id="dashboad" role="tabpanel">
+                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'userdashboard') }}" id="dashboad" role="tabpanel">
                                         <div class="myaccount-content">
                                             <h5>Dashboard</h5>
                                             <div class="welcome">
@@ -132,7 +132,7 @@
 
                                     <!-- Single Tab Content Start -->
 
-                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'userorders') ? 'active' : '' }}" id="orders" role="tabpanel">
+                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'userorders') }}" id="orders" role="tabpanel">
 
                                         @if($orders->count()<1)
                                             <div class="myaccount-content">
@@ -145,7 +145,7 @@
                                                     <h3>Search</h3>
                                                 </div>
                                                 <div class="side-form">
-                                                    <form action="{{ route('searchordersrouteUserPanel') }}">
+                                                    <form action="{{ route('searchwishrouteUserPanel') }}">
                                                         <input type="text" name="search" placeholder="Cerca un ordine in base ai fumetti comprati, l'indirizzo di spedizione, il venditore etc..." />
                                                         <a  href="javascript:;" onclick="parentNode.submit();"><i class="fa fa-search"></i></a>
                                                     </form>
@@ -184,11 +184,31 @@
 
                                     <!-- Single Tab Content Start -->
 
-                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'userwishlist') ? 'active' : '' }}" id="wishlist" role="tabpanel">
+                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'userwishlist') }} active" id="wishlist" role="tabpanel">
 
                                         @if($list->count()<1)
                                             <div class="myaccount-content">
-                                                <h5>Non sono presenti fumetti nella lista dei desideri</h5>
+                                                <div class="blog-left-title">
+                                                    <h3>Search</h3>
+                                                </div>
+                                                <div class="side-form">
+                                                    <form action="{{ route('searchwishrouteUserPanel') }}">
+                                                        <input type="text" name="search" placeholder="Cerca un fumetto in base al titolo, la descrizione, il venditore etc..." />
+                                                        <a  href="javascript:;" onclick="parentNode.submit();"><i class="fa fa-search"></i></a>
+                                                    </form>
+                                                </div>
+                                                <div class="mt-3"></div>
+                                                <h3>nessun risultato di ricerca</h3>
+                                            </div>
+                                            <div class="mt-3"></div>
+                                            <div class="row">
+                                                <div class="col-lg-10"></div>
+                                                <div style="margin-right: 2.75%"></div>
+                                                <div class="col-lg-1">
+                                                    <div class="buttons-back">
+                                                        <a href="{{url('/accountArea/wishlist')}}">Indietro</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         @else
                                             <div class="blog-left-title">
@@ -329,15 +349,25 @@
 
                                                 </table>
                                                 @foreach($list as $item)
-                                                    @endforeach
+                                                @endforeach
                                                 {{$list->links()}}
+                                            </div>
+                                            <div class="mt-3"></div>
+                                            <div class="row">
+                                                <div class="col-lg-10"></div>
+                                                <div style="margin-right: 2.75%"></div>
+                                                <div class="col-lg-1">
+                                                    <div class="buttons-back">
+                                                        <a href="{{url('/accountArea/wishlist')}}">Indietro</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         @endif
                                     </div>
                                     <!-- Single Tab Content End -->
 
                                     <!-- Single Tab Content Start -->
-                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'paymentmethods') ? 'active' : '' }}" id="payment-method" role="tabpanel">
+                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'paymentmethods')}}" id="payment-method" role="tabpanel">
 
                                         @php($oggi = \App\Http\Controllers\PaymentMethodController::getTime())
                                         {{$paymentMethods->links()}}
@@ -397,8 +427,8 @@
                                                         <a href="{{ Route('remove.method', ['method' => $paymentMethod->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
                                                             Rimuovi metodo di pagamento</a>
                                                         @if($scadenza - $oggi > 0)
-                                                        <a href="{{ Route('predefinite.method', ['method' => $paymentMethod->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
-                                                            Rendi predefinito</a>
+                                                            <a href="{{ Route('predefinite.method', ['method' => $paymentMethod->id])}}" class="btn btn-sqr"><i class="fa fa-edit"></i>
+                                                                Rendi predefinito</a>
                                                         @endif
                                                     </div>
                                                 @endif
@@ -415,7 +445,7 @@
                                     <!-- Single Tab Content End -->
 
                                     <!-- Single Tab Content Start -->
-                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'addressedit') ? 'active' : '' }}" id="address-edit" role="tabpanel">
+                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'addressedit')}}" id="address-edit" role="tabpanel">
 
                                         @if($shippingAddresses->count() < 1)
                                             <div class="myaccount-content">
@@ -467,118 +497,108 @@
                                     <!-- Single Tab Content End -->
 
                                     <!-- Single Tab Content Start -->
-                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'accountinfo') ? 'active' : '' }}"  id="account-info" role="tabpanel">
+                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'accountinfo')}}"  id="account-info" role="tabpanel">
                                         <div class="myaccount-content">
                                             <h5>Dettagli account</h5>
                                             <div class="account-details-form">
-                                                    <div class="row">
-                                                        <div class="col-lg-6">
-                                                            <div class="single-input-item-not-editable">
-                                                                <h5>NOME <br><br>{{$user->name}}</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <div class="single-input-item-not-editable">
-                                                                <h5>COGNOME <br><br>{{$user->surname}}</h5>
-                                                            </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="single-input-item-not-editable">
+                                                            <h5>NOME <br><br>{{$user->name}}</h5>
                                                         </div>
                                                     </div>
-                                                    <div class="mt-2"></div>
-                                                    <div class="row">
-                                                        <div class="col-lg-10">
-                                                            <div class="single-input-item-not-editable">
-                                                                <h5>NICKNAME <br><br>{{$user->username}}</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-2">
-                                                            <div class="single-input-item-not-editable">
-                                                                <h5>ETA' <br><br>{{$user->age}}</h5>
-                                                            </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="single-input-item-not-editable">
+                                                            <h5>COGNOME <br><br>{{$user->surname}}</h5>
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="mt-2"></div>
+                                                <div class="row">
+                                                    <div class="col-lg-10">
+                                                        <div class="single-input-item-not-editable">
+                                                            <h5>NICKNAME <br><br>{{$user->username}}</h5>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <div class="single-input-item-not-editable">
+                                                            <h5>ETA' <br><br>{{$user->age}}</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                                                    <form method="POST" action="{{ route('change.password') }}">
-                                                        @csrf
-                                                        <fieldset>
+                                                <form method="POST" action="{{ route('change.password') }}">
+                                                    @csrf
+                                                    <fieldset>
 
-                                                            <legend>Cambia password</legend>
-
-                                                            <div class="single-input-item">
-                                                                <label for="password" class="required">Password corrente</label>
-                                                                <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="password" placeholder="Password corrente" >
-
-                                                                @error('password')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                                @enderror
-                                                            </div>
-
-                                                            <div class="row">
-
-                                                                <div class="col-lg-6">
-                                                                    <div class="single-input-item">
-                                                                        <label for="newPassword" class="required">Nuova password</label>
-                                                                        <input type="password" id="newPassword" class="form-control @error('newPassword') is-invalid @enderror" name="newPassword" required autocomplete="newPassword" placeholder="Nuova password" >
-
-                                                                        @error('newPassword')
-                                                                        <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                    </span>
-                                                                        @enderror
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-lg-6">
-                                                                    <div class="single-input-item">
-                                                                        <label for="confirmPassword" class="required">Conferma password</label>
-                                                                        <input type="password" id="confirmPassword" class="form-control @error('confirmPassword') is-invalid @enderror" name="confirmPassword" required autocomplete="confirmPassword" placeholder="Conferma password" >
-
-                                                                        @error('confirmPassword')
-                                                                        <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                    </span>
-                                                                        @enderror
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-
-                                                        </fieldset>
+                                                        <legend>Cambia password</legend>
 
                                                         <div class="single-input-item">
-                                                            <button type="submit" class="btn btn-sqr">Salva</button>
+                                                            <label for="password" class="required">Password corrente</label>
+                                                            <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="password" placeholder="Password corrente" >
+
+                                                            @error('password')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
                                                         </div>
-                                                    </form>
+
+                                                        <div class="row">
+
+                                                            <div class="col-lg-6">
+                                                                <div class="single-input-item">
+                                                                    <label for="newPassword" class="required">Nuova password</label>
+                                                                    <input type="password" id="newPassword" class="form-control @error('newPassword') is-invalid @enderror" name="newPassword" required autocomplete="newPassword" placeholder="Nuova password" >
+
+                                                                    @error('newPassword')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-6">
+                                                                <div class="single-input-item">
+                                                                    <label for="confirmPassword" class="required">Conferma password</label>
+                                                                    <input type="password" id="confirmPassword" class="form-control @error('confirmPassword') is-invalid @enderror" name="confirmPassword" required autocomplete="confirmPassword" placeholder="Conferma password" >
+
+                                                                    @error('confirmPassword')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </fieldset>
+
+                                                    <div class="single-input-item">
+                                                        <button type="submit" class="btn btn-sqr">Salva</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- Single Tab Content End -->
                                 @if($isVendor)
                                     <!-- Single Tab Content Start -->
-                                        <div class="tab-pane fade show {{ (Route::currentRouteName() == 'venditoreinfo') ? 'active' : '' }}" id="venditore-info" role="tabpanel">
+                                        <div class="tab-pane fade show {{ (Route::currentRouteName() == 'venditoreinfo')}}" id="venditore-info" role="tabpanel">
                                             @if($orders_of_vendor->count() < 1)
                                                 <div class="myaccount-content">
                                                     <h5>Oh, sembra che ancora non hai venduto nulla...</h5>
                                                 </div>
                                             @else
                                                 <div class="myaccount-content">
-                                                    <h5>Ordini</h5>
-                                                    <div class="blog-left-title">
-                                                        <h3>Search</h3>
-                                                    </div>
-                                                    <div class="side-form">
-                                                        <form action="{{ route('searchorderVendorrouteUserPanel') }}">
-                                                            <input type="text" name="search" placeholder="Cerca un ordine in base ai fumetti venduti, l'indirizzo di spedizione, il compratore etc..." />
-                                                            <a  href="javascript:;" onclick="parentNode.submit();"><i class="fa fa-search"></i></a>
-                                                        </form>
-                                                    </div>
-                                                    <div class="mt-3"></div>
+                                                    <h5>Vendite</h5>
                                                     <div class="myaccount-table table-responsive text-center">
                                                         <table class="table table-bordered">
                                                             <thead class="thead-light">
                                                             <tr>
-                                                                <th>Ordine</th>
+                                                                <th>Comic</th>
                                                                 <th>Data</th>
                                                                 <th>Azione</th>
                                                                 <th></th>
@@ -587,33 +607,13 @@
                                                             @php($orders_of_vendor = \App\Http\Controllers\OrderController::getAllOrdersOfVendor($user->id))
                                                             <tbody>
                                                             {{$orders_of_vendor->links()}}
-                                                            @php($collect2 = collect())
                                                             @foreach($orders_of_vendor as $order_of_vendor)
-                                                                @php($bool = true)
-                                                                @if($collect2->isEmpty())
-                                                                    @php($collect2->push($order_of_vendor->order_id))
                                                                 <tr>
+
                                                                     <td>{{ $order_of_vendor->order_id }}</td>
                                                                     <td>{{ substr($order_of_vendor->date, 0,10) }}</td>
                                                                     <td><a href="{{ route('orderDetailVendor', ['id' => $order_of_vendor->order_id]) }}" class="btn btn-sqr">Dettagli</a></td>
                                                                 </tr>
-                                                                @else
-                                                                    @if(!($collect2->contains($order_of_vendor->order_id)))
-                                                                        @foreach($collect2->all() as $id_comic_of_order)
-                                                                            @if($order_of_vendor->order_id == $id_comic_of_order)
-                                                                                @php($bool = false)
-                                                                            @endif
-                                                                        @endforeach
-                                                                        @if($bool == true)
-                                                                        @php($collect2->push($order_of_vendor->order_id))
-                                                                        <tr>
-                                                                            <td>{{ $order_of_vendor->order_id }}</td>
-                                                                            <td>{{ substr($order_of_vendor->date, 0,10) }}</td>
-                                                                            <td><a href="{{ route('orderDetailVendor', ['id' => $order_of_vendor->order_id]) }}" class="btn btn-sqr">Dettagli</a></td>
-                                                                        </tr>
-                                                                            @endif
-                                                                    @endif
-                                                                @endif
                                                             @endforeach
                                                             </tbody>
                                                         </table>
@@ -627,24 +627,12 @@
                                         <!-- Single Tab Content End -->
 
                                         <!-- Single Tab Content Start -->
-                                        <div class="tab-pane fade show {{ (Route::currentRouteName() == 'venditoremenagementproducts') ? 'active' : '' }}" id="venditore-menagement-products" role="tabpanel">
+                                        <div class="tab-pane fade show {{ (Route::currentRouteName() == 'venditoremenagementproducts') }}" id="venditore-menagement-products" role="tabpanel">
                                             @if($comics_of_vendor->count() < 1)
                                                 <div class="myaccount-content">
                                                     <h5>Oh, sembra che ancora non hai fumetti in vendita</h5>
                                                 </div>
                                             @else
-                                                <div class="myaccount-content">
-                                                <h5>Ordini</h5>
-                                                <div class="blog-left-title">
-                                                    <h3>Search</h3>
-                                                </div>
-                                                <div class="side-form">
-                                                    <form action="{{ route('searchcomicsVendorrouteUserPanel') }}">
-                                                        <input type="text" name="search" placeholder="Cerca un fumetto in base al titolo, la descrizione, la casa editrice etc..." />
-                                                        <a  href="javascript:;" onclick="parentNode.submit();"><i class="fa fa-search"></i></a>
-                                                    </form>
-                                                </div>
-                                                <div class="mt-3"></div>
                                                 <div class="table-cart table-responsive mb-15">
                                                     <table>
                                                         <thead>
@@ -682,7 +670,6 @@
                                                     @endforeach
                                                     {{$comics_of_vendor->links()}}
                                                 </div>
-                                                </div>
                                             @endif
                                         </div>
                                         <!-- Single Tab Content End -->
@@ -690,7 +677,7 @@
 
 
                                         <!-- Single Tab Content Start -->
-                                        <div class="tab-pane fade show {{ (Route::currentRouteName() == 'venditoreaddproducts') ? 'active' : '' }}" id="venditore-add-products" role="tabpanel">
+                                        <div class="tab-pane fade show {{ (Route::currentRouteName() == 'venditoreaddproducts')}}" id="venditore-add-products" role="tabpanel">
                                             <fieldset>
                                                 <legend>
                                                     Aggiungi un fumetto
@@ -733,7 +720,7 @@
                                                                             });
                                                                         </script>
 
-                                                                        <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" ></textarea>
+                                                                        <textarea id="description" name="description" ></textarea>
                                                                         @error('description')
                                                                         <span class="invalid-feedback" role="alert">
                                                                             <strong>
@@ -981,12 +968,12 @@
                                                                 </div>
                                                             </div>
 
-                                                        <div class="mt-2"></div>
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <label for="file" class="required">Altre immagini:</label>
+                                                            <div class="mt-2"></div>
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <label for="file" class="required">Altre immagini:</label>
+                                                                </div>
                                                             </div>
-                                                        </div>
                                                             <div class="row">
                                                                 <div class="col-lg-6">
                                                                     immagine 1
@@ -1024,14 +1011,14 @@
                                                                 </div>
                                                             </div>
 
-                                                        <div class="mt-3"></div>
+                                                            <div class="mt-3"></div>
 
                                                             <div class="row">
                                                                 <div class="col-lg-10"></div>
                                                                 <div class="col-lg-2">
-                                                                <div class="single-input-item">
-                                                                    <button type="submit" class="btn btn-sqr">PUBBLICA</button>
-                                                                </div>
+                                                                    <div class="single-input-item">
+                                                                        <button type="submit" class="btn btn-sqr">PUBBLICA</button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </form>

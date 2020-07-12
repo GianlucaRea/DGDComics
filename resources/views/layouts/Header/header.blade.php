@@ -47,7 +47,7 @@
                                                                 @endif
                                                             </div>
                                                             <div class="cart-icon">
-                                                                <a href="{{url('remove-from-list/'.$comic->id) }}"><i class="fa fa-remove"></i></a>
+                                                                <a href="{{url('remove-from-list/'.$comicW->id) }}"><i class="fa fa-remove"></i></a>
                                                             </div>
                                                         </div>
                                                         @endif
@@ -150,6 +150,11 @@
                                                 </div>
                                                 <div class="single-cart">
                                                     <div class="cart-info">
+                                                        <h5><a href="{{url('/accountArea/wishlist')}}"><i class="fa fa-shopping-bag"></i> Wishlists</a></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="single-cart">
+                                                    <div class="cart-info">
                                                         <h5><a href="{{url('/accountArea/paymentmethods')}}"><i class="fa fa-credit-card"></i> Metodi Di pagamento</a></h5>
                                                     </div>
                                                 </div>
@@ -179,7 +184,7 @@
                                                             <h5><a href="{{url('/accountArea/venditoreaddproducts')}}"><i class="fa fa-book"></i> Vendi un Fumetto</a></h5>
                                                         </div>
                                                     </div>
-                                                  @endif
+                                                @endif
                                                     <div class="single-cart">
                                                     <div class="cart-info">
                                                         <h5><a href="{{ url('/logout') }}" class="logout"><i class="fa fa-sign-out"></i> Logout</a></h5>

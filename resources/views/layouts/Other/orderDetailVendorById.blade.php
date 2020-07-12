@@ -98,7 +98,7 @@
     <div class ="row">
         <div class="col-lg-10"></div>
         <div class="col-lg-2">
-            <a href="{{ url('/accountArea') }}" class="btn btn-sqr">Indietro</a>
+            <a href="{{ url('/accountArea/venditore') }}" class="btn btn-sqr">Indietro</a>
         </div>
     </div>
     <div class="mb-3"></div>

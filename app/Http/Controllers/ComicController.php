@@ -373,6 +373,13 @@ class ComicController extends Controller
         return AdminController::dashboardComics($comics);
     }
 
+    public function comicVendorSearchUser(Request $request){
+        $search = $request->input('search');
+        $id = Auth::user()->id;
+        $comics = DB::table('comics')->where('comics.comic_name','LIKE','%'.$search.'%')->orWhere('comics.description','LIKE','%'.$search.'%')->orWhere('comics.type','LIKE','%'.$search.'%')->orWhere('comics.language','LIKE','%'.$search.'%')->orWhere('comics.publisher','LIKE','%'.$search.'%')->where('comics.user_id', '=', $id)->select('comics.*')->paginate(6);
+        return UserController::dashboardComicVendor($comics);
+    }
+
     public function shoplistPrice0(Request $request){
         $number1 = 0;
         $number2 = 3.99;
