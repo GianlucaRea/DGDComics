@@ -156,7 +156,7 @@
                                             </div>
                                             <div class="side-form">
                                                 <form action="{{ route('searchcomicsrouteAdminPanel') }}">
-                                                    <input type="text" name="search" placeholder="Cerca un articolo..." />
+                                                    <input type="text" name="search" placeholder="Cerca un fumetto in base al titolo, la descrizione, il venditore etc..." />
                                                     <a  href="javascript:;" onclick="parentNode.submit();"><i class="fa fa-search"></i></a>
                                                 </form>
                                             </div>

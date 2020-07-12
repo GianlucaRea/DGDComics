@@ -114,7 +114,7 @@
                                             </div>
                                             <div class="side-form">
                                                 <form action="{{ route('searchusersrouteAdminPanel') }}">
-                                                    <input type="text" name="search" placeholder="Cerca un articolo..." />
+                                                    <input type="text" name="search" placeholder="Cerca un utente in base allo username..." />
                                                     <a  href="javascript:;" onclick="parentNode.submit();"><i class="fa fa-search"></i></a>
                                                 </form>
                                             </div>

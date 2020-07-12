@@ -195,7 +195,7 @@
                                             </div>
                                             <div class="side-form">
                                                 <form action="{{ route('searchreviewsrouteAdminPanel') }}">
-                                                    <input type="text" name="search" placeholder="Cerca un articolo..." />
+                                                    <input type="text" name="search" placeholder="Cerca una recensione in base al titolo, al testo, al recensore, etc..." />
                                                     <a  href="javascript:;" onclick="parentNode.submit();"><i class="fa fa-search"></i></a>
                                                 </form>
                                             </div>

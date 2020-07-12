@@ -214,5 +214,10 @@ class WishlistController extends Controller
         }
     }
 
+    public function wishSearchUser(Request $request){
+        $search = $request->input('search');
+        $list = DB::table('wishlists')->join('comic_wishlist', 'comic_wishlist.wishlist_id', '=', 'wishlists.id')->join('comics', 'comic_wishlist.comic_id', '=', 'comics.id')->join('users', 'comics.user_id', '=', 'users.id')->where('comics.comic_name','LIKE','%'.$search.'%')->orWhere('users.username','LIKE','%'.$search.'%')->orWhere('comics.description','LIKE','%'.$search.'%')->select('wishlists.*')->paginate(6);
+        return UserController::dashboardList($list);
+    }
 
 }
