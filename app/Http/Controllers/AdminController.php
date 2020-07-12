@@ -14,7 +14,7 @@ class AdminController extends Controller
 public static function dashboard() {
     if(Auth::user()) {
         $user = Auth::user();
-        $users = User::where('username', '!=', 'admin')->orderBy('username', 'asc')->paginate(12);
+        $users = User::orderBy('username', 'asc')->paginate(12);
         $comics = Comic::orderBy('comic_name', 'asc')->paginate(12);
         $reviews = Review::orderBy('review_title', 'asc')->paginate(12);
         $articles = Article::orderBy('created_at', 'asc')->paginate(12);
@@ -31,10 +31,58 @@ public static function dashboard() {
     public static function dashboardArticle( $articles ) {
         if(Auth::user()) {
             $user = Auth::user();
-            $users = User::where('username', '!=', 'admin')->orderBy('username', 'asc')->paginate(12);
+            $users = User::orderBy('username', 'asc')->paginate(12);
             $comics = Comic::orderBy('comic_name', 'asc')->paginate(12);
             $reviews = Review::orderBy('review_title', 'asc')->paginate(12);
             return view('adminPanelArticleSearch')
+                ->with(compact('user'))
+                ->with(compact('users'))
+                ->with(compact('comics'))
+                ->with(compact('reviews'))
+                ->with(compact('articles'));
+        }
+        else return redirect('/login');
+    }
+
+    public static function dashboardReviews( $reviews ) {
+        if(Auth::user()) {
+            $user = Auth::user();
+            $users = User::orderBy('username', 'asc')->paginate(12);
+            $comics = Comic::orderBy('comic_name', 'asc')->paginate(12);
+            $articles = Article::orderBy('created_at', 'asc')->paginate(12);
+            return view('adminPanelReviewsSearch')
+                ->with(compact('user'))
+                ->with(compact('users'))
+                ->with(compact('comics'))
+                ->with(compact('reviews'))
+                ->with(compact('articles'));
+        }
+        else return redirect('/login');
+    }
+
+    public static function dashboardComics( $comics ) {
+        if(Auth::user()) {
+            $user = Auth::user();
+            $users = User::orderBy('username', 'asc')->paginate(12);
+            $reviews = Review::orderBy('review_title', 'asc')->paginate(12);
+            $articles = Article::orderBy('created_at', 'asc')->paginate(12);
+            return view('adminPanelComicsSearch')
+                ->with(compact('user'))
+                ->with(compact('users'))
+                ->with(compact('comics'))
+                ->with(compact('reviews'))
+                ->with(compact('articles'));
+        }
+        else return redirect('/login');
+    }
+
+    public static function dashboardUser( $users ) {
+        if(Auth::user()) {
+            $user = Auth::user();
+            $reviews = Review::orderBy('review_title', 'asc')->paginate(12);
+            $comics = Comic::orderBy('comic_name', 'asc')->paginate(12);
+            $articles = Article::orderBy('created_at', 'asc')->paginate(12);
+            return view('adminPanelUsersSearch')
                 ->with(compact('user'))
                 ->with(compact('users'))
                 ->with(compact('comics'))

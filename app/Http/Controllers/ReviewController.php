@@ -166,4 +166,10 @@ class ReviewController extends Controller
             return false;
     }
 
+    public function reviewsSearchAdmin(Request $request){
+        $search = $request->input('search');
+        $reviews = DB::table('reviews')->join('users', 'reviews.user_id', '=', 'users.id')->join('comics', 'reviews.comic_id', '=', 'comics.id')->where('reviews.review_title','LIKE','%'.$search.'%')->orWhere('reviews.review_text','LIKE','%'.$search.'%')->orWhere('users.username','LIKE','%'.$search.'%')->orWhere('comics.comic_name','LIKE','%'.$search.'%')->select('reviews.*')->paginate(12);
+        return AdminController::dashboardReviews($reviews);
+    }
+
 }

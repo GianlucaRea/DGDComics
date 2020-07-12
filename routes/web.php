@@ -134,6 +134,9 @@ Route::get('/adminArea/comics', 'AdminController@dashboard')->name('admincomics'
 Route::get('/adminArea/reviews', 'AdminController@dashboard')->name('adminreviews');
 Route::get('/adminArea/articles', 'AdminController@dashboard')->name('adminarticles');
 Route::get('/adminArea/articles/search/', 'ArticleController@articleSearchAdmin')->name('searcharticlerouteAdminPanel');
+Route::get('/adminArea/reviews/search/', 'ReviewController@reviewsSearchAdmin')->name('searchreviewsrouteAdminPanel');
+Route::get('/adminArea/comics/search/', 'ComicController@comicsSearchAdmin')->name('searchcomicsrouteAdminPanel');
+Route::get('/adminArea/users/search/', 'UserController@usersSearchAdmin')->name('searchusersrouteAdminPanel');
 
 
 Route::get('/vendor', function () {
@@ -142,7 +145,7 @@ Route::get('/vendor', function () {
         ->with(compact('user'));
 });
 
-Route::get('/accountArea/notificaLetta/{id}', 'NotificationController@notificationRead')->name('notificaLetta'); //per farlo andare per adesso, poi dovremo fare in modo che ad ogni notifica corrisponda un link di reindirizzamento (in base alla notifica). Sta roba effettivamente potrebbe non essere semplice.
+Route::get('/accountArea/notificaLetta/{id}', 'NotificationController@notificationRead')->name('notificaLetta');
 
 Route::get('/shops','HomeController@onwork')->name('shops');
 Route::get('/privacypolicy','HomeController@onwork')->name('privacypolicy');
