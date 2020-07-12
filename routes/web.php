@@ -59,6 +59,8 @@ Route::get('/shoplist/suggest','ComicController@shoplistSuggest')->name('suggest
 Route::get('/shoplist/search/','ComicController@shoplistSearch')->name('searchroute');
 
 
+
+
 Auth::routes();
 
 //da qui sono da riordinare bene con i controller come ha fatto Gianluca sopra, per ora lasciamo così che funziona bene
@@ -188,6 +190,7 @@ Auth::routes(); //ehm... perché è stato scritto due volte? nel caso mi leggete
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('user-delete/{id}','UserController@destroy')->name('user-delete');
+Route::get('suggestComic/{id}', 'ComicController@suggestComic')->name('suggestComic');
 Route::get('comic-delete/{id}','ComicController@destroy')->name('comic-delete');
 Route::get('comic-delete-vendor/{id}','ComicController@destroyForVendor')->name('comic-delete-vendor');
 Route::get('review-delete/{id}','ReviewController@destroy')->name('review-delete');

@@ -171,6 +171,7 @@
                                                             <th>Prezzo</th>
                                                             <th>Quantità</th>
                                                             <th>Venditore</th>
+                                                            <th>Consigliato</th>
                                                             <th>Elimina</th>
                                                         </tr>
                                                         </thead>
@@ -185,9 +186,13 @@
                                                                 <td>{{$comic->price}} €</td>
                                                                 <td>{{$comic->quantity}}</td>
                                                                 <td>{{$userNeed->username}}</td>
+                                                                @if($comic->suggest == true)
+                                                                    <td><a class="btn" href="{{ url('suggestComic', $comic->id) }}"> <i class="fa fa-star"></i></a></td>
+                                                                @else
+                                                                    <td><a class="btn" href="{{ url('suggestComic', $comic->id) }}"> <i class="fa fa-star-o"></i></a></td>
+                                                                @endif
                                                                 <td><a class="btn btn-danger" onclick="return deleteComic();"  href="{{route('comic-delete', $comic->id)}}"><i class="fa fa-trash"></i></a></td>
                                                             </tr>
-                                                            {{$comic->id}}
                                                         @endforeach
                                                         {{ $comics->links() }}
                                                         </tbody>

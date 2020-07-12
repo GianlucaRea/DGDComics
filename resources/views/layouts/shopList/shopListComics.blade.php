@@ -60,6 +60,12 @@
                                         </div>
                                     </div>
                                     <div class="product-details text-center">
+                                        @if(strlen($comic->comic_name) < 17 )
+                                            <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $comic->comic_name }}</b></div>
+                                        @else
+                                            @php($subcomic = substr($comic->comic_name, 0, 17))
+                                            <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $subcomic }}</b></div>
+                                        @endif
                                         <div class="product-rating">
                                             <ul>
                                                 @php($id = $comic->id)
@@ -67,18 +73,17 @@
                                                 @foreach(range(1,5) as $i)
                                                     @if($avgstar >0)
                                                         @if($avgstar >0.5)
-                                                            <a><i class="fa fa-star fa_custom"></i></a>
+                                                            <a><i class="fa fa-star fa_custom" style="color: #eeb900;"></i></a>
                                                         @else
-                                                            <a><i class="fa fa-star-half-o fa_custom"></i></a>
+                                                            <a><i class="fa fa-star-half-o fa_custom" style="color: #eeb900;"></i></a>
                                                         @endif
                                                     @else
-                                                        <a><i class="fa  fa-star-o fa_custom"></i></a>
+                                                        <a><i class="fa  fa-star-o fa_custom" style="color: #eeb900;"></i></a>
                                                     @endif
                                                     <?php $avgstar--; ?>
                                                 @endforeach
                                             </ul>
                                         </div>
-                                        <h4>{{ $comic->comic_name }}</h4>
                                         <div class="product-price">
                                             <ul>
                                                 @if( $comic->discount != 0 )
@@ -126,6 +131,7 @@
                             <div class="col-lg-8 col-md-8 col-12">
                                 <div class="product-wrapper-content">
                                     <div class="product-details">
+                                        <h4>{{ $comic->comic_name }}</h4>
                                         <div class="product-rating">
                                             <ul>
                                                 @php($id = $comic->id)
@@ -133,18 +139,18 @@
                                                 @foreach(range(1,5) as $i)
                                                     @if($avgstar >0)
                                                         @if($avgstar >0.5)
-                                                            <a><i class="fa fa-star fa_custom"></i></a>
+                                                            <a><i class="fa fa-star fa_custom" style="color: #eeb900;"></i></a>
                                                         @else
-                                                            <a><i class="fa fa-star-half-o fa_custom"></i></a>
+                                                            <a><i class="fa fa-star-half-o fa_custom" style="color: #eeb900;"></i></a>
                                                         @endif
                                                     @else
-                                                        <a><i class="fa  fa-star-o fa_custom"></i></a>
+                                                        <a><i class="fa  fa-star-o fa_custom" style="color: #eeb900;"></i></a>
                                                     @endif
                                                     <?php $avgstar--; ?>
                                                 @endforeach
                                             </ul>
                                         </div>
-                                        <h4>{{ $comic->comic_name }}</h4>
+
                                         <div class="product-price">
                                             <ul>
                                                 @if( $comic->discount != 0 )

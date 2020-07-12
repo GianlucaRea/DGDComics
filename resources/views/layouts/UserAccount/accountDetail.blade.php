@@ -670,7 +670,7 @@
                                                                             });
                                                                         </script>
 
-                                                                        <textarea id="description" name="description" ></textarea>
+                                                                        <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" ></textarea>
                                                                         @error('description')
                                                                         <span class="invalid-feedback" role="alert">
                                                                             <strong>

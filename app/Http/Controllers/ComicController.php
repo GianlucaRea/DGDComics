@@ -563,6 +563,20 @@ class ComicController extends Controller
         return view('shoplist')->with(compact('genres'))->with(compact('comics'));
     }
 
+    public function suggestComic(Request $request){
+        $comic = comic::where('id', '=', $request->id)->first();
+        if ($comic->suggest == true){
+            $data = array('suggest' => 0,);
+            DB::table('comics')->where('id', '=', $comic->id)->update($data);
+            return redirect()->back();
+        }
+        else{
+            $data = array('suggest' => 1,);
+            DB::table('comics')->where('id', '=', $comic->id)->update($data);
+            return redirect()->back();
+        }
+    }
+
 
 
 

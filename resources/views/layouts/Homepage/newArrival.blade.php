@@ -56,12 +56,12 @@
                                 @foreach(range(1,5) as $i)
                                     @if($avgstar >0)
                                         @if($avgstar >0.5)
-                                            <a><i class="fa fa-star fa_custom"></i></a>
+                                            <a><i class="fa fa-star fa_custom" style="color: #eeb900;"></i></a>
                                         @else
-                                            <a><i class="fa fa-star-half-o fa_custom"></i></a>
+                                            <a><i class="fa fa-star-half-o fa_custom" style="color: #eeb900;"></i></a>
                                         @endif
                                     @else
-                                        <a><i class="fa  fa-star-o fa_custom"></i></a>
+                                        <a><i class="fa  fa-star-o fa_custom" style="color: #eeb900;"></i></a>
                                     @endif
                                     <?php $avgstar--; ?>
                                 @endforeach
