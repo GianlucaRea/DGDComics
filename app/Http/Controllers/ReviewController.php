@@ -187,11 +187,11 @@ class ReviewController extends Controller
     }
 
     public static function getAllRecievedReview($user_id){
-        return DB::table('reviews')->join('comics', 'comics.id', '=', 'reviews.comic_id')->where('comics.user_id', '=', $user_id)->select('reviews.*')->get();
+        return DB::table('reviews')->join('comics', 'comics.id', '=', 'reviews.comic_id')->where('comics.user_id', '=', $user_id)->select('reviews.*')->paginate(5);
     }
 
     public static function getAllWritedReview($user_id){
-        return DB::table('reviews')->where('user_id', '=', $user_id)->get();
+        return DB::table('reviews')->where('user_id', '=', $user_id)->paginate(5);
     }
 
 }

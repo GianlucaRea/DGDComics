@@ -315,7 +315,7 @@
                                                             @endif
                                                         </div>
                                                     </div>
-                                                    @foreach($reviews as $review)
+                                                @foreach($reviews as $review)
                                                         @php($comicOfReviewVendorDetail = \App\Http\Controllers\ComicController::getByID($review->comic_id))
                                                         <div class="row" style="border-bottom: lightgray 1px solid; padding-bottom: 5%">
                                                             <div class="ml-5"></div>
@@ -369,6 +369,7 @@
                                                         </div>
                                                         <div class="mb-5"></div>
                                                     @endforeach
+
                                                 </div>
                                             </div>
                                         </div>
