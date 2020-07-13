@@ -116,7 +116,11 @@ class GroupController extends Controller
             'group_id'=> '2',
             'user_id' => $user->id,
         );
+        $data2=array(
+            'user_id' => $user->id,
+        );
         DB::table('group_user')->where("user_id", "=", $user->id)->update($data);
+        DB::table('rankings')->insert($data2);
 
     }
 

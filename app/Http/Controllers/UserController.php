@@ -201,7 +201,7 @@ class UserController extends Controller
     {
 
         $request->validate([
-            'partitaIva' => ['required', 'regex:/^[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}$/'],
+            'partitaIva' => ['required', 'digits:11'],
             'attivita' => 'required',
         ]);
 
@@ -356,6 +356,12 @@ class UserController extends Controller
         Auth::logout();
         DB::table('users')->where('id', '=', $user->id)->update($data);
         return redirect('/');
+    }
+
+    public static function userInfo($id) {
+        $user = User::where('id','=',$id)->first();
+        return view('/userinfo')
+            ->with(compact('user'));
     }
 
 

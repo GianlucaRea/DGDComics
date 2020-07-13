@@ -124,7 +124,7 @@
                                                     <table class="table table-bordered mt-2">
                                                         <thead class="thead-light">
                                                         <tr>
-                                                            <th>Nickname</th>
+                                                            <th>Username</th>
                                                             <th>Phone</th>
                                                             <th>Email</th>
                                                             <th>Tipologia</th>
@@ -135,15 +135,18 @@
                                                         @foreach($users as $user)
                                                             @if(!(\App\Http\Controllers\GroupController::isAdmin($user->id)))
                                                                 <tr>
-                                                                    <td>{{$user->username}}</td>
-                                                                    <td>{{$user->phone_number}}</td>
-                                                                    <td>{{$user->email}}</td>
                                                                     @if(!(\App\Http\Controllers\GroupController::isVendor($user->id)))
+                                                                        <td><a href="{{url('user_detail/'.$user->id) }}" >{{$user->username}}</a></td>
+                                                                        <td>{{$user->phone_number}}</td>
+                                                                        <td>{{$user->email}}</td>
                                                                         <td>Utente</td>
                                                                     @else
+                                                                        <td><a href="{{url('vendor_detail/'.$user->id) }}" >{{$user->username}}</a></td>
+                                                                        <td>{{$user->phone_number}}</td>
+                                                                        <td>{{$user->email}}</td>
                                                                         <td>Venditore</td>
                                                                     @endif
-                                                                    <td><a class="btn btn-danger" onclick="return deleteUser();"  href="{{route('user-delete', $user->id)}}"><i class="fa fa-trash"></i></a></td>
+                                                                    <td><a class="btn btn-danger" onclick="return deleteUser();"  href="{{route('user-delete', $user->id)}}"><i class="fa fa-trash" style="color:white;"></i></a></td>
                                                                 </tr>
                                                             @endif
                                                         @endforeach
@@ -198,7 +201,7 @@
                                                             <td>{{$comic->ISBN}}</td>
                                                             <td>{{$comic->quantity}}</td>
                                                             <td>{{$userNeed->username}}</td>
-                                                            <td><a class="btn btn-danger" onclick="return deleteComic();"  href="{{route('comic-delete', $comic->id)}}"><i class="fa fa-trash"></i></a></td>
+                                                            <td><a class="btn btn-danger" onclick="return deleteComic();"  href="{{route('comic-delete', $comic->id)}}"><i class="fa fa-trash" style="color:white;"></i></a></td>
                                                         </tr>
                                                     @endforeach
                                                     {{ $comics->links() }}

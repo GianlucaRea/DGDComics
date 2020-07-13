@@ -181,7 +181,7 @@
                                                                 $userNeed = App\User::where('id','=',$comic->user_id)->first();
                                                             @endphp
                                                             <tr>
-                                                                <td>{{$comic->comic_name}}</td>
+                                                                <td><a href="{{ url('/comic_detail/'.$comic->id) }}">{{$comic->comic_name}}</a></td>
                                                                 <td>{{$comic->ISBN}}</td>
                                                                 <td>{{$comic->price}} €</td>
                                                                 <td>{{$comic->quantity}}</td>
@@ -191,7 +191,7 @@
                                                                 @else
                                                                     <td><a class="btn" href="{{ url('suggestComic', $comic->id) }}"> <i class="fa fa-star-o"></i></a></td>
                                                                 @endif
-                                                                <td><a class="btn btn-danger" onclick="return deleteComic();"  href="{{route('comic-delete', $comic->id)}}"><i class="fa fa-trash"></i></a></td>
+                                                                <td><a class="btn btn-danger" onclick="return deleteComic();"  href="{{route('comic-delete', $comic->id)}}"><i class="fa fa-trash" style="color:white;"></i></a></td>
                                                             </tr>
                                                         @endforeach
                                                         {{ $comics->links() }}

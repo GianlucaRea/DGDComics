@@ -756,8 +756,8 @@
                                                                     <td>{{ $reviewQuantity }}</td>
                                                                     <td>{{ $comic_of_vendor->price }}</td>
                                                                     <td>
-                                                                        <a class="btn btn-light" href="{{url('/comicModify/'. $comic_of_vendor->id)}}"><i class="fa fa-pencil"></i></a>
-                                                                        <a class="btn btn-danger" onclick="return deleteComic();"  href="{{route('comic-delete-vendor', $comic_of_vendor->id)}}"><i class="fa fa-trash"></i></a>
+                                                                        <a class="btn btn-light" href="{{url('/comicModify/'. $comic_of_vendor->id)}}"><i class="fa fa-pencil" style="color:#333"></i></a>
+                                                                        <a class="btn btn-danger" onclick="return deleteComic();"  href="{{route('comic-delete-vendor', $comic_of_vendor->id)}}"><i class="fa fa-trash" style="color:white;"></i></a>
                                                                     </td>
                                                                 </tr>
                                                             @endforeach

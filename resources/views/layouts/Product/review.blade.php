@@ -61,6 +61,8 @@
         alert();
     </script>
 @endif
+@php($seller = \App\Http\Controllers\ComicController::getSeller($comic->id))
+@if(\App\Http\Controllers\ReviewController::isComicBought($comic->id, $seller->id))
 <div class="product-info-area" style="margin-left: 20%">
     <div class="tab-content border-0">
         <div class="mt-30"></div>
@@ -150,7 +152,7 @@
         </div>
     </div>
 </div>
-
+@endif
 
 <div class="product-info-area" style="margin-left: 20%">
     <div class="tab-pane fade show active"  id="review">
