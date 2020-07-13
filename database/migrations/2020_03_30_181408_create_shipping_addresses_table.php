@@ -27,7 +27,12 @@ class CreateShippingAddressesTable extends Migration
         DB::table('shipping_addresses')->insert([
             ['user_id' => '3', 'via' => 'le mani dal naso', 'civico' => '123', 'città' => 'Pescara', 'post_code' => '65123', 'other_info' => 'nothing', 'favourite' => '1'],
             ['user_id' => '3', 'via' => 'le mani dal nasino', 'civico' => '124', 'città' => 'Roma', 'post_code' => '65125', 'other_info' => 'test', 'favourite' => '0'],
-            ['user_id' => '5', 'via' => 'a caso', 'civico' => '32', 'città' => 'Arpino', 'post_code' => '03033', 'other_info' => 'Mi piace', 'favourite' => '0']
+            ['user_id' => '5', 'via' => 'a caso', 'civico' => '32', 'città' => 'Arpino', 'post_code' => '03033', 'other_info' => 'Mi piace', 'favourite' => '0'],
+        ]);
+
+        DB::table('shipping_addresses')->insert([
+            ['user_id' => '1', 'via' => 'via Luigi Gordigiani', 'civico' => '32', 'città' => 'Firenze', 'post_code' => '50127', 'other_info' => 'numero civico 32 Nord', 'favourite' => '1', 'sede' => '1'],
+            ['user_id' => '2', 'via' => 'via nazionale adriatica nord', 'civico' => '348', 'città' => 'Pescara', 'post_code' => '65123', 'other_info' => 'Official store DGDcomics', 'favourite' => '1', 'sede' => '1']
         ]);
     }
 

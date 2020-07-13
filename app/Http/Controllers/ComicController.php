@@ -656,7 +656,7 @@ class ComicController extends Controller
             $cart = session()->get('cart');
             $image = ImageController::getCover($id);
 
-            if($user->id == self::getSeller($id)){
+            if($user->id == self::getSeller($id)->id){
                 return redirect('comic_detail/'.$comic->id)->with('error', 'seems something went wrong!');
             }
 

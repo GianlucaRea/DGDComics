@@ -73,6 +73,8 @@ class ReviewController extends Controller
             'user_id' => $notification->user_id,
             'state' =>  $notification->state,
             'notification_text' => $notification->notification_text,
+            'notification' => 'comicdetail',
+            'idLink' => $comic_id
         );
 
         if(is_null($Review)){
@@ -97,7 +99,7 @@ class ReviewController extends Controller
             'user_id' => $notification->user_id,
             'state' =>  $notification->state,
             'notification_text' => $notification->notification_text,
-            'notification' => 'comic_detail',
+            'notification' => 'comicdetail',
             'idLink' => $comic_id
         );
 
@@ -170,6 +172,26 @@ class ReviewController extends Controller
         $search = $request->input('search');
         $reviews = DB::table('reviews')->join('users', 'reviews.user_id', '=', 'users.id')->join('comics', 'reviews.comic_id', '=', 'comics.id')->where('reviews.review_title','LIKE','%'.$search.'%')->orWhere('reviews.review_text','LIKE','%'.$search.'%')->orWhere('users.username','LIKE','%'.$search.'%')->orWhere('comics.comic_name','LIKE','%'.$search.'%')->select('reviews.*')->paginate(12);
         return AdminController::dashboardReviews($reviews);
+    }
+
+    public static function isComicBought($comic_id, $seller_id){
+        if(Auth::user()) {
+            $user_id = Auth::user()->id;
+            if (DB::table('orders')->join('comic_bought_order', 'orders.id', '=', 'comic_bought_order.order_id')->join('comic_boughts', 'comic_bought_order.comic_bought_id', '=', 'comic_boughts.id')->join('comics', 'comic_boughts.comic_id', '=', 'comics.id')->where('comics.id', '=', $comic_id)->where('orders.user_id', '=', $user_id)->where('comics.user_id', '=', $seller_id)->where('comic_boughts.state', '=', 'spedito')->count() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public static function getAllRecievedReview($user_id){
+        return DB::table('reviews')->join('comics', 'comics.id', '=', 'reviews.comic_id')->where('comics.user_id', '=', $user_id)->select('reviews.*')->get();
+    }
+
+    public static function getAllWritedReview($user_id){
+        return DB::table('reviews')->where('user_id', '=', $user_id)->get();
     }
 
 }

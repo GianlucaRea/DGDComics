@@ -134,7 +134,7 @@
                                 @endif
                             </div>
                             <div class="product-addto-links-text">
-                                <p>{!! $comic->description !!}</p>
+                                {!! $comic->description !!}
                             </div>
                             <div class="tab-content border-0">
                                 <div class="tab-pane fade show active" id="Details">

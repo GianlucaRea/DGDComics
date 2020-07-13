@@ -29,18 +29,20 @@ class CreateUsersTable extends Migration
             $table->timestamp('date')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->string('attivita')->nullable();
         });
-        DB::table('users')->insert([
 
-            ['name' => 'venditore' , 'surname' => 'scarso' , 'username' => 'VenditoreScarso' , 'age' => '22' , 'partitaIva' => 'PARTITAIVA1111X' , 'phone_number' => '323456789' , 'email' => 'venditore.scarso@lalala.comma', 'password' => Hash::make('password2')],
-            ['name' => 'venditore' , 'surname' => 'professionista' , 'username' => 'VenditoreProfessionista' , 'age' => '22' , 'partitaIva' => 'PARTITAIVA2222X' , 'phone_number' => '321654987' , 'email' => 'venditore.professionista@lalala.comma', 'password' => Hash::make('password3')],
-            ['name' => 'Daniele' , 'surname' => 'Fossemò' , 'username' => 'DanieleF198' , 'age' => '22' , 'partitaIva' => 'PARTITAIVA0000X' , 'phone_number' => '123456789' , 'email' => 'daniele.fossemo@lalala.comma', 'password' => Hash::make('password')],
-            ['name' => 'Gianluca' , 'surname' => 'Rea' , 'username' => 'gianrea' , 'age' => '22' , 'partitaIva' => 'PARTITAIVA0001X' , 'phone_number' => '123654321' , 'email' => 'reagianluca97@gmail.com', 'password' => Hash::make('password')],
+        DB::table('users')->insert([
+            ['name' => 'Davide' , 'surname' => 'Ricci' , 'username' => 'DGDcomics official' , 'age' => '22' , 'partitaIva' => '14631260859' , 'phone_number' => '323456789' , 'email' => 'dgdComicsOfficial@dgdcomics.com', 'password' => Hash::make('dgdcomics'), 'attivita' => 'DGDcomics'],
+            ['name' => 'Mario' , 'surname' => 'Rossi' , 'username' => 'MangaMania' , 'age' => '33' , 'partitaIva' => '66604080490' , 'phone_number' => '321654987' , 'email' => 'mario.rossi@gmail.com', 'password' => Hash::make('password3'), 'attivita' => 'MangaMania'],
         ]);
 
         DB::table('users')->insert([
+            ['name' => 'Daniele' , 'surname' => 'Fossemò' , 'username' => 'DanieleF198' , 'age' => '22' , 'phone_number' => '3209104523' , 'email' => 'daniele.fossemo@outlook.it', 'password' => Hash::make('password')],
+        ]);
+
+        DB::table('users')->insert([
+            ['name' => 'Gianluca' , 'surname' => 'Rea' , 'username' => 'gianrea' , 'age' => '22' , 'email' => 'reagianluca97@gmail.com', 'password' => Hash::make('password')],
             ['name' => 'Admin' , 'surname' => 'Admin' , 'username' => 'admin' , 'age' => '50', 'email' => 'admin@dgdcomics.com', 'password' => Hash::make('admin')],
         ]);
-
 
 
 

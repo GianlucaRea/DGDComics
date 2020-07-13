@@ -474,12 +474,12 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <div class="single-input-item-not-editable">
-                                                                <h5>NOME <br><br>{{$user->name}}</h5>
+                                                                <h5>Nome <br><br>{{$user->name}}</h5>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <div class="single-input-item-not-editable">
-                                                                <h5>COGNOME <br><br>{{$user->surname}}</h5>
+                                                                <h5>Cognome <br><br>{{$user->surname}}</h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -487,12 +487,12 @@
                                                     <div class="row">
                                                         <div class="col-lg-10">
                                                             <div class="single-input-item-not-editable">
-                                                                <h5>NICKNAME <br><br>{{$user->username}}</h5>
+                                                                <h5>Username <br><br>{{$user->username}}</h5>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-2">
                                                             <div class="single-input-item-not-editable">
-                                                                <h5>ETA' <br><br>{{$user->age}}</h5>
+                                                                <h5>Età <br><br>{{$user->age}}</h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -671,8 +671,8 @@
                                                                 <td>{{ $reviewQuantity }}</td>
                                                                 <td>{{ $comic_of_vendor->price }}</td>
                                                                 <td>
-                                                                    <a class="btn btn-light" href="{{url('/comicModify/'. $comic_of_vendor->id)}}"><i class="fa fa-pencil"></i></a>
-                                                                    <a class="btn btn-danger" onclick="return deleteComic();"  href="{{route('comic-delete-vendor', $comic_of_vendor->id)}}"><i class="fa fa-trash"></i></a>
+                                                                    <a class="btn btn-light" href="{{url('/comicModify/'. $comic_of_vendor->id)}}"><i class="fa fa-pencil" style="color:#333"></i></a>
+                                                                    <a class="btn btn-danger" onclick="return deleteComic();"  href="{{route('comic-delete-vendor', $comic_of_vendor->id)}}"><i class="fa fa-trash" style="color:white;"></i></a>
                                                                 </td>
                                                             </tr>
                                                         @endforeach
@@ -940,7 +940,7 @@
                                                                 x
                                                                 <div class="col-lg-4">
                                                                     <div class="single-input-item">
-                                                                        <input id="length" type="number" class="form-control @error('length') is-invalid @enderror" name="length" placeholder="Lunghezza" min="1">
+                                                                        <input id="length" type="number" class="form-control @error('length') is-invalid @enderror" name="length" placeholder="Larghezza" min="1">
                                                                         @error('length')
                                                                         <span class="invalid-feedback" role="alert">
                                                                                 <strong>

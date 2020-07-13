@@ -205,8 +205,8 @@
                                                     <table class="table table-bordered">
                                                         <thead class="thead-dark">
                                                         <tr>
-                                                            <th>Titolo</th>
                                                             <th>Fumetto</th>
+                                                            <th>Titolo</th>
                                                             <th>Recensore</th>
                                                             <th>Elimina</th>
                                                         </tr>
@@ -218,10 +218,10 @@
                                                                 $comicReview = App\Comic::where('id','=',$review->comic_id)->first();
                                                             @endphp
                                                             <tr>
+                                                                <td><a href="{{ url('/comic_detail/'.$comicReview->id) }}">{{$comicReview->comic_name}}</a></td>
                                                                 <td>{{$review->review_title}}</td>
-                                                                <td>{{$comicReview->comic_name}}</td>
                                                                 <td>{{$userReview->username}}</td>
-                                                                <td><a class="btn btn-danger" onclick="return deleteReview();"  href="{{route('review-delete-local', $review->id)}}"><i class="fa fa-trash"></i></a></td>
+                                                                <td><a class="btn btn-danger" onclick="return deleteReview();"  href="{{route('review-delete-local', $review->id)}}"><i class="fa fa-trash" style="color:white;"></i></a></td>
                                                             </tr>
                                                         @endforeach
                                                         {{ $reviews->links() }}

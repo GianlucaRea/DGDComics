@@ -254,13 +254,13 @@
                                                         <tbody>
                                                         @foreach($articles as $article)
                                                             <tr>
-                                                                <td>{{$article->title}}</td>
+                                                                <td><a href="{{ url('/blogDetail/'.$article->id) }}">{{$article->title}}</a></td>
                                                                 <td>{{ \Illuminate\Support\Str::limit($article->article_text, 45, $end='...') }}</td>
                                                                 <td>
-                                                                    <a class="btn btn-danger" onclick="return deleteArticle();"  href="{{route('article-delete', $article->id)}}"><i class="fa fa-trash"></i></a>
+                                                                    <a class="btn btn-light" href="{{route('article-modify', $article->id)}}"><i class="fa fa-pencil" style="color:#333;"></i></a>
                                                                 </td>
                                                                 <td>
-                                                                    <a class="btn btn-light" href="{{route('article-modify', $article->id)}}"><i class="fa fa-pencil"></i></a>
+                                                                    <a class="btn btn-danger" onclick="return deleteArticle();"  href="{{route('article-delete', $article->id)}}"><i class="fa fa-trash" style="color:white;"></i></a>
                                                                 </td>
                                                             </tr>
                                                         @endforeach

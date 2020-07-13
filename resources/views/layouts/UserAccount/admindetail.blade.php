@@ -27,7 +27,7 @@
                                     <a href="{{route('adminusers')}}" class="{{ (Route::currentRouteName() == 'adminusers') ? 'active' : '' }}" ><i class="fa fa-user"></i>Gestione Utenti</a>
                                     <a href="{{route('admincomics')}}" class="{{ (Route::currentRouteName() == 'admincomics') ? 'active' : '' }}" code><i class="fa fa-book"></i>Gestione Fumetti</a>
                                     <a href="{{route('adminreviews')}}" class="{{ (Route::currentRouteName() == 'adminreviews') ? 'active' : '' }}"><i class="fa fa-map-marker"></i>Gestione Recensione</a>
-                                    <a href="{{route('adminarticles')}}" class="{{ (Route::currentRouteName() == 'adminarticles') ? 'active' : '' }}"><i class="fa fa-pencil"></i>Gestione Articoli</a>
+                                    <a href="{{route('adminarticles')}}" class="{{ (Route::currentRouteName() == 'adminarticles') ? 'active' : '' }}"><i class="fa fa-pencil" style="color:#333;"></i>Gestione Articoli</a>
                                 </div>
                             </div>
                             <!-- My Account Tab Menu End -->
@@ -77,17 +77,20 @@
                                                     <tbody>
                                                     @foreach($users as $user)
                                                         @if(!$user->hasGroup('il gruppo degli admin'))
-                                                    <tr>
-                                                        <td>{{$user->username}}</td>
-                                                        <td>{{$user->phone_number}}</td>
-                                                        <td>{{$user->email}}</td>
-                                                        @if($user->hasGroup('il gruppo degli utenti'))
-                                                        <td>Utente</td>
-                                                        @else
-                                                            <td>Venditore</td>
-                                                        @endif
-                                                        <td><a class="btn btn-danger" onclick="return deleteUser();"  href="{{route('user-delete', $user->id)}}"><i class="fa fa-trash"></i></a></td>
-                                                    </tr>
+                                                            <tr>
+                                                                @if($user->hasGroup('il gruppo degli utenti'))
+                                                                    <td><a href="{{url('user_detail/'.$user->id) }}" >{{$user->username}}</a></td>
+                                                                    <td>{{$user->phone_number}}</td>
+                                                                    <td>{{$user->email}}</td>
+                                                                    <td>Utente</td>
+                                                                @else
+                                                                    <td><a href="{{url('vendor_detail/'.$user->id) }}" >{{$user->username}}</a></td>
+                                                                    <td>{{$user->phone_number}}</td>
+                                                                    <td>{{$user->email}}</td>
+                                                                    <td>Venditore</td>
+                                                                @endif
+                                                                <td><a class="btn btn-danger" onclick="return deleteUser();"  href="{{route('user-delete', $user->id)}}"><i class="fa fa-trash" style="color:white;"></i></a></td>
+                                                            </tr>
                                                         @endif
                                                     @endforeach
                                                     {{ $users->links() }}
@@ -132,21 +135,19 @@
                                                     </thead>
                                                     <tbody>
                                                     @foreach($comics as $comic)
-                                                        @php
-                                                            $userNeed = App\User::where('id','=',$comic->user_id)->first();
-                                                        @endphp
+                                                        @php($userNeed = App\User::where('id','=',$comic->user_id)->first())
                                                         <tr>
-                                                            <td>{{$comic->comic_name}}</td>
+                                                            <td><a href="{{ url('/comic_detail/'.$comic->id) }}">{{$comic->comic_name}}</a></td>
                                                             <td>{{$comic->ISBN}}</td>
                                                             <td>{{$comic->price}} €</td>
                                                             <td>{{$comic->quantity}}</td>
+                                                            <td>{{$userNeed->username}}</td>
                                                             @if($comic->suggest == true)
                                                                 <td><a class="btn" href="{{ url('suggestComic', $comic->id) }}"> <i class="fa fa-star"></i></a></td>
                                                             @else
                                                                 <td><a class="btn" href="{{ url('suggestComic', $comic->id) }}"> <i class="fa fa-star-o"></i></a></td>
                                                             @endif
-                                                            <td>{{$userNeed->username}}</td>
-                                                            <td><a class="btn btn-danger" onclick="return deleteComic();"  href="{{route('comic-delete', $comic->id)}}"><i class="fa fa-trash"></i></a></td>
+                                                            <td><a class="btn btn-danger" onclick="return deleteComic();"  href="{{route('comic-delete', $comic->id)}}"><i class="fa fa-trash" style="color:white;"></i></a></td>
                                                         </tr>
                                                     @endforeach
                                                     {{ $comics->links() }}
@@ -178,33 +179,29 @@
                                                 <table class="table table-bordered mt-2">
                                                     <thead class="thead-dark">
                                                     <tr>
-                                                        <th>Titolo</th>
                                                         <th>Fumetto</th>
+                                                        <th>Titolo</th>
                                                         <th>Recensore</th>
                                                         <th>Elimina</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
                                                     @foreach($reviews as $review)
-                                                        @php
-                                                            $userReview = App\User::where('id','=',$review->user_id)->first();
-                                                            $comicReview = App\Comic::where('id','=',$review->comic_id)->first();
-                                                        @endphp
+                                                        @php($userReview = App\User::where('id','=',$review->user_id)->first())
+                                                        @php(($comicReview = App\Comic::where('id','=',$review->comic_id)->first()))
                                                         <tr>
+                                                            <td><a href="{{ url('/comic_detail/'.$comicReview->id) }}">{{$comicReview->comic_name}}</a></td>
                                                             <td>{{$review->review_title}}</td>
-                                                            <td>{{$comicReview->comic_name}}</td>
                                                             <td>{{$userReview->username}}</td>
-                                                            <td><a class="btn btn-danger" onclick="return deleteReview();"  href="{{route('review-delete-local', $review->id)}}"><i class="fa fa-trash"></i></a></td>
+                                                            <td><a class="btn btn-danger" onclick="return deleteReview();"  href="{{route('review-delete-local', $review->id)}}"><i class="fa fa-trash" style="color:white;"></i></a></td>
                                                         </tr>
                                                     @endforeach
                                                     {{ $reviews->links() }}
                                                     </tbody>
                                                 </table>
                                                 @foreach($reviews as $review)
-                                                    @php
-                                                        $userReview = App\User::where('id','=',$review->user_id)->first();
-                                                        $comicReview = App\Comic::where('id','=',$review->comic_id)->first();
-                                                    @endphp
+                                                    @php($userReview = App\User::where('id','=',$review->user_id)->first())
+                                                    @php($comicReview = App\Comic::where('id','=',$review->comic_id)->first())
                                                 @endforeach
                                                 {{ $reviews->links() }}
                                             </div>
@@ -230,20 +227,20 @@
                                                     <tr>
                                                         <th>Titolo</th>
                                                         <th>Testo</th>
-                                                        <th>Elimina</th>
                                                         <th>Modifica</th>
+                                                        <th>Elimina</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
                                                     @foreach($articles as $article)
                                                         <tr>
-                                                            <td>{{$article->title}}</td>
+                                                            <td><a href="{{ url('/blogDetail/'.$article->id) }}">{{$article->title}}</a></td>
                                                             <td>{{ \Illuminate\Support\Str::limit($article->article_text, 45, $end='...') }}</td>
                                                             <td>
-                                                                <a class="btn btn-danger" onclick="return deleteArticle();"  href="{{route('article-delete', $article->id)}}"><i class="fa fa-trash"></i></a>
+                                                                <a class="btn btn-light" href="{{route('article-modify', $article->id)}}"><i class="fa fa-pencil" style="color:#333;"></i></a>
                                                             </td>
                                                             <td>
-                                                            <a class="btn btn-light" href="{{route('article-modify', $article->id)}}"><i class="fa fa-pencil"></i></a>
+                                                                <a class="btn btn-danger" onclick="return deleteArticle();"  href="{{route('article-delete', $article->id)}}"><i class="fa fa-trash" style="color:white;"></i></a>
                                                             </td>
                                                         </tr>
                                                     @endforeach

@@ -854,7 +854,7 @@ body {
 }
 
 .header-mid-area .my-cart ul>li .cart-bottom a {
-    background-color: #606060;
+    background-color: #333;
     color: #fff;
     display: inline-block;
     font-size: 12px;
@@ -875,13 +875,14 @@ body {
 .home-6 .header-mid-area .my-cart ul>li .mini-cart-sub .cart-bottom a {
     color: #fff;
 }
-
-
+.home-1 .header-mid-area .my-cart ul>li .mini-cart-sub .cart-bottom a:hover,
+.home-2 .header-mid-area .my-cart ul>li .mini-cart-sub .cart-bottom a:hover,
 .home-3 .header-mid-area .my-cart ul>li .mini-cart-sub .cart-bottom a:hover,
 .home-4 .header-mid-area .my-cart ul>li .mini-cart-sub .cart-bottom a:hover,
 .home-5 .header-mid-area .my-cart ul>li .mini-cart-sub .cart-bottom a:hover,
 .home-6 .header-mid-area .my-cart ul>li .mini-cart-sub .cart-bottom a:hover {
-    color: #f07c29;
+    color:white;
+    background-color: #f07c29;
 }
 
 /*----------------------------------------*/
@@ -1908,6 +1909,10 @@ body {
 
 .bt {
     border-top: 1px solid #e5e5e5;
+}
+
+.bb {
+    border-bottom: 1px solid #e5e5e5;
 }
 
 /*----------------------------------------*/

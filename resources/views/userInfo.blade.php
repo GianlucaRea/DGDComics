@@ -8,10 +8,10 @@
     @include('layouts.Header.header')
 </header>
 @php($page = [
-    'name' =>'Info Venditore']
+    'name' =>'Info Utente']
     )
 @include('layouts.Header.breadcrumbsArea', $page)
-@include('layouts.UserAccount.vendorPublicDetail')
+@include('layouts.UserAccount.userPublicDetail')
 <footer>
     @include('layouts.Footer.footer')
 </footer>
