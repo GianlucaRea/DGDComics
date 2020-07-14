@@ -63,6 +63,7 @@
 @endif
 @php($seller = \App\Http\Controllers\ComicController::getSeller($comic->id))
 @if(\App\Http\Controllers\ReviewController::isComicBought($comic->id, $seller->id))
+@if(!(\App\Http\Controllers\ReviewController::isAlreadyWrited($comic->id)))
 <div class="product-info-area" style="margin-left: 20%">
     <div class="tab-content border-0">
         <div class="mt-30"></div>
@@ -153,17 +154,22 @@
     </div>
 </div>
 @endif
+@endif
+
+
 
 <div class="product-info-area" style="margin-left: 20%">
     <div class="tab-pane fade show active"  id="review">
         <div class="valu">
             <div class="row">
                 <div class="ml-3"></div>
-                <div class="col-lg-4">
+                <div class="col-lg-12">
                     @if($reviews->count() > 0)
-                        <h2>Recensioni</h2>
+                        <h2>Recensioni*</h2>
                     @elseif($reviews->count() <= 0)
                         <h2>Non ci sono Recensioni</h2>
+                        <h5>a quanto pare questo prodotto non è stato ancora recensito. Acquistalo per primo e scrivi una recensione!</h5>
+                        <p><b>N.B.:</b> Per poter scrivere una recensione si deve prima acquistare il fumetto ed aspettare che sia stato consegnato. Può essere scritta una sola recensione per fumetto </p>
                     @endif
                 </div>
             </div>
@@ -229,5 +235,6 @@
                 <div class="mb-5"></div>
             @endforeach
         </div>
+        <p><b style="font-size: 20px;">*</b> Per poter scrivere una recensione si deve prima acquistare il fumetto ed aspettare che sia stato consegnato. Può essere scritta una sola recensione per fumetto </p>
     </div>
 </div>

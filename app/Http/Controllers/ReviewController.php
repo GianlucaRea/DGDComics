@@ -186,6 +186,18 @@ class ReviewController extends Controller
         return false;
     }
 
+    public static function isAlreadyWrited($comic_id){
+        if(Auth::user()) {
+            $user_id = Auth::user()->id;
+            if(DB::table('reviews')->where('comic_id', '=', $comic_id)->where('user_id', '=', $user_id)->count() > 0){
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
     public static function getAllRecievedReview($user_id){
         return DB::table('reviews')->join('comics', 'comics.id', '=', 'reviews.comic_id')->where('comics.user_id', '=', $user_id)->select('reviews.*')->paginate(5);
     }
