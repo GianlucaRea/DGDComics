@@ -39,7 +39,6 @@ Route::get('/vendor_detail/{id}' , 'RankingController@vendorRanking')->name('ven
 Route::get('/user_detail/{id}' , 'UserController@userInfo')->name('userpublic');
 
 
-
 Route::get('/shoplist', 'ComicController@shoplistBase');
 Route::get('/shoplist/type/{type}','ComicController@shoplistType');
 Route::get('/shoplist/genre/{name_genre}','ComicController@shoplistGenre')->name('genreshoplist');

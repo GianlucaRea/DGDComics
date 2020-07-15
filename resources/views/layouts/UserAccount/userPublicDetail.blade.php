@@ -114,5 +114,6 @@
             </div>
             <div class="mb-5"></div>
         @endforeach
+        {{ $reviews->links() }}
     </div>
 </div>

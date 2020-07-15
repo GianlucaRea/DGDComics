@@ -28,6 +28,19 @@
                     </ul>
                 </div>
             </div>
+            {{--<div class="col-lg-6">
+                <!-- googleMap-area-start -->
+                <div class="map-area mb-70">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div id="googleMap"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- googleMap-end -->
+            </div>--}}
         </div>
     </div>
 </div>

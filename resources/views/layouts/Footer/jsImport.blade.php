@@ -27,5 +27,31 @@
 <script src="{{ asset('js/plugins.js') }}"></script>
 <!-- main js -->
 <script src="{{ asset('js/main.js') }}"></script>
+<!-- googleapis -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMlLa3XrAmtemtf97Z2YpXwPLlimRK7Pk" ></script>
+<script>
+    /* Google Map js */
+    function initialize() {
+        var mapOptions = {
+            zoom: 15,
+            scrollwheel: false,
+            center: new google.maps.LatLng(42.3690279, 13.34978865)
+        };
+
+        var map = new google.maps.Map(document.getElementById('googleMap'),
+            mapOptions);
+
+        var marker = new google.maps.Marker({
+            position: map.getCenter(),
+            animation:google.maps.Animation.BOUNCE,
+            icon: 'img/map.png',
+            map: map
+        });
+
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+
 
 

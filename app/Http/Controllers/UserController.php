@@ -215,7 +215,7 @@ class UserController extends Controller
     {
         if(Auth::user()) {
             $user = \Illuminate\Support\Facades\Auth::user();
-            $notifications = Notification::where('user_id', '=', $user->id)->paginate(6);
+            $notifications = Notification::where('user_id', '=', $user->id)->orderBy('date', 'desc')->paginate(6);
             $orders = Order::where('user_id', '=', $user->id)->paginate(6);
             $list = Wishlist::where('user_id', '=', $user->id)->paginate(6);
             $paymentMethods = PaymentMethod::where('user_id', '=', $user->id)->paginate(6);
@@ -243,7 +243,7 @@ class UserController extends Controller
     {
         if(Auth::user()) {
             $user = \Illuminate\Support\Facades\Auth::user();
-            $notifications = Notification::where('user_id', '=', $user->id)->paginate(6);
+            $notifications = Notification::where('user_id', '=', $user->id)->orderBy('date', 'desc')->paginate(6);
             $list = Wishlist::where('user_id', '=', $user->id)->paginate(6);
             $paymentMethods = PaymentMethod::where('user_id', '=', $user->id)->paginate(6);
             $shippingAddresses = ShippingAddress::where('user_id', '=', $user->id)->paginate(6);
@@ -270,7 +270,7 @@ class UserController extends Controller
     {
         if(Auth::user()) {
             $user = \Illuminate\Support\Facades\Auth::user();
-            $notifications = Notification::where('user_id', '=', $user->id)->paginate(6);
+            $notifications = Notification::where('user_id', '=', $user->id)->orderBy('date', 'desc')->paginate(6);
             $orders = Order::where('user_id', '=', $user->id)->paginate(6);
             $paymentMethods = PaymentMethod::where('user_id', '=', $user->id)->paginate(6);
             $shippingAddresses = ShippingAddress::where('user_id', '=', $user->id)->paginate(6);
@@ -297,7 +297,7 @@ class UserController extends Controller
     {
         if(Auth::user()) {
             $user = \Illuminate\Support\Facades\Auth::user();
-            $notifications = Notification::where('user_id', '=', $user->id)->paginate(6);
+            $notifications = Notification::where('user_id', '=', $user->id)->orderBy('date', 'desc')->paginate(6);
             $orders = Order::where('user_id', '=', $user->id)->paginate(6);
             $list = Wishlist::where('user_id', '=', $user->id)->paginate(6);
             $paymentMethods = PaymentMethod::where('user_id', '=', $user->id)->paginate(6);
@@ -324,7 +324,7 @@ class UserController extends Controller
     {
         if(Auth::user()) {
             $user = \Illuminate\Support\Facades\Auth::user();
-            $notifications = Notification::where('user_id', '=', $user->id)->paginate(6);
+            $notifications = Notification::where('user_id', '=', $user->id)->orderBy('date', 'desc')->paginate(6);
             $orders = Order::where('user_id', '=', $user->id)->paginate(6);
             $list = Wishlist::where('user_id', '=', $user->id)->paginate(6);
             $paymentMethods = PaymentMethod::where('user_id', '=', $user->id)->paginate(6);
