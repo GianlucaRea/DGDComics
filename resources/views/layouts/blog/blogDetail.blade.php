@@ -78,7 +78,12 @@
                                             <div class="single-comm-top">
                                                 <div class="row">
                                                     <div class="col-lg-4">
-                                                    <h5>{{ $userComment->username }}</h5>
+                                                        @php($isVendor = \App\Http\Controllers\GroupController::isVendor($userComment->id))
+                                                        @if($isVendor)
+                                                            <a href="{{url('vendor_detail/'.$userComment->id) }}"><h5>{{$userComment->username}}</h5></a>
+                                                        @else
+                                                            <a href="{{url('user_detail/'.$userComment->id) }}"><h5>{{$userComment->username}}</h5></a>
+                                                        @endif
                                                     </div>
                                                     <div class="col-lg-7"></div>
                                                     @if(\Illuminate\Support\Facades\Auth::user()!=null)

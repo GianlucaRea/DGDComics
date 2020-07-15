@@ -36,6 +36,7 @@ Route::patch('/updatereview/{id}', 'ReviewController@updateReview')->name('updat
 Route::post('/submitReview/{id}','ReviewController@add')->name('submitReview');
 
 Route::get('/vendor_detail/{id}' , 'RankingController@vendorRanking')->name('vendorpublic');
+Route::get('/vendor_detail_written_reviews/{id}' , 'RankingController@vendorRanking')->name('reviewscrittevendor');
 Route::get('/user_detail/{id}' , 'UserController@userInfo')->name('userpublic');
 
 

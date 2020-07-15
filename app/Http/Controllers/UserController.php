@@ -360,8 +360,10 @@ class UserController extends Controller
 
     public static function userInfo($id) {
         $user = User::where('id','=',$id)->first();
-        return view('/userinfo')
-            ->with(compact('user'));
+        $reviews =  DB::table('reviews')->where('user_id', '=', $id)->paginate(3);
+        return view('/userInfo')
+            ->with(compact('user'))
+            ->with(compact('reviews'));
     }
 
 

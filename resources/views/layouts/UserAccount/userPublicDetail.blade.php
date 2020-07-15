@@ -53,7 +53,6 @@
         <div class="row">
         <h2>Recensioni Scritte</h2>
         </div>
-        @php($reviews=\App\Http\Controllers\ReviewController::getAllWritedReview($user->id))
         @if($reviews->count() <= 0)
         <div class="row">
             <div class="col-lg-6">
