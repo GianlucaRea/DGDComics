@@ -11,9 +11,11 @@
     'name' =>'In lavorazione']
     )
 
+@include('layouts.Header.breadcrumbsArea')
+
 <div class="col-lg-12">
-    <div class="section-title bt text-center pt-50 mb-50">
-        <h2>Under Construction</h2>
+    <div class="section-title text-center pt-50 mb-50">
+        <h2>In lavorazione</h2>
         <p>Questa pagina è in mantenimento, ci scusiamo, <br /> Per avere informazioni contattaci.</p>
 
             <i class="fa fa-mobile"></i>
