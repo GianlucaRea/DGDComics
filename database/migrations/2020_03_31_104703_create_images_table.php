@@ -49,6 +49,10 @@ class CreateImagesTable extends Migration
             ['comic_id' => '22' , 'image_name' => 'TWD4.jpg' , 'cover' => '1', 'imageNumber' => '0'],
             ['comic_id' => '23' , 'image_name' => 'TWD5.jpg' , 'cover' => '1', 'imageNumber' => '0'],
             ['comic_id' => '24' , 'image_name' => 'TWD6.jpg' , 'cover' => '1', 'imageNumber' => '0'],
+            ['comic_id' => '25' , 'image_name' => 'SIR.jpg' , 'cover' => '1', 'imageNumber' => '0'],
+            ['comic_id' => '25' , 'image_name' => 'SIR1.jpg' , 'cover' => '0', 'imageNumber' => '1'],
+            ['comic_id' => '25' , 'image_name' => 'SIR2.jpg' , 'cover' => '0', 'imageNumber' => '2'],
+            ['comic_id' => '25' , 'image_name' => 'SIR3.jpg' , 'cover' => '0', 'imageNumber' => '3'],
         ]); }
 
     /**
