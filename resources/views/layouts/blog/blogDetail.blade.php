@@ -42,8 +42,16 @@
 
                         <div class="product-attribute">
                                 <p>
+                                    <b>TAG:</b>
+                                    @php($numberOfTag= $article->tag->count())
+                                    @php($counter = 1)
                                     @foreach($article->tag as $tags)
-                                    <a href="{{route('taglist',['tag_name' => $tags->tag_name])}}"> {{$tags->tag_name}} </a>
+                                        @if($counter < $numberOfTag)
+                                            @php($counter++)
+                                            <a href="{{route('taglist',['tag_name' => $tags->tag_name])}}"> {{$tags->tag_name}}</a>,
+                                        @else
+                                            <a href="{{route('taglist',['tag_name' => $tags->tag_name])}}"> {{$tags->tag_name}}</a>.
+                                        @endif
                                     @endforeach
                                 </p>
                         </div>

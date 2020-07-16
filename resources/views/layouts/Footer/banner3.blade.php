@@ -1,7 +1,7 @@
 <!-- banner-area-start -->
 <div class="mt-3"></div>
 <div class="banner-area banner-res-large">
-    <div class="container pt-5 pb-5" style="border-bottom: lightgray 1px solid; border-top: lightgray 1px solid; background-color: #fff3cd">
+    <div class="container pt-5 pb-5" style="border-bottom: #e5e5e5 1px solid; border-top: #e5e5e5 1px solid; background-color: #fffeee">
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                 <div class="single-banner mb-30" >

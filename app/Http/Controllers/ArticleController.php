@@ -330,7 +330,7 @@ class ArticleController extends Controller
 
             }
 
-            if($request->has('Original Character')){
+            if($request->has('Original_Character')){
                 $tag_id = DB::table('tags')->where('tag_name', '=', 'Original Character')->first();
                 $tagA = new Tag();
                 $tagA->article_id = $article_id->id;
@@ -629,7 +629,7 @@ class ArticleController extends Controller
                 }
             }
 
-            if($request->has('Original Character')){
+            if($request->has('Original_Character')){
                 if(!self::isTagOfArticle($id, 14)){
                     $tagA = new Tag();
                     $tagA->article_id = $id;

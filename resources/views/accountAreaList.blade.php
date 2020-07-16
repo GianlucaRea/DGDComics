@@ -12,7 +12,6 @@
     )
 @include('layouts.Header.breadcrumbsArea', $page)
 @include('layouts.UserAccount.accountDetailList')
-@include('layouts.Footer.social')
 <footer>
     @include('layouts.Footer.footer')
 </footer>
