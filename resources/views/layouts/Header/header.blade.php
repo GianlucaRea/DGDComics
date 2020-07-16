@@ -417,8 +417,8 @@
                     @endif
                 @endauth
             @endif--}}
-            <div class="col-lg-5">
-                <div id="search" class="header-search">
+            <div class="col-lg-5-5">
+                <div id="search" class="header-search" style="width: 100%">
                     <ul>
                         <li>
                             <form action="{{ route('searchroute') }}" >

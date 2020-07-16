@@ -12,10 +12,9 @@
             @include('layouts.Homepage.sale')
 
             @include('layouts.Homepage.consigliati')
+        @include('layouts.Footer.banner3')
             @include('layouts.Homepage.productArea')
-            @include('layouts.Homepage.productArea2')
             @include('layouts.Homepage.recentPostArea')
-            @include('layouts.Footer.banner2')
             @include('layouts.Footer.social')
             <footer>
                 @include('layouts.Footer.footer')
