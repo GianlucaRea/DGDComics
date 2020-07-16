@@ -75,7 +75,25 @@ class CreateImagesTable extends Migration
             ['comic_id' => '31' , 'image_name' => 'AQM1.jpg' , 'cover' => '0', 'imageNumber' => '1'],
             ['comic_id' => '31' , 'image_name' => 'AQM2.jpg' , 'cover' => '0', 'imageNumber' => '2'],
             ['comic_id' => '31' , 'image_name' => 'AQM3.jpg' , 'cover' => '0', 'imageNumber' => '3'],
-
+            ['comic_id' => '32' , 'image_name' => 'OPM0.jpg' , 'cover' => '1', 'imageNumber' => '0'],
+            ['comic_id' => '32' , 'image_name' => 'OPM1.jpg' , 'cover' => '0', 'imageNumber' => '1'],
+            ['comic_id' => '32' , 'image_name' => 'OPM2.jpg' , 'cover' => '0', 'imageNumber' => '2'],
+            ['comic_id' => '33' , 'image_name' => 'kj0.jpg' , 'cover' => '1', 'imageNumber' => '0'],
+            ['comic_id' => '33' , 'image_name' => 'kj2.jpg' , 'cover' => '0', 'imageNumber' => '1'],
+            ['comic_id' => '34' , 'image_name' => 'TKGH0.jpg' , 'cover' => '1', 'imageNumber' => '0'],
+            ['comic_id' => '34' , 'image_name' => 'TKGH1.jpg' , 'cover' => '0', 'imageNumber' => '1'],
+            ['comic_id' => '34' , 'image_name' => 'TKGH2.jpg' , 'cover' => '0', 'imageNumber' => '2'],
+            ['comic_id' => '34' , 'image_name' => 'TKGH3.jpg' , 'cover' => '0', 'imageNumber' => '3'],
+            ['comic_id' => '35' , 'image_name' => 'TKGHb0.jpg' , 'cover' => '1', 'imageNumber' => '0'],
+            ['comic_id' => '35' , 'image_name' => 'TKGHb1.jpg' , 'cover' => '0', 'imageNumber' => '1'],
+            ['comic_id' => '35' , 'image_name' => 'TKGHb2.jpg' , 'cover' => '0', 'imageNumber' => '2'],
+            ['comic_id' => '35' , 'image_name' => 'TKGHb3.jpg' , 'cover' => '0', 'imageNumber' => '3'],
+            ['comic_id' => '36' , 'image_name' => 'Par0.jpg' , 'cover' => '1', 'imageNumber' => '0'],
+            ['comic_id' => '36' , 'image_name' => 'Par1.jpg' , 'cover' => '0', 'imageNumber' => '1'],
+            ['comic_id' => '37' , 'image_name' => 'ladyoscar1.jpg' , 'cover' => '1', 'imageNumber' => '0'],
+            ['comic_id' => '37' , 'image_name' => 'ladyoscar2.jpg' , 'cover' => '0', 'imageNumber' => '1'],
+            ['comic_id' => '38' , 'image_name' => 'BNNF0.jpg' , 'cover' => '1', 'imageNumber' => '0'],
+            ['comic_id' => '38' , 'image_name' => 'BNNF1.jpg' , 'cover' => '0', 'imageNumber' => '1'],
         ]); }
 
     /**

@@ -25,6 +25,12 @@ class CreateAuthorsTable extends Migration
             ['name_author' => 'Malcolm Wheeler'],
             ['name_author' => 'Michele Rech'],
             ['name_author' => 'Robert Kirkman'],
+            ['name_author' => 'One'],
+            ['name_author' => 'Hitoshi Iwaaki'],
+            ['name_author' => 'Sui Ishida'],
+            ['name_author' => 'Natsume Ono'],
+            ['name_author' => 'Riyoko Ikeda'],
+            ['name_author' => 'Akimi Yoshida'],
         ]);
     }
 

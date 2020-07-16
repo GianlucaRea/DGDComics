@@ -67,7 +67,21 @@ class CreateComicGenreTable extends Migration
             ['comic_id' => '29' , 'genre_id' => '8'],
             ['comic_id' => '30' , 'genre_id' => '8'],
             ['comic_id' => '31' , 'genre_id' => '8'],
-
+            ['comic_id' => '32' , 'genre_id' => '8'],
+            ['comic_id' => '32' , 'genre_id' => '4'],
+            ['comic_id' => '32' , 'genre_id' => '2'],
+            ['comic_id' => '33' , 'genre_id' => '2'],
+            ['comic_id' => '33' , 'genre_id' => '9'],
+            ['comic_id' => '34' , 'genre_id' => '9'],
+            ['comic_id' => '34' , 'genre_id' => '10'],
+            ['comic_id' => '34' , 'genre_id' => '2'],
+            ['comic_id' => '35' , 'genre_id' => '9'],
+            ['comic_id' => '35' , 'genre_id' => '10'],
+            ['comic_id' => '35' , 'genre_id' => '2'],
+            ['comic_id' => '36' , 'genre_id' => '7'],
+            ['comic_id' => '37' , 'genre_id' => '7'],
+            ['comic_id' => '38' , 'genre_id' => '10'],
+            ['comic_id' => '38' , 'genre_id' => '11'],
 
         ]);
     }
