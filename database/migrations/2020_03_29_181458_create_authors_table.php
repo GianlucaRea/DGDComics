@@ -31,6 +31,9 @@ class CreateAuthorsTable extends Migration
             ['name_author' => 'Natsume Ono'],
             ['name_author' => 'Riyoko Ikeda'],
             ['name_author' => 'Akimi Yoshida'],
+            ['name_author' => 'Leo Ortolani'],
+            ['name_author' => 'Mirka Andolfo'],
+            ['name_author' => 'Mattia Labadessa'],
         ]);
     }
 
