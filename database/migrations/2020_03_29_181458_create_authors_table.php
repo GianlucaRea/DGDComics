@@ -34,6 +34,10 @@ class CreateAuthorsTable extends Migration
             ['name_author' => 'Leo Ortolani'],
             ['name_author' => 'Mirka Andolfo'],
             ['name_author' => 'Mattia Labadessa'],
+            ['name_author' => 'Alan Moore'],
+            ['name_author' => 'James O\'Barr'],
+            ['name_author' => 'Gianluigi Bonelli'],
+            ['name_author' => 'Toni Bruno'],
         ]);
     }
 
