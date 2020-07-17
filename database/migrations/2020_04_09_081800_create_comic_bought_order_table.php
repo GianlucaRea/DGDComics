@@ -18,6 +18,17 @@ class CreateComicBoughtOrderTable extends Migration
             $table->foreignId('comic_bought_id')->constrained()->cascadeOnDelete();
             $table->foreignId('order_id')->constrained()->cascadeOnDelete();
         });
+        DB::table('comic_bought_order')->insert([
+            ['comic_bought_id' => '1', 'order_id' => '1'],
+            ['comic_bought_id' => '2', 'order_id' => '1'],
+            ['comic_bought_id' => '3', 'order_id' => '1'],
+            ['comic_bought_id' => '4', 'order_id' => '2'],
+            ['comic_bought_id' => '5', 'order_id' => '2'],
+            ['comic_bought_id' => '6', 'order_id' => '2'],
+            ['comic_bought_id' => '7', 'order_id' => '2'],
+            ['comic_bought_id' => '8', 'order_id' => '3'],
+            ['comic_bought_id' => '9', 'order_id' => '3'],
+        ]);
     }
 
     /**

@@ -21,6 +21,12 @@ class CreateOrdersTable extends Migration
             $table->double('total');
             $table->timestamp('date')->default(\DB::raw('CURRENT_TIMESTAMP'));
         });
+        DB::table('orders')->insert([
+            ['user_id' => '3', 'payment_method_id' => '1', 'shipping_address_id' => '1', 'total'=>'55.1'],
+            ['user_id' => '3', 'payment_method_id' => '2', 'shipping_address_id' => '2', 'total'=>'35.65'],
+            ['user_id' => '3', 'payment_method_id' => '1', 'shipping_address_id' => '1', 'total'=>'20.31'],
+            ['user_id' => '3', 'payment_method_id' => '2', 'shipping_address_id' => '2', 'total'=>'26.6'],
+        ]);
     }
 
     /**

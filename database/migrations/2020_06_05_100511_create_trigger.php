@@ -60,14 +60,16 @@ class CreateTrigger extends Migration
         ');
 
         DB::table('reviews')->insert([
-            ['comic_id' => '1' , 'user_id' => '4' , 'review_title' => 'schifoso' , 'review_text' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'stars' => '1'],
-            ['comic_id' => '1' , 'user_id' => '3' , 'review_title' => 'Bello' , 'review_text' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'stars' => '5'],
-            ['comic_id' => '2' , 'user_id' => '4' , 'review_title' => 'Bello' , 'review_text' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'stars' => '5'],
-            ['comic_id' => '2' , 'user_id' => '3' , 'review_title' => 'Bello' , 'review_text' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'stars' => '4'],
-            ['comic_id' => '3' , 'user_id' => '4' , 'review_title' => 'Bello' , 'review_text' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'stars' => '4'],
-            ['comic_id' => '4' , 'user_id' => '3' , 'review_title' => 'meh' , 'review_text' => 'Just a description, this is a try, so sorry but I do not make a serious description ' , 'stars' => '3'],
+            ['comic_id' => '26' , 'user_id' => '3' , 'review_title' => 'Il mio amato Peter Parker' , 'review_text' => 'Il miglior spiderman che abbia mai letto! Super Consigliato' , 'stars' => '5'],
+            ['comic_id' => '28' , 'user_id' => '3'  , 'review_title' => 'Batman Alla riscossa' , 'review_text' => 'Un batman ritrovato, non nuovo ma ritrovato , finalmente la dc torna alle origini' , 'stars' => '4 '],
+            ['comic_id' => '34' , 'user_id' => '3'  , 'review_title' => 'Mi aspettavo di più' , 'review_text' => 'Vista la sua fama pensavo ad un manga più avvincente, ma non adoto gli horror' , 'stars' => '2'],
+            ['comic_id' => '13' , 'user_id' => '3'  , 'review_title' => 'Il gigante verde spento' , 'review_text' => 'Un hulk troppo stilizzato che non rispecchia le origini del personaggio' , 'stars' => '3'],
+            ['comic_id' => '14' , 'user_id' => '3'  , 'review_title' => 'Thor martella di nuovo' , 'review_text' => 'Il figlio di Odino è incredibile in questo fumetto , strepitoso. 5 stelle super meritate' , 'stars' => '5'],
+            ['comic_id' => '2' , 'user_id' => '3'  , 'review_title' => 'Tutti vorrebbero essere Stark' , 'review_text' => 'Il fumetto originale che parla della nascita di Iron Man , strepitoso da leggere con gli acdc in sottofondo' , 'stars' => '5'],
+            ['comic_id' => '25' , 'user_id' => '3'  , 'review_title' => 'Un Iron man mai visto , in peggio ' , 'review_text' => 'In questo fumetto Tony Stark è diventato troppo potente, talmente potente da essere il cattivo.' , 'stars' => '2'],
+            ['comic_id' => '3' , 'user_id' => '3'  , 'review_title' => 'Paperino è il mio alter ego nei fumetti' , 'review_text' => 'Sempre divertente un fumetto per tornare fanciulli e rillasarsi un po' , 'stars' => '5'],
+            ['comic_id' => '16' , 'user_id' => '3'  , 'review_title' => 'Topolino Happy Birthday' , 'review_text' => 'Una super collection per celebrare il compleanno di topolino. Molto carino , consigliato!!' , 'stars' => '5'],
         ]);
-
     }
 
     /**

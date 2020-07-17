@@ -23,6 +23,7 @@ class CreateReviewsTable extends Migration
             $table->timestamp('review_date');
         });
 
+
     }
 
     /**
