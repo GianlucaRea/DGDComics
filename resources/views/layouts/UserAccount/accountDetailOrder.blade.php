@@ -172,6 +172,8 @@
                                                 </div>
                                                 <div class="mt-3"></div>
                                                 <div class="myaccount-table table-responsive text-center">
+                                                    {{$orders->links()}}
+                                                    <div class="mb-3"></div>
                                                     <table class="table table-bordered">
                                                         <thead class="thead-light">
                                                         <tr>
@@ -182,8 +184,7 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody>
-                                                        @php($collectOrder = collect())
-                                                        {{$orders->links()}}
+                                                        {{--@php($collectOrder = collect())
                                                         @foreach($orders as $order)
                                                             @if($collectOrder->isEmpty())
                                                                 @php($collectOrder->push($order->id))
@@ -204,6 +205,14 @@
                                                                     </tr>
                                                                 @endif
                                                             @endif
+                                                        @endforeach--}}
+                                                        @foreach($orders as $order)
+                                                            <tr>
+                                                                <td>{{ $order->order_id }}</td>
+                                                                <td>{{ substr($order->date, 0,10) }}</td>
+                                                                <td>€ {{ $order->total }}</td>
+                                                                <td><a href="{{ route('orderDetail', ['id' => $order->order_id]) }}" class="btn btn-sqr">Dettagli</a></td>
+                                                            </tr>
                                                         @endforeach
                                                         </tbody>
                                                     </table>

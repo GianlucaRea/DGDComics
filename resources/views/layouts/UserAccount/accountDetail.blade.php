@@ -71,6 +71,8 @@
                                                 </div>
                                             @else
                                                 <div class="myaccount-table table-responsive text-center">
+                                                    {{$notifications->links()}}
+                                                    <div class="mt-3"></div>
                                                     <table class="table table-bordered">
                                                         <thead class="thead-light">
                                                         <tr>
@@ -81,7 +83,6 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody>
-                                                        {{$notifications->links()}}
                                                         @foreach($notifications as $notification)
                                                             <tr>
                                                                 <td>{{ substr($notification->date, 0, 16) }}</td>
@@ -152,6 +153,8 @@
                                                 </div>
                                                 <div class="mt-3"></div>
                                                 <div class="myaccount-table table-responsive text-center">
+                                                    {{$orders->links()}}
+                                                    <div class="mb-3"></div>
                                                     <table class="table table-bordered">
                                                         <thead class="thead-light">
                                                         <tr>
@@ -162,7 +165,6 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody>
-                                                        {{$orders->links()}}
                                                         @foreach($orders as $order)
                                                             <tr>
                                                                 <td>{{ $order->id }}</td>
@@ -575,7 +577,6 @@
                                                     </div>
                                                     <div class="mt-2"></div>
                                                     <div class="myaccount-table table-responsive text-center">
-                                                        @php($orders_of_vendor = \App\Http\Controllers\OrderController::getAllOrdersOfVendor($user->id))
                                                         {{$orders_of_vendor->links()}}
                                                         <div class="mt-3"></div>
                                                         <table class="table table-bordered">
@@ -592,7 +593,7 @@
                                                             @foreach($orders_of_vendor as $order_of_vendor)
                                                                 {{--@php($bool = true)
                                                                 @if($collect2->isEmpty())
-                                                                    @php($collect2->push($order_of_vendor->order_id))--}}
+                                                                    @php($collect2->push($order_of_vendor->order_id))--}}  {{--  TUTTO QUESTO CODICE COMMENTATO POTREBBE ESSERE ELIMINATO, MA LO TENIAMO, NON SI SA MAI--}}
                                                                 <tr>
                                                                     <td>{{ $order_of_vendor->order_id }}</td>
                                                                     <td>{{ substr($order_of_vendor->date, 0,10) }}</td>

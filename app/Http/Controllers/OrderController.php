@@ -223,16 +223,32 @@ class OrderController extends Controller
         return DB::table('orders')->join('comic_bought_order', 'orders.id', '=', 'comic_bought_order.order_id')->join('comic_boughts', 'comic_bought_order.comic_bought_id', '=', 'comic_boughts.id')->join('comics', 'comic_boughts.comic_id', '=', 'comics.id')->where('comics.user_id', '=', $id)->paginate(6);
     }
 
+    public static function getAllOrdersOfVendor2($id){
+        return DB::table('orders')->join('comic_bought_order', 'orders.id', '=', 'comic_bought_order.order_id')->join('comic_boughts', 'comic_bought_order.comic_bought_id', '=', 'comic_boughts.id')->join('comics', 'comic_boughts.comic_id', '=', 'comics.id')->where('comics.user_id', '=', $id)->select(['comic_bought_order.order_id', 'orders.date'])->groupBy('comic_bought_order.order_id', 'orders.date')->paginate(6);
+    }
+
     public function orderSearchUser(Request $request){
         $search = $request->input('search');
-        $orders = DB::table('orders')->join('comic_bought_order', 'orders.id', '=', 'comic_bought_order.order_id')->join('comic_boughts', 'comic_bought_order.comic_bought_id', '=', 'comic_boughts.id')->join('comics', 'comic_boughts.comic_id', '=', 'comics.id')->join('shipping_addresses', 'orders.shipping_address_id', '=', 'shipping_addresses.id')->join('users', 'comics.user_id', '=', 'users.id')->where('comics.comic_name','LIKE','%'.$search.'%')->orWhere('users.username','LIKE','%'.$search.'%')->orWhere('shipping_addresses.via','LIKE','%'.$search.'%')->orWhere('shipping_addresses.città','LIKE','%'.$search.'%')->orWhere('shipping_addresses.post_code','LIKE','%'.$search.'%')->select('orders.*')->paginate(6);
+        $id = Auth::user()->id;
+        $orders = DB::table('orders')
+            ->join('comic_bought_order', 'orders.id', '=', 'comic_bought_order.order_id')
+            ->join('comic_boughts', 'comic_bought_order.comic_bought_id', '=', 'comic_boughts.id')
+            ->join('comics', 'comic_boughts.comic_id', '=', 'comics.id')
+            ->join('shipping_addresses', 'orders.shipping_address_id', '=', 'shipping_addresses.id')
+            ->join('users', 'comics.user_id', '=', 'users.id')
+            ->where(function($likes) use ($search){
+            $likes->where('comics.comic_name', '=', '%'.$search.'%')
+                ->orWhere('users.username','LIKE','%'.$search.'%')->orWhere('shipping_addresses.via','LIKE','%'.$search.'%')
+                ->orWhere('shipping_addresses.città','LIKE','%'.$search.'%')
+                ->orWhere('shipping_addresses.post_code','LIKE','%'.$search.'%');
+        })->where('orders.user_id', '=', $id)->select(['comic_bought_order.order_id', 'orders.date', 'orders.total'])->groupBy('comic_bought_order.order_id', 'orders.date', 'orders.total')->paginate(6);
         return UserController::dashboardOrder($orders);
     }
 
     public function orderVendorSearchUser(Request $request){
         $search = $request->input('search');
         $id = Auth::user()->id;
-        $orders_of_vendor = DB::table('orders')->join('comic_bought_order', 'orders.id', '=', 'comic_bought_order.order_id')->join('comic_boughts', 'comic_bought_order.comic_bought_id', '=', 'comic_boughts.id')->join('comics', 'comic_boughts.comic_id', '=', 'comics.id')->join('shipping_addresses', 'orders.shipping_address_id', '=', 'shipping_addresses.id')->join('users', 'orders.user_id', '=', 'users.id')->where('comics.comic_name','LIKE','%'.$search.'%')->orWhere('users.username','LIKE','%'.$search.'%')->orWhere('shipping_addresses.via','LIKE','%'.$search.'%')->orWhere('shipping_addresses.città','LIKE','%'.$search.'%')->orWhere('shipping_addresses.post_code','LIKE','%'.$search.'%')->select('orders.*')->where('comics.user_id', '=', $id)->paginate(6);
+        $orders_of_vendor = DB::table('orders')->join('comic_bought_order', 'orders.id', '=', 'comic_bought_order.order_id')->join('comic_boughts', 'comic_bought_order.comic_bought_id', '=', 'comic_boughts.id')->join('comics', 'comic_boughts.comic_id', '=', 'comics.id')->join('shipping_addresses', 'orders.shipping_address_id', '=', 'shipping_addresses.id')->join('users', 'orders.user_id', '=', 'users.id')->where('comics.comic_name','LIKE','%'.$search.'%')->orWhere('users.username','LIKE','%'.$search.'%')->orWhere('shipping_addresses.via','LIKE','%'.$search.'%')->orWhere('shipping_addresses.città','LIKE','%'.$search.'%')->orWhere('shipping_addresses.post_code','LIKE','%'.$search.'%')->where('comics.user_id', '=', $id)->select(['comic_bought_order.order_id', 'orders.date'])->groupBy('comic_bought_order.order_id', 'orders.date')->paginate(6);
         return UserController::dashboardOrderVendor($orders_of_vendor);
     }
 

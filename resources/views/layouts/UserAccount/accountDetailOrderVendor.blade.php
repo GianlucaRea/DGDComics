@@ -630,6 +630,8 @@
                                                     </div>
                                                     <div class="mt-3"></div>
                                                     <div class="myaccount-table table-responsive text-center">
+                                                        {{$orders_of_vendor->links()}}
+                                                        <div class="mt-3"></div>
                                                         <table class="table table-bordered">
                                                             <thead class="thead-light">
                                                             <tr>
@@ -639,14 +641,12 @@
                                                                 <th></th>
                                                             </tr>
                                                             </thead>
-                                                            @php($orders_of_vendor = \App\Http\Controllers\OrderController::getAllOrdersOfVendor($user->id))
                                                             <tbody>
-                                                            {{$orders_of_vendor->links()}}
                                                             {{--@php($collect2 = collect())--}}
                                                             @foreach($orders_of_vendor as $order_of_vendor)
                                                                 {{--@php($bool = true)
                                                                 @if($collect2->isEmpty())
-                                                                    @php($collect2->push($order_of_vendor->order_id))--}}
+                                                                    @php($collect2->push($order_of_vendor->order_id))--}}{{--  TUTTO QUESTO CODICE COMMENTATO POTREBBE ESSERE ELIMINATO, MA LO TENIAMO, NON SI SA MAI--}}
                                                                     <tr>
                                                                         <td>{{ $order_of_vendor->order_id }}</td>
                                                                         <td>{{ substr($order_of_vendor->date, 0,10) }}</td>
