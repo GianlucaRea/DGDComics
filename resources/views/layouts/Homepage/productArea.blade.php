@@ -61,11 +61,11 @@
                                 </div>
                                 <div class="product-details text-center">
 
-                                    @if(strlen($comic->comic_name) < 17 )
+                                    @if(strlen($comic->comic_name) < 16 )
                                         <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $comic->comic_name }}</b></div>
                                     @else
-                                        @php($subcomic = substr($comic->comic_name, 0, 17))
-                                        <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $subcomic }}</b></div>
+                                        @php($subcomic = substr($comic->comic_name, 0, 16))
+                                        <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $subcomic }}...</b></div>
                                     @endif
 
                                     <div class="product-rating">
@@ -145,11 +145,11 @@
                             </div>
                             <div class="product-details text-center">
 
-                                @if(strlen($comic->comic_name) < 17 )
+                                @if(strlen($comic->comic_name) < 16 )
                                     <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $comic->comic_name }}</b></div>
                                 @else
-                                    @php($subcomic = substr($comic->comic_name, 0, 17))
-                                    <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $subcomic }}</b></div>
+                                    @php($subcomic = substr($comic->comic_name, 0, 16))
+                                    <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $subcomic }}...</b></div>
                                 @endif
 
                                 <div class="product-rating">
@@ -228,11 +228,11 @@
                             </div>
                             <div class="product-details text-center">
 
-                                @if(strlen($comic->comic_name) < 17 )
+                                @if(strlen($comic->comic_name) < 16 )
                                     <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $comic->comic_name }}</b></div>
                                 @else
-                                    @php($subcomic = substr($comic->comic_name, 0, 17))
-                                    <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $subcomic }}</b></div>
+                                    @php($subcomic = substr($comic->comic_name, 0, 16))
+                                    <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $subcomic }}...</b></div>
                                 @endif
 
                                 <div class="product-rating">
