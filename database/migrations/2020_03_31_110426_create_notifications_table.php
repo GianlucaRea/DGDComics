@@ -114,6 +114,14 @@ class CreateNotificationsTable extends Migration
             ['user_id' => '1' , 'notification_text' => 'un utente ha acquistato un tuo fumetto!' , 'state' => '1' , 'notification' => 'orderDetailVendor' , 'idLink' => '9'],
             ['user_id' => '8' , 'notification_text' => 'Ehy, un tuo fumetto è stato confermato' , 'state' => '1' , 'notification' => 'orderDetail' , 'idLink' => '9'],
             ['user_id' => '8' , 'notification_text' => 'Ehy, un tuo fumetto è stato spedito' , 'state' => '1' , 'notification' => 'orderDetail' , 'idLink' => '9'],
+
+            ['user_id' => '8' , 'notification_text' => 'Un tuo commento ha ricevuto una risposta' , 'state' => '1' , 'notification' => 'blogDetail' , 'idLink' => '1'],
+            ['user_id' => '6' , 'notification_text' => 'Un tuo commento ha ricevuto una risposta' , 'state' => '1' , 'notification' => 'blogDetail' , 'idLink' => '2'],
+            ['user_id' => '7' , 'notification_text' => 'Un tuo commento ha ricevuto una risposta' , 'state' => '1' , 'notification' => 'blogDetail' , 'idLink' => '2'],
+            ['user_id' => '6' , 'notification_text' => 'Un tuo commento ha ricevuto una risposta' , 'state' => '1' , 'notification' => 'blogDetail' , 'idLink' => '2'],
+            ['user_id' => '7' , 'notification_text' => 'Un tuo commento ha ricevuto una risposta' , 'state' => '1' , 'notification' => 'blogDetail' , 'idLink' => '2'],
+            ['user_id' => '8' , 'notification_text' => 'Un tuo commento ha ricevuto una risposta' , 'state' => '1' , 'notification' => 'blogDetail' , 'idLink' => '2'],
+
         ]);
     }
 
