@@ -96,7 +96,7 @@
                                                                     @endif
                                                                 </td>
                                                                 @if($notification->state == 1)
-                                                                    @if($notification->id == 0)
+                                                                    @if($notification->idLink == 0)
                                                                         <td>
                                                                             Letto
                                                                         </td>
@@ -108,7 +108,7 @@
                                                                             Letto
                                                                         </td>
                                                                         <td>
-                                                                            <a href="{{ route($notification->notification, ['id' => $notification->id])}}" class="btn btn-sqr">Dettagli</a>
+                                                                            <a href="{{ route($notification->notification, ['id' => $notification->idLink])}}" class="btn btn-sqr">Dettagli</a>
                                                                         </td>
                                                                     @endif
                                                                 @else
@@ -573,8 +573,11 @@
                                                             <a  href="javascript:;" onclick="parentNode.submit();"><i class="fa fa-search"></i></a>
                                                         </form>
                                                     </div>
-                                                    <div class="mt-3"></div>
+                                                    <div class="mt-2"></div>
                                                     <div class="myaccount-table table-responsive text-center">
+                                                        @php($orders_of_vendor = \App\Http\Controllers\OrderController::getAllOrdersOfVendor($user->id))
+                                                        {{$orders_of_vendor->links()}}
+                                                        <div class="mt-3"></div>
                                                         <table class="table table-bordered">
                                                             <thead class="thead-light">
                                                             <tr>
@@ -584,20 +587,18 @@
                                                                 <th></th>
                                                             </tr>
                                                             </thead>
-                                                            @php($orders_of_vendor = \App\Http\Controllers\OrderController::getAllOrdersOfVendor($user->id))
                                                             <tbody>
-                                                            {{$orders_of_vendor->links()}}
-                                                            @php($collect2 = collect())
+                                                            {{--@php($collect2 = collect())--}}
                                                             @foreach($orders_of_vendor as $order_of_vendor)
-                                                                @php($bool = true)
+                                                                {{--@php($bool = true)
                                                                 @if($collect2->isEmpty())
-                                                                    @php($collect2->push($order_of_vendor->order_id))
+                                                                    @php($collect2->push($order_of_vendor->order_id))--}}
                                                                 <tr>
                                                                     <td>{{ $order_of_vendor->order_id }}</td>
                                                                     <td>{{ substr($order_of_vendor->date, 0,10) }}</td>
                                                                     <td><a href="{{ route('orderDetailVendor', ['id' => $order_of_vendor->order_id]) }}" class="btn btn-sqr">Dettagli</a></td>
                                                                 </tr>
-                                                                @else
+                                                                {{--@else
                                                                     @if(!($collect2->contains($order_of_vendor->order_id)))
                                                                         @foreach($collect2->all() as $id_comic_of_order)
                                                                             @if($order_of_vendor->order_id == $id_comic_of_order)
@@ -613,7 +614,7 @@
                                                                         </tr>
                                                                             @endif
                                                                     @endif
-                                                                @endif
+                                                                @endif--}}
                                                             @endforeach
                                                             </tbody>
                                                         </table>

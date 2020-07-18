@@ -118,24 +118,26 @@ class OrderController extends Controller
     }
 
     public function submitOrder(Request $request){
-        if($request != null && $request->total > 0 && $request->paymentMethod != null && $request->shippingAddress != null){
-        $order = new Order();
-        $user =  \Illuminate\Support\Facades\Auth::user();
-        $order->user_id = $user->id;
-        $order->payment_method_id = $request->paymentMethod;
-        $order->shipping_adress_id = $request->shippingAddress;
-        $order->total = $request->total;
+        if($request != null && $request->total > 0 && $request->paymentMethod != null && $request->shippingAddress != null) {
+            $order = new Order();
+            $user = \Illuminate\Support\Facades\Auth::user();
+            $order->user_id = $user->id;
+            $order->payment_method_id = $request->paymentMethod;
+            $order->shipping_adress_id = $request->shippingAddress;
+            $order->total = $request->total;
 
-        $data1=array(
-            'user_id' => $order->user_id,
-            'payment_method_id' => $order->payment_method_id,
-            'shipping_address_id' => $order->shipping_adress_id,
-            'total' => $order->total,
-        );
+            $data1 = array(
+                'user_id' => $order->user_id,
+                'payment_method_id' => $order->payment_method_id,
+                'shipping_address_id' => $order->shipping_adress_id,
+                'total' => $order->total,
+            );
 
-        $order_id = Order::create($data1);
+            $sellers = collect();
 
-            foreach (session('cart') as $id => $details){
+            $order_id = Order::create($data1);
+
+            foreach (session('cart') as $id => $details) {
                 if ($details["user"] == $user->id) {
                     $comic = ComicController::getByID($details["comic_id"]);
                     $vendor = ComicController::getSeller($details["comic_id"]);
@@ -148,7 +150,8 @@ class OrderController extends Controller
                     $comicBought->price = $details['price'];
                     $comicBought->state = "ordinato";
 
-                    $data2=array(
+
+                    $data2 = array(
                         'comic_id' => $comicBought->comic_id,
                         'name' => $comicBought->name,
                         'vendor' => $comicBought->vendor,
@@ -158,26 +161,39 @@ class OrderController extends Controller
                     );
 
                     $comic_Bought_id = ComicBought::create($data2);
-                    $data3=array(
+
+                    if ($sellers->isEmpty()) {
+                        $sellers->push(ComicController::getSeller($comic_Bought_id->comic_id)->id);
+                    } else if (!($sellers->contains(ComicController::getSeller($comic_Bought_id->comic_id)->id))) {
+                        $sellers->push(ComicController::getSeller($comic_Bought_id->comic_id)->id);
+                    }
+
+                    $data3 = array(
                         'comic_bought_id' => $comic_Bought_id->id,
                         'order_id' => $order_id->id,
                     );
                     DB::table('comic_bought_order')->insert($data3);
 
-                    $data4=array(
-                        'user_id' => ComicController::getSeller($comic_Bought_id->comic_id)->id,
-                        'notification_text' => 'un utente ha acquistato un tuo fumetto!',
-                        'state' => '0',
-                        'notification' => 'orderDetailVendor',
-                        'idLink' => $order_id->id,
-                    );
-                    if(WishlistController::alreadyToList($details["comic_id"], $user->id)) {
+
+                    if (WishlistController::alreadyToList($details["comic_id"], $user->id)) {
                         WishlistController::removeToList($details["comic_id"]);
                     }
-
-                    DB::table('notifications')->insert($data4);
                 }
             }
+
+            foreach ($sellers->all() as $idOfSeller) {
+
+                $data4 = array(
+                    'user_id' => $idOfSeller,
+                    'notification_text' => 'un utente ha effettuato un ordine!',
+                    'state' => '0',
+                    'notification' => 'orderDetailVendor',
+                    'idLink' => $order_id->id,
+                );
+
+                DB::table('notifications')->insert($data4);
+            }
+
 
 
         ComicController::removeAllForOrder(); //svuotamento carrello

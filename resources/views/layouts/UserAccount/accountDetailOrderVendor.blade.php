@@ -642,17 +642,17 @@
                                                             @php($orders_of_vendor = \App\Http\Controllers\OrderController::getAllOrdersOfVendor($user->id))
                                                             <tbody>
                                                             {{$orders_of_vendor->links()}}
-                                                            @php($collect2 = collect())
+                                                            {{--@php($collect2 = collect())--}}
                                                             @foreach($orders_of_vendor as $order_of_vendor)
-                                                                @php($bool = true)
+                                                                {{--@php($bool = true)
                                                                 @if($collect2->isEmpty())
-                                                                    @php($collect2->push($order_of_vendor->order_id))
+                                                                    @php($collect2->push($order_of_vendor->order_id))--}}
                                                                     <tr>
                                                                         <td>{{ $order_of_vendor->order_id }}</td>
                                                                         <td>{{ substr($order_of_vendor->date, 0,10) }}</td>
                                                                         <td><a href="{{ route('orderDetailVendor', ['id' => $order_of_vendor->order_id]) }}" class="btn btn-sqr">Dettagli</a></td>
                                                                     </tr>
-                                                                @else
+                                                                {{--@else
                                                                     @if(!($collect2->contains($order_of_vendor->order_id)))
                                                                         @foreach($collect2->all() as $id_comic_of_order)
                                                                             @if($order_of_vendor->order_id == $id_comic_of_order)
@@ -668,7 +668,7 @@
                                                                             </tr>
                                                                         @endif
                                                                     @endif
-                                                                @endif
+                                                                @endif--}}
                                                             @endforeach
                                                             </tbody>
                                                         </table>

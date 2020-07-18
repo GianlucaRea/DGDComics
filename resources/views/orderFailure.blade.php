@@ -13,6 +13,7 @@
 @include('layouts.Header.breadcrumbsArea', $page)
 @include('layouts.Other.failure')
 @include('layouts.Footer.banner2')
+@include('layouts.Footer.social')
 <footer>
     @include('layouts.Footer.footer')
 </footer>
