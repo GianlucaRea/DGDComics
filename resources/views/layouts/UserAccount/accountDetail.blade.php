@@ -71,7 +71,16 @@
                                                 </div>
                                             @else
                                                 <div class="myaccount-table table-responsive text-center">
-                                                    {{$notifications->links()}}
+                                                    <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-lg-7-5">
+                                                            {{$notifications->links()}}
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <a href="{{ route('allRead', ['id' => $user->id]) }}" class="btn btn-sqr">Segna tutti come "letto"</a>
+                                                        </div>
+                                                    </div>
+                                                    </div>
                                                     <div class="mt-3"></div>
                                                     <table class="table table-bordered">
                                                         <thead class="thead-light">

@@ -153,6 +153,7 @@ Route::get('/vendor', function () {
 });
 
 Route::get('/accountArea/notificaLetta/{id}', 'NotificationController@notificationRead')->name('notificaLetta');
+Route::get('/accountArea/allRead/{id}', 'NotificationController@notificationAllRead')->name('allRead');
 
 Route::get('/shops','HomeController@onwork')->name('shops');
 Route::get('/privacypolicy','HomeController@onwork')->name('privacypolicy');

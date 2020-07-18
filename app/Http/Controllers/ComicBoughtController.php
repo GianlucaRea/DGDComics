@@ -144,17 +144,15 @@ class ComicBoughtController extends Controller
         );
         DB::table('comic_boughts')->where("id", "=", $id)->update($data);
         $user = Auth::user();
-        $order = DB::table('comic_boughts')->join('comic_bought_order', 'comic_boughts.id', '=', 'comic_bought_order.comic_bought_id')->join('orders', 'comic_bought_order.order_id', '=', 'orders.id')->where('comic_boughts.id', '=', $id)->first();
+        $order = DB::table('comic_boughts')->join('comic_bought_order', 'comic_boughts.id', '=', 'comic_bought_order.comic_bought_id')->join('orders', 'comic_bought_order.order_id', '=', 'orders.id')->where('comic_boughts.id', '=', $id)->select('orders.*')->first();
         $user2 = UserController::getUserId($order->user_id);
 
         $data2= array(
-            'user_id' => $user2->id,
             'notification_text' => 'Ehy, un tuo fumetto è stato spedito',
             'state' => 0,
-            'notification' => 'orderDetail',
-            'idLink' => $order->id
         );
-        DB::table('notifications')->insert($data2);
+
+        DB::table('notifications')->where('user_id', '=', $user2->id)->where('notification', '=', 'orderDetail')->where('idLink', '=', $order->id)->update($data2);
 
         return redirect()->back()->with(compact('user'));
     }

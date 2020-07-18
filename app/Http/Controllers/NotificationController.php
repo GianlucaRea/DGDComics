@@ -137,4 +137,17 @@ class NotificationController extends Controller
             return Redirect::route($notification->notification, ['id' => $notification->idLink]);
         }
     }
+
+    public static function notificationAllRead($id){
+        $notifications = DB::table('notifications')->where('user_id', '=', $id)->get();
+        foreach ($notifications as $notification){
+            if($notification->state == 0){
+                $data2= array(
+                    'state' => 1,
+                );
+                DB::table('notifications')->where('id', '=', $notification->id)->update($data2);
+            }
+        }
+        return redirect()->back();
+    }
 }
