@@ -444,25 +444,32 @@
                     @php($cover = \App\Http\Controllers\ImageController::getCover($comic->id))
                     <div class="mt-2"></div>
                     <div class="row">
-                        <div class="col-lg-2.5">
+                        <div class="col-lg-4">
                             <div class="single-input-item">
-                                <label for="file" class="required">Copertina attuale:</label>
-                                <br>
+                                <label for="file" class="required">Copertina attuale:<span>*</span></label>
+                                <br/>
                                 <img src="{{asset('img/comicsImages/' . $cover->image_name) }}" style=" background-repeat: no-repeat; background-size: contain; width: 180px; height: 270px;"/>
                             </div>
                         </div>
-                        <div class="col-lg-3.5">
+                    </div>
+                    <div class="mt-2"></div>
+                    <div class="row">
+                        <div class="col-lg-3">
                             <div class="single-input-item">
-                                <div class="mtb-100"></div>
-                                <input type="file" id="cover" name="cover"  class="form-control @error('cover') is-invalid @enderror">
+                                <input type="file" id="cover" name="cover"  class="form-control @error('cover') is-invalid @enderror" style="margin-bottom: 5px;">
                                 @error('cover')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                         </div>
                     </div>
+
+
+
+
+
 
                     <div class="mt-2"></div>
                     <div class="row">
@@ -471,84 +478,16 @@
                         </div>
                     </div>
 
-
-                    {{--@php($pic1 = \App\Http\Controllers\ImageController::getImageByNumber($comic->id, 1))
-                    @php($pic2 = \App\Http\Controllers\ImageController::getImageByNumber($comic->id, 2))
-                    @php($pic3 = \App\Http\Controllers\ImageController::getImageByNumber($comic->id, 3))
-                    @php($pic4 = \App\Http\Controllers\ImageController::getImageByNumber($comic->id, 4))
-
-
-                    <div class="row">
-                        <div class="col-lg-2.5">
-                            <div class="single-input-item">
-                                <label for="file" class="required">Immagine {{ $numImmagine }}<span>*</span></label>
-                                <br>
-                                @if($pic1 != null)
-                                    <img src="{{asset('img/comicsImages/' . $pic1->image_name) }}" style=" background-repeat: no-repeat; background-size: contain; width: 180px; height: 270px;"/>
-                                @else
-                                    <img src="{{asset('img/immaginiNostre/noImageDisclaimer.jpg') }}" style=" background-repeat: no-repeat; background-size: contain; width: 180px; height: 270px;"/>
-                                @endif
-
-                            </div>
-                        </div>
-                        <div class="col-lg-3.5">
-                            <div class="single-input-item">
-                                <div class="mtb-100"></div>
-                                <input type="file" id="image1" name="image1"  class="form-control @error('image1') is-invalid @enderror">
-                                @error('image1')
-                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                    </span>
-                                @enderror
-                            </div>
-                        </div>--}}
-
-
-
-
-
-
-
-                    {{--@php($images = \App\Http\Controllers\ImageController::getOtherImages($comic->id))--}}
-                    {{--@php($aCapo = true)
-                    @php($row2 = false)--}}
-                   {{-- @php($numImmagine = 1)
-                    @php($img1 = false)
-                    @php($img2 = false)
-                    @php($img3 = false)
-                    @php($img4 = false)
-                    @foreach($images as $images)
-                        @if($images->imageNumber == 1)
-                            @php($img1 = true)
-                        @endif
-                        @if($images->imageNumber == 2)
-                            @php($img2 = true)
-                        @endif
-                        @if($images->imageNumber == 3)
-                            @php($img3 = true)
-                        @endif
-                        @if($images->imageNumber == 4)
-                            @php($img4 = true)
-                        @endif
-                    @endforeach--}}
-
-
-
-
-
-
                     @php($image1 = \App\Http\Controllers\ImageController::getImageByNumber($comic->id, 1))
                     @php($image2 = \App\Http\Controllers\ImageController::getImageByNumber($comic->id, 2))
                     @php($image3 = \App\Http\Controllers\ImageController::getImageByNumber($comic->id, 3))
                     @php($image4 = \App\Http\Controllers\ImageController::getImageByNumber($comic->id, 4))
 
-
-
                     <div class="row">
-                        <div class="col-lg-2.5">
+                        <div class="col-lg-4">
                             <div class="single-input-item">
                                 <label for="file" class="required">Immagine 1</label>
-                                <br>
+                                <br/>
                                 @if($image1 != null)
                                     <img src="{{asset('img/comicsImages/' . $image1->image_name) }}" style=" background-repeat: no-repeat; background-size: contain; width: 180px; height: 270px;"/>
                                 @else
@@ -556,19 +495,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-lg-3.5">
-                            <div class="single-input-item">
-                                <br>
-                                <div class="mtb-100"></div>
-                                <input type="file" id="image1" name="image1"  class="form-control @error('image1') is-invalid @enderror">
-                                @error('image1')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-lg-2.5">
+                        <div class="col-lg-4">
                             <div class="single-input-item">
                                 <label for="file" class="required">Immagine 2</label>
                                 <br>
@@ -578,11 +505,22 @@
                                     <img src="{{asset('img/immaginiNostre/inserisciNuovaImmagine.jpg') }}" style=" background-repeat: no-repeat; background-size: contain; width: 180px; height: 270px;"/>
                                 @endif        </div>
                         </div>
-                        <div class="col-lg-3.5">
+                    </div>
+                    <div class="mt-2"></div>
+                    <div class="row">
+                        <div class="col-lg-3">
                             <div class="single-input-item">
-                                <br>
-                                <div class="mtb-100"></div>
-                                <input type="file" id="image2" name="image2"  class="form-control @error('image2') is-invalid @enderror">
+                                <input type="file" id="image1" name="image1"  class="form-control @error('image1') is-invalid @enderror" style="margin-bottom: 5px;">
+                                @error('image1')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div><div class="col-lg-1">
+                        </div><div class="col-lg-3">
+                            <div class="single-input-item">
+                                <input type="file" id="image2" name="image2"  class="form-control @error('image2') is-invalid @enderror" style="margin-bottom: 5px;">
                                 @error('image2')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -591,11 +529,18 @@
                             </div>
                         </div>
                     </div>
+
+
+
+
+
+
+                    <div class="mt-2"></div>
                     <div class="row">
-                        <div class="col-lg-2.5">
+                        <div class="col-lg-4">
                             <div class="single-input-item">
                                 <label for="file" class="required">Immagine 3</label>
-                                <br>
+                                <br/>
                                 @if($image3 != null)
                                     <img src="{{asset('img/comicsImages/' . $image3->image_name) }}" style=" background-repeat: no-repeat; background-size: contain; width: 180px; height: 270px;"/>
                                 @else
@@ -603,18 +548,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-lg-3.5">
-                            <div class="single-input-item">
-                                <div class="mtb-100"></div>
-                                <input type="file" id="image3" name="image3"  class="form-control @error('image3') is-invalid @enderror">
-                                @error('image3')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-lg-2.5">
+                        <div class="col-lg-4">
                             <div class="single-input-item">
                                 <label for="file" class="required">Immagine 4</label>
                                 <br>
@@ -622,12 +556,25 @@
                                     <img src="{{asset('img/comicsImages/' . $image4->image_name) }}" style=" background-repeat: no-repeat; background-size: contain; width: 180px; height: 270px;"/>
                                 @else
                                     <img src="{{asset('img/immaginiNostre/inserisciNuovaImmagine.jpg') }}" style=" background-repeat: no-repeat; background-size: contain; width: 180px; height: 270px;"/>
-                                @endif     </div>
+                                @endif
+                            </div>
                         </div>
-                        <div class="col-lg-3.5">
+                    </div>
+                    <div class="mt-2"></div>
+                    <div class="row">
+                        <div class="col-lg-3">
                             <div class="single-input-item">
-                                <div class="mtb-100"></div>
-                                <input type="file" id="image4" name="image4"  class="form-control @error('image4') is-invalid @enderror">
+                                <input type="file" id="image3" name="image3"  class="form-control @error('image3') is-invalid @enderror" style="margin-bottom: 5px;">
+                                @error('image3')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div><div class="col-lg-1">
+                        </div><div class="col-lg-3">
+                            <div class="single-input-item">
+                                <input type="file" id="image4" name="image4"  class="form-control @error('image4') is-invalid @enderror" style="margin-bottom: 5px;">
                                 @error('image4')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

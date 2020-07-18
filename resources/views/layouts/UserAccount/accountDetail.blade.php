@@ -997,18 +997,18 @@
                                                                     </span>
                                                                     @enderror
                                                                     <div class="mt-2"></div>
-                                                                    immagine 2
-                                                                    <input type="file" id="image2" name="image2" class="form-control @error('image2') is-invalid @enderror">
-                                                                    @error('image2')
+                                                                    immagine 3
+                                                                    <input type="file" id="image3" name="image3" class="form-control @error('image3') is-invalid @enderror">
+                                                                    @error('image3')
                                                                     <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                     </span>
                                                                     @enderror
                                                                 </div>
                                                                 <div class="col-lg-6">
-                                                                    immagine 3
-                                                                    <input type="file" id="image3" name="image3" class="form-control @error('image3') is-invalid @enderror">
-                                                                    @error('image3')
+                                                                    immagine 2
+                                                                    <input type="file" id="image2" name="image2" class="form-control @error('image2') is-invalid @enderror">
+                                                                    @error('image2')
                                                                     <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                     </span>
