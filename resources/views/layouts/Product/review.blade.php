@@ -175,8 +175,8 @@
             </div>
             @foreach($reviews4 as $review)
                 <div class="row">
-                    <div class="ml-5"></div>
-                    <div class="col-lg-10">
+
+                    <div class="col-lg-10 mt-20">
                         <h5>{{$review->review_title}}</h5>
                         <div class="review-rating">
                             <div class="rating-result">
@@ -237,8 +237,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="mb-5"></div>
+                <div class="mb-2"></div>
             @endforeach
+
         </div>
         <p><b style="font-size: 20px;">*</b> Per poter scrivere una recensione si deve prima acquistare il fumetto ed aspettare che sia stato consegnato. Può essere scritta una sola recensione per fumetto </p>
     </div>
