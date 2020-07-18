@@ -25,7 +25,6 @@ class CreateOrdersTable extends Migration
             ['user_id' => '3', 'payment_method_id' => '1', 'shipping_address_id' => '1', 'total'=>'55.1'],
             ['user_id' => '3', 'payment_method_id' => '1', 'shipping_address_id' => '2', 'total'=>'35.65'],
             ['user_id' => '3', 'payment_method_id' => '1', 'shipping_address_id' => '1', 'total'=>'20.31'],
-            ['user_id' => '3', 'payment_method_id' => '1', 'shipping_address_id' => '2', 'total'=>'26.6'],
             ['user_id' => '6', 'payment_method_id' => '5', 'shipping_address_id' => '4', 'total'=>'55.1'],
             ['user_id' => '6', 'payment_method_id' => '5', 'shipping_address_id' => '4', 'total'=>'35.65'],
             ['user_id' => '7', 'payment_method_id' => '6', 'shipping_address_id' => '5', 'total'=>'55.1'],

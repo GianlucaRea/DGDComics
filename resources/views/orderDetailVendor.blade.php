@@ -11,7 +11,7 @@
 'name' =>'Dettagli ordine']
 )
 @include('layouts.Header.breadcrumbsArea', $page)
-@include('layouts.Other.orderDetailVendorByID')
+@include('layouts.Other.orderDetailVendorById')
 <footer>
     @include('layouts.Footer.footer')
 </footer>
