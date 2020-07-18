@@ -44,6 +44,12 @@ class CreateUsersTable extends Migration
             ['name' => 'Admin' , 'surname' => 'Admin' , 'username' => 'admin' , 'age' => '50', 'email' => 'admin@dgdcomics.com', 'password' => Hash::make('admin')],
         ]);
 
+        DB::table('users')->insert([
+            ['name' => 'Aldo' , 'surname' => 'Baglio' , 'username' => 'AldoBaglio' , 'age' => '20' , 'phone_number' => '3209104525' , 'email' => 'Aldo.Baglio@outlook.it', 'password' => Hash::make('Sforza10')],
+            ['name' => 'Giovanni' , 'surname' => 'Storti' , 'username' => 'Giovanni10' , 'age' => '21' , 'phone_number' => '3209104623' , 'email' => 'Giovanni.Storti@outlook.it', 'password' => Hash::make('Sforza11')],
+            ['name' => 'Giacomo' , 'surname' => 'Poretti' , 'username' => 'Giacomo5' , 'age' => '23' , 'phone_number' => '3209104323' , 'email' => 'Giacomo.Poretti@outlook.it', 'password' => Hash::make('Gambapersa92')],
+        ]);
+
 
 
     }

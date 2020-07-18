@@ -28,6 +28,9 @@ class CreateShippingAddressesTable extends Migration
             ['user_id' => '3', 'via' => 'le mani dal naso', 'civico' => '123', 'città' => 'Pescara', 'post_code' => '65123', 'other_info' => 'nothing', 'favourite' => '1'],
             ['user_id' => '3', 'via' => 'le mani dal nasino', 'civico' => '124', 'città' => 'Roma', 'post_code' => '65125', 'other_info' => 'test', 'favourite' => '0'],
             ['user_id' => '5', 'via' => 'a caso', 'civico' => '32', 'città' => 'Arpino', 'post_code' => '03033', 'other_info' => 'Mi piace', 'favourite' => '0'],
+            ['user_id' => '6', 'via' => 'Roma', 'civico' => '12', 'città' => 'Arpino', 'post_code' => '03033','other_info' => 'nothing' ,'favourite' => '1'],
+            ['user_id' => '7', 'via' => 'Garibaldi', 'civico' => '35', 'città' => 'Arpino', 'post_code' => '03033','other_info' => 'nothing','favourite' => '1'],
+            ['user_id' => '8', 'via' => 'De Gasperi', 'civico' => '21', 'città' => 'Arpino', 'post_code' => '03033','other_info' => 'nothing','favourite' => '1'],
         ]);
 
         DB::table('shipping_addresses')->insert([

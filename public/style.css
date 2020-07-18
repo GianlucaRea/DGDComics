@@ -2449,7 +2449,8 @@ body {
 /*----------------------------------------*/
 
 .social-group-area {
-    background: #F6F6F6;
+    /*background: #F6F6F6;*/
+    background: #fff3cd;
 }
 
 .section-title-3 h3 {
@@ -2466,7 +2467,7 @@ body {
 }
 
 .twitter-content .twitter-icon a {
-    background: #f07c29 none repeat scroll 0 0;
+    background: #333333 none repeat scroll 0 0;
     border-radius: 100%;
     color: #fff;
     font-size: 24px;
@@ -2476,6 +2477,10 @@ body {
     text-align: center;
     width: 70px;
     display: inline-block;
+}
+
+.twitter-content .twitter-icon a:hover {
+    background: #f07c29 none repeat scroll 0 0;
 }
 
 .twitter-content .twitter-text {
@@ -2517,9 +2522,9 @@ body {
 }
 
 .link-follow ul li a {
-    background: #fff none repeat scroll 0 0;
+    background: #333333 none repeat scroll 0 0;
     border-radius: 100%;
-    color: #333333;
+    color: #ffffff;
     font-size: 18px;
     display: inline-block;
     height: 52px;
@@ -2532,7 +2537,7 @@ body {
 }
 
 .link-follow ul li a:hover {
-    background: #333333 none repeat scroll 0 0;
+    background: #f07c29 none repeat scroll 0 0;
     color: #fff;
 }
 

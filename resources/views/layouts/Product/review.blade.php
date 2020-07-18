@@ -200,8 +200,13 @@
                                 <br>
                                 @php($userR = \App\Http\Controllers\UserController::getUserId($review->user_id))
                                 @php($username = $userR->username)
-                                <p style="font-size: 13px; margin: 0;">Review by {{$username}}</p>
-                                <p style="font-size: 10px; margin: 0;">Posted on {{\Carbon\Carbon::parse($review->review_date)->format('d/m/Y')}} </p>
+                                @php($isVendor = \App\Http\Controllers\GroupController::isVendor($review->id))
+                                @if($isVendor)
+                                    <p style="font-size: 13px; margin: 0;">Review by <a href="{{url('vendor_detail/'.$review->user_id) }}" style="font-size: 13px; margin: 0;">{{$username}}</a></p>
+                                @else
+                                <p style="font-size: 13px; margin: 0;">Review by <a href="{{url('user_detail/'.$review->user_id) }}" style="font-size: 13px; margin: 0;">{{$username}}</a></p>
+                                @endif
+                                    <p style="font-size: 10px; margin: 0;">Posted on {{\Carbon\Carbon::parse($review->review_date)->format('d/m/Y')}} </p>
                                 @if(Auth::user())
                                     @if(Auth::user()->hasGroup('il gruppo degli admin'))
                                         <div style="font-size: 24px;">

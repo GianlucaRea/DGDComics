@@ -114,6 +114,15 @@
                 <div class="mt-1"></div>
                 <div class="row">
                     <div class="col-lg-3-5">
+                        <b>Prodotti in vendita:</b>
+                    </div>
+                    <div class="col-lg-7-5">
+                        {{$count}}
+                    </div>
+                </div>
+                <div class="mt-1"></div>
+                <div class="row">
+                    <div class="col-lg-3-5">
                         <b>Prodotti venduti:</b>
                     </div>
                     <div class="col-lg-7-5">
@@ -225,26 +234,25 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-4">
                                 <div class="myaccount-tab-menu nav" role="tablist">
-                                    <a href="#ReviewRicevute" class="active" data-toggle="tab"><i class="fa fa-comment-o"></i>Recensioni Ricevute</a>
-                                    <a href="#ReviewScritte" data-toggle="tab"><i class="fa fa-commenting-o"></i>Recensioni scritte</a>
+                                    <a href="{{route('vendorpublic',$user->id)}}"class="{{ (Route::currentRouteName() == 'vendorpublic') ? 'active' : '' }}" ><i class="fa fa-comment-o"></i>Recensioni Ricevute</a>
+                                    <a href="{{route('reviewscrittevendor',$user->id)}}" class="{{ (Route::currentRouteName() == 'reviewscrittevendor') ? 'active' : '' }}"  ><i class="fa fa-commenting-o"></i>Recensioni scritte</a>
                                 </div>
                             </div>
                             <div class="col-lg-9">
                                 <div class="tab-content" id="MyAccountContent">
-                                    <div class="tab-pane fade show  active" id="ReviewRicevute" role="tabpanel">
+                                    <div class="tab-pane fade show {{ (Route::currentRouteName() == 'vendorpublic') ? 'active' : '' }}"  id="ReviewRicevute" role="tabpanel">
                                         <div class="product-info-area" style="margin-left: 5%">
                                             <div class="tab-pane fade show active"  id="review">
                                                 <div class="valu">
                                                     <div class="row">
                                                         <div class="ml-3"></div>
                                                         <div class="col-lg-6">
-                                                            @php($reviews=\App\Http\Controllers\ReviewController::getAllRecievedReview($user->id))
-                                                            @if($reviews->count() <= 0)
+                                                            @if($reviews1->count() <= 0)
                                                                 <h3>Non ci sono Recensioni</h3>
                                                             @endif
                                                         </div>
                                                     </div>
-                                                    @foreach($reviews as $review)
+                                                    @foreach($reviews1 as $review)
                                                         @php($comicOfReviewVendorDetail = \App\Http\Controllers\ComicController::getByID($review->comic_id))
                                                         <div class="row" style="border-bottom: lightgray 1px solid; padding-bottom: 5%">
                                                             <div class="ml-5"></div>
@@ -273,7 +281,7 @@
                                                                         <br>
                                                                         @php($userR = \App\Http\Controllers\UserController::getUserId($review->user_id))
                                                                         @php($username = $userR->username)
-                                                                        <p style="font-size: 13px; margin: 0;">Review by {{$username}}</p>
+                                                                        <p style="font-size: 13px; margin: 0;">Review by <a href="{{url('user_detail/'.$review->user_id) }}" style="font-size: 13px; margin: 0;">{{$username}}</a></p>
                                                                         <p style="font-size: 10px; margin: 0;">Posted on {{\Carbon\Carbon::parse($review->review_date)->format('d/m/Y')}} </p>
                                                                         @if(Auth::user())
                                                                             @if(Auth::user()->hasGroup('il gruppo degli admin'))
@@ -298,24 +306,24 @@
                                                         </div>
                                                         <div class="mb-5"></div>
                                                     @endforeach
+                                                    {{$reviews1->links()}}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade show " id="ReviewScritte" role="tabpanel">
+                                    <div  class="tab-pane fade show {{ (Route::currentRouteName() == 'reviewscrittevendor') ? 'active' : '' }}" id="ReviewScritte" role="tabpanel">
                                         <div class="product-info-area" style="margin-left: 5%">
                                             <div class="tab-pane fade show active"  id="review">
                                                 <div class="valu">
                                                     <div class="row">
                                                         <div class="ml-3"></div>
                                                         <div class="col-lg-6">
-                                                            @php($reviews=\App\Http\Controllers\ReviewController::getAllWritedReview($user->id))
-                                                            @if($reviews->count() <= 0)
+                                                            @if($reviews2->count() <= 0)
                                                                 <h3>Non ci sono Recensioni</h3>
                                                             @endif
                                                         </div>
                                                     </div>
-                                                @foreach($reviews as $review)
+                                                @foreach($reviews2 as $review)
                                                         @php($comicOfReviewVendorDetail = \App\Http\Controllers\ComicController::getByID($review->comic_id))
                                                         <div class="row" style="border-bottom: lightgray 1px solid; padding-bottom: 5%">
                                                             <div class="ml-5"></div>
@@ -369,8 +377,8 @@
                                                         </div>
                                                         <div class="mb-5"></div>
                                                     @endforeach
-
                                                 </div>
+                                                {{$reviews2->links()}}
                                             </div>
                                         </div>
                                     </div>

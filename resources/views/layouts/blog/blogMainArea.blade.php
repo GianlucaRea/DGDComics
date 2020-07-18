@@ -185,9 +185,9 @@
                                             </div>
                                             <div class="blog-single-content">
                                                 @if(strlen($article->article_text)>680)
-                                                    <p>{{ substr($article->article_text, 0, 680)}}...</p>
+                                                    <p>{!! substr($article->article_text, 0, 680) !!}...</p>
                                                 @else
-                                                    <p>{{ $article->article_text }}</p>
+                                                    <p>{!! $article->article_text !!}</p>
                                                 @endif
                                             </div>
                                         </div>
@@ -243,9 +243,9 @@
                                         </div>
                                         <div class="blog-single-content">
                                             @if(strlen($article->article_text)>680)
-                                                <p>{{ substr($article->article_text, 0, 680)}}...</p>
+                                                <p>{!! substr($article->article_text, 0, 680) !!}...</p>
                                             @else
-                                                <p>{{ $article->article_text }}</p>
+                                                <p>{!! $article->article_text !!}</p>
                                             @endif
                                         </div>
                                     </div>

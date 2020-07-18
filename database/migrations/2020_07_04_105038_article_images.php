@@ -21,10 +21,10 @@ class ArticleImages extends Migration
 
         DB::table('article_images')->insert([
             ['article_id' => '1' , 'image_name' => 'OnePieceBlog.jpg'],
-            ['article_id' => '2' , 'image_name' => 'FMABlog.jpg'],
-            ['article_id' => '3' , 'image_name' => 'supermanBlog.jpg'],
-            ['article_id' => '4' , 'image_name' => 'ironmanBlog.jpg'],
-            ['article_id' => '5' , 'image_name' => 'DylanDogBlog.jpg'],
+            ['article_id' => '2' , 'image_name' => 'DylanDogBlog.jpg'],
+            ['article_id' => '3' , 'image_name' => 'FMABlog.jpg'],
+            ['article_id' => '4' , 'image_name' => 'supermanBlog.jpg'],
+            ['article_id' => '5' , 'image_name' => 'ironmanBlog.jpg'],
             ['article_id' => '6' , 'image_name' => 'topolinoBlog.jpg'],
         ]);
     }

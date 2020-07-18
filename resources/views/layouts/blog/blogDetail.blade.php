@@ -42,8 +42,16 @@
 
                         <div class="product-attribute">
                                 <p>
+                                    <b>TAG:</b>
+                                    @php($numberOfTag= $article->tag->count())
+                                    @php($counter = 1)
                                     @foreach($article->tag as $tags)
-                                    <a href="{{route('taglist',['tag_name' => $tags->tag_name])}}"> {{$tags->tag_name}} </a>
+                                        @if($counter < $numberOfTag)
+                                            @php($counter++)
+                                            <a href="{{route('taglist',['tag_name' => $tags->tag_name])}}"> {{$tags->tag_name}}</a>,
+                                        @else
+                                            <a href="{{route('taglist',['tag_name' => $tags->tag_name])}}"> {{$tags->tag_name}}</a>.
+                                        @endif
                                     @endforeach
                                 </p>
                         </div>
@@ -78,7 +86,12 @@
                                             <div class="single-comm-top">
                                                 <div class="row">
                                                     <div class="col-lg-4">
-                                                    <h5>{{ $userComment->username }}</h5>
+                                                        @php($isVendor = \App\Http\Controllers\GroupController::isVendor($userComment->id))
+                                                        @if($isVendor)
+                                                            <a href="{{url('vendor_detail/'.$userComment->id) }}"><h5>{{$userComment->username}}</h5></a>
+                                                        @else
+                                                            <a href="{{url('user_detail/'.$userComment->id) }}"><h5>{{$userComment->username}}</h5></a>
+                                                        @endif
                                                     </div>
                                                     <div class="col-lg-7"></div>
                                                     @if(\Illuminate\Support\Facades\Auth::user()!=null)

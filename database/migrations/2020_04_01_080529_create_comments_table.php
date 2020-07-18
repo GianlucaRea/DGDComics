@@ -24,10 +24,13 @@ class CreateCommentsTable extends Migration
             $table->timestamp('date')->default(\DB::raw('CURRENT_TIMESTAMP'));
         });
         DB::table('comments')->insert([
-            ['user_id' => '1', 'article_id' => '2', 'like' => '10', 'dislike' => '0', 'answer' => 'questo articolo è palesemente un copia ed incolla della pagina wikipedia su fma', 'parent_comment' => '0'],
-            ['user_id' => '2', 'article_id' => '2', 'like' => '6', 'dislike' => '0', 'answer' => 'hai proprio ragione bro', 'parent_comment' => '1'],
-            ['user_id' => '3', 'article_id' => '2', 'like' => '2', 'dislike' => '8', 'answer' => 'articles are red, others are blue... oh, what is that article? It is an article for you!', 'parent_comment' => '0'],
-            ['user_id' => '3', 'article_id' => '1', 'like' => '2', 'dislike' => '8', 'answer' => 'e buonanotte', 'parent_comment' => '0'],
+            ['user_id' => '6', 'article_id' => '2', 'like' => '5', 'dislike' => '0', 'answer' => 'Dylan Dog è il mio fumetto preferito, ha uno stile unico. Ogni volta che lo leggo mi immergo dentro al fumetto', 'parent_comment' => '0'],
+            ['user_id' => '7', 'article_id' => '2', 'like' => '1', 'dislike' => '0', 'answer' => 'Stessa cosa per me , ne ho letti almeno 200. Ogni volta mi emoziono sempre.', 'parent_comment' => '1'],
+            ['user_id' => '8', 'article_id' => '2', 'like' => '2', 'dislike' => '0', 'answer' => 'Io ho la collezione completa dal 1994 al 2000. Gli anni d\'oro del grande Sclavi', 'parent_comment' => '1'],
+            ['user_id' => '6', 'article_id' => '2', 'like' => '2', 'dislike' => '0', 'answer' => 'Pensa un po io ho la collezione dal 96 al 98', 'parent_comment' => '1'],
+            ['user_id' => '3', 'article_id' => '2', 'like' => '2', 'dislike' => '8', 'answer' => 'Sclavi è stato unico nel genere Horror... le sue storie sono pazzesche!', 'parent_comment' => '0'],
+            ['user_id' => '8', 'article_id' => '1', 'like' => '0', 'dislike' => '8', 'answer' => 'One piece è molto sopravalutato', 'parent_comment' => '0'],
+            ['user_id' => '6', 'article_id' => '1', 'like' => '7', 'dislike' => '0', 'answer' => 'Bhè un opinione non comune visto che è il più venduto al mondo!!!', 'parent_comment' => '6'],
         ]);
     }
 
