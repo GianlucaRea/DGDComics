@@ -152,7 +152,7 @@ Route::get('/vendor', function () {
         ->with(compact('user'));
 });
 
-Route::get('/accountArea/notificaLetta/{id}', 'NotificationController@notificationRead')->name('notificaLetta');
+Route::get('/accountArea/notifica/Letta/{id}', 'NotificationController@notificationRead')->name('notificaLetta');
 Route::get('/accountArea/allRead/{id}', 'NotificationController@notificationAllRead')->name('allRead');
 
 Route::get('/shops','HomeController@onwork')->name('shops');
