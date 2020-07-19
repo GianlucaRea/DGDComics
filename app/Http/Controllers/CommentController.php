@@ -117,22 +117,18 @@ class CommentController extends Controller
 
     public function addToArticle(Article $article, Request $request){
         $request->validate([
-            'comment_text' => ['required', 'string', 'max:511', 'alpha'],
+            'comment_text' => ['required', 'string', 'max:511'],
         ]);
         $user = \Illuminate\Support\Facades\Auth::user();
 
         $comment = new Comment(); //per evitare problemi con campi che non appartengono effettivamente a paymentMethod.
         $comment->user_id = \Illuminate\Support\Facades\Auth::user()->id;
         $comment->article_id = $article->id;
-        $comment->like = 0;
-        $comment->dislike = 0;
         $comment->answer = $request->comment_text;
 
         $data=array(
             'user_id'=> $comment->user_id,
             'article_id' => $comment->article_id,
-            'like' => $comment->like,
-            'dislike' => $comment->dislike,
             'answer' => $comment->answer
         );
 
@@ -153,16 +149,12 @@ class CommentController extends Controller
         $comment = new Comment(); //per evitare problemi con campi che non appartengono effettivamente a paymentMethod.
         $comment->user_id = \Illuminate\Support\Facades\Auth::user()->id;
         $comment->article_id = $article->article_id;
-        $comment->like = 0;
-        $comment->dislike = 0;
         $comment->answer = $request->answer;
         $comment->parent_comment = $id;
 
         $data=array(
             'user_id'=> $comment->user_id,
             'article_id' => $comment->article_id,
-            'like' => $comment->like,
-            'dislike' => $comment->dislike,
             'answer' => $comment->answer,
             'parent_comment' => $comment->parent_comment,
         );
@@ -173,7 +165,7 @@ class CommentController extends Controller
         $answers = CommentController::answers($parent->id);
 
         foreach ($answers as $answer){
-            if($answer->user_id != $comment->user_id) {
+            if($answer->user_id != $comment->user_id && $answer->user_id != $parent->user_id) {
 
                 $data2 = array(
                     'user_id' => $answer->user_id,
