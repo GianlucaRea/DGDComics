@@ -3,6 +3,7 @@
 @php($articleComments = \App\Http\Controllers\CommentController::getcommentsByArticleId($article->id))
 @php($articleImage = \App\Http\Controllers\ArticleImageController::getImageByArticleId($article->id))
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.2/tinymce.min.js" referrerpolicy="origin"></script>
+@php($i = 0)
 <div class="blog-main-area mb-70">
     <div class="container">
         <div class="row">
@@ -103,7 +104,7 @@
                                                 </div>
                                                 <p>{{ substr($article->date, 0,10) }} {{--<a href="#">Rispondi</a></p>--}}
                                             </div>
-                                            <p>{{ $articleComment->answer }}</p>
+                                            <p>{!! $articleComment->answer !!}</p>
                                         </div>
                                     </div>
                                 </li>
@@ -152,16 +153,60 @@
                                         @csrf
                                         <div class="row">
                                             <div class="col-lg-8">
-                                                <script>
+                                                @php($i++)
+                                               <script>
+                                                   var iterazione = "<?php echo $i ?>";
+                                                   var classe = new RegExp("#answer" + iterazione);
+                                                   var classe1 = classe.toString();
+                                                   var classe2 = classe1.substring(1, 9);
                                                     tinymce.init({
-                                                        selector: ".form-control",
+                                                        selector: classe2,
                                                         statusbar: false,
                                                         menubar: false,
                                                         height: 150,
-                                                        width: 777
+                                                        width: 777,
+                                                        max_chars: 511, // max. allowed chars
+                                                        setup: function (ed) {
+                                                            var allowedKeys = [8, 37, 38, 39, 40, 46]; // backspace, delete and cursor keys
+                                                            ed.on('keydown', function (e) {
+                                                                if (allowedKeys.indexOf(e.keyCode) != -1) return true;
+                                                                if (tinymce_getContentLength() + 1 > this.settings.max_chars) {
+                                                                    e.preventDefault();
+                                                                    e.stopPropagation();
+                                                                    return false;
+                                                                }
+                                                                return true;
+                                                            });
+                                                            ed.on('keyup', function (e) {
+                                                                tinymce_updateCharCounter(this, tinymce_getContentLength());
+                                                            });
+                                                        },
+                                                        init_instance_callback: function () { // initialize counter div
+                                                            $('#' + this.id).prev().append('<div class="char_count" style="text-align:right"></div>');
+                                                            tinymce_updateCharCounter(this, tinymce_getContentLength());
+                                                        },
+                                                        paste_preprocess: function (plugin, args) {
+                                                            var editor = tinymce.get(tinymce.activeEditor.id);
+                                                            var len = editor.contentDocument.body.innerText.length;
+                                                            var text = $(args.content).text();
+                                                            if (len + text.length > editor.settings.max_chars) {
+                                                                alert('Pasting this exceeds the maximum allowed number of ' + editor.settings.max_chars + ' characters.');
+                                                                args.content = '';
+                                                            } else {
+                                                                tinymce_updateCharCounter(editor, len + text.length);
+                                                            }
+                                                        }
                                                     });
+
+                                                    function tinymce_updateCharCounter(el, len) {
+                                                        $('#' + el.id).prev().find('.char_count').text(len + '/' + el.settings.max_chars);
+                                                    }
+
+                                                    function tinymce_getContentLength() {
+                                                        return tinymce.get(tinymce.activeEditor.id).contentDocument.body.innerText.length;
+                                                    }
                                                 </script>
-                                                <textarea id="{{'answer'}}" name="{{'answer'}}" onclick="required(this)" class="form-control @error('answer') is-invalid @enderror"></textarea>
+                                                <textarea id="{{'answer'.$i}}" name="{{'answer'}}" onclick="required(this)" class="answerDGD"></textarea>
 
                                                 {{--@error('answer')
                                                 <span class="invalid-feedback" role="alert">

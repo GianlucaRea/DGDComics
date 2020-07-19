@@ -140,7 +140,7 @@ class CommentController extends Controller
 
     public function addToComment(int $id, Request $request){
         $request->validate([
-            'answer' => ['required'],
+            'answer' => ['required', 'string', 'max:511'],
         ]);
 
         $article = CommentController::getArticleIdBycommentId($id);
