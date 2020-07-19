@@ -2,6 +2,7 @@
 @php($articleAuth = \App\Http\Controllers\UserController::getUserId($article->user_id))
 @php($articleComments = \App\Http\Controllers\CommentController::getcommentsByArticleId($article->id))
 @php($articleImage = \App\Http\Controllers\ArticleImageController::getImageByArticleId($article->id))
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.2/tinymce.min.js" referrerpolicy="origin"></script>
 <div class="blog-main-area mb-70">
     <div class="container">
         <div class="row">
@@ -203,7 +204,7 @@
                             <form method="POST" action="{{ Route('submitComment', ['article' => $article->id])}}">
                                 @csrf
 
-                                <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.2/tinymce.min.js" referrerpolicy="origin"></script>
+
                                 <script>
                                     tinymce.init({
                                         selector: '#comment_text',
