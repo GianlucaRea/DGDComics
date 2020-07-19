@@ -43,19 +43,19 @@
 
 
                         <div class="product-attribute">
-                                <p>
-                                    <b>TAG:</b>
-                                    @php($numberOfTag= $article->tag->count())
-                                    @php($counter = 1)
-                                    @foreach($article->tag as $tags)
-                                        @if($counter < $numberOfTag)
-                                            @php($counter++)
-                                            <a href="{{route('taglist',['tag_name' => $tags->tag_name])}}"> {{$tags->tag_name}}</a>,
-                                        @else
-                                            <a href="{{route('taglist',['tag_name' => $tags->tag_name])}}"> {{$tags->tag_name}}</a>.
-                                        @endif
-                                    @endforeach
-                                </p>
+                            <p>
+                                <b>TAG:</b>
+                                @php($numberOfTag= $article->tag->count())
+                                @php($counter = 1)
+                                @foreach($article->tag as $tags)
+                                    @if($counter < $numberOfTag)
+                                        @php($counter++)
+                                        <a href="{{route('taglist',['tag_name' => $tags->tag_name])}}"> {{$tags->tag_name}}</a>,
+                                    @else
+                                        <a href="{{route('taglist',['tag_name' => $tags->tag_name])}}"> {{$tags->tag_name}}</a>.
+                                    @endif
+                                @endforeach
+                            </p>
                         </div>
 
 
@@ -116,33 +116,33 @@
                                 @if(!($comments->contains($answer->id)))
                                     @php($comments->push($answer->id))
                                 @endif
-                                    <div class="mt-1"></div>
-                                    <div class="comment-reply-wrap ml-5">
-                                        <ul>
-                                            <li>
-                                                <div class="public-comment">
-                                                    <div class="public-text">
-                                                        <div class="single-comm-top">
-                                                            @php($u = \App\Http\Controllers\UserController::getUserId($answer->user_id))
-                                                            <div class="row">
-                                                                <div class="col-lg-4">
-                                                                    <h5>{{ $u->username }}</h5>
-                                                                </div>
-                                                                <div class="col-lg-7"></div>
-                                                                @if(\Illuminate\Support\Facades\Auth::user()!=null)
-                                                                    @if(\App\Http\Controllers\GroupController::isAdmin(\Illuminate\Support\Facades\Auth::user()->id))
-                                                                        <a class="btn btn-danger" onclick="return deleteComment();"  href="{{route('answer-delete-local', $answer->id)}}"><i class="fa fa-trash"></i></a>
-                                                                    @endif
-                                                                @endif
+                                <div class="mt-1"></div>
+                                <div class="comment-reply-wrap ml-5">
+                                    <ul>
+                                        <li>
+                                            <div class="public-comment">
+                                                <div class="public-text">
+                                                    <div class="single-comm-top">
+                                                        @php($u = \App\Http\Controllers\UserController::getUserId($answer->user_id))
+                                                        <div class="row">
+                                                            <div class="col-lg-4">
+                                                                <h5>{{ $u->username }}</h5>
                                                             </div>
-                                                            <p>{{ substr($answer->date, 0,10) }} {{--<a href="#">Rispondi</a></p>--}}
+                                                            <div class="col-lg-7"></div>
+                                                            @if(\Illuminate\Support\Facades\Auth::user()!=null)
+                                                                @if(\App\Http\Controllers\GroupController::isAdmin(\Illuminate\Support\Facades\Auth::user()->id))
+                                                                    <a class="btn btn-danger" onclick="return deleteComment();"  href="{{route('answer-delete-local', $answer->id)}}"><i class="fa fa-trash"></i></a>
+                                                                @endif
+                                                            @endif
                                                         </div>
-                                                        <p>{!! $answer->answer !!}</p>
+                                                        <p>{{ substr($answer->date, 0,10) }} {{--<a href="#">Rispondi</a></p>--}}
                                                     </div>
+                                                    <p>{!! $answer->answer !!}</p>
                                                 </div>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                             @endforeach
                         @endif
                         @if(\Illuminate\Support\Facades\Auth::user()!=null)
@@ -154,18 +154,26 @@
                                         <div class="row">
                                             <div class="col-lg-8">
                                                 @php($i++)
-                                               <script>
-                                                   var iterazione = "<?php echo $i ?>";
-                                                   var classe = new RegExp("#answer" + iterazione);
-                                                   var classe1 = classe.toString();
-                                                   var classe2 = classe1.substring(1, 9);
+                                                <script>
+                                                    var iterazione = "<?php echo $i ?>";
+                                                    var classe = new RegExp("#answer" + iterazione);
+                                                    var classe1 = classe.toString();
+                                                    if(classe1.length < 11) { //decine
+                                                        var classe2 = classe1.substring(1, 9);
+                                                    }
+                                                    else if (classe1.length < 12){ //centinaia
+                                                        var classe2 = classe1.substring(1, 10);
+                                                    }
+                                                    else{ //migliaia (dubito che in un articolo di un blog si arrivi ad oltre a 10.000 risposte (non commenti, risposte a commenti)
+                                                        var classe2 = classe1.substring(1, 11);
+                                                    }
                                                     tinymce.init({
                                                         selector: classe2,
                                                         statusbar: false,
                                                         menubar: false,
                                                         height: 150,
                                                         width: 777,
-                                                        max_chars: 511, // max. allowed chars
+                                                        max_chars: 512, // max. allowed chars
                                                         setup: function (ed) {
                                                             var allowedKeys = [8, 37, 38, 39, 40, 46]; // backspace, delete and cursor keys
                                                             ed.on('keydown', function (e) {
@@ -182,7 +190,7 @@
                                                             });
                                                         },
                                                         init_instance_callback: function () { // initialize counter div
-                                                            $('#' + this.id).prev().append('<div class="char_count" style="text-align:right"></div>');
+                                                            $('#' + this.id).prev().append('<div class="char_count" style="text-align:right; padding-bottom: 5px; padding-right: 5px;"></div>');
                                                             tinymce_updateCharCounter(this, tinymce_getContentLength());
                                                         },
                                                         paste_preprocess: function (plugin, args) {
@@ -199,7 +207,7 @@
                                                     });
 
                                                     function tinymce_updateCharCounter(el, len) {
-                                                        $('#' + el.id).prev().find('.char_count').text(len + '/' + el.settings.max_chars);
+                                                        $('#' + el.id).prev().find('.char_count').text('massimo numero di caratteri: '+len + '/' + el.settings.max_chars);
                                                     }
 
                                                     function tinymce_getContentLength() {
@@ -215,22 +223,22 @@
                                                 @enderror--}}
 
 
-                                        {{--<textarea name="{{'answer'}}" id="{{'answer'}}" class="form-control @error('answer') is-invalid @enderror" cols="30" rows="10" placeholder="Scrivi una risposta!" style="resize: none; height: 70px;"></textarea>
+                                                {{--<textarea name="{{'answer'}}" id="{{'answer'}}" class="form-control @error('answer') is-invalid @enderror" cols="30" rows="10" placeholder="Scrivi una risposta!" style="resize: none; height: 70px;"></textarea>
 
-                                                @error('answer')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                                @enderror--}}
+                                                        @error('answer')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror--}}
                                             </div>
                                         </div>
                                         <div class="mt-3"></div>
                                         <div class="row">
                                             <div class="col-lg-8"></div>
                                             <div style="margin-left: 17.8%"></div>
-                                        <div class="col-lg-1">
-                                            <button type="submit" class="btn btn-sqr" name="{{'btnAnswer'}}" >Pubblica</button>
-                                        </div>
+                                            <div class="col-lg-1">
+                                                <button type="submit" class="btn btn-sqr" name="{{'btnAnswer'}}" >Pubblica</button>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -239,50 +247,95 @@
                         <div class="mb-3"></div>
                     @endforeach
                     @if(\Illuminate\Support\Facades\Auth::user()!=null)
-                    <div class="comment-title-wrap mt-30">
-                        <h3>Lascia un commento!</h3>
-                    </div>
-                    <div class="comment-input mt-16">
-                        <div class="comment-input-textarea mb-30">
-                            @php($user = \Illuminate\Support\Facades\Auth::user())
-                            <form method="POST" action="{{ Route('submitComment', ['article' => $article->id])}}">
-                                @csrf
+                        <div class="comment-title-wrap mt-30">
+                            <h3>Lascia un commento!</h3>
+                        </div>
+                        <div class="comment-input mt-16">
+                            <div class="comment-input-textarea mb-30">
+                                @php($user = \Illuminate\Support\Facades\Auth::user())
+                                <form method="POST" action="{{ Route('submitComment', ['article' => $article->id])}}">
+                                    @csrf
 
 
-                                <script>
-                                    tinymce.init({
-                                        selector: '#comment_text',
-                                        statusbar: false,
-                                        menubar: false,
-                                        height: 200
-                                    });
-                                </script>
-                                <textarea id="comment_text" name="comment_text" class="form-control @error('comment_text') is-invalid @enderror"></textarea>
+                                    <script>
+                                        tinymce.init({
+                                            selector: '#comment_text',
+                                            statusbar: false,
+                                            menubar: false,
+                                            height: 150,
+                                            max_chars: 512, // max. allowed chars
+                                            setup: function (ed) {
+                                                var allowedKeys = [8, 37, 38, 39, 40, 46]; // backspace, delete and cursor keys
+                                                ed.on('keydown', function (e) {
+                                                    if (allowedKeys.indexOf(e.keyCode) != -1) return true;
+                                                    if (tinymce_getContentLength() + 1 > this.settings.max_chars) {
+                                                        e.preventDefault();
+                                                        e.stopPropagation();
+                                                        return false;
+                                                    }
+                                                    return true;
+                                                });
+                                                ed.on('keyup', function (e) {
+                                                    tinymce_updateCharCounter(this, tinymce_getContentLength());
+                                                });
+                                            },
+                                            init_instance_callback: function () { // initialize counter div
+                                                $('#' + this.id).prev().append('<div class="char_count" style="text-align:right; padding-bottom: 5px; padding-right: 5px;"></div>');
+                                                tinymce_updateCharCounter(this, tinymce_getContentLength());
+                                            },
+                                            paste_preprocess: function (plugin, args) {
+                                                var editor = tinymce.get(tinymce.activeEditor.id);
+                                                var len = editor.contentDocument.body.innerText.length;
+                                                var text = $(args.content).text();
+                                                if (len + text.length > editor.settings.max_chars) {
+                                                    alert('Pasting this exceeds the maximum allowed number of ' + editor.settings.max_chars + ' characters.');
+                                                    args.content = '';
+                                                } else {
+                                                    tinymce_updateCharCounter(editor, len + text.length);
+                                                }
+                                            }
+                                        });
 
-                                @error('comment_text')
-                                <span class="invalid-feedback" role="alert">
+                                        function tinymce_updateCharCounter(el, len) {
+                                            $('#' + el.id).prev().find('.char_count').text('massimo numero di caratteri: '+len + '/' + el.settings.max_chars);
+                                        }
+
+                                        function tinymce_getContentLength() {
+                                            return tinymce.get(tinymce.activeEditor.id).contentDocument.body.innerText.length;
+                                        }
+                                    </script>
+                                    <textarea id="comment_text" name="comment_text" class="form-control @error('comment_text') is-invalid @enderror"></textarea>
+
+                                    @error('comment_text')
+                                    <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
-                                @enderror
+                                    @enderror
 
 
 
 
-                                {{--<textarea name="comment_text" id="comment_text" class="form-control @error('comment_text') is-invalid @enderror" cols="30" rows="10" style="resize: none; height: 10em;"></textarea>
+                                    {{--<textarea name="comment_text" id="comment_text" class="form-control @error('comment_text') is-invalid @enderror" cols="30" rows="10" style="resize: none; height: 10em;"></textarea>
 
-                                @error('comment_text')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror--}}
+                                    @error('comment_text')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror--}}
 
-                                <div class="mb-3"></div>
-                                <div class="single-post-button">
-                                    <button type="submit" class="btn btn-sqr">Pubblica</button>
-                                </div>
-                            </form>
+                                    <div class="mb-3"></div>
+                                    <div class="row">
+                                        <div class="col-lg-8"></div>
+                                        <div style="margin-left: 18.8%"></div>
+                                        <div class="col-lg-1">
+                                            <div class="single-post-button">
+                                                <button type="submit" class="btn btn-sqr">Pubblica</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    </div>
                     @endif
                 </div>
             </div>

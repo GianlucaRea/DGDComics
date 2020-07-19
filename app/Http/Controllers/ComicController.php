@@ -1012,7 +1012,7 @@ class ComicController extends Controller
         if(Auth::user()){
             $request->validate([
                 'comic_name' => ['required'],
-                'description' => ['required', 'max: 2047'],
+                'description' => ['required'],
                 'ISBN' => ['required', 'digits: 10'],
                 'publisher' => 'required',
                 'author_name' => 'required',
@@ -1274,7 +1274,7 @@ class ComicController extends Controller
         if(Auth::user()) {
             $request->validate([
                 'comic_name' => ['required'],
-                'description' => ['required', 'max: 2047'],
+                'description' => ['required'],
                 'ISBN' => ['required', 'digits: 10'],
                 'publisher' => 'required',
                 'author_name' => 'required',

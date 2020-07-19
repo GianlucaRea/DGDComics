@@ -117,7 +117,7 @@ class CommentController extends Controller
 
     public function addToArticle(Article $article, Request $request){
         $request->validate([
-            'comment_text' => ['required', 'string', 'max:511'],
+            'comment_text' => ['required'],
         ]);
         $user = \Illuminate\Support\Facades\Auth::user();
 
@@ -140,7 +140,7 @@ class CommentController extends Controller
 
     public function addToComment(int $id, Request $request){
         $request->validate([
-            'answer' => ['required', 'string', 'max:511'],
+            'answer' => ['required'],
         ]);
 
         $article = CommentController::getArticleIdBycommentId($id);

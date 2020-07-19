@@ -28,7 +28,7 @@ class ReviewController extends Controller
             $now = Carbon::now();
             $validator = Validator::make($data, [
                 'review_title' => ['required', 'string', 'max:50',],
-                'review_text' => ['required', 'max:255', 'min:10'],
+                'review_text' => ['required', 'min:10'],
                 'stars' => ['required'],
             ]);
 
@@ -133,7 +133,7 @@ class ReviewController extends Controller
         $review = Review::find($review_id);
         $request->validate([
             'review_title' => ['string', 'max:50', 'min:3'],
-            'review_text' => ['string', 'max:255', 'min:10'],
+            'review_text' => ['string', 'min:10'],
             'stars'=> 'integer|min:1|max:5'
         ]);
 

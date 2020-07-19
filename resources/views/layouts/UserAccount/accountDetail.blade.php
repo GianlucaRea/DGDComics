@@ -73,9 +73,10 @@
                                                 <div class="myaccount-table table-responsive text-center">
                                                     <div class="container">
                                                     <div class="row">
-                                                        <div class="col-lg-7-5">
+                                                        <div class="col-lg-7">
                                                             {{$notifications->links()}}
                                                         </div>
+                                                        <div style="margin-right: 7%"></div>
                                                         <div class="col-lg-4">
                                                             <a href="{{ route('allRead', ['id' => $user->id]) }}" class="btn btn-sqr">Segna tutti come "letto"</a>
                                                         </div>
@@ -737,11 +738,49 @@
                                                                         <script>
                                                                             tinymce.init({
                                                                                 selector: '#description',
-                                                                                height: 200,
                                                                                 statusbar: false,
                                                                                 menubar: false,
-
+                                                                                height: 370,
+                                                                                max_chars: 2048, // max. allowed chars
+                                                                                setup: function (ed) {
+                                                                                    var allowedKeys = [8, 37, 38, 39, 40, 46]; // backspace, delete and cursor keys
+                                                                                    ed.on('keydown', function (e) {
+                                                                                        if (allowedKeys.indexOf(e.keyCode) != -1) return true;
+                                                                                        if (tinymce_getContentLength() + 1 > this.settings.max_chars) {
+                                                                                            e.preventDefault();
+                                                                                            e.stopPropagation();
+                                                                                            return false;
+                                                                                        }
+                                                                                        return true;
+                                                                                    });
+                                                                                    ed.on('keyup', function (e) {
+                                                                                        tinymce_updateCharCounter(this, tinymce_getContentLength());
+                                                                                    });
+                                                                                },
+                                                                                init_instance_callback: function () { // initialize counter div
+                                                                                    $('#' + this.id).prev().append('<div class="char_count" style="text-align:right; padding-bottom: 5px; padding-right: 5px;"></div>');
+                                                                                    tinymce_updateCharCounter(this, tinymce_getContentLength());
+                                                                                },
+                                                                                paste_preprocess: function (plugin, args) {
+                                                                                    var editor = tinymce.get(tinymce.activeEditor.id);
+                                                                                    var len = editor.contentDocument.body.innerText.length;
+                                                                                    var text = $(args.content).text();
+                                                                                    if (len + text.length > editor.settings.max_chars) {
+                                                                                        alert('Pasting this exceeds the maximum allowed number of ' + editor.settings.max_chars + ' characters.');
+                                                                                        args.content = '';
+                                                                                    } else {
+                                                                                        tinymce_updateCharCounter(editor, len + text.length);
+                                                                                    }
+                                                                                }
                                                                             });
+
+                                                                            function tinymce_updateCharCounter(el, len) {
+                                                                                $('#' + el.id).prev().find('.char_count').text('massimo numero di caratteri: '+len + '/' + el.settings.max_chars);
+                                                                            }
+
+                                                                            function tinymce_getContentLength() {
+                                                                                return tinymce.get(tinymce.activeEditor.id).contentDocument.body.innerText.length;
+                                                                            }
                                                                         </script>
 
                                                                         <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" ></textarea>
