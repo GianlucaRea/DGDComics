@@ -152,7 +152,6 @@
                                         @csrf
                                         <div class="row">
                                             <div class="col-lg-8">
-                                                <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.2/tinymce.min.js" referrerpolicy="origin"></script>
                                                 <script>
                                                     tinymce.init({
                                                         selector: ".form-control",
