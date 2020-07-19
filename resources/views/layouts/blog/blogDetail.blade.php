@@ -203,13 +203,13 @@
                             <form method="POST" action="{{ Route('submitComment', ['article' => $article->id])}}">
                                 @csrf
 
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.2/tinymce.min.js" referrerpolicy="origin"></script>
                                 <script>
                                     tinymce.init({
                                         selector: '#comment_text',
                                         statusbar: false,
                                         menubar: false,
-                                        height: 200,
-                                        width: 700
+                                        height: 200
                                     });
                                 </script>
                                 <textarea id="comment_text" name="comment_text" class="form-control @error('comment_text') is-invalid @enderror"></textarea>

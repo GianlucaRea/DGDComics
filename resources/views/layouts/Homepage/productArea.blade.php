@@ -65,6 +65,9 @@
                                         <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $comic->comic_name }}</b></div>
                                     @else
                                         @php($subcomic = substr($comic->comic_name, 0, 16))
+                                        @if(substr($subcomic, -1) == " ")
+                                            @php($subcomic = substr($comic->comic_name, 0, 15))
+                                        @endif
                                         <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $subcomic }}...</b></div>
                                     @endif
 
@@ -149,6 +152,9 @@
                                     <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $comic->comic_name }}</b></div>
                                 @else
                                     @php($subcomic = substr($comic->comic_name, 0, 16))
+                                    @if(substr($subcomic, -1) == " ")
+                                        @php($subcomic = substr($comic->comic_name, 0, 15))
+                                    @endif
                                     <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $subcomic }}...</b></div>
                                 @endif
 
@@ -232,6 +238,9 @@
                                     <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $comic->comic_name }}</b></div>
                                 @else
                                     @php($subcomic = substr($comic->comic_name, 0, 16))
+                                    @if(substr($subcomic, -1) == " ")
+                                        @php($subcomic = substr($comic->comic_name, 0, 15))
+                                    @endif
                                     <div style="font-family: 'Open Sans', sans-serif; font-size: 20px; margin-top: 1%; color: #333;"><b>{{ $subcomic }}...</b></div>
                                 @endif
 
