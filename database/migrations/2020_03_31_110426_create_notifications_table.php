@@ -27,6 +27,7 @@ class CreateNotificationsTable extends Migration
             ['user_id' => '1' , 'notification_text' => 'un utente ha effettuato un ordine!' , 'state' => '1' , 'notification' => 'orderDetailVendor' , 'idLink' => '1'],
             ['user_id' => '3' , 'notification_text' => 'Ehy, un tuo fumetto è stato spedito' , 'state' => '0' , 'notification' => 'orderDetail' , 'idLink' => '1'],
             ['user_id' => '3' , 'notification_text' => 'Ehy, un tuo fumetto è stato confermato' , 'state' => '0' , 'notification' => 'orderDetail' , 'idLink' => '1'],
+            ['user_id' => '3' , 'notification_text' => 'Un tuo commento ha ricevuto una risposta' , 'state' => '0' , 'notification' => 'blogDetail' , 'idLink' => '2'],
             ['user_id' => '2' , 'notification_text' => 'un utente ha effettuato un ordine!' , 'state' => '1' , 'notification' => 'orderDetailVendor' , 'idLink' => '1'],
             ['user_id' => '1' , 'notification_text' => 'un utente ha effettuato un ordine!' , 'state' => '1' , 'notification' => 'orderDetailVendor' , 'idLink' => '2'],
             ['user_id' => '3' , 'notification_text' => 'Ehy, un tuo fumetto è stato spedito' , 'state' => '0' , 'notification' => 'orderDetail' , 'idLink' => '2'],

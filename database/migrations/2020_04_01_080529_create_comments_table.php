@@ -27,8 +27,9 @@ class CreateCommentsTable extends Migration
             ['user_id' => '8', 'article_id' => '2', 'answer' => 'Io ho la collezione completa dal 1994 al 2000. Gli anni d\'oro del grande Sclavi', 'parent_comment' => '1'],
             ['user_id' => '6', 'article_id' => '2', 'answer' => 'Pensa un po io ho la collezione dal 96 al 98', 'parent_comment' => '1'],
             ['user_id' => '3', 'article_id' => '2', 'answer' => 'Sclavi è stato unico nel genere Horror... le sue storie sono pazzesche!', 'parent_comment' => '0'],
+            ['user_id' => '7', 'article_id' => '2', 'answer' => 'Concordo pienamente, personalmente l\'ho sempre definito il padre di questo genere in Italia', 'parent_comment' => '5'],
             ['user_id' => '8', 'article_id' => '1', 'answer' => 'Sinceramente secondo me One piece è fin troppo sopravvalutato', 'parent_comment' => '0'],
-            ['user_id' => '6', 'article_id' => '1', 'answer' => 'Beh, non mi ritrovo d\'accordo... e con me molti altri visto che è il più venduto al mondo!', 'parent_comment' => '6'],
+            ['user_id' => '6', 'article_id' => '1', 'answer' => 'Beh, non mi ritrovo d\'accordo... e con me molti altri visto che è il più venduto al mondo!', 'parent_comment' => '7'],
         ]);
     }
 
