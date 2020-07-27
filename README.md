@@ -22,20 +22,30 @@ The project is currently under development using **Laravel**. **MySQL** is the D
 
 ### ProjectPreview:
 
-** Homepage part1 **
+**Homepage part1**
 ![Alt text](/images/image1.png?raw=true "Homepage part1")
 
-** Homepage part2 **
+
+
+**Homepage part2**
 ![Alt text](/images/image2.png?raw=true "Homepage part2")
 
-** Search result/Comic divided by Genre , Category or Price  **
+
+
+**Search result/Comic divided by Genre , Category or Price**
 ![Alt text](/images/image3.png?raw=true "Search result")
 
-** Seller Area (normal user is similar)**
+
+
+**Seller Area (normal user is similar)**
 ![Alt text](/images/image4.png?raw=true "Seller")
 
-** Admin Area **
+
+
+**Admin Area**
 ![Alt text](/images/image5.png?raw=true "Admin Area")
 
-** Blog **
+
+
+**Blog**
 ![Alt text](/images/image6.png?raw=true "Blog")
