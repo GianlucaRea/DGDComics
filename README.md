@@ -10,7 +10,7 @@ The e-commerce is complete you can found the ER schema inside the Doc folder.
 For any question you can contact us. 
 
 #### Tech stack:
-The project is currently under development using **Laravel**. **MySQL** is the DBMS of choice.
+The project has been built using **Laravel** on the backend. **MySQL** is the DBMS of choice.
 
 #### Contributors:
 
